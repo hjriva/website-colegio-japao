@@ -14,14 +14,18 @@ app.use(express.static('public'))
 app.use(express.json()); //claude
 const db = require('./connect_db'); // linha do código antigo
 
+
+
 app.get('/agenda', (req, res) => {
 
     let qry = "SELECT * FROM agenda"
+    
 
     db.query(qry, (err, results) => {
         if (err) {
             console.error(err)
-        return res.status(500).json({error: err.message});
+            console.log
+        return res.status(500).json({error: 'Erro ao buscar dados!'});
         }
         res.json(results.rows);
     })
@@ -38,7 +42,7 @@ app.post('/updateBD', (req, res) => {
     db.query(qry, (err, results) => {
         if (err) {
             console.error(err)
-        return res.status(500).json({error: err.message});
+        return res.status(500).json({error: 'Erro ao buscar dados!'});
         }
     res.json(results)
     })
@@ -50,7 +54,7 @@ app.post('/deletar', (req, res) => {
     db.query(qry, (err, results) => {
         if (err) {
             console.log(err)
-            return res.status(500).json({error: err.message});
+            return res.status(500).json({error: 'Erro ao buscar dados!'});
         }
         res.json(results)
     }) 
@@ -62,7 +66,7 @@ app.post('/Alteracao_BD', (req, res) => {
     db.query(qry, (err, results) => {
          if (err) {
             console.log(err)
-            return res.status(500).json({error: err.message});
+            return res.status(500).json({error: 'Erro ao buscar dados!'});
         }
         res.json(results)
     })

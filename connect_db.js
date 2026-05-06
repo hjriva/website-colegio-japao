@@ -6,6 +6,10 @@ let con = new pg.Pool({
   ssl: {
     rejectUnauthorized: false
   },
+  port: process.env.PORT, 
+  user: process.env.USERDB,
+  password: process.env.PASSWORD_DB,
+  database: process.env.DB
 });
 
 con.query('SELECT 1', (err) => {
@@ -15,6 +19,7 @@ con.query('SELECT 1', (err) => {
   }
   console.log("Conectado ao banco de dados!");
 }); //claude
+
 
 //W3C
 module.exports = con; // linha do código antigo
