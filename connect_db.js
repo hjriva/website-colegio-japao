@@ -3,6 +3,9 @@ let pg = require('pg');
 
 let con = new pg.Pool({
   connectionString: process.env.DB_URL,
+  ssl: {
+    rejectUnauthorized: false
+  },
   port: 5432, 
   user: process.env.USERDB,
   password: process.env.PASSWORD_DB,
