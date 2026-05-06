@@ -62,7 +62,7 @@ app.post('/Alteracao_BD', (req, res) => {
     db.query(qry, (err, results) => {
          if (err) {
             console.log(err)
-            return res.status(500).json({error: 'Erro ao buscar dados'});
+            return res.status(500).json({error: err.message});
         }
         res.json(results)
     })
