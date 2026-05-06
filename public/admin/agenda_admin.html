@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="">Sair</a>
+    <h1>Painel de Controle</h1>
+    <a href="../index.html">Visite sua página</a>
+    <a href="blog_posts_int.html">Painel do Blog</a>
+    <div id="controleAgenda">
+        
+        
+
+
+    </div>
+    <br><br>
+    <h2>Criar novo evento</h2>
+    <form action="/updateBD" method="POST">
+        <input type="text" name="nomeEvento" id="NomeNovoEvento" placeholder="Nome">
+        <br> <br>
+        <input type="date" name="" id="dataNovoEvento"> <br> <br>
+            <input type="time" name="" id="HoraNovoEvento"> <br> <br>
+            
+            <input type="file" name="" id="ImagemNovoEvento" accept="image/*">
+            <br><br>
+        <textarea name="" id="DescNovoEvento" placeholder="Descricao">
+            
+        </textarea>
+        <br><br>
+        <input type="button" value="Submeter" id="cria"> <br> <br>
+        
+   
+    </form>
+     <input type="button" value="Criar nova postagem"> 
+    <input type="button" value="Gerenciar posts existentes">
+    <script src="agenda_admin.js"></script>
+</body>
+</html>
