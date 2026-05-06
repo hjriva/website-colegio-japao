@@ -21,7 +21,7 @@ app.get('/agenda', (req, res) => {
     db.query(qry, (err, results) => {
         if (err) {
             console.error(err)
-        return res.status(500).json({error: 'Erro ao buscar dados'});
+        return res.status(500).json({error: err.message});
         }
         res.json(results.rows);
     })
@@ -38,7 +38,7 @@ app.post('/updateBD', (req, res) => {
     db.query(qry, (err, results) => {
         if (err) {
             console.error(err)
-        return res.status(500).json({error: 'Erro ao buscar dados'});
+        return res.status(500).json({error: err.message});
         }
     res.json(results)
     })
@@ -50,7 +50,7 @@ app.post('/deletar', (req, res) => {
     db.query(qry, (err, results) => {
         if (err) {
             console.log(err)
-            return res.status(500).json({error: 'Erro ao buscar dados'});
+            return res.status(500).json({error: err.message});
         }
         res.json(results)
     }) 
