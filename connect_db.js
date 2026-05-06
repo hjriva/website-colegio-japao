@@ -2,7 +2,7 @@ require('dotenv').config();
 let pg = require('pg');
 
 let con = new pg.Pool({
-  host: process.env.DB_URL,
+  connectionString: process.env.DB_URL,
   port: 5432, 
   user: process.env.USERDB,
   password: process.env.PASSWORD_DB,
