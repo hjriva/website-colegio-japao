@@ -16,7 +16,7 @@ const db = require('./connect_db'); // linha do código antigo
 
 app.get('/agenda', (req, res) => {
 
-    let qry = "SELECT * FROM AGENDA"
+    let qry = "SELECT * FROM agenda"
 
     db.query(qry, (err, results) => {
         if (err) {
@@ -34,7 +34,7 @@ app.post('/updateBD', (req, res) => {
     let nome = req.body.nome;
     console.log('e:' + nome)
 
-    let qry =  `INSERT INTO AGENDA (descricao, IMG, Titulo, DataPost, Horario) VALUES ('${nome}', 'foto.png', 'Reuniao', '2026-04-26', '14:30:00');`
+    let qry =  `INSERT INTO agenda (descricao, IMG, Titulo, DataPost, Horario) VALUES ('${nome}', 'foto.png', 'Reuniao', '2026-04-26', '14:30:00');`
     db.query(qry, (err, results) => {
         if (err) {
             console.error(err)
@@ -46,7 +46,7 @@ app.post('/updateBD', (req, res) => {
 })
 
 app.post('/deletar', (req, res) => {
-    let qry = `DELETE FROM AGENDA WHERE idEntrada = ${req.body.idEntrada};`
+    let qry = `DELETE FROM agenda WHERE idEntrada = ${req.body.idEntrada};`
     db.query(qry, (err, results) => {
         if (err) {
             console.log(err)
@@ -58,7 +58,7 @@ app.post('/deletar', (req, res) => {
 
 app.post('/Alteracao_BD', (req, res) => {
     console.log(req.body)
-    let qry = `UPDATE AGENDA SET Titulo = '${req.body.nome}', descricao = '${req.body.descricao}' WHERE idEntrada = ${req.body.idEntrada};`
+    let qry = `UPDATE agenda SET Titulo = '${req.body.nome}', descricao = '${req.body.descricao}' WHERE idEntrada = ${req.body.idEntrada};`
     db.query(qry, (err, results) => {
          if (err) {
             console.log(err)
