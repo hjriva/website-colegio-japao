@@ -84,4 +84,3 @@ app.post('/Alteracao_BD', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
-
