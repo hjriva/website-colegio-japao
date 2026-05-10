@@ -1,0 +1,27 @@
+.eventos_agenda {
+    border: solid black;
+    width: 25em;
+    height: 12em;
+    margin: 5px;
+    padding: 8px;
+}
+
+img {
+    width: 100px;
+    min-width: 90px;
+    display: inline-block;
+}
+
+.ev_Titulo {
+    color: rgb(255, 255, 255);
+}
+
+.ev_Header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    gap: 30px;
+    align-content: center;
+}

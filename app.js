@@ -15,16 +15,22 @@ app.use(express.json()); //claude
 const db = require('./connect_db'); // linha do código antigo
 
 
-
+//Para mostrar os dados da tabela no painel
 app.get('/agenda', (req, res) => {
 
-    let qry = "SELECT * FROM agenda"
+    let qry = `
+    SELECT
+    *,
+    TO_CHAR(DataPost, 'DD') AS dia,
+    TO_CHAR(DataPost, 'MM') AS mes,
+    TO_CHAR(DataPost, 'YYYY') AS ano
+    FROM agenda;`
     
 
     db.query(qry, (err, results) => {
         if (err) {
             console.error(err)
-            console.log
+            console.log('teste')
         return res.status(500).json({error: 'Erro ao buscar dados!'});
         }
         res.json(results.rows);
@@ -33,6 +39,7 @@ app.get('/agenda', (req, res) => {
     
 })
 
+//Para criar novo evento
 app.post('/updateBD', (req, res) => {
 
     let nome = req.body.nome;
@@ -49,6 +56,7 @@ app.post('/updateBD', (req, res) => {
 
 })
 
+//Para deletar algum evento
 app.post('/deletar', (req, res) => {
     let qry = `DELETE FROM agenda WHERE idEntrada = ${req.body.idEntrada};`
     db.query(qry, (err, results) => {
@@ -60,6 +68,7 @@ app.post('/deletar', (req, res) => {
     }) 
 })
 
+//Para editar título
 app.post('/Alteracao_BD', (req, res) => {
     console.log(req.body)
     let qry = `UPDATE agenda SET Titulo = '${req.body.nome}', descricao = '${req.body.descricao}' WHERE idEntrada = ${req.body.idEntrada};`

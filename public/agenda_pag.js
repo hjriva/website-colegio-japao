@@ -1,23 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
-const PagAgenda = window.document.getElementById('AgendaPublica')
+import { criaCardEvento } from '/util.js';
 
-fetch('/agenda')
-.then(response => response.json())
-.then(data => {
-    console.log(data);
-    data.forEach(entrada => {
-    const ev = document.createElement('div')
-    ev.classList.add('eventos_agenda');
-    PagAgenda.appendChild(ev);
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('AgendaPublica');
 
-    const title = document.createElement('div');
-    title.textContent = `${entrada.titulo}: \n
-    ${entrada.descricao}`  
-
-    ev.appendChild(title);
-    })
-  
-   
-})
-.catch(error => console.log(error))
-})
+    fetch('/agenda')
+        .then(res => res.json())
+        .then(data => data.forEach(entrada => criaCardEvento(entrada, container)))
+        .catch(err => console.error(err));
+});
