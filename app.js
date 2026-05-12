@@ -1,6 +1,9 @@
 require('dotenv').config()
 const express = require('express')
 const cookieParser = require('cookie-parser')  //somente para senha, periodo de teste
+const multer = require('multer');
+const path = require('path');
+
 
 const app = express()
 const port = 3000
@@ -29,7 +32,7 @@ app.get('/agenda', (req, res) => {
 
     db.query(qry, (err, results) => {
         if (err) {
-            console.error(err)
+            console.error(err)  
             console.log('teste')
         return res.status(500).json({error: 'Erro ao buscar dados!'});
         }
@@ -40,21 +43,34 @@ app.get('/agenda', (req, res) => {
 })
 
 //Para criar novo evento
-app.post('/updateBD', (req, res) => {
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, 'public/imgs/'),
+    filename: (req, file, cb) => {
+        const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        cb(null, unique + path.extname(file.originalname));
+    }
+});
 
-    let nome = req.body.nome;
-    console.log('e:' + nome)
+const upload = multer({ storage });
 
-    let qry =  `INSERT INTO agenda (descricao, IMG, Titulo, DataPost, Horario) VALUES ('${nome}', 'foto.png', 'Reuniao', '2026-04-26', '14:30:00');`
-    db.query(qry, (err, results) => {
-        if (err) {
-            console.error(err)
-        return res.status(500).json({error: 'Erro ao buscar dados!'});
-        }
-    res.json(results)
-    })
 
-})
+app.post('/updateBD', upload.single('imagem'), async (req, res) => {
+    try {
+    const { titulo, descricao, data, horario } = req.body;
+    const caminho = req.file ? `/imgs/${req.file.filename}` : null;
+
+    await db.query(
+        'INSERT INTO agenda (descricao, IMG, Titulo, DataPost, Horario) VALUES ($1, $2, $3, $4, $5)',
+        [descricao, caminho, titulo, data, horario]
+    );
+
+    res.json({ sucesso: true, caminho });
+    }
+    catch (err) {
+        console.error(err); 
+        res.status(500).json({ error: err.message });
+    }
+});
 
 //Para deletar algum evento
 app.post('/deletar', (req, res) => {

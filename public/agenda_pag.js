@@ -8,3 +8,4 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => data.forEach(entrada => criaCardEvento(entrada, container)))
         .catch(err => console.error(err));
 });
+

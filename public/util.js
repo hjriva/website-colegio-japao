@@ -7,6 +7,7 @@ export function criaElemento(tag, texto, atributo, valorAtributo, pai) {
 }
 
 export function criaCardEvento(entrada, container, acoes = null) {
+    console.log(entrada.img)
     const ev = document.createElement('div');
     ev.classList.add('eventos_agenda');
     ev.setAttribute('id', `${entrada.identrada}`);
@@ -20,7 +21,7 @@ export function criaCardEvento(entrada, container, acoes = null) {
     evTitulo.setAttribute('class', 'ev_Titulo');
     evHeader.appendChild(evTitulo);
 
-    criaElemento('img', null, 'src', '/imgs/foto.png', evHeader);
+    criaElemento('img', null, 'src', `${entrada.img}`, evHeader);
     criaElemento('h2', `${entrada.titulo}:`, null, null, evTitulo);
     criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano}`, null, null, evTitulo);
     criaElemento('p', entrada.descricao, null, null, ev);
@@ -28,3 +29,6 @@ export function criaCardEvento(entrada, container, acoes = null) {
     // se acoes for passado, renderiza os botões
     if (acoes) acoes(ev, entrada);
 }
+
+
+//Claude
