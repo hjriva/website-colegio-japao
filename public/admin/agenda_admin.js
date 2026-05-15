@@ -1,5 +1,9 @@
+
+
+//Puxa a função do arquivo util.js, para que todos os arquivos apareçam na tela
 import { criaCardEvento } from '/util.js';
 
+//Aqui cria a função para que cada item tenha os botões de editar e excluir
 function acoesAdmin(ev, entrada) {
     const btnEditar = document.createElement('button');
     btnEditar.textContent = 'Alterar';
@@ -13,6 +17,7 @@ function acoesAdmin(ev, entrada) {
     ev.appendChild(btnExcluir);
 }
 
+//Chama ambas as funções acoesAdmin e criaCardEvento, no carregamento da página
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('controleAgenda');
 
@@ -22,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(err => console.error(err));
 });
 
+//Função para editar itens
 function editarEntrada(idElem) {
     fetch('/Alteracao_BD', {
     method: "POST", 
@@ -34,7 +40,7 @@ function editarEntrada(idElem) {
 .catch(error => console.log(error))
 }
 
-//Excluir
+//Função para excluir itens
 function excluirEntrada(idElem) {
     fetch('/deletar', {
     method: "POST", 
@@ -45,6 +51,7 @@ function excluirEntrada(idElem) {
     .catch(error => console.log(error))
 }
 
+//Função para inserir novos itens
 function InserirNovo() {
     let tituloevento = window.document.getElementById('NomeNovoEvento').value
     let ilustraimg = window.document.getElementById('ImagemNovoEvento').files[0]
@@ -70,4 +77,5 @@ function InserirNovo() {
     .catch(error => console.log(error));
 }
 
+//Chamando função InserirNovo() no botão de salvar
 window.document.getElementById('InsertValue').addEventListener('click', () => {InserirNovo()})

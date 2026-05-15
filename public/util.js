@@ -1,3 +1,4 @@
+// Função para mostrar eventos da agenda, utilizada na página pública e no admin
 export function criaElemento(tag, texto, atributo, valorAtributo, pai) {
     const elem = document.createElement(tag);
     if (texto !== null) elem.textContent = texto;
@@ -6,6 +7,7 @@ export function criaElemento(tag, texto, atributo, valorAtributo, pai) {
     return elem; // retornar permite encadear se precisar
 }
 
+// Função para 
 export function criaCardEvento(entrada, container, acoes = null) {
     console.log(entrada.img)
     const ev = document.createElement('div');
