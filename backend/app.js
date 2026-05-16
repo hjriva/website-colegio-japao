@@ -13,8 +13,50 @@ const auth = require('./auth');
 app.use(cookieParser()) //somente para senha, periodo de teste
 app.use(auth);
 
-app.use(express.static('public'))
+
 app.use(express.json()); //claude
+
+const admin = require('firebase-admin');
+const session = require('express-session');
+
+const serviceAccount = JSON.parse(
+    Buffer.from(process.env.FIREBASE_KEY, 'base64').toString('utf8')
+);
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
+
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'secreto',
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.post('/sessao', async (req, res) => {
+    try {
+        await admin.auth().verifyIdToken(req.body.token);
+        req.session.admin = true;
+        res.json({ ok: true });
+    } catch {
+        res.status(401).json({ error: 'Token inválido' });
+    }
+});
+
+function autenticado(req, res, next) {
+    if (req.session.admin) return next();
+    res.redirect('/login.html');
+}
+
+app.use('/admin', autenticado, express.static(path.join(__dirname, '..', 'public', 'admin')));
+
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/login.html');
+});
+
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 const db = require('./connect_db'); // linha do código antigo
 
 
@@ -45,7 +87,7 @@ app.get('/agenda', (req, res) => {
 
 //Para criar novo evento
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, 'public/imgs/'),
+    destination: (req, file, cb) => cb(null,  path.join(__dirname, '..', 'public', 'imgs')),
     filename: (req, file, cb) => {
         const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
         cb(null, unique + path.extname(file.originalname));
