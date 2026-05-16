@@ -7,7 +7,7 @@ export function criaElemento(tag, texto, atributo, valorAtributo, pai) {
     return elem; // retornar permite encadear se precisar
 }
 
-// Função para 
+// Função para puxar dados do BD e colocar nos elementos criados na função CriaElemento
 export function criaCardEvento(entrada, container, acoes = null) {
     console.log(entrada.img)
     const ev = document.createElement('div');

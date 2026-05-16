@@ -14,14 +14,16 @@
     <a href="blog_posts_int.html">Painel do Blog</a>
     <div id="controleAgenda">
         
-        
+        <!--Aqui é onde vão aparecer os eventos-->
 
+        <!--Precisamos definir se vai ficar na mesma página que o form abaixo ou se terá
+        alguma estrutura diferente -->
 
     </div>
     <br><br>
     <h2>Criar novo evento</h2>
     <!---Esse form tá cheio de br, precisa arrumar com divs direitinho e adicionar labels -->
-    <form action="/updateBD" method="POST">
+    <form action="/updateBD" method="POST"id='FormularioNovo'>
         <input type="text" name="nomeEvento" id="NomeNovoEvento" placeholder="Nome">
         <br> <br>
         <input type="date" name="" id="dataNovoEvento"> <br> <br>
@@ -35,10 +37,12 @@
         <br><br>
         <br> <br>
         
-   
+    <input type="reset" value="Limpar Formulário"> 
+    <!--Coloquei para teste, não é necessário-->
     </form>
      <input type="button" value="Criar nova postagem" id="InsertValue"> 
     <input type="button" value="Gerenciar posts existentes">
+    
     <script type="module" src="agenda_admin.js"></script>
 </body>
 </html>

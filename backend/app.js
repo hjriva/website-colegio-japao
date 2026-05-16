@@ -27,7 +27,8 @@ app.get('/agenda', (req, res) => {
     TO_CHAR(DataPost, 'DD') AS dia,
     TO_CHAR(DataPost, 'MM') AS mes,
     TO_CHAR(DataPost, 'YYYY') AS ano
-    FROM agenda;`
+    FROM agenda
+    ORDER BY criado_em ASC;`
     
 
     db.query(qry, (err, results) => {
@@ -84,18 +85,33 @@ app.post('/deletar', (req, res) => {
     }) 
 })
 
-//Para editar título
-app.post('/Alteracao_BD', (req, res) => {
-    console.log(req.body)
-    let qry = `UPDATE agenda SET Titulo = '${req.body.nome}', descricao = '${req.body.descricao}' WHERE idEntrada = ${req.body.idEntrada};`
-    db.query(qry, (err, results) => {
-         if (err) {
-            console.log(err)
-            return res.status(500).json({error: 'Erro ao buscar dados!'});
+//Para editar item
+const updateimg = multer({ storage });
+
+app.post('/Alteracao_BD', updateimg.single('img'), (req, res) => {
+    const { nome, descricao, idEntrada } = req.body;
+    const imgPath = req.file ? `/imgs/${req.file.filename}` : null;
+
+    const campos = ['Titulo = $1', 'descricao = $2'];
+    const valores = [nome, descricao];
+
+    if (imgPath) {
+        campos.push(`img = $${valores.length + 1}`);
+        valores.push(imgPath);
+    }
+
+    valores.push(idEntrada);
+
+    const qry = `UPDATE agenda SET ${campos.join(', ')} WHERE idEntrada = $${valores.length}`;
+
+    db.query(qry, valores, (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({ error: 'Erro ao atualizar dados!' });
         }
-        res.json(results)
-    })
-})
+        res.json({ img: imgPath });;
+    });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
