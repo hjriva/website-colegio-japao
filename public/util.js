@@ -1,8 +1,9 @@
-// Função para mostrar eventos da agenda, utilizada na página pública e no admin
-export function criaElemento(tag, texto, atributo, valorAtributo, pai) {
+// Função para criar elementos dentro de cada evento da agenda
+export function criaElemento(tag, texto, atributo, valorAtributo, pai, className) {
     const elem = document.createElement(tag);
     if (texto !== null) elem.textContent = texto;
     if (atributo !== null) elem.setAttribute(atributo, valorAtributo);
+    elem.classList.add(className);
     pai.appendChild(elem);
     return elem; // retornar permite encadear se precisar
 }
@@ -11,26 +12,26 @@ export function criaElemento(tag, texto, atributo, valorAtributo, pai) {
 export function criaCardEvento(entrada, container, acoes = null) {
     console.log(entrada.img)
     const ev = document.createElement('div');
-    ev.classList.add('eventos_agenda');
+    ev.classList.add('eventos-agenda');
     ev.setAttribute('id', `${entrada.identrada}`);
     container.appendChild(ev);
 
     const evHeader = document.createElement('div');
-    evHeader.classList.add('ev_Header');
+    evHeader.classList.add('evento-header-div');
     ev.appendChild(evHeader);
 
     const evTitulo = document.createElement('div');
-    evTitulo.setAttribute('class', 'ev_Titulo');
+    evTitulo.setAttribute('class', 'evento-titulo-div');
     evHeader.appendChild(evTitulo);
 
-    criaElemento('img', null, 'src', `${entrada.img}`, evHeader);
-    criaElemento('h2', `${entrada.titulo}:`, null, null, evTitulo);
-    criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano}`, null, null, evTitulo);
-    criaElemento('p', entrada.descricao, null, null, ev);
+    criaElemento('img', null, 'src', `${entrada.img}`, evHeader, 'img-evento');
+    criaElemento('h2', `${entrada.titulo}:`, null, null, evTitulo, 'titulo-vento');
+    criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano}`, null, null, evTitulo, 'data-evento');
+    criaElemento('p', entrada.descricao, null, null, ev, 'descr-evento');
 
-    // se acoes for passado, renderiza os botões
+    // se acoes for passado, renderiza os botões - para usar somente no painel interno
     if (acoes) acoes(ev, entrada);
 }
 
 
-//Claude
+//adaptado do Claude

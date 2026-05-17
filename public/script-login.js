@@ -34,3 +34,5 @@ document.getElementById('btn-login').addEventListener('click', async (e) => {
         document.getElementById('erro').style.display = 'block';
     }
 });
+
+//Adaptado do Claude e da documentação do firebase

@@ -1,22 +1,21 @@
-.eventos_agenda {
+.eventos-agenda {
     border: solid black;
     width: 25em;
     height: 12em;
     margin: 5px;
     padding: 8px;
 }
-
-img {
+.img-evento {
     width: 100px;
     min-width: 90px;
     display: inline-block;
 }
 
-.ev_Titulo {
+.evento-titulo-div {
     color: rgb(0, 0, 0);
 }
 
-.ev_Header {
+.evento_header-div {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;

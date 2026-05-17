@@ -1,3 +1,4 @@
+    //Arquivo para controlar sessão de login do painel
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
@@ -22,3 +23,4 @@ document.getElementById('SairBotao').addEventListener('click', async () => {
     await fetch('/logout')
     window.location.href = '/login.html'
 })
+
