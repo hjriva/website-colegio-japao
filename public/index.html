@@ -1,26 +1,122 @@
-<!--Essa é a página inicial do site-->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colégio Estadual Japão</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
-    <header>
-    <h1>Página inicial</h1>
-    <nav>
-    <a href="agenda_pag.html">Agenda</a>
-    <a href="blog_pag.html">Blog da escola</a>
-    <a href="contato.html">Contato</a>
-    <a href="atividades/index.html">Atividades</a>
+
+<div class="container">
+
+<header>
+    <img src="imgs_site/logo.png" id="logo_header" alt="">
+        <div class="logo">Colégio Japão</div>
+    <!-- NAV -->
+    <nav> 
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contato</a></li>
+            <li><a class="btn" href="#">Agenda</a></li>
+        </ul>
     </nav>
-    </header>
+
+</header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div>
+            <h1>Colégio Estadual <span>Japão</span></h1>
+            <p>O conhecer nos faz valer.</p>
+            <button>Entre em contato!</button> 
+        </div>
+        <img src="https://picsum.photos/600/400" alt="">
+    </section>
+
+
+<main>
+    <!-- HISTORIA -->
     
-    <main>
-        <h2>Vamos fazer de conta que aqui é a homepage</h2>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit consequuntur beatae atque soluta qui ut unde minima repellat rerum laborum quos officia quasi dolorum eum, doloremque pariatur saepe, neque ullam ad, a recusandae. Distinctio perferendis amet voluptatum dolore magni fugiat sapiente nisi omnis expedita deserunt iusto, modi quod sit alias!
-    </main>
+        <h2>Nossa <span>História</span></h2>
+        <div class="historia">
+            <img src="imgs_site/japao_historia01.jpg" id="ih1" alt="">
+            <article class="historia_text" id="ht1">
+            <p>O Colégio Estadual Japão foi inaugurado no dia 16 de julho de 1964. A instituição era composta de dois pavilhões e foi denominada então Grupo Escolar Japão, por localizar-se num pequeno reduto de japoneses, que doaram o terreno para a construção da escola. Foi em homenagem à essa gentileza que a escola recebeu o nome de <strong> Colégio Japão</strong>.</p>
+           
+               </article>
+               <article class="historia_text" id="ht2">
+            <p>A nossa amizade com o Japão não parou por aí. As relações do Colégio com o Consulado Japonês desde então sempre foram cordiais e intensas. No ano de 2004, o então Cônsul Kohei Nagashima nos proporcionou a criação do ginásio coberto. Em setembro de 2009, o Cônsul Haruyoshi Miura possibilitou a reforma de um antigo pavilhão de madeira, nos entregando o atual "Prédio Verde".</p>
+          
+
+           
+            <p>Ao longo desses anos, muitos alunos passaram por estas salas de aula e tornaram-se cidadãos que colaboram com o seu trabalho para a grandeza da nossa cidade, exercendo as mais variadas profissões.</p>
+                </article>
+            <img src="imgs_site/japao_historia02.jpg" alt="" id="ih2">
+            
+        </div>
+    
+
+    <!-- LOCALIZAÇÃO -->
+    <section id="loc_end">
+        <h2>Localização</h2>
+        <div class="local">
+<iframe id="mapframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d665.8823857949334!2d-51.14231218236115!3d-30.031966974701227!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951977b5e996f15f%3A0xd85d79c8d38fdd5c!2sCol%C3%A9gio%20Estadual%20Jap%C3%A3o!5e0!3m2!1spt-BR!2sus!4v1779391961783!5m2!1spt-BR!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            <div class="box">
+                <div id="endereco">
+                <p>R. Enrico Caruso, 444</p>
+                <p>Jardim Sabará</p>
+                <br>
+                <p>Porto Alegre, RS</p>
+                <p>CEP 91215-300</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="galeria">
+        <h2>Espaços</h2>
+        <img src="https://picsum.photos/400/300" alt="">
+    </section>
+
+    <!-- FORM -->
+    <section class="form">
+        <div>
+            <input type="text" placeholder="Nome">
+            <br><br>
+            <input type="email" placeholder="E-mail">
+        </div>
+        <textarea placeholder="Insira sua sugestão!"></textarea>
+    </section>
+
+</main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container footer-grid">
+        <div>
+            <img src="imgs_site/logo.png" id="logo_footer" alt="">
+            <h3>Colégio Japão</h3>
+            <p>O conhecimento nos faz valer.</p>
+        </div>
+
+        <div>
+            <h3>Links úteis</h3>
+            <p><a href="https://www.instagram.com/colegioestadualjapao_01.cre/">Instagram</a></p>
+            <p><a href="https://www.facebook.com/colegiojapao01cre/">Facebook</a></p>
+        </div>
+
+        <div>
+            <h3>Contato</h3>
+            <p>(51) 9541-9523</p>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
