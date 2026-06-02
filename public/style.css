@@ -24,6 +24,11 @@
 }
 
 
+.identidade:hover {
+    transition: transform 0.1s ease;
+    transform: scale(1.1);
+}
+
 .titulo {
     display: block;
     font-family: 'Sekuya';
@@ -32,6 +37,7 @@
 
 header {
     box-shadow: black 1pt 1pt 1px;
+    padding: 2vw;
 }
 
 nav>ul {
@@ -41,43 +47,87 @@ nav>ul {
     display: flex;
     flex-direction: row;
     gap: 20px;
+
+}
+
+
+.identidade {
+    display: flex;
+    flex-direction: row;
+    margin-right: 25vw;
 }
 
 header {
-    display: flex
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
 }
+
 
 li>a {
     text-decoration: none;
     color: var(--cor-texto);
     font-family: var(--fonte-texto);
+    font-weight: 600;
+    margin-left: 3em;
+    font-size: 2.5vh;
+
 }
+
+
+
+.btn_agenda {
+    background-color: var(--vermelho);
+    padding: 0.5em;
+    padding-left: 2em;
+    padding-right: 2em;
+    color: #ffffff;
+    border-radius: 10px;
+    font-weight: 300;
+    box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 1pt;
+
+}
+
 
 .principal {
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
-    margin: 15px;
+    margin-top: 1.2vw;
+    margin-right: 0 auto;
+
+}
+
+#informacoes_iniciais>p {
+    font-size: 1.7vh;
+    max-width: 12vw;
+    color: #4141418f;
+    margin-bottom: 1em;
+    font-weight: 600;
 
 }
 
 h1 {
     font-weight: 400;
     display: block;
-    font-size: 60px;
+    font-size: 3vw;
     color: var(--cor-texto);
-    margin: 5px;
+    margin-top: 2em;
+    margin-bottom: 1vw;
+    line-height: 1.2em;
 
 }
 
 button {
-   background-color: var(--vermelho);
-   border: none;
-   border-radius: 20px;
-   padding: 20px;
-   font-size: 1em;
-   color: #ffffff;
-   
+    background-color: var(--vermelho);
+    border: none;
+    border-radius: 10px;
+    padding: 2vh;
+    font-size: 2vh;
+    color: #ffffff;
+    margin-top: 1em;
+    box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
+
 }
 
 button>a {
@@ -85,6 +135,60 @@ button>a {
     font-family: 'Poppins';
     text-decoration: none;
 }
+
+
+#imagem_inicio {
+    width: 900px;
+    height: 500px;
+    border-radius: 50px;
+    margin-left: 2em;
+
+}
+
+#imagem_transparencia {
+    position: relative;
+    width: 900px;
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#imagem_transparencia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+#imagem_transparencia:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(255, 255, 255), transparent 60%);
+    pointer-events: none;
+}
+
+
+
+
+
+/* NOSSA HISTORIA */
+
+#subtitulo {
+    text-align: center;
+    font-size: 2.2vw;
+    font-weight: 450;
+    color: var(--cor-texto);
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.subtitulo_pt2 {
+    color: var(--vermelho);
+    font-weight: 800;
+}
+
+
 
 .historia {
     display: grid;
@@ -96,22 +200,29 @@ button>a {
 
 
 .historia_text {
-    margin: 20px;
-    font-size: 2em;
-    line-height: 2.5rem;
+    margin-left: 8em;
+    margin-right: 8em;
+    font-size: 1em;
+    line-height: 2.2rem;
+    text-align: justify;
+    margin-top: 1.5em;
 }
+
 
 .historia>img {
-    max-width: 450px;
-    width: 100%;
-    height: auto;
+    width: 80vh;
+    height: 40vh;
     display: inline-block;
-    align-items: center;
-
 }
 
+
+strong {
+    color: var(--vermelho);
+}
+
+
 #ih1 {
-    border-radius: 0px 12px 12px 0px;
+    border-radius: 0px 20px 20px 0px;
     grid-column: 1;
 
 }
@@ -142,14 +253,14 @@ button>a {
 
 #endereco {
     background-color: var(--vermelho);
-    font-size: 32px;
-    border-radius: 62px 0px 0px 62px;
-    width: 595px;
-    height: 509px;
+    font-size: 3vh;
+    border-radius: 30px 0px 0px 30px;
+    width: 30vw;
+    height: 31vw;
     display: flex;
     justify-content: center;
     /* Centraliza na horizontal */
-    align-items: center;
+    align-items: start;
     /* Centraliza na vertical */
     flex-direction: column;
     flex-wrap: wrap;
@@ -158,12 +269,16 @@ button>a {
 
 }
 
+#endereco>p {
+    margin-left: 2vw;
+}
 
 #mapframe {
-    width: 600px;
-    height: 450px;
-    border-radius: 0px 62px 62px 0px;
+    width: 900px;
+    height: 428px;
+    border-radius: 0px 30px 30px 0px;
     border: none;
+    box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
 }
 
 /*agenda:*/
@@ -193,4 +308,19 @@ button>a {
     /* align-items: center; */
     gap: 30px;
     align-content: center;
+}
+
+#container_footer_grid {
+    background-color: var(--vermelho);
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    height: 30vh;
+
+}
+
+#id_visual, #links, #contatos{
+    font-size: 2vh;
+    margin-top: 3vh;
+
 }

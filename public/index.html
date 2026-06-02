@@ -16,6 +16,9 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
+
+    <!-- BootStrap/Flaticon -->
+
 </head>
 
 <body>
@@ -23,39 +26,40 @@
     <div class="container">
 
         <header>
-            <img src="imgs_site/logo.png" id="logo_header" alt="">
-            <div class="logo">Colégio<span class="titulo">Japão</span></div>
+            <div class="identidade"><img src="imgs_site/logo.png" id="logo_header" alt="">
+            <div class="logo">Colégio<span class="titulo">Japão</span></div></div>
             <!-- NAV -->
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
                     <li><a href="blog_pag.html">Blog</a></li>
                     <li><a href="atividades/index.html">Atividades</a></li>
-                    <li><a class="btn" href="agenda_pag.html">Agenda</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a class="btn_agenda" href="agenda_pag.html">Agenda</a></li>
                 </ul>
             </nav>
-
         </header>
 
         <!-- HERO -->
         <section class="principal">
-            <div>
-                <h1>Colégio <br> Estadual<span class="titulo">Japão</span></h1>
-                <p>O conhecer nos faz valer.</p>
+            <div id="informacoes_iniciais">
+                <h1>Colégio<br>Estadual<span class="titulo">Japão</span></h1>
+                <p>O conhecer nos faz valer. A educação é o acender de uma chama, não o preenchimento de um recipiente vazio.</p>
                 <button><a href="#">Entre em contato!</a></button>
             </div>
-            <img src="https://picsum.photos/600/400" alt="">
+            <div id="imagem_transparencia">
+            <img src="./imgs_site/escola_inicio_teste.png" alt="Fachada Escola Japão" id="imagem_inicio"></div>
         </section>
 
 
         <main>
             <!-- HISTORIA -->
 
-            <h2>Nossa <span>História</span></h2>
+            <h2 id="subtitulo">Nossa <span class="subtitulo_pt2">História</span></h2>
             <div class="historia">
-                <img src="imgs_site/japao_historia01.jpg" id="ih1" alt="">
+                <img src="imgs_site/inauguracao_escola.png" id="ih1" alt="">
                 <article class="historia_text" id="ht1">
-                    <p>O Colégio Estadual Japão foi inaugurado no dia 16 de julho de 1964. A instituição era composta de
+                    <p>O Colégio Estadual Japão foi inaugurado no dia <strong>16 de julho de 1964.</strong> A instituição era composta de
                         dois pavilhões e foi denominada então Grupo Escolar Japão, por localizar-se num pequeno reduto
                         de japoneses, que doaram o terreno para a construção da escola. Foi em homenagem à essa
                         gentileza que a escola recebeu o nome de <strong> Colégio Japão</strong>.</p>
@@ -119,20 +123,20 @@
 
     <!-- FOOTER -->
     <footer>
-        <div class="container footer-grid">
-            <div>
+        <div id="container_footer_grid">
+            <div id="id_visual">
                 <img src="imgs_site/logo.png" id="logo_footer" alt="">
                 <h3>Colégio Japão</h3>
                 <p>O conhecimento nos faz valer.</p>
             </div>
 
-            <div>
+            <div id="links">
                 <h3>Links úteis</h3>
                 <p><a href="https://www.instagram.com/colegioestadualjapao_01.cre/">Instagram</a></p>
                 <p><a href="https://www.facebook.com/colegiojapao01cre/">Facebook</a></p>
             </div>
 
-            <div>
+            <div id="contatos">
                 <h3>Contato</h3>
                 <p>(51) 9541-9523</p>
             </div>
