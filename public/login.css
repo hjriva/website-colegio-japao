@@ -1,0 +1,80 @@
+:root {
+    font-family: "Poppins";
+
+    --cor-primaria: #FF0000;
+    --cor-secundaria: #1E1E1E;
+
+}
+
+body {
+    margin: 0;
+
+}
+
+main {
+    background-color: #ffff;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 40% 60%;
+
+}
+
+#container {
+    background-color: var(--cor-primaria);
+    height: 100vh;
+}
+
+
+img {
+    width: 200px;
+    height: 200px;
+
+}
+
+#info {
+    align-items: flex-end;
+    margin: 0 auto;
+}
+
+#tela_login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    row-gap: 15px;
+}
+
+#tela_login>i{
+    text-align: center;
+    color: var(--cor-primaria);
+    margin-bottom: 5vh;
+}
+
+
+
+input,
+button {
+    height: 3em;
+    border-radius: 2vh;
+    border: none;
+    width: 40vh;
+
+}
+
+input {
+    background-color: #E2DDDD;
+    text-indent: 2vh;
+}
+
+button {
+    background-color: var(--cor-primaria);
+    font-size: 2vh;
+    color: #E2DDDD;
+}
+
+#redefinicao {
+    font-size: 1.5vh;
+    text-align: center;
+    margin-top: 1vh;
+    margin-bottom: 5vh;
+}
