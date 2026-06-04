@@ -10,7 +10,7 @@ export function criaElemento(tag, texto, atributo, valorAtributo, pai, className
 
 // Função para puxar dados do BD e colocar nos elementos criados na função CriaElemento
 export function criaCardEvento(entrada, container, acoes = null) {
-    console.log(entrada.img)
+    console.log(entrada)
     const ev = document.createElement('div');
     ev.classList.add('eventos-agenda');
     ev.setAttribute('id', `${entrada.identrada}`);
@@ -27,6 +27,7 @@ export function criaCardEvento(entrada, container, acoes = null) {
     criaElemento('img', null, 'src', `${entrada.img}`, evHeader, 'img-evento');
     criaElemento('h2', `${entrada.titulo}:`, null, null, evTitulo, 'titulo-vento');
     criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano}`, null, null, evTitulo, 'data-evento');
+    criaElemento('p', `${entrada.horario.slice(0, 5).replace(':', 'h')}`, null, null, evTitulo, 'horario-evento')
     criaElemento('p', entrada.descricao, null, null, ev, 'descr-evento');
 
     // se acoes for passado, renderiza os botões - para usar somente no painel interno

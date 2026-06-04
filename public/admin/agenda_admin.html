@@ -13,37 +13,43 @@
     <h1>Painel de Controle</h1>
     <a href="../index.html">Visite sua página</a>
     <a href="blog_posts_int.html">Painel do Blog</a>
-    <div id="controleAgenda"> <!--Precisa ter esse id devido ao javascript, que criará elementos dinamicamente-->
+
+    <button id="adicionar-post">Adicionar postagens</button>
+
+    <div id="novo-evento-form">
+        <h2>Adicionar novo post:</h2>
+    <!---Esse form tá cheio de br, precisa arrumar com divs direitinho e adicionar labels -->
+        <form action="/updateBD" method="POST"id='FormularioNovo'>
+            <input type="text" name="nome-evento" id="nome-novo-evento" placeholder="Nome">
+            <br> <br>
+            <input type="date" name="" id="data-novo-evento"> <br> <br>
+            <input type="time" name="" id="hora-novo-evento"> <br> <br>
+            
+            <input type="file" name="" id="Imagem-novo-evento" accept="image/*">
+            <br><br>
+            <textarea name="" id="desc-novo-evento" placeholder="Descricao">
+            
+            </textarea>
+        <br><br>
+        <br> <br>
+    
+        </form>
+            <input type="button" value="Criar nova postagem" id="salvar-post"> 
+    </div>
+
+    <input type="text" id="input-busca" placeholder="Buscar por título ou descrição...">
+    <input type="date" id="filtro-data">
+
+    <div id="controle-agenda"> 
         
         <!--Aqui é onde vão aparecer os eventos-->
 
-        <!--Precisamos definir se vai ficar na mesma página que o form abaixo ou se terá
-        alguma estrutura diferente -->
-
     </div>
-    <br><br>
-    <h2>Criar novo evento</h2>
-    <!---Esse form tá cheio de br, precisa arrumar com divs direitinho e adicionar labels -->
-    <form action="/updateBD" method="POST"id='FormularioNovo'>
-        <input type="text" name="nomeEvento" id="NomeNovoEvento" placeholder="Nome">
-        <br> <br>
-        <input type="date" name="" id="dataNovoEvento"> <br> <br>
-            <input type="time" name="" id="HoraNovoEvento"> <br> <br>
-            
-            <input type="file" name="" id="ImagemNovoEvento" accept="image/*">
-            <br><br>
-        <textarea name="" id="DescNovoEvento" placeholder="Descricao">
-            
-        </textarea>
-        <br><br>
-        <br> <br>
-        
-    <input type="reset" value="Limpar Formulário"> 
-    <!--Coloquei para teste, não é necessário-->
-    </form>
-     <input type="button" value="Criar nova postagem" id="InsertValue"> 
-    <input type="button" value="Gerenciar posts existentes">
-    
+
+    <button id="btn-anterior-interno">← Anterior</button>
+<span id="info-pagina-interna"></span>
+<button id="btn-proximo-interno">Próximo →</button>
+
     <script type="module" src="agenda_admin.js"></script>
 </body>
 </html>

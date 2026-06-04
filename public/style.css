@@ -283,7 +283,7 @@ strong {
 
 /*agenda:*/
 .eventos-agenda {
-    border: solid black;
+    border: solid rgb(255, 255, 255);
     width: 25em;
     height: 12em;
     margin: 5px;

@@ -8,7 +8,23 @@
 </head>
 <body>
     <h1>Agenda da escola:</h1>
-    <div id="AgendaPublica">
+
+<!-- Eventos de hoje -->
+<h2>Hoje</h2>
+<div id="eventos-hoje"></div>
+
+<!-- Seletor de dia -->
+<input type="date" id="input-data">
+<div id="eventos-dia"></div>
+
+<!-- Próximos eventos -->
+<h2>Próximos eventos</h2>
+<div id="proximos-eventos"></div>
+<div>
+    <button id="btn-anterior">← Anterior</button>
+    <span id="info-pagina"></span>
+    <button id="btn-proximo">Próximo →</button>
+</div>
 
         <!--Precisa ter uma div com esse id, pois é aqui que os elementos de agenda serão
         adicionados dinâmicamente pelo javascript-->
