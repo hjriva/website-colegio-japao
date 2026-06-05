@@ -263,6 +263,25 @@ app.post('/Alteracao_BD', updateimg.single('img'), (req, res) => {
     });
 }); 
 
+//Atividade de Geografia - regiões do Br
+
+app.get("/regioes", async (req, res) => {
+  try {
+    const { rows: regioes } = await db.query("SELECT * FROM regiao");
+    const { rows: estados } = await db.query("SELECT * FROM estados");
+
+    const resposta = regioes.map(regiao => ({
+      ...regiao,
+      estados: estados.filter(e => e.sigla_regiao === regiao.id_sigla)
+    }));
+
+    res.json(resposta);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Erro ao buscar regiões" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
