@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="titulo">Teste</h1>
+    <div id="navegacao"></div>
+    <div id="questoes"></div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const pagina = params.get('pagina') || 1;
+
+    fetch(`/quiz/${id}?pagina=${pagina}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('titulo').innerText = data.quiz.titulo; // ✅ atualizado
+
+            data.questoes.forEach(questao => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <p>${questao.pergunta}</p>
+                    <input type="radio" name="q${questao.id}" value="a"> ${questao.alternativa_a}<br>
+                    <input type="radio" name="q${questao.id}" value="b"> ${questao.alternativa_b}<br>
+                    <input type="radio" name="q${questao.id}" value="c"> ${questao.alternativa_c}<br>
+                    <input type="radio" name="q${questao.id}" value="d"> ${questao.alternativa_d}<br>
+                `;
+                document.getElementById('questoes').appendChild(div);
+            });
+
+            const nav = document.getElementById('navegacao');
+
+            if (data.paginaAtual > 1) {
+                nav.innerHTML += `<a href="/atividades/quiz.html?id=${id}&pagina=${data.paginaAtual - 1}">← Anterior</a>`; // ✅ subpasta
+            }
+            if (data.paginaAtual < data.totalPaginas) {
+                nav.innerHTML += `<a href="/atividades/quiz.html?id=${id}&pagina=${Number(data.paginaAtual) + 1}">Próxima →</a>`; // ✅ subpasta
+            }
+        });
+</script>
+    </script>
+</body>
+</html>

@@ -9,6 +9,24 @@
     <h1>Atividades interativas</h1>
     <p>Coming soon...</p>
 
-    <!--Aqui vai ter uma lista de todas as disciplinas, puxada dinamicamente-->
+    <a href="novo_quiz.html">Novo quiz</a>
+
+    <ul id="lista-disciplinas"></ul>
+
+<script>
+    fetch('/disciplinas')
+        .then(res => res.json())
+        .then(data => {
+            const lista = document.getElementById('lista-disciplinas');
+            data.forEach(disc => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="/atividades/disciplinas.html?id=${disc.id}">${disc.nome_disc}</a>`;
+                lista.appendChild(li);
+            });
+        })
+        .catch(err => console.error(err));
+</script>
+
+    <script src="script.js"></script>
 </body>
 </html>

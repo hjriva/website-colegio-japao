@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Adicionar nova atividade:</h1>
+    
+<!--Informações principais sobre o quiz, antes das perguntas: nome e disciplina -->
+<form action=""  id="cabeçalho-quiz"> 
+    <label for="nome-atividade">Nome da atividade: </label>
+    <input type="text" name="nome-atividade" id="nome-atividade">
+    <label for="input-disciplina">Disciplina:</label>
+    <input list="disciplinas-dl" name="input-disciplina" id="input-disciplina">
+    <datalist id="disciplinas-dl">
+        <!--Opções adicionadas dinamicamente com js-->
+    </datalist>
+
+    <input type="checkbox" id="randomizar" name="random">
+    <label for="randomizar">Embaralhar</label>
+</form>
+
+
+<main id="formulario_perguntas"> <!--Aqui são gerados os formulários para criar as perguntas-->
+    <div id="form-pergunta-1" class="perguntas_teste"> 
+        <!--Div modelo para outros formulários gerados dinamicamente com JS-->
+      <form action="" class="form_pergunta" id="form_1"> <!--Talvez não precise de action, ver posteriormente-->
+        
+        <span class="numero-pergunta">1&#41;</span>
+        <label for="question1">Pergunta:</label>
+        <input type="text" name="enunciado-1" id="enunciado-1" class="input_enunciado">
+
+        <div class="campo"> <!--Essa div existe para conseguirmos deixar uma pergunta embaixo da outra 
+            sem encher de br,
+            provavelmente vai ser adicionado em outros elementos -->
+        <label for="alt-a-1"> a&#41; </label>
+        <input type="text" name="alt-a" class="alt-a" id="alt-a-1"> 
+        <!--O id desses inputs precisa ter um número, pois serão gerados mais deles dinamicamente
+        para serem unicos -->
+        <input type="radio" name="radio-alternativa" value="a">
+        <!--O value do radio precisa ser a letra da alternativa, para conseguirmos armazenar a opção correta de cada pergunta.-->
+        </div>
+
+        <div class="campo">
+        <label for="alt-b-1"> b&#41; </label>
+        <input type="text" name="alt-b" class="alt-b" id="alt-b-1">
+        <input type="radio" name="radio-alternativa" value="b">
+        </div>
+
+        <div class="campo">
+        <label for="alt-c"> c&#41; </label>
+        <input type="text" name="alt-c" class="alt-c" id="alt-c-1">
+        <input type="radio" name="radio-alternativa" value="c">
+        </div>
+
+        <div class="campo">
+        <label for="alt-d"> d&#41; </label>
+        <input type="text" name="alt-d" class="alt-d" id="alt-d-1">
+        <input type="radio" name="radio-alternativa" value="d">
+        </div>
+
+        <div class="campo">
+            <textarea name="explicacao-1" id="explicacao-1" class="explicacao-text" placeholder="Explicacao opcional">
+
+            </textarea>
+        </div>
+    </form>
+</div> 
+   
+</main>    
+
+
+<button id="add-pergunta">+</button> 
+<button id="salvar_quiz">Salvar</button>
+
+<script src="script.js"></script>
+</body>
+</html>

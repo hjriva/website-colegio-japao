@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="" id="formulario_atv_dinamica">
+        <div id="atividade-dinamica-form">
+        <p>Esse formulário é para submissão de atividades dinâmicas hospedadas, criadas com HTML, JavaScript e 
+            tecnologias semelhantes.
+        </p>
+
+        <div class="campo">
+        <input type="text" id="titulo-atv-dinamica" placeholder="Título da atividade">
+        </div>
+        
+        <div class="campo">
+        <textarea name="" id="descricao-atv-dinamica" placeholder="Descrição da atividade"></textarea>
+        </div>
+        
+        <input type="text" id="caminho_atv-dinamica" placeholder="Link/caminho"> 
+        </div>
+        <div class="campo">
+
+        <input list="disciplinas-dl" name="input-disciplina" id="input-disciplina">
+        <datalist id="disciplinas-dl">
+        <!--Opções adicionadas dinamicamente com js-->
+        </datalist>
+        </div>
+        <button id="salvar-atv-dinamica">Salvar atividade dinâmica</button>
+        </form>
+    </div>
+
+    <script src="script_atvdinamica.js"></script>
+</body>
+</html>

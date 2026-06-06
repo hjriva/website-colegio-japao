@@ -282,6 +282,186 @@ app.get("/regioes", async (req, res) => {
   }
 });
 
+//Fazedor de quizzes
+
+// Listar disciplinas
+app.get("/disciplinas", async (req, res) => {
+  try {
+    const { rows } = await db.query(`SELECT * FROM disciplinas`);
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ erro: "Erro ao buscar disciplinas" });
+  }
+});
+
+
+
+
+// Novas perguntas
+app.post("/novasperguntas", async (req, res) => {
+  const { idQuiz, enunciado, alt_a, alt_b, alt_c, alt_d, correto, explicacao } = req.body;
+
+  if (!idQuiz || !enunciado) {
+    return res.status(400).json({ erro: "Campos obrigatórios faltando", recebido: req.body });
+  }
+
+  try {
+    await db.query(`
+      INSERT INTO questoes (quiz_id, pergunta, alternativa_a, alternativa_b, alternativa_c, alternativa_d, resposta_correta, explicacao)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    `, [idQuiz, enunciado, alt_a, alt_b, alt_c, alt_d, correto, explicacao]);
+
+    res.json({ sucesso: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ erro: "Erro ao salvar pergunta" });
+  }
+});
+
+// Novo quiz
+app.post("/novoquiz", async (req, res) => {
+  const { disciplina, tituloQuiz, randomizar } = req.body;
+
+  if (!disciplina || !tituloQuiz) {
+    return res.status(400).json({
+      erro: "Campos 'disciplina' e 'tituloQuiz' são obrigatórios.",
+      recebido: { disciplina, tituloQuiz }
+    });
+  }
+
+  const client = await db.connect();
+  try {
+    await client.query('BEGIN');
+
+    // Insere disciplina se não existir
+    await client.query(`
+      INSERT INTO disciplinas (nome_disc)
+      VALUES ($1)
+      ON CONFLICT (nome_disc) DO NOTHING
+    `, [disciplina]);
+
+    const { rows: discRows } = await client.query(
+      `SELECT id FROM disciplinas WHERE nome_disc = $1`,
+      [disciplina]
+    );
+    const idDisciplina = discRows[0].id;
+
+    // Cria a atividade
+    const { rows: atividadeRows } = await client.query(`
+      INSERT INTO atividades (titulo, tipo, disciplina_id)
+      VALUES ($1, 'quiz', $2)
+      RETURNING id
+    `, [tituloQuiz, idDisciplina]);
+    const idAtividade = atividadeRows[0].id;
+
+    // Cria o quiz vinculado à atividade
+    const { rows: quizRows } = await client.query(`
+      INSERT INTO quizzes (atividade_id, randomizar)
+      VALUES ($1, $2)
+      RETURNING id
+    `, [idAtividade, randomizar ?? false]);
+    const idQuiz = quizRows[0].id;
+
+    await client.query('COMMIT');
+    res.json({ sucesso: true, idQuiz, idAtividade, idDisciplina });
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error(err);
+    res.status(500).json({ erro: "Erro ao criar quiz" });
+  } finally {
+    client.release();
+  }
+});
+
+// Backend
+app.post('/novaatvdinamica', async (req, res) => {
+    let { titulo, descricao, caminho, disciplina } = req.body;
+
+    const client = await db.connect();
+    try {
+        await client.query('BEGIN');
+
+        // Insere a disciplina se não existir
+        await client.query(`
+            INSERT INTO disciplinas (nome_disc)
+            VALUES ($1)
+            ON CONFLICT (nome_disc) DO NOTHING
+        `, [disciplina]);
+
+        // Insere a atividade buscando o id da disciplina
+        await client.query(`
+            INSERT INTO atividades (titulo, descricao, tipo, caminho, disciplina_id)
+            VALUES ($1, $2, 'estatica', $3, (SELECT id FROM disciplinas WHERE nome_disc = $4))
+        `, [titulo, descricao, caminho, disciplina]);
+
+        await client.query('COMMIT');
+        res.json({ sucesso: true });
+    } catch (err) {
+        await client.query('ROLLBACK');
+        console.error(err);
+        res.status(500).json({ erro: "Erro ao salvar atividade" });
+    } finally {
+        client.release();
+    }
+});
+
+
+// 2. Nova — lista atividades e quizzes de uma disciplina
+app.get("/disciplina/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const { rows: disciplina } = await db.query(
+            `SELECT * FROM disciplinas WHERE id = $1`, [id]
+        );
+        const { rows: atividades } = await db.query(`
+            SELECT 
+                a.id, a.titulo, a.tipo, a.caminho,
+                q.id AS quiz_id
+            FROM atividades a
+            LEFT JOIN quizzes q ON q.atividade_id = a.id
+            WHERE a.disciplina_id = $1
+        `, [id]);
+
+        res.json({ disciplina: disciplina[0], atividades });
+    } catch (err) {
+        res.status(500).json({ erro: "Erro ao buscar disciplina" });
+    }
+});
+
+// 3. Já existe — adaptar para PostgreSQL e novo schema
+app.get("/quiz/:id", async (req, res) => {
+    const { id } = req.params;
+    const pagina = parseInt(req.query.pagina) || 1;
+    const porPagina = 10;
+    const offset = (pagina - 1) * porPagina;
+
+    try {
+        const { rows: quizRows } = await db.query(`
+            SELECT q.*, a.titulo, q.randomizar
+            FROM quizzes q
+            JOIN atividades a ON a.id = q.atividade_id
+            WHERE q.id = $1
+        `, [id]);
+        const quiz = quizRows[0];
+
+        const ordem = quiz.randomizar ? 'ORDER BY RANDOM()' : 'ORDER BY id';
+        const { rows: questoes } = await db.query(`
+            SELECT * FROM questoes WHERE quiz_id = $1 ${ordem} LIMIT $2 OFFSET $3
+        `, [id, porPagina, offset]);
+
+        const { rows: totalRows } = await db.query(
+            `SELECT COUNT(*) as total FROM questoes WHERE quiz_id = $1`, [id]
+        );
+        const totalPaginas = Math.ceil(parseInt(totalRows[0].total) / porPagina);
+
+        res.json({ quiz, questoes, totalPaginas, paginaAtual: pagina });
+    } catch (err) {
+        res.status(500).json({ erro: "Erro ao buscar quiz" });
+    }
+});
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
