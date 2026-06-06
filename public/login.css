@@ -16,7 +16,7 @@ main {
     bakground-color: var(--cor-terciaria);
     display: grid;
     grid-template-columns: 40% 60%;
-    width:100%;
+    width: 100%;
 
 }
 
@@ -71,17 +71,34 @@ input {
     text-indent: 2vh;
 }
 
+#erro {
+    font-size: 5vh;
+}
+
+
 button {
     background-color: var(--cor-primaria);
     font-size: 2vh;
     color: var(--cor-terciaria);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    width: 30vh;
+    margin: 0 auto;
+    font-family: 'Poppins';
 }
 
+button:hover {
+    transform: scale(1.1);
+    font-display: none;
+    background-color: hwb(0 39% 0%);
+}
+
+
 #redefinicao {
-    font-size: 1.5vh;
+    font-size: 1.9vh;
     text-align: center;
     margin-top: 1vh;
     margin-bottom: 5vh;
+    font-weight: 520;
 }
 
 #info {
@@ -97,6 +114,7 @@ h1 {
     line-height: 1em;
     display: flex;
     flex-wrap: wrap;
+
 }
 
 @media (max-width: 480px) {
@@ -106,13 +124,13 @@ h1 {
     }
 
     main {
-        display: flex;         
+        display: flex;
         flex-direction: column;
-        
+
     }
 
     #container {
-        height: auto;           
+        height: auto;
         padding: 2em;
     }
 
