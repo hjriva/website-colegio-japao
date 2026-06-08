@@ -7,27 +7,39 @@
 </head>
 <body>
     <h1 id="titulo">Teste</h1>
+    
     <div id="navegacao"></div>
+
+    <div id="resultado"></div>
     <div id="questoes"></div>
+
+    <button id="submeter-resultado">Submeter resultado </button>
 
 <script>
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     const pagina = params.get('pagina') || 1;
+    let res = window.document.getElementById('resultado')
+    
 
+    let botaoResultado = window.document.getElementById('submeter-resultado')
     fetch(`/quiz/${id}?pagina=${pagina}`)
         .then(res => res.json())
         .then(data => {
+            
             document.getElementById('titulo').innerText = data.quiz.titulo; // ✅ atualizado
-
+            console.log(data)
             data.questoes.forEach(questao => {
+                
                 const div = document.createElement('div');
+                div.id = questao.id
+                div.classList.add('questao')
                 div.innerHTML = `
                     <p>${questao.pergunta}</p>
-                    <input type="radio" name="q${questao.id}" value="a"> ${questao.alternativa_a}<br>
-                    <input type="radio" name="q${questao.id}" value="b"> ${questao.alternativa_b}<br>
-                    <input type="radio" name="q${questao.id}" value="c"> ${questao.alternativa_c}<br>
-                    <input type="radio" name="q${questao.id}" value="d"> ${questao.alternativa_d}<br>
+                    <input type="radio" name="q${questao.id}" value="a"> a) ${questao.alternativa_a}<br>
+                    <input type="radio" name="q${questao.id}" value="b"> b) ${questao.alternativa_b}<br>
+                    <input type="radio" name="q${questao.id}" value="c"> c) ${questao.alternativa_c}<br>
+                    <input type="radio" name="q${questao.id}" value="d"> d) ${questao.alternativa_d}<br>
                 `;
                 document.getElementById('questoes').appendChild(div);
             });
@@ -40,8 +52,49 @@
             if (data.paginaAtual < data.totalPaginas) {
                 nav.innerHTML += `<a href="/atividades/quiz.html?id=${id}&pagina=${Number(data.paginaAtual) + 1}">Próxima →</a>`; // ✅ subpasta
             }
+
+            let corretas = []
+            botaoResultado.addEventListener('click', () => {
+                let perguntas = document.querySelectorAll('.questao')
+                
+
+                perguntas.forEach((pergunta, index) => {
+                    const divFeedback = document.createElement('div')
+                    pergunta.appendChild(divFeedback)
+
+                    const questao = data.questoes.find(q => q.id == pergunta.id) ?? null;
+                    const altCorreta = questao.resposta_correta
+
+                    let altMarcada = pergunta.querySelector('input[type=radio]:checked').value
+                    //console.log(`Marcou ${altMarcada}, o certo é ${altCorreta}`)
+                    if (altMarcada == altCorreta) {
+                        divFeedback.textContent = `Você acertou a questão ${index + 1}!`
+                        divFeedback.classList.add('resposta-correta')
+                        corretas.push(pergunta)
+                    } else {
+                        divFeedback.textContent = `A resposta correta é ${altCorreta}!`
+                        divFeedback.classList.add('resposta-inccorreta')
+                    }
+
+                    explicacaoPergunta = questao.explicacao
+                    if (explicacaoPergunta !== null) {
+                        const divExplicacao = document.createElement('div')
+                        divExplicacao.textContent = explicacaoPergunta
+                        pergunta.appendChild(divExplicacao)
+                    }
+                    
+                    
+                })
+                   
+                    res.innerHTML += `Você acertou ${corretas.length} de ${perguntas.length}!`
+                    if (corretas.length >= Math.ceil(perguntas.length / 2)) {
+                        res.innerHTML += ` Parabéns!!`
+                    }
+            })
+
         });
+
 </script>
-    </script>
+    
 </body>
 </html>

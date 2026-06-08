@@ -62,6 +62,7 @@ function NovaQuestao() {
             inputRadios[inicioRadio].checked = false
     }   
 
+    novoForm.querySelector('.explicacao-text').value = ""
     novoForm.querySelector('.explicacao-text').id = `explicacao-${numPerguntas}`
 
 
@@ -75,20 +76,20 @@ window.document.getElementById('add-pergunta').addEventListener('click', () => N
 
 //Salvar quiz no banco de dados
 window.document.getElementById('salvar_quiz').addEventListener('click', () => {
- let todosFormularios = document.querySelectorAll('.form_pergunta');
-let semResposta = [];
+    let todosFormularios = document.querySelectorAll('.form_pergunta');
+    let semResposta = [];
 
-todosFormularios.forEach((form, index) => {
-    const marcado = form.querySelector('[name="radio-alternativa"]:checked');
-    if (!marcado) {
-        semResposta.push(index + 1); // +1 para o número ser 1, 2, 3... ao invés de 0, 1, 2...
+    todosFormularios.forEach((form, index) => {
+        const marcado = form.querySelector('[name="radio-alternativa"]:checked');
+        if (!marcado) {
+            semResposta.push(index + 1); // +1 para o número ser 1, 2, 3... ao invés de 0, 1, 2...
+        }
+    });
+
+    if (semResposta.length > 0) {
+        alert(`As seguintes perguntas não têm resposta marcada: ${semResposta.join(', ')}`);
+        return;
     }
-});
-
-if (semResposta.length > 0) {
-    alert(`As seguintes perguntas não têm resposta marcada: ${semResposta.join(', ')}`);
-    return;
-}
     
 
     let nomeAtividade = document.getElementById('nome-atividade').value
@@ -143,7 +144,13 @@ if (semResposta.length > 0) {
         return Promise.all(requests);
 
 })
-.then(resultados => console.log(resultados))
+.then(resultados => {console.log(resultados);
+    document.querySelectorAll('form').forEach(form => form.reset())
+    let feedbackQuizSalvo = document.createElement('div')
+    feedbackQuizSalvo.id = 'quiz-salvo';
+    feedbackQuizSalvo.classList.add('feedback-quiz')
+    feedbackQuizSalvo.textContent = 'Quiz salvo com sucesso!'
+})
 .catch(error => console.error(error));
 })
 
