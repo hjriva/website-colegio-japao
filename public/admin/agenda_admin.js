@@ -1,12 +1,9 @@
-
 //Puxa a função do arquivo util.js, para que todos os arquivos apareçam na tela
 import { criaCardEvento } from '/util.js';
-
 import { ReqDisciplinas } from '/util.js'
 
 let painelDefault = 0;
 //vai ser definido posteriormente conforme definiões de acesso do firebase
-
 
 let painelAdmin = document.getElementById('painel-admin')
 let painelAgendaConteudo = document.getElementById('painel-agenda-conteudo');
@@ -22,29 +19,24 @@ let paginaAtual = 1;
 let totalEventos = 0;
 const LIMITE = 10;
 
-// Claude
 const inputBusca = document.getElementById('input-busca');
 const inputFiltroData = document.getElementById('filtro-data');
 const container = document.getElementById('controle-agenda');
 
 //Declarações de funções:
-/*Função para criar o efeito de sumir e desaparecer de alguns elementos conforme botão, 
-será aplciado no formulario de novo evento*/
+
 function toggleElement(element, displayDesejado) {
-    
     if (element.style.display == 'none') {
         element.style.display = displayDesejado
     } else {
         element.style.display = 'none'
     }
-    
 }
 
 //Função para editar itens
 function editarEntrada(idElem) {
     const ev = document.getElementById(idElem);
 
-    // Captura os elementos e seus valores ANTES de qualquer alteração
     const elTitulo = ev.querySelector('h2');
     const elData = ev.querySelector('.data-evento');
     const elHorario = ev.querySelector('.horario-evento');
@@ -57,17 +49,16 @@ function editarEntrada(idElem) {
     const valDescricao = elDescricao.textContent.trim();
     const valImg = elImg.getAttribute('src');
 
-    // Cria os inputs
     const inputTitulo = Object.assign(document.createElement('input'), { value: valTitulo });
 
     const inputData = Object.assign(document.createElement('input'), {
         type: 'date',
-        value: valData.split(' / ').reverse().join('-') // "18 / 06 / 2026" → "2026-06-18"
+        value: valData.split(' / ').reverse().join('-')
     });
 
     const inputHorario = Object.assign(document.createElement('input'), {
         type: 'time',
-        value: valHorario.replace('h', ':') // "10h00" → "10:00"
+        value: valHorario.replace('h', ':')
     });
 
     const inputDescricao = Object.assign(document.createElement('textarea'));
@@ -81,7 +72,6 @@ function editarEntrada(idElem) {
         preview.src = URL.createObjectURL(e.target.files[0]);
     });
 
-    // Substitui elementos pelos inputs
     elTitulo.replaceWith(inputTitulo);
     elData.replaceWith(inputData);
     elHorario.replaceWith(inputHorario);
@@ -89,7 +79,6 @@ function editarEntrada(idElem) {
     elImg.replaceWith(inputImg);
     inputImg.after(preview);
 
-    // Troca botão Alterar por Salvar
     const btnAlterar = ev.querySelector('button');
     btnAlterar.style.display = 'none';
 
@@ -104,11 +93,9 @@ function editarEntrada(idElem) {
         inputImg.replaceWith(Object.assign(document.createElement('img'), { src: imgSrc, className: 'img-evento' }));
         preview.remove();
 
-        // Restaura data formatada "2026-06-18" → "18 / 06 / 2026"
         const [ano, mes, dia] = data.split('-');
         inputData.replaceWith(Object.assign(document.createElement('p'), { className: 'data-evento', textContent: `${dia} / ${mes} / ${ano}` }));
 
-        // Restaura horário formatado "10:00" → "10h00"
         inputHorario.replaceWith(Object.assign(document.createElement('p'), { className: 'horario-evento', textContent: horario.replace(':', 'h') }));
 
         btnAlterar.style.display = '';
@@ -155,7 +142,6 @@ function excluirEntrada(idElem) {
     })
         .then(res => res.json())
         .then(() => {
-            // Se era o único item da página (e não é a primeira), volta uma página
             const totalPaginas = Math.ceil((totalEventos - 1) / LIMITE);
             const pagina = (paginaAtual > totalPaginas && paginaAtual > 1) ? paginaAtual - 1 : paginaAtual;
             buscar(pagina);
@@ -187,12 +173,13 @@ function InserirNovo() {
         .then(res => res.json())
         .then(data => {
             console.log(data);
-            buscar(paginaAtual); // recarrega a página atual com a lista atualizada
+            buscar(paginaAtual);
         })
         .catch(error => console.log(error));
 
     window.document.getElementById('FormularioNovo').reset()
 }
+
 //Aqui cria a função para que cada item tenha os botões de editar e excluir
 function acoesAdmin(ev, entrada) {
     const btnEditar = document.createElement('button');
@@ -207,7 +194,6 @@ function acoesAdmin(ev, entrada) {
     ev.appendChild(btnExcluir);
 }
 
-// Claude
 function buscar(pagina = 1) {
     const termo = inputBusca.value.trim();
     const data = inputFiltroData.value;
@@ -219,15 +205,15 @@ function buscar(pagina = 1) {
 
     container.innerHTML = '';
 
-   fetch(`/agenda/busca?${params}`)
-    .then(res => res.json())
-    .then(({ eventos, total }) => {
-        totalEventos = total;
-        paginaAtual = pagina;
-        eventos.forEach(entrada => criaCardEvento(entrada, container, acoesAdmin));
-        atualizaPaginacaoInterna();
-    })
-    .catch(err => console.error(err));
+    fetch(`/agenda/busca?${params}`)
+        .then(res => res.json())
+        .then(({ eventos, total }) => {
+            totalEventos = total;
+            paginaAtual = pagina;
+            eventos.forEach(entrada => criaCardEvento(entrada, container, acoesAdmin));
+            atualizaPaginacaoInterna();
+        })
+        .catch(err => console.error(err));
 }
 
 function atualizaPaginacaoInterna() {
@@ -256,20 +242,294 @@ function mostrarPainelAgenda() {
     painelAtividadesConteudo.style.display = 'none';
 
     novoEventoForm.style.display = 'none';
-    buscar(paginaAtual); // recarrega a lista quando volta pro painel
+    buscar(paginaAtual);
+}
+
+// ===== Navegação dentro do painel de atividades =====
+
+function mostrarListaDisciplinas() {
+    painelAtividadesConteudo.innerHTML = '';
+
+    const titulo = document.createElement('h2');
+    titulo.textContent = 'Disciplinas';
+    painelAtividadesConteudo.appendChild(titulo);
+
+    const lista = document.createElement('ul');
+    painelAtividadesConteudo.appendChild(lista);
+
+    ReqDisciplinas(lista, acoesAdminDisciplina);
+}
+
+function mostrarAtividadesDisciplina(idDisciplina, nomeDisciplina) {
+    painelAtividadesConteudo.innerHTML = '';
+
+    const btnVoltar = document.createElement('button');
+    btnVoltar.textContent = '← Voltar';
+    btnVoltar.addEventListener('click', mostrarListaDisciplinas);
+    painelAtividadesConteudo.appendChild(btnVoltar);
+
+    const titulo = document.createElement('h2');
+    titulo.textContent = nomeDisciplina;
+    painelAtividadesConteudo.appendChild(titulo);
+
+    const lista = document.createElement('ul');
+    painelAtividadesConteudo.appendChild(lista);
+
+    fetch(`/disciplina/${idDisciplina}`)
+        .then(res => res.json())
+        .then(({ atividades }) => {
+            atividades.forEach(atv => {
+                const li = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = '#';
+                link.textContent = atv.titulo;
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    mostrarAtividade(atv, idDisciplina, nomeDisciplina);
+                });
+                li.appendChild(link);
+                lista.appendChild(li);
+            });
+        })
+        .catch(err => console.error(err));
+}
+
+function mostrarAtividade(atv, idDisciplina, nomeDisciplina) {
+    painelAtividadesConteudo.innerHTML = '';
+
+    const btnVoltar = document.createElement('button');
+    btnVoltar.textContent = '← Voltar';
+    btnVoltar.addEventListener('click', () => mostrarAtividadesDisciplina(idDisciplina, nomeDisciplina));
+    painelAtividadesConteudo.appendChild(btnVoltar);
+
+    if (atv.tipo === 'quiz') {
+        renderizarQuizAdmin(atv.quiz_id, painelAtividadesConteudo);
+    } else {
+        mostrarAtividadeEstatica(atv.caminho, painelAtividadesConteudo);
+    }
+}
+
+function mostrarAtividadeEstatica(caminho, container) {
+    const iframe = document.createElement('iframe');
+    iframe.src = caminho;
+    iframe.style.width = '100%';
+    iframe.style.height = '70vh';
+    iframe.style.border = 'none';
+    container.appendChild(iframe);
+}
+
+// ===== Edição/exclusão de disciplinas (lista inicial) =====
+
+function acoesAdminDisciplina(li, disc) {
+    const link = li.querySelector('.nome-disciplina');
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        mostrarAtividadesDisciplina(disc.id, disc.nome_disc);
+    });
+
+    const editarBotao = document.createElement('button');
+    editarBotao.id = `editar${disc.id}`;
+    editarBotao.textContent = 'Editar';
+    editarBotao.addEventListener('click', () => editarDisciplina(li, disc));
+
+    const excluirBotao = document.createElement('button');
+    excluirBotao.id = `excluir${disc.id}`;
+    excluirBotao.textContent = 'Excluir';
+    excluirBotao.addEventListener('click', () => excluirDisciplina(disc));
+
+    li.appendChild(editarBotao);
+    li.appendChild(excluirBotao);
+}
+
+function editarDisciplina(li, disc) {
+    const elLink = li.querySelector('.nome-disciplina');
+    const valorAtual = elLink.textContent;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = valorAtual;
+    elLink.replaceWith(input);
+
+    const btnEditar = li.querySelector(`#editar${disc.id}`);
+    const btnExcluir = li.querySelector(`#excluir${disc.id}`);
+    btnEditar.style.display = 'none';
+    btnExcluir.style.display = 'none';
+
+    const btnSalvar = document.createElement('button');
+    btnSalvar.textContent = 'Salvar';
+
+    const btnCancelar = document.createElement('button');
+    btnCancelar.textContent = 'Cancelar';
+
+    function restaurar(nomeFinal) {
+        const novoLink = document.createElement('a');
+        novoLink.href = `/atividades/disciplinas.html?id=${disc.id}`;
+        novoLink.textContent = nomeFinal;
+        novoLink.classList.add('nome-disciplina');
+        novoLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            mostrarAtividadesDisciplina(disc.id, disc.nome_disc);
+        });
+
+        input.replaceWith(novoLink);
+
+        btnEditar.style.display = '';
+        btnExcluir.style.display = '';
+        btnSalvar.remove();
+        btnCancelar.remove();
+    }
+
+    btnSalvar.addEventListener('click', () => {
+        const novoNome = input.value.trim();
+        if (!novoNome) return;
+
+        fetch('/atualizarDisciplina', {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
+            body: JSON.stringify({ id: disc.id, nome_disc: novoNome })
+        })
+            .then(res => res.json())
+            .then(() => {
+                disc.nome_disc = novoNome;
+                restaurar(novoNome);
+            })
+            .catch(err => console.error(err));
+    });
+
+    btnCancelar.addEventListener('click', () => {
+        restaurar(valorAtual);
+    });
+
+    li.append(btnSalvar, btnCancelar);
+}
+
+function excluirDisciplina(disc) {
+    alert('teste excluir ' + disc.id);
+}
+
+// ===== Renderização do quiz (admin) =====
+
+function renderizarQuizAdmin(idQuiz, container) {
+    fetch(`/quiz/${idQuiz}`)
+        .then(res => res.json())
+        .then(({ quiz, questoes }) => {
+
+            const tituloDiv = document.createElement('div');
+            tituloDiv.classList.add('titulo-quiz-admin');
+
+            const inputTitulo = document.createElement('input');
+            inputTitulo.type = 'text';
+            inputTitulo.value = quiz.titulo;
+
+            const btnSalvarTitulo = document.createElement('button');
+            btnSalvarTitulo.textContent = 'Salvar título';
+            btnSalvarTitulo.addEventListener('click', () => {
+                fetch('/atualizarTituloQuiz', {
+                    method: 'POST',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ idAtividade: quiz.atividade_id, titulo: inputTitulo.value })
+                })
+                    .then(res => res.json())
+                    .then(() => btnSalvarTitulo.textContent = 'Salvo ✓')
+                    .catch(err => console.error(err));
+            });
+
+            tituloDiv.append(inputTitulo, btnSalvarTitulo);
+            container.appendChild(tituloDiv);
+
+            questoes.forEach(q => criaCardPerguntaAdmin(q, container));
+        })
+        .catch(err => console.error(err));
+}
+
+function criaCardPerguntaAdmin(questao, container) {
+    const card = document.createElement('div');
+    card.classList.add('pergunta-admin');
+
+    const inputPergunta = document.createElement('textarea');
+    inputPergunta.value = questao.pergunta;
+    inputPergunta.placeholder = 'Enunciado da pergunta';
+
+    function criarLinhaAlternativa(letra, valor) {
+        const linha = document.createElement('div');
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = `correta-${questao.id}`;
+        radio.value = letra;
+        if (questao.resposta_correta === letra) radio.checked = true;
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = valor;
+
+        linha.append(radio, input);
+        return { linha, input, radio };
+    }
+
+    const altA = criarLinhaAlternativa('A', questao.alternativa_a);
+    const altB = criarLinhaAlternativa('B', questao.alternativa_b);
+    const altC = criarLinhaAlternativa('C', questao.alternativa_c);
+    const altD = criarLinhaAlternativa('D', questao.alternativa_d);
+
+    const inputExplicacao = document.createElement('textarea');
+    inputExplicacao.value = questao.explicacao || '';
+    inputExplicacao.placeholder = 'Explicação';
+
+    const btnSalvar = document.createElement('button');
+    btnSalvar.textContent = 'Salvar pergunta';
+    btnSalvar.addEventListener('click', () => {
+        const correta = [altA, altB, altC, altD].find(a => a.radio.checked)?.radio.value;
+
+        fetch('/atualizarPergunta', {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                id: questao.id,
+                pergunta: inputPergunta.value,
+                alt_a: altA.input.value,
+                alt_b: altB.input.value,
+                alt_c: altC.input.value,
+                alt_d: altD.input.value,
+                correto: correta,
+                explicacao: inputExplicacao.value
+            })
+        })
+            .then(res => res.json())
+            .then(() => btnSalvar.textContent = 'Salvo ✓')
+            .catch(err => console.error(err));
+    });
+
+    const btnExcluir = document.createElement('button');
+    btnExcluir.textContent = 'Excluir pergunta';
+    btnExcluir.addEventListener('click', () => {
+        if (!confirm('Tem certeza que deseja excluir essa pergunta?')) return;
+
+        fetch('/deletarPergunta', {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ id: questao.id })
+        })
+            .then(res => res.json())
+            .then(() => card.remove())
+            .catch(err => console.error(err));
+    });
+
+    card.append(
+        inputPergunta,
+        altA.linha, altB.linha, altC.linha, altD.linha,
+        inputExplicacao,
+        btnSalvar,
+        btnExcluir
+    );
+    container.appendChild(card);
 }
 
 function mostrarPainelAtvs() {
     painelAgendaConteudo.style.display = 'none';
     painelAtividadesConteudo.style.display = '';
 
-    // só popula a lista de disciplinas na primeira vez
-    if (!painelAtividadesConteudo.dataset.carregado) {
-        const lista = document.createElement('ul');
-        painelAtividadesConteudo.appendChild(lista);
-        ReqDisciplinas(lista);
-        painelAtividadesConteudo.dataset.carregado = 'true';
-    }
+    mostrarListaDisciplinas();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -287,11 +547,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-//Chama ambas as funções acoesAdmin e criaCardEvento, no carregamento da página
-
-
 //Chamando função InserirNovo() no botão de salvar
-window.document.getElementById('salvar-post').addEventListener('click', () => {InserirNovo()})
+window.document.getElementById('salvar-post').addEventListener('click', () => { InserirNovo() })
 
 //Adiciona o toggle de display do formulário
 adicionarPost.addEventListener('click', () => toggleElement(novoEventoForm, 'block'))

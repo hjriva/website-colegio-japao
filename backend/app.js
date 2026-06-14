@@ -482,6 +482,70 @@ app.post("/atualizarDisciplina", async (req, res) => {
   }
 });
 
+// Atualiza o título do quiz (que vive na tabela atividades)
+app.post("/atualizarTituloQuiz", async (req, res) => {
+    const { idAtividade, titulo } = req.body;
+
+    if (!idAtividade || !titulo) {
+        return res.status(400).json({ erro: "Dados incompletos" });
+    }
+
+    try {
+        await db.query(
+            `UPDATE atividades SET titulo = $1 WHERE id = $2`,
+            [titulo, idAtividade]
+        );
+        res.json({ sucesso: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: "Erro ao atualizar título" });
+    }
+});
+
+// Atualiza uma pergunta
+app.post("/atualizarPergunta", async (req, res) => {
+    const { id, pergunta, alt_a, alt_b, alt_c, alt_d, correto, explicacao } = req.body;
+
+    if (!id || !pergunta) {
+        return res.status(400).json({ erro: "Dados incompletos" });
+    }
+
+    try {
+        await db.query(`
+            UPDATE questoes SET
+                pergunta = $1,
+                alternativa_a = $2,
+                alternativa_b = $3,
+                alternativa_c = $4,
+                alternativa_d = $5,
+                resposta_correta = $6,
+                explicacao = $7
+            WHERE id = $8
+        `, [pergunta, alt_a, alt_b, alt_c, alt_d, correto, explicacao, id]);
+
+        res.json({ sucesso: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: "Erro ao atualizar pergunta" });
+    }
+});
+
+app.post("/deletarPergunta", async (req, res) => {
+    const { id } = req.body;
+
+    if (!id) {
+        return res.status(400).json({ erro: "Dados incompletos" });
+    }
+
+    try {
+        await db.query(`DELETE FROM questoes WHERE id = $1`, [id]);
+        res.json({ sucesso: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: "Erro ao excluir pergunta" });
+    }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
