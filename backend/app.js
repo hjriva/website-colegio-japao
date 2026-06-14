@@ -287,7 +287,7 @@ app.get("/regioes", async (req, res) => {
 // Listar disciplinas
 app.get("/disciplinas", async (req, res) => {
   try {
-    const { rows } = await db.query(`SELECT * FROM disciplinas`);
+    const { rows } = await db.query(`SELECT * FROM disciplinas ORDER BY id`);
     res.json(rows);
   } catch (err) {
     console.error(err);
@@ -454,13 +454,33 @@ app.get("/quiz/:id", async (req, res) => {
             `SELECT COUNT(*) as total FROM questoes WHERE quiz_id = $1`, [id]
         );
         const totalPaginas = Math.ceil(parseInt(totalRows[0].total) / porPagina);
-
-        res.json({ quiz, questoes, totalPaginas, paginaAtual: pagina });
+        res.json({ quiz, questoes, totalPaginas, totalQuestoes: parseInt(totalRows[0].total), paginaAtual: pagina });
     } catch (err) {
         res.status(500).json({ erro: "Erro ao buscar quiz" });
     }
 });
 
+
+//Claude
+
+app.post("/atualizarDisciplina", async (req, res) => {
+  const { id, nome_disc } = req.body;
+
+  if (!id || !nome_disc) {
+    return res.status(400).json({ erro: "Dados incompletos" });
+  }
+
+  try {
+    await db.query(
+      `UPDATE disciplinas SET nome_disc = $1 WHERE id = $2`,
+      [nome_disc, id]
+    );
+    res.json({ sucesso: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ erro: "Erro ao atualizar disciplina" });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

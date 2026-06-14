@@ -2,6 +2,19 @@
 //Puxa a função do arquivo util.js, para que todos os arquivos apareçam na tela
 import { criaCardEvento } from '/util.js';
 
+import { ReqDisciplinas } from '/util.js'
+
+let painelDefault = 0;
+//vai ser definido posteriormente conforme definiões de acesso do firebase
+
+
+let painelAdmin = document.getElementById('painel-admin')
+let painelAgendaConteudo = document.getElementById('painel-agenda-conteudo');
+let painelAtividadesConteudo = document.getElementById('painel-atividades-conteudo');
+
+let mostrarAtvs = document.getElementById('mostrar-painel-atv')
+let mostrarAgenda = document.getElementById('mostrar-painel-agenda')
+
 let adicionarPost = document.getElementById('adicionar-post')
 let novoEventoForm = document.getElementById('novo-evento-form')
 
@@ -136,12 +149,18 @@ function editarEntrada(idElem) {
 //Função para excluir itens
 function excluirEntrada(idElem) {
     fetch('/deletar', {
-    method: "POST", 
-    body: JSON.stringify({ 
-    idEntrada: idElem}), 
-    headers: {"Content-type": "application/json; charset=UTF-8"}})
-    .then((data => {console.log(data);}))
-    .catch(error => console.log(error))
+        method: "POST",
+        body: JSON.stringify({ idEntrada: idElem }),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+    })
+        .then(res => res.json())
+        .then(() => {
+            // Se era o único item da página (e não é a primeira), volta uma página
+            const totalPaginas = Math.ceil((totalEventos - 1) / LIMITE);
+            const pagina = (paginaAtual > totalPaginas && paginaAtual > 1) ? paginaAtual - 1 : paginaAtual;
+            buscar(pagina);
+        })
+        .catch(error => console.log(error));
 }
 
 //Função para inserir novos itens
@@ -158,21 +177,22 @@ function InserirNovo() {
     formData.append('data', datapost);
     formData.append('horario', horario);
     if (ilustraimg) {
-        formData.append('imagem', ilustraimg); // mesmo nome usado no multer
+        formData.append('imagem', ilustraimg);
     }
 
     fetch('/updateBD', {
         method: "POST",
         body: formData,
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            buscar(paginaAtual); // recarrega a página atual com a lista atualizada
         })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
+        .catch(error => console.log(error));
 
     window.document.getElementById('FormularioNovo').reset()
-    //Para limpar o formulário
 }
-
 //Aqui cria a função para que cada item tenha os botões de editar e excluir
 function acoesAdmin(ev, entrada) {
     const btnEditar = document.createElement('button');
@@ -212,19 +232,59 @@ function buscar(pagina = 1) {
 
 function atualizaPaginacaoInterna() {
     const totalPaginas = Math.ceil(totalEventos / LIMITE);
-    document.getElementById('info-pagina-interna').textContent = `Página ${paginaAtual} de ${totalPaginas}`;
-    document.getElementById('btn-anterior-interno').disabled = paginaAtual === 1;
-    document.getElementById('btn-proximo-interno').disabled = paginaAtual >= totalPaginas;
+    const btnAnterior = document.getElementById('btn-anterior-interno');
+    const btnProximo = document.getElementById('btn-proximo-interno');
+    const infoPagina = document.getElementById('info-pagina-interna');
+
+    if (totalEventos > LIMITE) {
+        btnAnterior.style.display = '';
+        btnProximo.style.display = '';
+        infoPagina.style.display = '';
+
+        infoPagina.textContent = `Página ${paginaAtual} de ${totalPaginas}`;
+        btnAnterior.disabled = paginaAtual === 1;
+        btnProximo.disabled = paginaAtual >= totalPaginas;
+    } else {
+        btnAnterior.style.display = 'none';
+        btnProximo.style.display = 'none';
+        infoPagina.style.display = 'none';
+    }
+}
+
+function mostrarPainelAgenda() {
+    painelAgendaConteudo.style.display = '';
+    painelAtividadesConteudo.style.display = 'none';
+
+    novoEventoForm.style.display = 'none';
+    buscar(paginaAtual); // recarrega a lista quando volta pro painel
+}
+
+function mostrarPainelAtvs() {
+    painelAgendaConteudo.style.display = 'none';
+    painelAtividadesConteudo.style.display = '';
+
+    // só popula a lista de disciplinas na primeira vez
+    if (!painelAtividadesConteudo.dataset.carregado) {
+        const lista = document.createElement('ul');
+        painelAtividadesConteudo.appendChild(lista);
+        ReqDisciplinas(lista);
+        painelAtividadesConteudo.dataset.carregado = 'true';
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    novoEventoForm.style.display = 'none';
-    buscar();
-
     inputBusca.addEventListener('input', () => buscar(1));
     inputFiltroData.addEventListener('change', () => buscar(1));
     document.getElementById('btn-anterior-interno').addEventListener('click', () => buscar(paginaAtual - 1));
     document.getElementById('btn-proximo-interno').addEventListener('click', () => buscar(paginaAtual + 1));
+
+    if (painelDefault == 0) {
+        mostrarPainelAgenda();
+    } else if (painelDefault == 1) {
+        mostrarPainelAtvs();
+    } else {
+        painelAdmin.textContent = 'Permissões não definidas.';
+    }
 });
 
 //Chama ambas as funções acoesAdmin e criaCardEvento, no carregamento da página
@@ -235,3 +295,11 @@ window.document.getElementById('salvar-post').addEventListener('click', () => {I
 
 //Adiciona o toggle de display do formulário
 adicionarPost.addEventListener('click', () => toggleElement(novoEventoForm, 'block'))
+
+mostrarAgenda.addEventListener('click', () => {
+    mostrarPainelAgenda()
+})
+
+mostrarAtvs.addEventListener('click', () => {
+    mostrarPainelAtvs()
+})

@@ -36,3 +36,27 @@ export function criaCardEvento(entrada, container, acoes = null) {
 
 
 //adaptado do Claude
+
+
+export function ReqDisciplinas(div, acoes = null) {
+    fetch('/disciplinas')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(disc => {
+                const li = document.createElement('li');
+                li.id = `disciplina${disc.id}`;
+
+                const link = document.createElement('a');
+                link.href = `/atividades/disciplinas.html?id=${disc.id}`;
+                link.textContent = disc.nome_disc;
+                link.classList.add('nome-disciplina');
+                li.appendChild(link);
+
+                div.appendChild(li);
+
+                // se acoes for passado, renderiza os botões - só pro painel admin
+                if (acoes) acoes(li, disc);
+            });
+        })
+        .catch(err => console.error(err));
+}
