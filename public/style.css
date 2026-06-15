@@ -338,10 +338,6 @@ strong {
     line-height: 1;
 }
 
-
-
-
-
 h2 {
     margin-top: 20vh;
     margin-left: 10vh;
@@ -423,19 +419,195 @@ h2>i {
     align-content: center;
 }
 
+/* footer todo */
 #container_footer_grid {
-    background-color: hsl(0, 100%, 67%);
+    background-color: var(--vermelho);
     color: #ffffff;
     display: flex;
     flex-direction: row;
-    height: 30vh;
-
+    justify-content: space-around;
+    padding: 3vw 5vw;
+    border-radius: 30px 30px 0 0;
+    margin-top: 5vh;
 }
 
-#id_visual,
-#links,
-#contatos {
-    font-size: 2vh;
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.logo-footer-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.titulo-branco {
+    font-family: 'Sekuya';
+    font-weight: bold;
+}
+
+.slogan-footer {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.horario-atendimento p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.footer-col h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-col ul li, .footer-col ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer-col ul li i {
+    width: 20px; /* alinha os ícones */
+}
+
+/* botão de login */
+.btn-login {
+    background-color: #ffffff;
+    color: var(--vermelho);
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 30px;
+    margin-top: 15px;
+    cursor: pointer;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-login i {
+    color: var(--vermelho);
+}
+
+.btn-login:hover {
+    background-color: #f1f1f1;
+}
+
+/* carrossel */
+.galeria {
+    text-align: center;
+    margin-bottom: 5vh;
+    overflow: hidden; /* evita criar barra de rolagem horizontal */
+}
+
+.carrossel-container {
+    position: relative;
+    width: 100%;
+    height: 450px; /* altura do carrossel */
     margin-top: 3vh;
-
 }
+
+.carrossel-slides {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    width: 40vw; /* largura das imagens */
+    max-width: 500px;
+    height: 350px;
+    transition: all 0.5s ease-in-out;
+    opacity: 0; /* esconde por padrão as que não estão nas 3 principais */
+    z-index: 0;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* o vermelho em cima das imagens laterais */
+.slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(249, 37, 37, 0.75); /* vermelho com transparência */
+    transition: background-color 0.5s ease;
+}
+
+/* imagem central (a que fica ativa) */
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+    transform: scale(1.1) translateX(0); /* Fica maior e no centro */
+}
+
+.slide.active::after {
+    background-color: transparent; /* Remove a película da imagem central */
+}
+
+/* imagem da esquerda */
+.slide.prev {
+    opacity: 1;
+    z-index: 1;
+    transform: scale(0.9) translateX(-65%); /* fica menor e vai para a esquerda */
+}
+
+/* imagem da direita */
+.slide.next {
+    opacity: 1;
+    z-index: 1;
+    transform: scale(0.9) translateX(65%); /* fica menor e vai para a direita */
+}
+
+/* botão do carrossel */
+.carrossel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 3rem;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+    padding: 0 20px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* sombra para o ícone aparecer na foto (tô fazendo meu melhor, eu juro */
+}
+
+.carrossel-btn:hover {
+    color: var(--vermelho);
+    background-color: transparent;
+}
+
+.prev-btn { left: 5vw; }
+.next-btn { right: 5vw; }

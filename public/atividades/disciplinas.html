@@ -5,12 +5,17 @@
     <title>Disciplina</title>
 </head>
 <body>
+    <button id="btnVoltar"
     <h1 id="titulo"></h1>
     <ul id="lista-atividades"></ul>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
+
+        document.getElementById('btnVoltar').onclick = () => {
+            window.location.href = `disciplinas.html?id=${id - 1}`;
+            }
 
         fetch(`/disciplina/${id}`)
             .then(res => res.json())
