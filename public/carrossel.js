@@ -33,4 +33,6 @@ prevBtn.addEventListener('click', () => {
 });
 
 // inicia o carrossel organizando a primeira imagem
-updateCarousel();
+updateCarousel(); 
+
+console.log('teste')
