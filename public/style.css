@@ -419,22 +419,28 @@ h2>i {
     align-content: center;
 }
 
-/* footer todo */
+footer {
+    width: 100%;
+    margin-top: 8vh;
+    font-family: 'Poppins', sans-serif;
+}
+
 #container_footer_grid {
     background-color: var(--vermelho);
     color: #ffffff;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 3vw 5vw;
-    border-radius: 30px 30px 0 0;
-    margin-top: 5vh;
+    justify-content: space-between; /* Empurra a esquerda e a direita para os cantos */
+    padding: 60px 8vw; /* Espaçamento interno mais generoso, como na imagem */
+    border-radius: 40px 40px 0 0;
+    box-sizing: border-box;
 }
 
-.footer-col {
+#id_visual {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: flex-start;
+    min-height: 280px; /* Garante uma altura para o horário ir para baixo */
 }
 
 .logo-footer-wrapper {
@@ -443,30 +449,56 @@ h2>i {
     gap: 15px;
 }
 
+.logo-footer-wrapper img {
+    width: 65px; 
+}
+
 .logo-text {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    line-height: 1.1;
     font-weight: 400;
-    line-height: 1.2;
 }
 
 .titulo-branco {
-    font-family: 'Sekuya';
-    font-weight: bold;
+    font-family: 'Sekuya', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
 .slogan-footer {
-    font-size: 0.9rem;
-    margin-bottom: 20px;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+.horario-atendimento {
+    margin-top: auto;
 }
 
 .horario-atendimento p {
-    font-size: 0.9rem;
-    margin: 0;
+    font-size: 1.3rem;
+    margin: 3px 0;
+}
+
+.footer-right {
+    display: flex;
+    gap: 30px;
+}
+
+.card-footer {
+    background-color: rgba(255, 255, 255, 0.15); /* Vermelho mais clarinho igual a referência */
+    padding: 30px;
+    border-radius: 20px;
+    min-width: 220px;
+    box-sizing: border-box;
 }
 
 .footer-col h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-weight: 700;
 }
 
 .footer-col ul {
@@ -475,55 +507,71 @@ h2>i {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 15px;
 }
 
 .footer-col ul li, .footer-col ul li a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .footer-col ul li i {
-    width: 20px; /* alinha os ícones */
+    font-size: 1.3rem;
+    width: 25px;
+    text-align: center;
 }
 
-/* botão de login */
+.footer-col-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .btn-login {
     background-color: #ffffff;
     color: var(--vermelho);
-    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
     border: none;
-    border-radius: 20px;
-    padding: 10px 30px;
-    margin-top: 15px;
+    border-radius: 15px;
+    padding: 15px 0;
     cursor: pointer;
-    box-shadow: none;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
+    width: 100%;
+    transition: all 0.2s ease;
 }
 
 .btn-login i {
     color: var(--vermelho);
+    font-size: 1.3rem;
 }
 
 .btn-login:hover {
-    background-color: #f1f1f1;
+    background-color: #f2f2f2;
+    transform: scale(1.02);
 }
 
-/* carrossel */
+/* carrossel de fotos */
 .galeria {
     text-align: center;
     margin-bottom: 5vh;
-    overflow: hidden; /* evita criar barra de rolagem horizontal */
+    overflow: hidden;
 }
 
 .carrossel-container {
     position: relative;
     width: 100%;
-    height: 450px; /* altura do carrossel */
-    margin-top: 3vh;
+    max-width: 1200px; /* impede as fotos de crescerem infinitamente */
+    height: 720px; 
+    margin: 3vh auto 0 auto; /* centraliza o carrossel na seção */
 }
 
 .carrossel-slides {
@@ -537,15 +585,15 @@ h2>i {
 
 .slide {
     position: absolute;
-    width: 40vw; /* largura das imagens */
-    max-width: 500px;
-    height: 350px;
+    width: 35vw; 
+    max-width: 550px;
+    height: 5   20px;
     transition: all 0.5s ease-in-out;
-    opacity: 0; /* esconde por padrão as que não estão nas 3 principais */
+    opacity: 0;
     z-index: 0;
     border-radius: 30px;
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px;
 }
 
 .slide img {
@@ -555,41 +603,36 @@ h2>i {
     display: block;
 }
 
-/* o vermelho em cima das imagens laterais */
 .slide::after {
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(249, 37, 37, 0.75); /* vermelho com transparência */
+    background-color: rgba(249, 37, 37, 0.75);
     transition: background-color 0.5s ease;
 }
 
-/* imagem central (a que fica ativa) */
 .slide.active {
     opacity: 1;
     z-index: 2;
-    transform: scale(1.1) translateX(0); /* Fica maior e no centro */
+    transform: scale(1.1) translateX(0);
 }
 
 .slide.active::after {
-    background-color: transparent; /* Remove a película da imagem central */
+    background-color: transparent;
 }
 
-/* imagem da esquerda */
 .slide.prev {
     opacity: 1;
     z-index: 1;
-    transform: scale(0.9) translateX(-65%); /* fica menor e vai para a esquerda */
+    transform: scale(0.9) translateX(-65%);
 }
 
-/* imagem da direita */
 .slide.next {
     opacity: 1;
     z-index: 1;
-    transform: scale(0.9) translateX(65%); /* fica menor e vai para a direita */
+    transform: scale(0.9) translateX(65%);
 }
 
-/* botão do carrossel */
 .carrossel-btn {
     position: absolute;
     top: 50%;
@@ -601,7 +644,7 @@ h2>i {
     cursor: pointer;
     z-index: 3;
     padding: 0 20px;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* sombra para o ícone aparecer na foto (tô fazendo meu melhor, eu juro */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 
 .carrossel-btn:hover {
@@ -609,7 +652,38 @@ h2>i {
     background-color: transparent;
 }
 
-.prev-btn { left: 5vw; }
-.next-btn { right: 5vw; }
+.prev-btn { left: 2vw; }
+.next-btn { right: 2vw; }
 
-/*teste*/
+.form {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 5vh auto;
+    width: 70vw; /* Define a largura na tela */
+    max-width: 800px;
+}
+
+.form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1; /* Ocupa metade do espaço */
+}
+
+.form input, .form textarea {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #fadada; /* Cor rosa claro */
+    font-family: 'Poppins', sans-serif;
+    color: var(--cor-texto);
+    box-sizing: border-box;
+    outline: none;
+}
+
+.form textarea {
+    height: 100%;
+    resize: none;
+}
