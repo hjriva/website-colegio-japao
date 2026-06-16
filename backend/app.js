@@ -207,21 +207,23 @@ const upload = multer({ storage });
 
 app.post('/updateBD', upload.single('imagem'), async (req, res) => {
     try {
-    const { titulo, descricao, data, horario } = req.body;
-    const caminho = req.file ? `/imgs/${req.file.filename}` : null;
+        const { titulo, descricao, data, horario, destaque } = req.body;
+        const caminho = req.file ? `/imgs/${req.file.filename}` : null;
+        const destaqueVal = destaque === 'true' || destaque === true;
 
-    await db.query(
-        'INSERT INTO agenda (descricao, IMG, Titulo, DataPost, Horario) VALUES ($1, $2, $3, $4, $5)',
-        [descricao, caminho, titulo, data, horario]
-    );
+        await db.query(
+            'INSERT INTO agenda (descricao, img, titulo, datapost, horario, destaque) VALUES ($1, $2, $3, $4, $5, $6)',
+            [descricao, caminho, titulo, data, horario, destaqueVal]
+        );
 
-    res.json({ sucesso: true, caminho });
-    }
-    catch (err) {
-        console.error(err); 
+        res.json({ sucesso: true, caminho });
+    } catch (err) {
+        console.error(err);
         res.status(500).json({ error: err.message });
     }
 });
+
+
 
 //Para deletar algum evento
 app.post('/deletar', (req, res) => {
@@ -234,6 +236,36 @@ app.post('/deletar', (req, res) => {
         res.json(results)
     }) 
 })
+
+app.get('/agenda/destaque', async (req, res) => {
+    try {
+        const resultado = await db.query(
+            'SELECT * FROM agenda WHERE destaque = TRUE LIMIT 1'
+        );
+
+        if (resultado.rows.length === 0) {
+            return res.json({ destaque: null });
+        }
+
+        res.json({ destaque: resultado.rows[0] });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.get('/agenda/ultimo', async (req, res) => {
+    try {
+        const resultado = await db.query(
+            'SELECT * FROM agenda ORDER BY identrada DESC LIMIT 1'
+        );
+
+        res.json({ ultimo: resultado.rows[0] || null });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+    }
+});
 
 //Para editar item
 const updateimg = multer({ storage });
@@ -543,6 +575,81 @@ app.post("/deletarPergunta", async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ erro: "Erro ao excluir pergunta" });
+    }
+});
+
+// Lista disciplinas para o select (excluindo a que será deletada)
+app.get('/disciplinas/exceto/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const { rows } = await db.query(
+            `SELECT id, nome_disc FROM disciplinas WHERE id != $1 ORDER BY nome_disc`,
+            [id]
+        );
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: 'Erro ao buscar disciplinas' });
+    }
+});
+
+// Exclui a disciplina, com opção de migrar ou excluir as atividades vinculadas
+app.post('/excluirDisciplina', async (req, res) => {
+    const { id, acao, idDestino } = req.body;
+    // acao: 'excluir' ou 'migrar'
+    // idDestino: id da disciplina destino (só quando acao === 'migrar')
+
+    if (!id || !acao) {
+        return res.status(400).json({ erro: 'Dados incompletos' });
+    }
+    if (acao === 'migrar' && !idDestino) {
+        return res.status(400).json({ erro: 'Disciplina destino não informada' });
+    }
+
+    const client = await db.connect();
+    try {
+        await client.query('BEGIN');
+
+        if (acao === 'excluir') {
+            // Busca atividades vinculadas
+            const { rows: atividades } = await client.query(
+                `SELECT id FROM atividades WHERE disciplina_id = $1`, [id]
+            );
+
+            for (const atv of atividades) {
+                // Busca quiz vinculado à atividade (se houver)
+                const { rows: quizzes } = await client.query(
+                    `SELECT id FROM quizzes WHERE atividade_id = $1`, [atv.id]
+                );
+                for (const quiz of quizzes) {
+                    // Exclui questões do quiz
+                    await client.query(`DELETE FROM questoes WHERE quiz_id = $1`, [quiz.id]);
+                }
+                // Exclui quizzes da atividade
+                await client.query(`DELETE FROM quizzes WHERE atividade_id = $1`, [atv.id]);
+            }
+            // Exclui atividades da disciplina
+            await client.query(`DELETE FROM atividades WHERE disciplina_id = $1`, [id]);
+
+        } else if (acao === 'migrar') {
+            // Apenas redireciona as atividades para a disciplina destino
+            await client.query(
+                `UPDATE atividades SET disciplina_id = $1 WHERE disciplina_id = $2`,
+                [idDestino, id]
+            );
+        }
+
+        // Em ambos os casos, exclui a disciplina
+        await client.query(`DELETE FROM disciplinas WHERE id = $1`, [id]);
+
+        await client.query('COMMIT');
+        res.json({ sucesso: true });
+    } catch (err) {
+        await client.query('ROLLBACK');
+        console.error(err);
+        res.status(500).json({ erro: 'Erro ao excluir disciplina' });
+    } finally {
+        client.release();
     }
 });
 

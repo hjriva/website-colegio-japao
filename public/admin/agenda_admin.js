@@ -8,12 +8,29 @@ let painelDefault = 0;
 let painelAdmin = document.getElementById('painel-admin')
 let painelAgendaConteudo = document.getElementById('painel-agenda-conteudo');
 let painelAtividadesConteudo = document.getElementById('painel-atividades-conteudo');
+let painelUsuarios = document.getElementById('painel-usuarios-conteudo')
 
 let mostrarAtvs = document.getElementById('mostrar-painel-atv')
 let mostrarAgenda = document.getElementById('mostrar-painel-agenda')
+let mostrarUsuarios = document.getElementById('mostrar-painel-usuarios')
 
 let adicionarPost = document.getElementById('adicionar-post')
 let novoEventoForm = document.getElementById('novo-evento-form')
+
+let formModelo = window.document.getElementById('form-pergunta-1');
+let numPerguntas = 1;
+
+let botaoNovoQuizToggle = document.getElementById('novo-quiz-toggle')
+
+let formsNovaAtividade = window.document.getElementById('nova-atividade')
+
+let datalistDisciplinas = window.document.getElementById('disciplinas-dl');
+let checkRandom = window.document.getElementById('randomizar')
+
+let isDestaque = window.document.getElementById('destaque')
+
+
+let randomizar = false;
 
 let paginaAtual = 1;
 let totalEventos = 0;
@@ -26,10 +43,12 @@ const container = document.getElementById('controle-agenda');
 //Declarações de funções:
 
 function toggleElement(element, displayDesejado) {
-    if (element.style.display == 'none') {
-        element.style.display = displayDesejado
+    const displayAtual = getComputedStyle(element).display;
+
+    if (displayAtual === 'none') {
+        element.style.display = displayDesejado;
     } else {
-        element.style.display = 'none'
+        element.style.display = 'none';
     }
 }
 
@@ -156,12 +175,14 @@ function InserirNovo() {
     let descr = window.document.getElementById('desc-novo-evento').value;
     let datapost = window.document.getElementById('data-novo-evento').value;
     let horario = window.document.getElementById('hora-novo-evento').value
+    let destaqueStatus = isDestaque.checked ? true : false
 
     const formData = new FormData();
     formData.append('titulo', tituloevento);
     formData.append('descricao', descr);
     formData.append('data', datapost);
     formData.append('horario', horario);
+    formData.append('destaque', destaqueStatus)
     if (ilustraimg) {
         formData.append('imagem', ilustraimg);
     }
@@ -248,32 +269,34 @@ function mostrarPainelAgenda() {
 // ===== Navegação dentro do painel de atividades =====
 
 function mostrarListaDisciplinas() {
-    painelAtividadesConteudo.innerHTML = '';
+    const controle = document.getElementById('controle-atividades');
+    controle.innerHTML = '';
 
     const titulo = document.createElement('h2');
     titulo.textContent = 'Disciplinas';
-    painelAtividadesConteudo.appendChild(titulo);
+    controle.appendChild(titulo);
 
     const lista = document.createElement('ul');
-    painelAtividadesConteudo.appendChild(lista);
+    controle.appendChild(lista);
 
     ReqDisciplinas(lista, acoesAdminDisciplina);
 }
 
 function mostrarAtividadesDisciplina(idDisciplina, nomeDisciplina) {
-    painelAtividadesConteudo.innerHTML = '';
+    const controle = document.getElementById('controle-atividades');
+    controle.innerHTML = '';
 
     const btnVoltar = document.createElement('button');
     btnVoltar.textContent = '← Voltar';
     btnVoltar.addEventListener('click', mostrarListaDisciplinas);
-    painelAtividadesConteudo.appendChild(btnVoltar);
+    controle.appendChild(btnVoltar);
 
     const titulo = document.createElement('h2');
     titulo.textContent = nomeDisciplina;
-    painelAtividadesConteudo.appendChild(titulo);
+    controle.appendChild(titulo);
 
     const lista = document.createElement('ul');
-    painelAtividadesConteudo.appendChild(lista);
+    controle.appendChild(lista);
 
     fetch(`/disciplina/${idDisciplina}`)
         .then(res => res.json())
@@ -295,17 +318,18 @@ function mostrarAtividadesDisciplina(idDisciplina, nomeDisciplina) {
 }
 
 function mostrarAtividade(atv, idDisciplina, nomeDisciplina) {
-    painelAtividadesConteudo.innerHTML = '';
+    const controle = document.getElementById('controle-atividades');
+    controle.innerHTML = '';
 
     const btnVoltar = document.createElement('button');
     btnVoltar.textContent = '← Voltar';
     btnVoltar.addEventListener('click', () => mostrarAtividadesDisciplina(idDisciplina, nomeDisciplina));
-    painelAtividadesConteudo.appendChild(btnVoltar);
+    controle.appendChild(btnVoltar);
 
     if (atv.tipo === 'quiz') {
-        renderizarQuizAdmin(atv.quiz_id, painelAtividadesConteudo);
+        renderizarQuizAdmin(atv.quiz_id, controle);
     } else {
-        mostrarAtividadeEstatica(atv.caminho, painelAtividadesConteudo);
+        mostrarAtividadeEstatica(atv.caminho, controle);
     }
 }
 
@@ -335,7 +359,7 @@ function acoesAdminDisciplina(li, disc) {
     const excluirBotao = document.createElement('button');
     excluirBotao.id = `excluir${disc.id}`;
     excluirBotao.textContent = 'Excluir';
-    excluirBotao.addEventListener('click', () => excluirDisciplina(disc));
+    excluirBotao.addEventListener('click', () => excluirDisciplina(li, disc));
 
     li.appendChild(editarBotao);
     li.appendChild(excluirBotao);
@@ -403,8 +427,93 @@ function editarDisciplina(li, disc) {
     li.append(btnSalvar, btnCancelar);
 }
 
-function excluirDisciplina(disc) {
-    alert('teste excluir ' + disc.id);
+function excluirDisciplina(li, disc) {
+    if (li.querySelector('.form-excluir-disciplina')) return;
+
+    const form = document.createElement('div');
+    form.classList.add('form-excluir-disciplina');
+
+    const pergunta = document.createElement('p');
+    pergunta.textContent = `O que fazer com as atividades de "${disc.nome_disc}"?`;
+    form.appendChild(pergunta);
+
+    const btnExcluirTudo = document.createElement('button');
+    btnExcluirTudo.textContent = 'Excluir tudo';
+
+    const btnMigrar = document.createElement('button');
+    btnMigrar.textContent = 'Mover para outra disciplina';
+
+    const btnCancelar = document.createElement('button');
+    btnCancelar.textContent = 'Cancelar';
+
+    form.append(btnExcluirTudo, btnMigrar, btnCancelar);
+    li.appendChild(form);
+
+    btnCancelar.addEventListener('click', () => form.remove());
+
+    btnExcluirTudo.addEventListener('click', () => {
+        if (!confirm(`Tem certeza? Isso vai excluir "${disc.nome_disc}" e todas as suas atividades permanentemente.`)) return;
+
+        fetch('/excluirDisciplina', {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ id: disc.id, acao: 'excluir' })
+        })
+            .then(res => res.json())
+            .then(() => li.remove())
+            .catch(err => console.error(err));
+    });
+
+    btnMigrar.addEventListener('click', () => {
+        btnExcluirTudo.remove();
+        btnMigrar.remove();
+
+        fetch(`/disciplinas/exceto/${disc.id}`)
+            .then(res => res.json())
+            .then(disciplinas => {
+                if (disciplinas.length === 0) {
+                    const aviso = document.createElement('p');
+                    aviso.textContent = 'Não há outras disciplinas disponíveis. Você precisa criar uma primeiro.';
+                    form.insertBefore(aviso, btnCancelar);
+                    return;
+                }
+
+                const label = document.createElement('p');
+                label.textContent = 'Mover atividades para:';
+
+                const select = document.createElement('select');
+                disciplinas.forEach(d => {
+                    const option = document.createElement('option');
+                    option.value = d.id;
+                    option.textContent = d.nome_disc;
+                    select.appendChild(option);
+                });
+
+                const btnConfirmar = document.createElement('button');
+                btnConfirmar.textContent = 'Confirmar migração';
+
+                btnConfirmar.addEventListener('click', () => {
+                    const idDestino = select.value;
+                    const nomeDestino = select.options[select.selectedIndex].text;
+
+                    if (!confirm(`Mover todas as atividades de "${disc.nome_disc}" para "${nomeDestino}" e excluir a disciplina?`)) return;
+
+                    fetch('/excluirDisciplina', {
+                        method: 'POST',
+                        headers: { 'Content-type': 'application/json' },
+                        body: JSON.stringify({ id: disc.id, acao: 'migrar', idDestino })
+                    })
+                        .then(res => res.json())
+                        .then(() => li.remove())
+                        .catch(err => console.error(err));
+                });
+
+                form.insertBefore(label, btnCancelar);
+                form.insertBefore(select, btnCancelar);
+                form.insertBefore(btnConfirmar, btnCancelar);
+            })
+            .catch(err => console.error(err));
+    });
 }
 
 // ===== Renderização do quiz (admin) =====
@@ -525,11 +634,63 @@ function criaCardPerguntaAdmin(questao, container) {
     container.appendChild(card);
 }
 
+// ===== Criação de novo quiz =====
+
+function NovaQuestao() {
+    numPerguntas++
+    const novoForm = formModelo.cloneNode(true);
+    novoForm.id = `form-pergunta-${numPerguntas}`
+    novoForm.querySelectorAll('label')[0].setAttribute('for', `enunciado-${numPerguntas}`)
+    novoForm.querySelector('.numero-pergunta').textContent = numPerguntas + ')';
+
+    const inputPergunta = novoForm.querySelectorAll('input')[0];
+    inputPergunta.id = `enunciado-${numPerguntas}`
+    inputPergunta.value = ""
+
+    let inputAlternativas = novoForm.querySelectorAll('input[type=text]')
+    let inputRadios = novoForm.querySelectorAll('input[type=radio]')
+
+    for (let inicioInput = 1, inicioRadio = 0; inicioInput < inputAlternativas.length; inicioInput++, inicioRadio++) {
+        inputAlternativas[inicioInput].id = `alt-${String.fromCharCode(65 + inicioInput)}-${numPerguntas}`
+        inputAlternativas[inicioInput].value = ""
+        novoForm.querySelectorAll('label')[inicioInput].setAttribute('for', `alt-${String.fromCharCode(65 + inicioInput)}-${numPerguntas}`)
+        inputRadios[inicioRadio].id = `radio-${String.fromCharCode(65 + inicioInput)}-${numPerguntas}`
+        inputRadios[inicioRadio].checked = false
+    }
+
+    novoForm.querySelector('.explicacao-text').value = ""
+    novoForm.querySelector('.explicacao-text').id = `explicacao-${numPerguntas}`
+
+    document.getElementById('formulario_perguntas').appendChild(novoForm);
+}
+
 function mostrarPainelAtvs() {
     painelAgendaConteudo.style.display = 'none';
     painelAtividadesConteudo.style.display = '';
+    painelUsuarios.style.display = 'none';
+
+    fetch("/disciplinas")
+        .then(res => res.json())
+        .then(data => {
+            datalistDisciplinas.innerHTML = '';
+
+            data.forEach(disciplina => {
+                let opcaoDisciplina = document.createElement('option');
+                opcaoDisciplina.value = disciplina.nome_disc;
+                datalistDisciplinas.appendChild(opcaoDisciplina);
+            })
+        })
+        .catch(err => console.error(err));
 
     mostrarListaDisciplinas();
+}
+
+function mostrarPainelUsuarios() {
+    painelAgendaConteudo.style.display = 'none'
+    painelAtividadesConteudo.style.display = 'none';
+    painelUsuarios.style.display = '';
+
+    //logica para puxar usuarios do fb
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -547,16 +708,105 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-//Chamando função InserirNovo() no botão de salvar
+// ===== Listeners =====
+
 window.document.getElementById('salvar-post').addEventListener('click', () => { InserirNovo() })
 
-//Adiciona o toggle de display do formulário
 adicionarPost.addEventListener('click', () => toggleElement(novoEventoForm, 'block'))
 
-mostrarAgenda.addEventListener('click', () => {
-    mostrarPainelAgenda()
+mostrarAgenda.addEventListener('click', () => mostrarPainelAgenda())
+
+mostrarAtvs.addEventListener('click', () => mostrarPainelAtvs())
+
+mostrarUsuarios.addEventListener('click', () => mostrarPainelUsuarios())
+
+botaoNovoQuizToggle.addEventListener('click', () => {
+    toggleElement(formsNovaAtividade, 'block');
+});
+
+checkRandom.addEventListener('click', function () {
+    randomizar = checkRandom.checked ? true : false;
+    let numeros = window.document.querySelectorAll('.numero-pergunta')
+    if (randomizar) {
+        numeros.forEach(span => span.style.display = 'none')
+    } else {
+        numeros.forEach(span => span.style.display = 'initial')
+    }
 })
 
-mostrarAtvs.addEventListener('click', () => {
-    mostrarPainelAtvs()
+window.document.getElementById('add-pergunta').addEventListener('click', () => NovaQuestao())
+
+window.document.getElementById('salvar_quiz').addEventListener('click', () => {
+    let todosFormularios = document.querySelectorAll('.form_pergunta');
+    let semResposta = [];
+
+    todosFormularios.forEach((form, index) => {
+        const marcado = form.querySelector('[name="radio-alternativa"]:checked');
+        if (!marcado) {
+            semResposta.push(index + 1);
+        }
+    });
+
+    if (semResposta.length > 0) {
+        alert(`As seguintes perguntas não têm resposta marcada: ${semResposta.join(', ')}`);
+        return;
+    }
+
+    let nomeAtividade = document.getElementById('nome-atividade').value
+    let nomeDisciplina = document.getElementById('input-disciplina').value
+
+    fetch('/novoquiz', {
+        method: "POST",
+        body: JSON.stringify({
+            disciplina: nomeDisciplina,
+            tituloQuiz: nomeAtividade,
+            randomizar: randomizar
+        }),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const idQuiz = data.idQuiz;
+            const perguntas = document.querySelectorAll('.perguntas_teste');
+            const requests = Array.from(perguntas).map(pergunta => {
+                const enunciado = pergunta.querySelector('.input_enunciado').value;
+                const alt_a = pergunta.querySelector('.alt-a').value;
+                const alt_b = pergunta.querySelector('.alt-b').value;
+                const alt_c = pergunta.querySelector('.alt-c').value;
+                const alt_d = pergunta.querySelector('.alt-d').value;
+                let resposta_correta = pergunta.querySelector('[name="radio-alternativa"]:checked')?.value;
+                let explicacao = pergunta.querySelector('.explicacao-text').value
+
+                if (!resposta_correta) {
+                    alert('Marque a alternativa correta de todas as perguntas!');
+                    return;
+                }
+
+                return fetch('/novasperguntas', {
+                    method: "POST",
+                    body: JSON.stringify({
+                        idQuiz: idQuiz,
+                        enunciado: enunciado,
+                        alt_a: alt_a,
+                        alt_b: alt_b,
+                        alt_c: alt_c,
+                        alt_d: alt_d,
+                        correto: resposta_correta,
+                        explicacao: explicacao
+                    }),
+                    headers: { "Content-type": "application/json; charset=UTF-8" }
+                })
+            })
+
+            return Promise.all(requests);
+        })
+        .then(resultados => {
+            console.log(resultados);
+            document.querySelectorAll('form').forEach(form => form.reset())
+            let feedbackQuizSalvo = document.createElement('div')
+            feedbackQuizSalvo.id = 'quiz-salvo';
+            feedbackQuizSalvo.classList.add('feedback-quiz')
+            feedbackQuizSalvo.textContent = 'Quiz salvo com sucesso!'
+        })
+        .catch(error => console.error(error));
 })

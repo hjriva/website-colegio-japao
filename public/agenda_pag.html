@@ -5,12 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_agenda.css">
 </head>
 <body>
-    <h1>Agenda da escola:</h1>
+<header>
+        
+        <div class="identidade">
+          <img src="imgs_site/logo.png" id="logo_header" alt="" />
+          <div class="logo">Colégio<span class="titulo">Japão</span></div>
+        </div>
+        <!-- NAV -->
+        <nav>
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="blog_pag.html">Blog</a></li>
+            <li><a href="atividades/index.html">Atividades</a></li>
+            <li><a href="#">Contato</a></li>
+            <li><a class="btn_agenda" href="agenda_pag.html">Agenda</a></li>
+          </ul>
+        </nav>
+     
+</header>
+
+    <h1>Agenda de Eventos</h1>
+    <p>Evento principal do mês: <span id="evento-destaque"></span></p>
+    <p>Confira as datas!</p>
+
+    <div id="agenda-layout">
+
+        <div id="agenda-tabs">
+    <button id="btn-tab-calendario" class="tab-ativa">
+        Calendário
+    </button>
+
+    <button id="btn-tab-lista">
+        Lista
+    </button>
+</div>
+<section id="calendario-coluna">
+
+    <div id="calendario_agenda">
+
+
+<div class="cal-header">
+  <button class="cal-nav" id="btn-prev">← anterior</button>
+  <h2 id="cal-titulo"></h2>
+  <button class="cal-nav" id="btn-next">próximo →</button>
+</div>
+
+<div class="cal-grid" id="cal-grid"></div>
+
+<div class="eventos-section" id="eventos-section">
+  <div class="eventos-titulo" id="eventos-titulo">Eventos de hoje</div>
+  <div id="eventos-conteudo"><span class="loading">Carregando...</span></div>
+</div>
+</div>
+</section>
+
 
 <!-- Eventos de hoje -->
-<h2>Hoje</h2>
+ <section id="lista-coluna">
+
 <div id="eventos-hoje"></div>
 
 <!-- Seletor de dia -->
@@ -18,17 +73,65 @@
 <div id="eventos-dia"></div>
 
 <!-- Próximos eventos -->
-<h2>Próximos eventos</h2>
+<h2 id="h2-prox">Próximos eventos</h2>
 <div id="proximos-eventos"></div>
+
 <div>
-    <button id="btn-anterior">← Anterior</button>
+    <button id="btn-anterior" class="paginacao-botao">← Anterior</button>
     <span id="info-pagina"></span>
-    <button id="btn-proximo">Próximo →</button>
+    <button id="btn-proximo" class="paginaca-botao">Próximo →</button>
 </div>
+</section>
 
         <!--Precisa ter uma div com esse id, pois é aqui que os elementos de agenda serão
         adicionados dinâmicamente pelo javascript-->
-    </div>
+    
+</div>
+    <footer>
+      <div id="container_footer_grid">
+        <div class="footer-col" id="id_visual">
+          <div class="logo-footer-wrapper">
+              <img src="imgs/logojpwhite.png" id="logo_footer" alt="Logo">
+              <div class="logo-text">Colégio<br><span class="titulo-branco">JAPÃO</span></div>
+          </div>
+          <p class="slogan-footer">O conhecimento<br>nos faz valer.</p>
+          
+          <div class="horario-atendimento">
+              <p><strong>Horário de atendimento:</strong></p>
+              <p><strong>Das 08:00 até as 20:00</strong></p>
+          </div>
+        </div>
+        <div class="footer-right">
+          <div class="footer-col card-footer" id="links">
+            <h3>Mapa</h3>
+            <ul>
+                <li><a href="index.html">Página Inicial</a></li>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="atividades/index.html">Atividades</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="agenda_pag.html">Agenda</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col-group">
+            
+            <div class="footer-col card-footer" id="contatos">
+              <h3>Contate-nos</h3>
+              <ul>
+                  <li><a href="#"><i class="fa-brands fa-facebook"></i> @xxxjapao</a></li>
+                  <li><a href="#"><i class="fa-brands fa-instagram"></i> /link</a></li>
+                  <li><a href="#"><i class="fa-brands fa-whatsapp"></i> (51) 99541-9523</a></li>
+              </ul>
+            </div>
+            
+            <button class="btn-login"><i class="fa-solid fa-user-gear"></i>Login</button>
+            
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
     <script type="module" src="agenda_pag.js"></script>
 </body>
 </html>

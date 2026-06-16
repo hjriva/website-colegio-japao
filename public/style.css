@@ -390,34 +390,7 @@ h2>i {
     box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
 }
 
-/*agenda:*/
-.eventos-agenda {
-    border: solid rgb(255, 255, 255);
-    width: 25em;
-    height: 12em;
-    margin: 5px;
-    padding: 8px;
-}
 
-.img-evento {
-    width: 100px;
-    min-width: 90px;
-    display: inline-block;
-}
-
-.evento-titulo-div {
-    color: rgb(0, 0, 0);
-}
-
-.evento_header-div {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    /* align-items: center; */
-    gap: 30px;
-    align-content: center;
-}
 
 footer {
     width: 100%;
@@ -686,4 +659,34 @@ footer {
 .form textarea {
     height: 100%;
     resize: none;
+}
+
+
+@media screen and (min-width: 1024px) {
+
+    .principal {
+        position: relative;
+    }
+
+    #previa-agenda {
+        position: absolute;
+
+        left: calc(100% - 480px);
+        top: 430px;
+
+        width: 420px;
+
+        background: var(--vermelho);
+        color: #fff;
+
+        padding: 18px 22px;
+
+        border-radius: 18px 0 0 18px;
+
+        z-index: 5;
+    }
+
+    #link-agenda {
+        color: white;
+    }
 }

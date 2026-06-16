@@ -1,3 +1,6 @@
+//gente isso aqui é mais pra uso interno nosso para colocar atividades tipo a de geografia
+//no banco de dados, se precisar eu excluo depois
+
 window.document.getElementById('salvar-atv-dinamica').addEventListener('click', () => {
     let titulo = window.document.getElementById('titulo-atv-dinamica').value;
     let descricao = window.document.getElementById('descricao-atv-dinamica').value;

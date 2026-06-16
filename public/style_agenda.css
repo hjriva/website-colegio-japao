@@ -1,0 +1,211 @@
+
+
+
+
+
+/*agenda:*/
+.eventos-agenda {
+    width: 100%;
+
+    height: auto; /* era 12em, cortava o conteúdo */
+}
+
+:root { box-sizing: border-box; margin: 0; padding: 0; font-family: Poppins;}
+
+#agenda-layout {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+}
+
+
+.img-evento {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.titulo-vento {
+    margin-top: 2px;
+    font-size: 15pt;
+    margin-left: 0px;
+}
+
+.evento-titulo-div {
+     color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+
+
+.evento-header-div {
+      display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#h2-prox {
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-bottom: 3px
+}
+
+.cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.cal-header h2 { font-size: 16px; font-weight: 500; text-transform: capitalize; }
+.cal-nav { background: none; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 4px 12px; cursor: pointer; font-size: 14px; color: var(--color-text-primary); }
+.cal-nav:hover { background: var(--color-background-secondary); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cal-weekday { text-align: center; font-size: 12px; color: var(--color-text-secondary); padding: 6px 0; font-weight: 500; }
+
+.cal-day {
+    text-align: center;
+    font-size: 14px;
+
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    border: 0.5px solid transparent;
+
+    /* deixa os dias quadrados */
+    aspect-ratio: 1 / 1;
+
+    /* tamanho mínimo */
+    min-height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: .2s;
+}
+
+.cal-day:hover { background: var(--color-background-secondary); border-color: var(--color-border-tertiary); }
+.cal-day.hoje { font-weight: 500; border-color: var(--color-border-secondary); background: var(--color-background-secondary); }
+.cal-day.vazio { cursor: default; }
+.cal-day.vazio:hover { background: none; border-color: transparent; }
+.cal-day.selecionado { background: var(--color-background-info); color: var(--color-text-info); border-color: var(--color-border-info); }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--color-text-info); }
+.cal-day.selecionado .dot { background: var(--color-text-info); }
+.eventos-section { margin-top: 1.5rem; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 1rem; }
+.eventos-titulo { font-size: 15px; font-weight: 500; margin-bottom: 0.75rem; }
+.btn-voltar {   margin-bottom: 1rem;
+    transition: .2s; color: var(--color-text-secondary); background: none; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 4px 10px; cursor: pointer; margin-bottom: 0.75rem; display: inline-flex; align-items: center; gap: 4px; }
+.btn-voltar:hover { background: var(--color-background-secondary); }
+.sem-eventos { font-size: 14px; color: var(--color-text-secondary); padding: 0.5rem 0; }
+.loading { font-size: 14px; color: var(--color-text-secondary); }
+
+
+#calendario_agenda {
+    width: 100%;
+}
+
+#agenda-layout {
+    width: 100%;
+}
+
+#agenda-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#agenda-tabs button {
+    flex: 1;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.tab-ativa {
+    font-weight: bold;
+}
+
+#calendario-coluna,
+#lista-coluna {
+    width: 100%;
+}
+
+#lista-coluna {
+    display: none;
+}
+
+#lista-coluna.ativo {
+    display: block;
+}
+
+#calendario-coluna.ativo {
+    display: block;
+}
+
+#calendario-coluna.oculto,
+#lista-coluna.oculto {
+    display: none;
+}
+
+
+
+.eventos-agenda {
+    width: 100%;
+}
+
+
+
+.tab-ativa {
+    font-weight: 600;
+}
+
+
+#lista-coluna.ativo {
+    display: block;
+}
+
+#calendario-coluna.oculto {
+    display: none;
+}
+
+
+@media (min-width: 1024px) {
+
+        .cal-day {
+        min-height: 64px;
+        font-size: 15px;
+    }
+
+    .cal-grid {
+        gap: 8px;
+    }
+
+
+    #agenda-tabs {
+        display: none;
+    }
+
+    #agenda-layout {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        align-items: center;
+    }
+
+    #calendario-coluna {
+        width: 60vw;
+        flex-shrink: 0;
+        display: block !important;
+
+    }
+
+    #lista-coluna {
+        display: block !important;
+        flex: 1;
+    }
+
+}
+

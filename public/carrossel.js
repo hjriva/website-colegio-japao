@@ -4,6 +4,21 @@ const nextBtn = document.querySelector('.next-btn');
 
 let currentIndex = 0;
 
+let previaAgenda = window.document.getElementById('previa-agenda')
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/agenda/ultimo')
+    .then(res => res.json())
+    .then(data => {
+        if (data.ultimo !== null) {
+            window.document.getElementById('previa-span').textContent = data.ultimo.titulo
+        } else {
+            previaAgenda.style.display = 'none'
+        }
+    })
+    .catch(err => console.error(err));
+});
+
 function updateCarousel() {
     slides.forEach((slide, index) => {
         // limpa todas as classes de estado primeiro
