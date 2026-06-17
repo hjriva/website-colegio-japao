@@ -23,10 +23,16 @@ function normalizarResposta(str) {
 function verificarConclusao() {
   const totalEstados = dadosRegioes.reduce((soma, r) => soma + r.estados.length, 0);
   const totalAcertos = document.querySelectorAll("li.advinhado").length;
-    resultado.style.display = 'block';
-  if (totalAcertos === totalEstados) { //compara o total de acertos e para o timer
-    //se for igual, mostra mensagem e interrompe o timer
-    
+  resultado.style.display = 'block';
+
+  dadosRegioes.forEach(regiao => {
+    const acertos = document.querySelectorAll(`#lista-${regiao.id_sigla} li.advinhado`).length;
+    if (acertos === regiao.estados.length) {
+      colorirRegiao(regiao.id_sigla);
+    }
+  });
+
+  if (totalAcertos === totalEstados) {
     resultado.innerHTML = "Parabéns! Você acertou todas as UFs!";
     pausarCron();
   }
@@ -144,6 +150,7 @@ function comecarCron() {
   let inputs = window.document.querySelectorAll('.inputEstado')
   inputs.forEach((inp) => inp.readOnly = false)
   botaoDesistir.style.display = 'block'
+  resetarMapa();
 }
 
 function DesistirSessao() {
@@ -155,6 +162,8 @@ function DesistirSessao() {
   document.querySelectorAll('.inputEstado').forEach((input) => {
     input.readOnly = true;
   })
+  dadosRegioes.forEach(reg => revelarGabaritoRegiao(reg.id_sigla));
+
 }
 
 function pausarCron() {
@@ -226,9 +235,9 @@ fetch("/regioes")
       })
   })
   .then(() => botaoJogar.style.display = 'inline')
+  .then(() => initMapa())
   .catch(() => {
     container.textContent = "Erro ao conectar com o servidor.";
   });
 
 botaoJogar.addEventListener('click', () => comecarCron())
-
