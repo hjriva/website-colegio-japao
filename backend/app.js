@@ -8,10 +8,7 @@ const path = require('path');
 const app = express()
 const port = process.env.PORT || 3000;
 
-const auth = require('./auth');
-
 app.use(cookieParser()) //somente para senha, periodo de teste
-app.use(auth);
 
 
 app.use(express.json()); //claude
