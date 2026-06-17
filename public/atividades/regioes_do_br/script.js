@@ -23,8 +23,10 @@ function normalizarResposta(str) {
 function verificarConclusao() {
   const totalEstados = dadosRegioes.reduce((soma, r) => soma + r.estados.length, 0);
   const totalAcertos = document.querySelectorAll("li.advinhado").length;
+    resultado.style.display = 'block';
   if (totalAcertos === totalEstados) { //compara o total de acertos e para o timer
     //se for igual, mostra mensagem e interrompe o timer
+    
     resultado.innerHTML = "Parabéns! Você acertou todas as UFs!";
     pausarCron();
   }
@@ -131,7 +133,7 @@ function returnData(input) {
 
 function comecarCron() {
   botaoJogar.style.display = 'none'
-  resultado.innerHTML = ''
+  resultado.style.display = ''
     document.querySelectorAll('li').forEach(li => {
       li.remove();
   });
@@ -146,9 +148,13 @@ function comecarCron() {
 
 function DesistirSessao() {
   desistiuStatus = true;
+  botaoDesistir.style.display = 'none'
   botaoJogar.value = 'Tentar novamente'
   botaoJogar.style.display = 'inline'
   verificarConclusao()
+  document.querySelectorAll('.inputEstado').forEach((input) => {
+    input.readOnly = true;
+  })
 }
 
 function pausarCron() {
@@ -216,9 +222,10 @@ fetch("/regioes")
       
     });})
         let faltas = window.document.querySelectorAll('li.gabarito').length
-        resultado.innerHTML += `Faltaram ${faltas}`
+        resultado.innerHTML += ` Faltaram ${faltas}!`
       })
   })
+  .then(() => botaoJogar.style.display = 'inline')
   .catch(() => {
     container.textContent = "Erro ao conectar com o servidor.";
   });

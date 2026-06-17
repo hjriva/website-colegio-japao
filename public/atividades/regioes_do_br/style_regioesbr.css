@@ -1,0 +1,106 @@
+:root {
+    --vermelho: #f92525;
+    --cor-texto: #515151;
+
+    --fonte-titulo: 'Sekuya';
+
+
+}
+
+.regioes-divs > h2 {
+    margin: 2px;
+    font-family: 'Poppins';
+
+}
+
+input {
+    background-color: #ffffff00;
+    border-radius: 5px;
+    border: 0.5px rgba(99, 99, 99, 0.493) solid;
+    min-height: 30px;
+}
+
+
+#play-btn {
+    display: none;
+}
+
+
+#play-btn, #quit-btn {
+    background-color: var(--vermelho);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.7em
+}
+
+#play-btn:hover {
+    box-shadow: 1px 1px 10px var(--vermelho);
+
+}
+
+#regioes-container {
+   font-family: 'Poppins';
+}
+
+#timer {
+    color: var(--vermelho);
+    font-size: 2rem;
+}
+
+.gabarito {
+    color: rgb(107, 107, 107);
+}
+
+.msg-erro {
+    color: var(--vermelho);
+    display: inline-block;
+    margin: 3px;
+}
+
+input:read-only {
+    background-color: rgb(216, 216, 216);
+}
+
+main {
+    margin: 2vh 15vw ;
+}
+
+#resultado {
+    display: none;
+    background-color: rgb(135, 206, 135);
+    max-width: 300px;
+    padding: 5px;
+    border-radius: 5px;
+    
+    
+}
+
+#cabecalho-atv {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 5px;
+  align-items: center;
+  margin: 3vh auto;
+}
+
+#controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#buttons {
+  display: flex;
+  gap: 8px;
+}
+
+#quit-btn {
+  display: none;
+}
+
+.regioes-divs {
+    margin: 25px auto;
+}
