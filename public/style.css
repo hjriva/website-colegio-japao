@@ -392,12 +392,13 @@ h2>i {
     box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
 }
 
-
-
-footer {
-    width: 100%;
-    margin-top: 8vh;
-    font-family: 'Poppins', sans-serif;
+/*agenda:*/
+.eventos-agenda {
+    border: solid rgb(255, 255, 255);
+    width: 25em;
+    height: 12em;
+    margin: 5px;
+    padding: 8px;
 }
 
 .img-evento {
@@ -445,10 +446,6 @@ footer {
     gap: 15px;
 }
 
-.logo-footer-wrapper img {
-    width: 65px; 
-}
-
 .logo-text {
     font-size: 1.2rem;
     font-weight: 400;
@@ -456,10 +453,8 @@ footer {
 }
 
 .titulo-branco {
-    font-family: 'Sekuya', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: 1px;
+    font-family: 'Sekuya';
+    font-weight: bold;
 }
 
 .slogan-footer {
@@ -579,29 +574,27 @@ footer {
     padding: 10px 30px;
     margin-top: 20px;
     cursor: pointer;
+    box-shadow: none;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    width: 100%;
-    transition: all 0.2s ease;
 }
 
 .btn-login i {
     color: var(--vermelho);
-    font-size: 1.3rem;
 }
 
 .btn-login:hover {
-    background-color: #f2f2f2;
-    transform: scale(1.02);
+    background-color: #f1f1f1;
 }
 
-/* carrossel de fotos */
+/* carrossel */
 .galeria {
     text-align: center;
     margin-bottom: 5vh;
     overflow: hidden;
+    /* evita criar barra de rolagem horizontal */
 }
 
 .carrossel-container {
@@ -633,7 +626,7 @@ footer {
     z-index: 0;
     border-radius: 30px;
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
 }
 
 .slide img {
@@ -643,6 +636,7 @@ footer {
     display: block;
 }
 
+/* o vermelho em cima das imagens laterais */
 .slide::after {
     content: '';
     position: absolute;
@@ -652,6 +646,7 @@ footer {
     transition: background-color 0.5s ease;
 }
 
+/* imagem central (a que fica ativa) */
 .slide.active {
     opacity: 1;
     z-index: 2;
@@ -664,6 +659,7 @@ footer {
     /* Remove a película da imagem central */
 }
 
+/* imagem da esquerda */
 .slide.prev {
     opacity: 1;
     z-index: 1;
@@ -671,6 +667,7 @@ footer {
     /* fica menor e vai para a esquerda */
 }
 
+/* imagem da direita */
 .slide.next {
     opacity: 1;
     z-index: 1;
@@ -678,6 +675,7 @@ footer {
     /* fica menor e vai para a direita */
 }
 
+/* botão do carrossel */
 .carrossel-btn {
     position: absolute;
     top: 50%;
@@ -696,68 +694,59 @@ footer {
     background-color: transparent;
 }
 
-.prev-btn { left: 2vw; }
-.next-btn { right: 2vw; }
+.prev-btn {
+    left: 5vw;
+}
+
+.next-btn {
+    right: 5vw;
+}
+
+/* form mds chega */
 
 .form {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 5vh auto;
-    width: 70vw; /* Define a largura na tela */
-    max-width: 800px;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 12px;
+    padding: 12px;
+    max-width: 420px;
+    margin: 0 auto;
+    margin-bottom: 15vh;
 }
 
-.form > div {
+.form>div {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    flex: 1; /* Ocupa metade do espaço */
+    gap: 10px;
 }
 
-.form input, .form textarea {
-    width: 100%;
-    padding: 15px 20px;
-    border-radius: 20px;
+.form input,
+.form textarea {
+    background-color: #fbd9da;
     border: none;
-    background-color: #fadada; /* Cor rosa claro */
-    font-family: 'Poppins', sans-serif;
-    color: var(--cor-texto);
-    box-sizing: border-box;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #4a4a4a;
+    font-family: inherit;
     outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+    color: #8a8a8a;
+}
+
+.form input:focus,
+.form textarea:focus {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
 }
 
 .form textarea {
+    width: 100%;
     height: 100%;
-    resize: none;
-}
-
-
-@media screen and (min-width: 1024px) {
-
-    .principal {
-        position: relative;
-    }
-
-    #previa-agenda {
-        position: absolute;
-
-        left: calc(100% - 480px);
-        top: 430px;
-
-        width: 420px;
-
-        background: var(--vermelho);
-        color: #fff;
-
-        padding: 18px 22px;
-
-        border-radius: 18px 0 0 18px;
-
-        z-index: 5;
-    }
-
-    #link-agenda {
-        color: white;
-    }
+    min-height: 10vh;
+    min-width: 100px;
+    resize: vertical;
 }
