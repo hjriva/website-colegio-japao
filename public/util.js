@@ -25,7 +25,7 @@ export function criaCardEvento(entrada, container, acoes = null) {
     evHeader.appendChild(evTitulo);
 
     criaElemento('img', null, 'src', `${entrada.img}`, evHeader, 'img-evento');
-    criaElemento('h2', `${entrada.titulo}`, null, null, evTitulo, 'titulo-vento');
+    criaElemento('h3', `${entrada.titulo}`, null, null, evTitulo, 'titulo-vento');
     criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano} ${entrada.horario.slice(0, 5).replace(':', 'h')}`, null, null, evTitulo, 'horario-data-evento');
     criaElemento('p', entrada.descricao, null, null, evTitulo, 'descr-evento');
 

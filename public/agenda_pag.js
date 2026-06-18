@@ -208,11 +208,16 @@ function carregaHojeCalendario() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
+    const dataAtual = new Date().toISOString().split('T')[0]; 
+    inputData.value = dataAtual
+
     carregaHoje();
     carregaProximos();
     renderCalendario(hoje.getFullYear(), hoje.getMonth());
     carregaHojeCalendario();
+
+    
 
     inputData.addEventListener('change', () => carregaEventosDia(inputData.value));
     btnAnterior.addEventListener('click', () => carregaProximos(paginaAtual - 1));

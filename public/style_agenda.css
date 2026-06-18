@@ -28,10 +28,29 @@
     object-fit: cover;
 }
 
+h2 {
+    font-weight: 500;
+}
+
+#eventos-hoje {
+    font-weight: 500;
+    margin: 0px;
+}
+
+#input-data {
+     border-radius: 10px;
+    font-size: 1em;
+    font-weight: 300;
+    border: solid 1px black;
+    background-color: #ffffff;
+    padding: 5px;
+}
+
 .titulo-vento {
     margin-top: 2px;
-    font-size: 15pt;
+    font-size: 13pt;
     margin-left: 0px;
+    font-weight: 400;
 }
 
 .evento-titulo-div {
@@ -100,7 +119,14 @@
 .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--color-text-info); }
 .cal-day.selecionado .dot { background: var(--color-text-info); }
 .eventos-section { margin-top: 1.5rem; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 1rem; }
-.eventos-titulo { font-size: 15px; font-weight: 500; margin-bottom: 0.75rem; }
+.eventos-titulo { font-size: 15px; font-weight: 500; margin-bottom: 0.75rem;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-direction: row; }
 .btn-voltar {   margin-bottom: 1rem;
     transition: .2s; color: var(--color-text-secondary); background: none; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 4px 10px; cursor: pointer; margin-bottom: 0.75rem; display: inline-flex; align-items: center; gap: 4px; }
 .btn-voltar:hover { background: var(--color-background-secondary); }
