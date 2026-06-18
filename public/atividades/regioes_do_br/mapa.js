@@ -17,9 +17,9 @@ const CORES_REGIOES = {
   S:  { acerto: "#BA7517", nome: "Sul" },
 };
 
-const COR_PADRAO   = "#d0d0cc"; // regiões ainda não acertadas
-const COR_BORDA    = "#ffffff";
-const COR_GABARITO = "#f09595"; // revelada ao desistir
+const COR_PADRAO   = "#ffffff00"; // regiões ainda não acertadas
+const COR_BORDA    = "#000000";
+const COR_GABARITO = "#acacac"; // revelada ao desistir
 
 let svgMapa = null;
 
@@ -99,18 +99,35 @@ function initMapa() {
 }
 
 function renderizarMapa(geojson, g) {
-  // Projeção: Mercator centralizada no Brasil
   const projection = d3.geoMercator().fitSize([500, 520], geojson);
   const pathGen    = d3.geoPath().projection(projection);
 
-  // Agrupamos features por região para poder colorir a região inteira de uma vez
+  // Cria versão normalizada do mapeamento uma vez só
+  const mapeamentoNormalizado = {};
+  Object.entries(ESTADO_PARA_REGIAO).forEach(([nome, sigla]) => {
+    const nomeNorm = nome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    mapeamentoNormalizado[nomeNorm] = sigla;
+  });
+
   const regioes = {};
   geojson.features.forEach(f => {
-    const nomeEstado = f.properties.name || f.properties.Name || f.properties.nome || "";
-    const siglaReg   = ESTADO_PARA_REGIAO[nomeEstado] || "N";
+    const nomeEstado = (f.properties.name || f.properties.Name || f.properties.nome || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    const siglaReg = mapeamentoNormalizado[nomeEstado];
+    if (!siglaReg) {
+      console.warn("Estado não mapeado:", nomeEstado);
+      return;
+    }
     if (!regioes[siglaReg]) regioes[siglaReg] = [];
     regioes[siglaReg].push(f);
   });
+
+  console.log("Regiões finais:", regioes);
+console.log("N tem:", regioes["N"]?.map(f => f.properties.name));
+console.log("S tem:", regioes["S"]?.map(f => f.properties.name));
 
   // Desenha um <g> por região contendo os estados dela
   Object.entries(regioes).forEach(([sigla, features]) => {

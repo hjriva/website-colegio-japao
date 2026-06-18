@@ -7,6 +7,12 @@
 
 }
 
+#mapa-container {
+    max-width: 400px;
+    margin: 0 2vw;
+   
+}
+
 .regioes-divs > h2 {
     margin: 2px;
     font-family: 'Poppins';
@@ -57,6 +63,7 @@ input {
     color: var(--vermelho);
     display: inline-block;
     margin: 3px;
+    max-width: inherit;
 }
 
 input:read-only {
@@ -64,7 +71,8 @@ input:read-only {
 }
 
 main {
-    margin: 2vh 15vw ;
+    margin: 2vh 15vw;
+    display: grid;
 }
 
 #resultado {
@@ -103,4 +111,21 @@ main {
 
 .regioes-divs {
     margin: 25px auto;
+}
+
+
+#atividade_container {
+    display: flex;
+    align-items: center;
+    width: 50vw;
+    margin: auto;
+}
+
+
+
+
+@media (min-width: 1024px) {
+    #atividade_container {
+        width: 45vw;
+    }
 }

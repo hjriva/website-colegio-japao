@@ -26,10 +26,16 @@ function verificarConclusao() {
   resultado.style.display = 'block';
 
   dadosRegioes.forEach(regiao => {
+
     const acertos = document.querySelectorAll(`#lista-${regiao.id_sigla} li.advinhado`).length;
+
+
+
     if (acertos === regiao.estados.length) {
       colorirRegiao(regiao.id_sigla);
     }
+
+
   });
 
   if (totalAcertos === totalEstados) {
@@ -40,9 +46,15 @@ function verificarConclusao() {
     pausarCron();
     resultado.innerHTML = `Você acertou ${totalAcertos} de ${totalEstados}!`;
   }
+
+ 
+
 }
 
     function criarMsgErro(msg, sigla) {
+      document.querySelectorAll('.msg-erro').forEach(msg => {
+    msg.remove();
+    });
       const erro = document.createElement("p");
       erro.classList.add('msg-erro');
       erro.textContent = msg;
@@ -186,13 +198,15 @@ function resetCron() {
 fetch("/regioes")
   .then(res => res.json())
   .then(regioes => {
+       regioes.forEach(r => r.id_sigla = r.id_sigla.trim());
+     
+
     dadosRegioes = regioes;
     console.log(dadosRegioes);
-
+    
     regioes.forEach(regiao => {
-      //Criando uma div para cada região, com elementos para o jogo
-      console.log(regiao);
-      const sigla = regiao.id_sigla;
+      //Criando uma div para cada região, com elementos para o jogo]
+      const sigla = regiao.id_sigla.trim()
 
       const div = document.createElement("div");
       div.id = `div-${sigla}`;
@@ -211,7 +225,11 @@ fetch("/regioes")
       input.id = `input-${sigla}`;
       input.placeholder = "Digite um estado...";
       input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") tentarAdicionar(sigla);
+        if (e.key === "Enter") {
+          e.preventDefault(); // impede o comportamento padrão de pular para o próximo no mobile
+          tentarAdicionar(sigla);
+  }
+        
       });
 
       div.appendChild(titulo);

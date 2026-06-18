@@ -301,7 +301,9 @@ app.get("/regioes", async (req, res) => {
 
     const resposta = regioes.map(regiao => ({
       ...regiao,
-      estados: estados.filter(e => e.sigla_regiao === regiao.id_sigla)
+      estados: estados.filter(
+    e => e.sigla_regiao?.trim() === regiao.id_sigla?.trim()
+)
     }));
 
     res.json(resposta);
