@@ -150,9 +150,10 @@ function returnData(input) {
 }
 
 function comecarCron() {
+  desistiuStatus = false
   botaoJogar.style.display = 'none'
   resultado.style.display = ''
-    document.querySelectorAll('li').forEach(li => {
+    document.querySelector('#atividade_container').querySelectorAll('li').forEach(li => {
       li.remove();
   });
 
@@ -224,17 +225,30 @@ fetch("/regioes")
       input.classList.add('inputEstado');
       input.id = `input-${sigla}`;
       input.placeholder = "Digite um estado...";
+
+        const divWrapper = document.createElement('div')
+        divWrapper.classList.add('botaoinput')
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "✓";
+        btn.classList.add('btn-confirmar');
+        btn.addEventListener("click", () => tentarAdicionar(sigla));
+
       input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
           e.preventDefault(); // impede o comportamento padrão de pular para o próximo no mobile
           tentarAdicionar(sigla);
+
+         
   }
         
       });
 
       div.appendChild(titulo);
       div.appendChild(lista);
-      div.appendChild(input);
+      divWrapper.appendChild(input);
+      divWrapper.appendChild(btn);  
+      div.appendChild(divWrapper) 
       container.appendChild(div);
     });
 

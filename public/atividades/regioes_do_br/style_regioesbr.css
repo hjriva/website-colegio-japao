@@ -121,8 +121,27 @@ main {
     margin: auto;
 }
 
+.btn-confirmar {
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 0 6px 6px 0;
+  margin-left: -1px; /* gruda no input */
+  background-color: #4CAF50;
+  color: white;
+}
 
+.inputEstado {
+  border-radius: 6px 0 0 6px;
+}
 
+.botaoinput {
+    display: flex;
+        flex-wrap: nowrap;
+    display: flex;
+    align-items: flex-end;
+}
 
 @media (min-width: 1024px) {
     #atividade_container {
