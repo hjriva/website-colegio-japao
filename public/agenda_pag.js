@@ -1,6 +1,6 @@
 import { criaCardEvento } from '/util.js';
 
-const containerHoje = document.getElementById('eventos-hoje');
+const containerHoje = document.getElementById('eventos-conteudo');
 const containerProximos = document.getElementById('proximos-eventos');
 const containerDia = document.getElementById('eventos-dia');
 const inputData = document.getElementById('input-data');
@@ -208,6 +208,7 @@ function carregaHojeCalendario() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    
     carregaHoje();
     carregaProximos();
     renderCalendario(hoje.getFullYear(), hoje.getMonth());

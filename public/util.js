@@ -25,10 +25,9 @@ export function criaCardEvento(entrada, container, acoes = null) {
     evHeader.appendChild(evTitulo);
 
     criaElemento('img', null, 'src', `${entrada.img}`, evHeader, 'img-evento');
-    criaElemento('h2', `${entrada.titulo}:`, null, null, evTitulo, 'titulo-vento');
-    criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano}`, null, null, evTitulo, 'data-evento');
-    criaElemento('p', `${entrada.horario.slice(0, 5).replace(':', 'h')}`, null, null, evTitulo, 'horario-evento')
-    criaElemento('p', entrada.descricao, null, null, ev, 'descr-evento');
+    criaElemento('h2', `${entrada.titulo}`, null, null, evTitulo, 'titulo-vento');
+    criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano} ${entrada.horario.slice(0, 5).replace(':', 'h')}`, null, null, evTitulo, 'horario-data-evento');
+    criaElemento('p', entrada.descricao, null, null, evTitulo, 'descr-evento');
 
     // se acoes for passado, renderiza os botões - para usar somente no painel interno
     if (acoes) acoes(ev, entrada);
