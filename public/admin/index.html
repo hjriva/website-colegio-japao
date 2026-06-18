@@ -1,160 +1,231 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel de Controle</title>
     <style>
-        img {
-            height: 100px;
-            width: 100px    ;
-        }
+      img {
+        height: 100px;
+        width: 100px;
+      }
 
-        #nova-atividade {
-            display: none;
-        }
-
-
+      #nova-atividade {
+        display: none;
+      }
     </style>
 
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <input type="button" value="Sair" id="SairBotao"> <!--Precisa desse id devido ao JavaScript-->
-    <h1>Bem vindo</h1>
+    <!-- Fontes Google -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- BootStrap/Flaticon -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <header>
+      <div class="identidade">
+        <img
+          src="../imgs_site/logo.png"
+          id="logo_header"
+          alt="Logotipo circular vermelho com símbolo abstrato preto da instituição"
+        />
+        <div class="logo">Colégio<span class="titulo">Japão</span></div>
+      </div>  
+          <input type="button" value="Sair" id="SairBotao" />
+    </header>
+
+    <!--Precisa desse id devido ao JavaScript-->
+
+    <h1>Boas Vindas, Helena!</h1>
+    <p id="subtitulo">Painel de Controle</p>
     <button id="mostrar-painel-agenda">Painel da agenda</button>
     <button id="mostrar-painel-atv">Painel de atividades</button>
     <button id="mostrar-painel-usuarios">Painel de usuários</button>
 
-<div id="painel-admin">
-
-    <div id="painel-agenda-conteudo">
-        <h2>Painel de controle da agenda</h2>
+    <div id="painel-admin">
+      <div id="painel-agenda-conteudo">
         <button id="adicionar-post">Adicionar postagens</button>
 
         <div id="novo-evento-form">
-            <h2>Adicionar novo post:</h2>
-            <form action="/updateBD" method="POST" id='FormularioNovo'>
-                <input type="text" name="nome-evento" id="nome-novo-evento" placeholder="Nome">
-                <br> <br>
-                <input type="date" name="" id="data-novo-evento"> <br> <br>
-                <input type="time" name="" id="hora-novo-evento"> <br> <br>
+          <h2>Adicionar novo post:</h2>
+          <form action="/updateBD" method="POST" id="FormularioNovo">
+            <input
+              type="text"
+              name="nome-evento"
+              id="nome-novo-evento"
+              placeholder="Nome"
+            />
+            <br />
+            <br />
+            <input type="date" name="" id="data-novo-evento" /> <br />
+            <br />
+            <input type="time" name="" id="hora-novo-evento" /> <br />
+            <br />
 
-                
-                <input type="checkbox" id="destaque">
+            <input type="checkbox" id="destaque" />
 
-                <input type="file" name="" id="imagem-novo-evento" accept="image/*">
-                <br><br>
-                <textarea name="" id="desc-novo-evento" placeholder="Descricao"></textarea>
-                <br><br><br><br>
-            </form>
-            <input type="button" value="Criar nova postagem" id="salvar-post">
+            <input
+              type="file"
+              name=""
+              id="imagem-novo-evento"
+              accept="image/*"
+            />
+            <br /><br />
+            <textarea
+              name=""
+              id="desc-novo-evento"
+              placeholder="Descricao"
+            ></textarea>
+            <br /><br /><br /><br />
+          </form>
+          <input type="button" value="Criar nova postagem" id="salvar-post" />
         </div>
 
-        <input type="text" id="input-busca" placeholder="Buscar por título ou descrição...">
-        <input type="date" id="filtro-data">
+        <input
+          type="text"
+          id="input-busca"
+          placeholder="Buscar por título ou descrição..."
+        />
+        <input type="date" id="filtro-data" />
 
         <div id="controle-agenda">
-            <!--Aqui é onde vão aparecer os eventos-->
+          <!--Aqui é onde vão aparecer os eventos-->
         </div>
 
         <button id="btn-anterior-interno">← Anterior</button>
         <span id="info-pagina-interna"></span>
         <button id="btn-proximo-interno">Próximo →</button>
-    </div>
+      </div>
 
-    <div id="painel-atividades-conteudo" style="display:none">
+      <div id="painel-atividades-conteudo" style="display: none">
         <h2>Painel de atividades</h2>
-        <input type="button" value="Adicionar novo quiz" id="novo-quiz-toggle">
-            <div id="nova-atividade">
-<!--Informações principais sobre o quiz, antes das perguntas: nome e disciplina -->
-<form action=""  id="cabecalho-quiz"> 
-    <label for="nome-atividade">Nome da atividade: </label>
-    <input type="text" name="nome-atividade" id="nome-atividade">
-    <label for="input-disciplina">Disciplina:</label>
-    <input list="disciplinas-dl" name="input-disciplina" id="input-disciplina">
-    <datalist id="disciplinas-dl">
-        <!--Opções adicionadas dinamicamente com js-->
-    </datalist>
+        <input
+          type="button"
+          value="Adicionar novo quiz"
+          id="novo-quiz-toggle"
+        />
+        <div id="nova-atividade">
+          <!--Informações principais sobre o quiz, antes das perguntas: nome e disciplina -->
+          <form action="" id="cabecalho-quiz">
+            <label for="nome-atividade">Nome da atividade: </label>
+            <input type="text" name="nome-atividade" id="nome-atividade" />
+            <label for="input-disciplina">Disciplina:</label>
+            <input
+              list="disciplinas-dl"
+              name="input-disciplina"
+              id="input-disciplina"
+            />
+            <datalist id="disciplinas-dl">
+              <!--Opções adicionadas dinamicamente com js-->
+            </datalist>
 
-    <input type="checkbox" id="randomizar" name="random">
-    <label for="randomizar">Embaralhar</label>
-</form>
+            <input type="checkbox" id="randomizar" name="random" />
+            <label for="randomizar">Embaralhar</label>
+          </form>
 
+          <main id="formulario_perguntas">
+            <!--Aqui são gerados os formulários para criar as perguntas-->
+            <div id="form-pergunta-1" class="perguntas_teste">
+              <!--Div modelo para outros formulários gerados dinamicamente com JS-->
+              <form action="" class="form_pergunta" id="form_1">
+                <!--Talvez não precise de action, ver posteriormente-->
 
-<main id="formulario_perguntas"> <!--Aqui são gerados os formulários para criar as perguntas-->
-    <div id="form-pergunta-1" class="perguntas_teste"> 
-        <!--Div modelo para outros formulários gerados dinamicamente com JS-->
-      <form action="" class="form_pergunta" id="form_1"> <!--Talvez não precise de action, ver posteriormente-->
-        
-        <span class="numero-pergunta">1&#41;</span>
-        <label for="question1">Pergunta:</label>
-        <input type="text" name="enunciado-1" id="enunciado-1" class="input_enunciado">
+                <span class="numero-pergunta">1&#41;</span>
+                <label for="question1">Pergunta:</label>
+                <input
+                  type="text"
+                  name="enunciado-1"
+                  id="enunciado-1"
+                  class="input_enunciado"
+                />
 
-        <div class="campo"> <!--Essa div existe para conseguirmos deixar uma pergunta embaixo da outra 
+                <div class="campo">
+                  <!--Essa div existe para conseguirmos deixar uma pergunta embaixo da outra 
             sem encher de br,
             provavelmente vai ser adicionado em outros elementos -->
-        <label for="alt-a-1"> a&#41; </label>
-        <input type="text" name="alt-a" class="alt-a" id="alt-a-1"> 
-        <!--O id desses inputs precisa ter um número, pois serão gerados mais deles dinamicamente
+                  <label for="alt-a-1"> a&#41; </label>
+                  <input type="text" name="alt-a" class="alt-a" id="alt-a-1" />
+                  <!--O id desses inputs precisa ter um número, pois serão gerados mais deles dinamicamente
         para serem unicos -->
-        <input type="radio" name="radio-alternativa" value="a">
-        <!--O value do radio precisa ser a letra da alternativa, para conseguirmos armazenar a opção correta de cada pergunta.-->
+                  <input type="radio" name="radio-alternativa" value="a" />
+                  <!--O value do radio precisa ser a letra da alternativa, para conseguirmos armazenar a opção correta de cada pergunta.-->
+                </div>
+
+                <div class="campo">
+                  <label for="alt-b-1"> b&#41; </label>
+                  <input type="text" name="alt-b" class="alt-b" id="alt-b-1" />
+                  <input type="radio" name="radio-alternativa" value="b" />
+                </div>
+
+                <div class="campo">
+                  <label for="alt-c"> c&#41; </label>
+                  <input type="text" name="alt-c" class="alt-c" id="alt-c-1" />
+                  <input type="radio" name="radio-alternativa" value="c" />
+                </div>
+
+                <div class="campo">
+                  <label for="alt-d"> d&#41; </label>
+                  <input type="text" name="alt-d" class="alt-d" id="alt-d-1" />
+                  <input type="radio" name="radio-alternativa" value="d" />
+                </div>
+
+                <div class="campo">
+                  <textarea
+                    name="explicacao-1"
+                    id="explicacao-1"
+                    class="explicacao-text"
+                    placeholder="Explicacao opcional"
+                  >
+                  </textarea>
+                </div>
+              </form>
+            </div>
+          </main>
+          <button id="add-pergunta">+</button>
+          <button id="salvar_quiz">Salvar</button>
         </div>
 
-        <div class="campo">
-        <label for="alt-b-1"> b&#41; </label>
-        <input type="text" name="alt-b" class="alt-b" id="alt-b-1">
-        <input type="radio" name="radio-alternativa" value="b">
-        </div>
+        <div id="controle-atividades"></div>
+      </div>
 
-        <div class="campo">
-        <label for="alt-c"> c&#41; </label>
-        <input type="text" name="alt-c" class="alt-c" id="alt-c-1">
-        <input type="radio" name="radio-alternativa" value="c">
-        </div>
-
-        <div class="campo">
-        <label for="alt-d"> d&#41; </label>
-        <input type="text" name="alt-d" class="alt-d" id="alt-d-1">
-        <input type="radio" name="radio-alternativa" value="d">
-        </div>
-
-        <div class="campo">
-            <textarea name="explicacao-1" id="explicacao-1" class="explicacao-text" placeholder="Explicacao opcional">
-
-            </textarea>
-        </div>
-    </form>
-</div> 
-   
-</main>    
-<button id="add-pergunta">+</button> 
-<button id="salvar_quiz">Salvar</button>
-</div>
-
- <div id="controle-atividades"></div>
-
-   
-
-</div>
-
-     <div id="painel-usuarios-conteudo" style="display:none">
+      <div id="painel-usuarios-conteudo" style="display: none">
         <h2>Painel de usuários</h2>
         <label for="add-novo-usuario">E-mail do usuário: </label>
-        <input type="text" id="add-novo-usuario"> 
-        <input type="button" value="adicionar usuario" id="adicionar-usuario-botao">
-        <!-- futuro -->
+        <input type="text" id="add-novo-usuario" />
+        <input
+          type="button"
+          value="adicionar usuario"
+          id="adicionar-usuario-botao"
+        />
+
+      </div>
     </div>
-
-</div>
-
-
-    <script type="module" src="agenda_admin.js"></script>
-    <script type="module" src="script-fb.js"></script>
 
 
     
-</body>
+    
+    <script type="module" src="agenda_admin.js"></script>
+    <script type="module" src="script-fb.js"></script>
+  </body>
 </html>
-
