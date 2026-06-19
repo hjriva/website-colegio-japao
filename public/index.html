@@ -49,13 +49,18 @@
           O conhecer nos faz valer. A educação é o acender de uma chama, não o
           preenchimento de um recipiente vazio.
         </p>
-        <button><a href="#">Entre em contato!</a></button>
+        <button><a href="https://wa.me/5191282233" target="_blank">Entre em contato!</a></button>
       </div>
       <div id="imagem_transparencia">
         <img src="./imgs_site/fachada.jpg"
           alt="Fachada Escola Japão, com flores e plantas ao redor, em um dia ensolarado. Mostrando as salas de aula."
           id="imagem_inicio" />
       </div>
+
+          <div id="previa-agenda">
+          <h4>Últimas notícias: </h4>
+          <p><span id="previa-span"></span>. <a href="agenda_pag.html" id="link-agenda">Confira a agenda.</a> </p>
+        </div>
     </section>
 
     <main>
@@ -142,23 +147,29 @@
 
           <ul>
             <li>
-              <a href="#"><i class="fa-brands fa-instagram icon"></i> @colegiojapao</a>
+              <a href="https://www.instagram.com/colegioestadualjapao_01.cre/" target="_blank"><i class="fa-brands fa-instagram icon"></i> @colegioestadualjapao_01.cre</a>
             </li>
             <li>
-              <a href="#"><i class="fa-solid fa-link icon"></i>
-                facebook/colegiojapao</a>
+              <a href="https://www.facebook.com/colegiojapao01cre " target="_blank"><i class="fa-brands fa-facebook-f"></i>
+                /colegiojapao01cre</a>
             </li>
             <li>
-              <a href="#"><i class="fa-brands fa-whatsapp icon"></i> (51) 99541-9523</a>
+              <a href="https://wa.me/5191282233" target="_blank"><i class="fa-brands fa-whatsapp icon"></i> (51) 9128-2233</a>
             </li>
           </ul>
         </div>
-        <div id="form">
+        
+        <form action="https://api.staticforms.dev/submit" method="POST" id="form">
+          
+
           <input type="text" placeholder="Nome" />
           <input type="email" placeholder="E-mail" />
           <textarea placeholder="Insira sua sugestão!"></textarea>
           <button type="submit">Enviar</button>
-        </div>
+          <div id="feedback-form"></div>
+        </form>
+        
+        
       </section>
     </main>
   </div>
@@ -207,9 +218,8 @@
         <h3>Mapa</h3>
         <ul>
           <li><a href="index.html">Página inicial</a></li>
-          <li><a href="index.html">Início</a></li>
           <li><a href="atividades/index.html">Atividades</a></li>
-          <li><a href="#">Contato</a></li>
+          <li><a href="#contato">Contato</a></li>
           <li><a href="agenda_pag.html">Agenda</a></li>
         </ul>
       </div>
@@ -218,15 +228,15 @@
         <h3>Contate-nos</h3>
         <ul>
           <li>
-            <a href="#"><i class="fa-brands fa-instagram"></i>@xxxjapao</a>
+            <a href="https://www.instagram.com/colegioestadualjapao_01.cre/" target="_blank"><i class="fa-brands fa-instagram"></i>@colegioestadualjapao_01.cre</a>
           </li>
           <li>
-            <a href="#"><i class="fa-solid fa-link"></i> / o link</a>
+            <a href="https://www.facebook.com/colegiojapao01cre" target="_blank"><i class="fa-brands fa-facebook-f"></i>/colegiojapao01cre</a>
           </li>
-          <li><i class="fa-brands fa-whatsapp"></i> (51) 99541-9523</li>
+          <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/5191282233" target="_blank">(51) 9128-2233</a></li>
         </ul>
         <button class="btn-login">
-          <i class="fa-solid fa-user"></i> Login
+          <i class="fa-solid fa-user"></i>Login
         </button>
       </div>
     </div>

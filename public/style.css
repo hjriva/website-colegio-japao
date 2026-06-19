@@ -809,3 +809,37 @@ h2>i {
   width: 100%;
   grid-column: 1 / -1;
 }
+
+
+#feedback_div {
+    display: none;
+}
+
+@media screen and (min-width: 1024px) {
+
+    .principal {
+        position: relative;
+    }
+
+    #previa-agenda {
+        position: absolute;
+
+        left: calc(100% - 480px);
+        top: 430px;
+
+        width: 420px;
+
+        background: var(--vermelho);
+        color: #fff;
+
+        padding: 18px 22px;
+
+        border-radius: 18px 0 0 18px;
+
+        z-index: 5;
+    }
+
+    #link-agenda {
+        color: white;
+    }
+}

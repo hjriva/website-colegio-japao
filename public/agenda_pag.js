@@ -21,7 +21,7 @@ const MESES = [
 ];
 
 const DIAS_SEMANA = [
-    'dom','seg','ter','qua','qui','sex','sáb'
+    'D','S','T','Q','Q','S','S'
 ];
 
 let anoAtual;
