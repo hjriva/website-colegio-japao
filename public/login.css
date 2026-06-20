@@ -13,7 +13,7 @@ body {
 }
 
 main {
-    bakground-color: var(--cor-terciaria);
+    background-color: var(--cor-terciaria);
     display: grid;
     grid-template-columns: 40% 60%;
     width: 100%;

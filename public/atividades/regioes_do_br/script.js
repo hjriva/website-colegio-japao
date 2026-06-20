@@ -23,34 +23,24 @@ function normalizarResposta(str) {
 function verificarConclusao() {
   const totalEstados = dadosRegioes.reduce((soma, r) => soma + r.estados.length, 0);
   const totalAcertos = document.querySelectorAll("li.advinhado").length;
-  resultado.style.display = 'block';
 
   dadosRegioes.forEach(regiao => {
-
     const acertos = document.querySelectorAll(`#lista-${regiao.id_sigla} li.advinhado`).length;
-
-
-
     if (acertos === regiao.estados.length) {
       colorirRegiao(regiao.id_sigla);
     }
-
-
   });
 
   if (totalAcertos === totalEstados) {
+    resultado.style.display = 'block';
     resultado.innerHTML = "Parabéns! Você acertou todas as UFs!";
     pausarCron();
-  }
-  if (desistiuStatus == true) {
-    pausarCron();
+  } else if (desistiuStatus === true) {
+    resultado.style.display = 'block';
     resultado.innerHTML = `Você acertou ${totalAcertos} de ${totalEstados}!`;
+    pausarCron();
   }
-
- 
-
 }
-
     function criarMsgErro(msg, sigla) {
       document.querySelectorAll('.msg-erro').forEach(msg => {
     msg.remove();
@@ -150,9 +140,11 @@ function returnData(input) {
 }
 
 function comecarCron() {
+
   desistiuStatus = false
+  resultado.style.display = 'none'
+  resultado.innerHTML = ' '
   botaoJogar.style.display = 'none'
-  resultado.style.display = ''
     document.querySelector('#atividade_container').querySelectorAll('li').forEach(li => {
       li.remove();
   });
@@ -170,7 +162,7 @@ function DesistirSessao() {
   desistiuStatus = true;
   botaoDesistir.style.display = 'none'
   botaoJogar.value = 'Tentar novamente'
-  botaoJogar.style.display = 'inline'
+  botaoJogar.style.display = 'inline-flex'
   verificarConclusao()
   document.querySelectorAll('.inputEstado').forEach((input) => {
     input.readOnly = true;
@@ -196,7 +188,7 @@ function resetCron() {
 
 
 //Código principal
-fetch("/regioes")
+const fetchRegioes = fetch("/regioes")
   .then(res => res.json())
   .then(regioes => {
        regioes.forEach(r => r.id_sigla = r.id_sigla.trim());
@@ -230,7 +222,7 @@ fetch("/regioes")
         divWrapper.classList.add('botaoinput')
         const btn = document.createElement("button");
         btn.type = "button";
-        btn.textContent = "✓";
+        btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
         btn.classList.add('btn-confirmar');
         btn.addEventListener("click", () => tentarAdicionar(sigla));
 
@@ -266,8 +258,18 @@ fetch("/regioes")
         resultado.innerHTML += ` Faltaram ${faltas}!`
       })
   })
-  .then(() => botaoJogar.style.display = 'inline')
-  .then(() => initMapa())
+  //.then(() => botaoJogar.style.display = 'inline-flex')
+  .catch(() => {
+    container.textContent = "Erro ao conectar com o servidor.";
+  });
+
+  Promise.all([fetchRegioes, initMapa()])
+  .then(() => {
+    botaoJogar.style.display = 'inline-flex';
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('mapa-container').style.visibility = 'visible';
+    document.getElementById('regioes-container').style.visibility = 'visible'
+  })
   .catch(() => {
     container.textContent = "Erro ao conectar com o servidor.";
   });

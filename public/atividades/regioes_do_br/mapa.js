@@ -83,7 +83,7 @@ function initMapa() {
   container.appendChild(srDiv);
 
   // --- Fetch GeoJSON ---
-  fetch(GEOJSON_URL)
+ return fetch(GEOJSON_URL)
     .then(r => {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return r.json();

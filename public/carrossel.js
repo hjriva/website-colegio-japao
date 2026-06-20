@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('/agenda/ultimo')
     .then(res => res.json())
     .then(data => {
+        console.log(data)
         if (data.ultimo !== null) {
+            previaAgenda.style.display = 'block'
             window.document.getElementById('previa-span').textContent = data.ultimo.titulo
         } else {
             previaAgenda.style.display = 'none'

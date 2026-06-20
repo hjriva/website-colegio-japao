@@ -43,6 +43,8 @@ main {
     color: var(--vermelho);
 }
 
+
+
 header {
     box-shadow: rgba(0, 0, 0, 0.26) 1pt 0pt 30px;
     padding: 2vw;
@@ -850,5 +852,9 @@ h2>i {
 
     #link-agenda {
         color: white;
+    }
+
+    #mapa-container {
+        margin: 0px 2vw;
     }
 }
