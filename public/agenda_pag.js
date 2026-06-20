@@ -30,6 +30,11 @@ let mesAtual;
 const hoje = new Date();
 const hojeStr = hoje.toISOString().split('T')[0];
 
+
+let todosProximos = [];
+let indexProximos = 0;
+const POR_VEZ = 10;
+
 function carregaHoje() {
     fetch('/agenda/hoje')
         .then(res => res.json())
@@ -44,32 +49,45 @@ function carregaHoje() {
         .catch(err => console.error(err));
 }
 
-function carregaProximos(pagina = 1) {
-    fetch(`/agenda/proximos?pagina=${pagina}`)
+function carregaProximos() {
+    fetch(`/agenda/proximos?pagina=1&limite=1000`) // busca tudo de uma vez
         .then(res => res.json())
-        .then(({ eventos, total }) => {
+        .then(({ eventos }) => {
+            todosProximos = eventos;
+            indexProximos = 0;
             containerProximos.innerHTML = '';
-            totalProximos = total;
-            paginaAtual = pagina;
-
-            if (eventos.length === 0) {
-                containerProximos.innerHTML = '<p>Nenhum próximo evento.</p>';
-            } else {
-                eventos.forEach(entrada => criaCardEvento(entrada, containerProximos));
-            }
-
-            atualizaPaginacao();
+            carregarMaisProximos();
+            observarScroll();
         })
         .catch(err => console.error(err));
 }
 
-function atualizaPaginacao() {
-    const totalPaginas = Math.ceil(totalProximos / LIMITE);
-    infoPagina.textContent = `Página ${paginaAtual} de ${totalPaginas}`;
-    btnAnterior.disabled = paginaAtual === 1;
-    btnProximo.disabled = paginaAtual >= totalPaginas;
+function carregarMaisProximos() {
+    const slice = todosProximos.slice(indexProximos, indexProximos + POR_VEZ);
+    slice.forEach(entrada => criaCardEvento(entrada, containerProximos));
+    indexProximos += POR_VEZ;
 }
 
+function observarScroll() {
+    if (indexProximos >= todosProximos.length) return;
+
+    const sentinela = document.createElement('div');
+    sentinela.className = 'sentinela-proximos';
+    containerProximos.appendChild(sentinela);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                observer.disconnect();
+                sentinela.remove();
+                carregarMaisProximos();
+                observarScroll(); // reobserva se ainda tem mais
+            }
+        });
+    }, { threshold: 0.1 });
+
+    observer.observe(sentinela);
+}
 function carregaEventosDia(data) {
     containerDia.innerHTML = '';
     fetch(`/agenda/dia?data=${data}`)
@@ -220,8 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     inputData.addEventListener('change', () => carregaEventosDia(inputData.value));
-    btnAnterior.addEventListener('click', () => carregaProximos(paginaAtual - 1));
-    btnProximo.addEventListener('click', () => carregaProximos(paginaAtual + 1));
+
 
     document.getElementById('btn-prev').addEventListener('click', () => {
         let m = mesAtual - 1, a = anoAtual;
@@ -280,4 +297,8 @@ btnTabLista.addEventListener('click', () => {
     btnTabCalendario.classList.remove('tab-ativa');
 });
 
+});
+
+window.document.querySelector('.btn-login').addEventListener('click', () => {
+    window.location.href = '/admin';
 });
