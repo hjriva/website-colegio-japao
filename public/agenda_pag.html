@@ -37,7 +37,7 @@
 </head>
 
 <body>
-  <header style="display:none">
+  <header>
     <div class="identidade">
       <img src="imgs_site/logo.png" id="logo_header"
         alt="Logotipo circular vermelho com símbolo abstrato preto da instituição." />
@@ -54,7 +54,10 @@
   </header>
 
   <main>
-  <h1>Agenda de Eventos</h1>
+  <div id="img-wrapper">
+    <img src="../imgs_site/gincana.png" alt="" />
+  </div>
+  <h1><i class="fa-solid fa-calendar-days" style="color: red;"></i>&nbsp;Agenda de Eventos</h1>
   <p>Evento principal do mês: <span id="evento-destaque"></span></p>
   <p>Confira as datas!</p>
 
@@ -111,7 +114,7 @@
     <!--Precisa ter uma div com esse id, pois é aqui que os elementos de agenda serão
         adicionados dinâmicamente pelo javascript-->
   </div>
-    <footer style="display:none">
+    <footer>
       <div id="container_footer_grid">
         <div class="footer-col" id="id_visual">
           <div class="logo-footer-wrapper">

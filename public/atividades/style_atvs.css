@@ -46,7 +46,7 @@
 
 
 main {
-    margin: 5px auto;
+    margin: 0 auto;
     max-width: 90vw;
 }
 
@@ -362,7 +362,7 @@ select {
 @media (min-width: 1024px) {
     main {
         max-width: 90vw;
-        /* ← dá mais espaço pro layout de duas colunas */
+        margin-top: 0;
     }
 
     #container_disciplinas_atvs {

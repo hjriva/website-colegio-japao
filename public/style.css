@@ -17,6 +17,10 @@ body {
     overflow-x: hidden;
 }
 
+main {
+    padding-top: 1px; /* evita o margin collapse */
+}
+
 #logo_header,
 #logo_footer,
 .logo {
