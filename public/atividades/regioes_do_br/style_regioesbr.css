@@ -10,18 +10,19 @@
 #mapa-container {
     max-width: 400px;
     margin: 0 2vw;
-   
+
 }
 
-.regioes-divs > h2 {
+.regioes-divs>h2 {
     margin: 2px;
     font-family: 'Poppins';
+    font-weight: 600;
+    color: rgb(11, 107, 124);
 
 }
 
 input {
     background-color: #ffffff00;
-    border-radius: 5px;
     border: 0.5px rgba(99, 99, 99, 0.493) solid;
     min-height: 30px;
 }
@@ -29,16 +30,23 @@ input {
 
 #play-btn {
     display: none;
+    line-height: normal;
+    text-align: center;
 }
 
 
-#play-btn, #quit-btn {
+#play-btn,
+#quit-btn {
     background-color: var(--vermelho);
     border: none;
     color: white;
     cursor: pointer;
-    padding: 10px;
-    font-size: 1.7em
+    padding: 20px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    align-items: center;
+    justify-items: center;
+    margin: 0;
 }
 
 #play-btn:hover {
@@ -47,12 +55,22 @@ input {
 }
 
 #regioes-container {
-   font-family: 'Poppins';
+    font-family: 'Poppins';
+    justify-content: start;
+    background-color: #dffffd;
+    padding: 5vh;
+    border-radius: 20px;
 }
 
 #timer {
     color: var(--vermelho);
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .gabarito {
@@ -67,7 +85,11 @@ input {
 }
 
 input:read-only {
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(255, 255, 255);
+    border: rgb(79, 197, 191) solid 2px;
+    height: 5vh;
+    border-radius: 20px;
+    text-indent: 10px;
 }
 
 main {
@@ -77,36 +99,38 @@ main {
 
 #resultado {
     display: none;
-    background-color: rgb(135, 206, 135);
+    background-color: rgb(108, 182, 108);
     max-width: 300px;
-    padding: 5px;
-    border-radius: 5px;
-    
-    
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+
+
 }
 
 #cabecalho-atv {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 5px;
-  align-items: center;
-  margin: 3vh auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 5px;
+    align-items: center;
+    margin: 3vh auto;
 }
 
 #controls {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 #buttons {
-  display: flex;
-  gap: 8px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
 }
 
 #quit-btn {
-  display: none;
+    display: none;
 }
 
 .regioes-divs {
@@ -118,27 +142,33 @@ main {
     display: flex;
     align-items: center;
     width: 50vw;
-    margin: auto;
+    margin: 0;
+    gap: 10vh;
+    margin-top: 5vh;
 }
 
 .btn-confirmar {
-  padding: 0.4rem 0.8rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  border-radius: 0 6px 6px 0;
-  margin-left: -1px; /* gruda no input */
-  background-color: #4CAF50;
-  color: white;
+    width: 5vh;
+    height: 5vh;
+    font-size: 0.95em;
+    cursor: pointer;
+    border: none;
+    border-radius: 100%;
+    margin-left: 5px;
+    background-color: #4CAF50;
+    color: white;
+    margin-bottom: 2px;
+    align-items: center;
+
 }
 
 .inputEstado {
-  border-radius: 6px 0 0 6px;
+    border-radius: 6px 0 0 6px;
 }
 
 .botaoinput {
     display: flex;
-        flex-wrap: nowrap;
+    flex-wrap: nowrap;
     display: flex;
     align-items: flex-end;
 }
@@ -147,4 +177,23 @@ main {
     #atividade_container {
         width: 45vw;
     }
+}
+
+#descr_regioes {
+    background-color: rgb(255, 238, 238);
+    padding: 5vh;
+    border-radius: 0px 0px 30px 30px;
+}
+
+h1 {
+    color: var(--vermelho);
+    font-weight: 500;
+}
+
+svg {
+    width: 40vw;
+}
+
+p {
+    text-align: justify;
 }
