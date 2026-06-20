@@ -44,7 +44,7 @@ export function ReqDisciplinas(div, acoes = null) {
             data.forEach(disc => {
                 const li = document.createElement('li');
                 li.id = `disciplina${disc.id}`;
-
+                li.classList.add('li_disciplinas')
                 const link = document.createElement('a');
                 link.href = `/atividades/disciplinas.html?id=${disc.id}`;
                 link.textContent = disc.nome_disc;
@@ -55,6 +55,20 @@ export function ReqDisciplinas(div, acoes = null) {
 
                 // se acoes for passado, renderiza os botões - só pro painel admin
                 if (acoes) acoes(li, disc);
+            });
+        })
+        .catch(err => console.error(err));
+}
+
+export function ReqDisciplinasSelect(select) {
+    fetch('/disciplinas')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(disc => {
+                const option = document.createElement('option');
+                option.value = disc.id;
+                option.textContent = disc.nome_disc;
+                select.appendChild(option);
             });
         })
         .catch(err => console.error(err));

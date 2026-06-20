@@ -816,6 +816,10 @@ h2>i {
     display: none;
 }
 
+ #previa-agenda {
+    display: none;
+ }
+
 @media screen and (min-width: 1024px) {
 
     .principal {
