@@ -56,44 +56,53 @@ function toggleElement(element, displayDesejado) {
 function editarEntrada(idElem) {
     const ev = document.getElementById(idElem);
 
-    const elTitulo = ev.querySelector('h2');
-    const elData = ev.querySelector('.data-evento');
-    const elHorario = ev.querySelector('.horario-evento');
+    const elTitulo   = ev.querySelector('.titulo-vento');       // ← era h2
+    const elDataHora = ev.querySelector('.horario-data-evento'); // ← era .data-evento
     const elDescricao = ev.querySelector('.descr-evento');
-    const elImg = ev.querySelector('img');
+    const elImg      = ev.querySelector('img');
 
-    const valTitulo = elTitulo.textContent.replace(':', '').trim();
-    const valData = elData.textContent.trim();
-    const valHorario = elHorario.textContent.trim();
+    const valTitulo   = elTitulo.textContent.trim();
     const valDescricao = elDescricao.textContent.trim();
-    const valImg = elImg.getAttribute('src');
+    const valImg      = elImg.getAttribute('src');
+
+    // ← separa data e hora do texto "DD / MM / YYYY HHhMM"
+    const textoDataHora = elDataHora.textContent.trim();
+
+// separa a hora pelo 'h' antes de qualquer coisa
+const partes = textoDataHora.split(' ').filter(s => s !== '/');
+// partes = ["DD", "MM", "YYYY", "HHhMM"]
+
+const dia  = partes[0];
+const mes  = partes[1];
+const ano  = partes[2];
+const valHorario = partes[3] ? partes[3].replace('h', ':') : '';
+const valData = `${ano}-${mes.padStart(2,'0')}-${dia.padStart(2,'0')}`;
 
     const inputTitulo = Object.assign(document.createElement('input'), { value: valTitulo });
 
     const inputData = Object.assign(document.createElement('input'), {
         type: 'date',
-        value: valData.split(' / ').reverse().join('-')
+        value: valData
     });
 
     const inputHorario = Object.assign(document.createElement('input'), {
         type: 'time',
-        value: valHorario.replace('h', ':')
+        value: valHorario
     });
 
-    const inputDescricao = Object.assign(document.createElement('textarea'));
+    const inputDescricao = document.createElement('textarea');
     inputDescricao.value = valDescricao;
 
     const inputImg = Object.assign(document.createElement('input'), { type: 'file', accept: 'image/*' });
-
-    const preview = Object.assign(document.createElement('img'), { src: valImg, style: 'max-width:100px' });
+    const preview  = Object.assign(document.createElement('img'), { src: valImg, style: 'max-width:100px' });
 
     inputImg.addEventListener('change', (e) => {
         preview.src = URL.createObjectURL(e.target.files[0]);
     });
 
     elTitulo.replaceWith(inputTitulo);
-    elData.replaceWith(inputData);
-    elHorario.replaceWith(inputHorario);
+    elDataHora.replaceWith(inputData);          // ← substitui o elemento unificado
+    inputData.after(inputHorario);              // ← horário logo depois
     elDescricao.replaceWith(inputDescricao);
     elImg.replaceWith(inputImg);
     inputImg.after(preview);
@@ -101,26 +110,48 @@ function editarEntrada(idElem) {
     const btnAlterar = ev.querySelector('button');
     btnAlterar.style.display = 'none';
 
-    const btnSalvar = Object.assign(document.createElement('button'), { textContent: 'Salvar' });
-    const btnCancelar = Object.assign(document.createElement('button'), { textContent: 'Cancelar' });
+    const btnSalvar = document.createElement('button');   // ← adicione isso
+    btnSalvar.textContent = 'Salvar';
 
+    const btnCancelar = document.createElement('button'); // ← e isso
+    btnCancelar.textContent = 'Cancelar';
+
+    // função restaurar também precisa recriar o elemento unificado
     function restaurar(titulo, descricao, imgSrc, data, horario) {
         if (preview.src.startsWith('blob:')) URL.revokeObjectURL(preview.src);
 
-        inputTitulo.replaceWith(Object.assign(document.createElement('h2'), { textContent: titulo + ':' }));
-        inputDescricao.replaceWith(Object.assign(document.createElement('p'), { className: 'descr-evento', textContent: descricao }));
-        inputImg.replaceWith(Object.assign(document.createElement('img'), { src: imgSrc, className: 'img-evento' }));
+        inputTitulo.replaceWith(Object.assign(document.createElement('h3'), {
+            textContent: titulo,
+            className: 'titulo-vento'
+        }));
+
+        inputDescricao.replaceWith(Object.assign(document.createElement('p'), {
+            className: 'descr-evento',
+            textContent: descricao
+        }));
+
+        inputImg.replaceWith(Object.assign(document.createElement('img'), {
+            src: imgSrc,
+            className: 'img-evento'
+        }));
         preview.remove();
 
-        const [ano, mes, dia] = data.split('-');
-        inputData.replaceWith(Object.assign(document.createElement('p'), { className: 'data-evento', textContent: `${dia} / ${mes} / ${ano}` }));
-
-        inputHorario.replaceWith(Object.assign(document.createElement('p'), { className: 'horario-evento', textContent: horario.replace(':', 'h') }));
+        const [a, m, d] = data.split('-');
+        const textoReconstruido = `${d} / ${m} / ${a} ${horario.replace(':', 'h')}`;
+        const pDataHora = Object.assign(document.createElement('p'), {
+            className: 'horario-data-evento',
+            textContent: textoReconstruido
+        });
+        inputData.replaceWith(pDataHora);
+        inputHorario.remove();
 
         btnAlterar.style.display = '';
         btnSalvar.remove();
         btnCancelar.remove();
     }
+
+    // resto permanece igual...
+    
 
     btnSalvar.addEventListener('click', () => {
         const formData = new FormData();
