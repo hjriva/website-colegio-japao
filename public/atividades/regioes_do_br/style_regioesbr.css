@@ -19,23 +19,17 @@
 
 }
 
-.regioes-divs>h2 {
-    margin: 2px;
-    font-family: 'Poppins';
-    font-weight: 600;
-    color: rgb(11, 107, 124);
-
-}
 
 input {
-    background-color: #ffffff00;
-    border: 0.5px rgba(99, 99, 99, 0.493) solid;
     min-height: 30px;
+    border: rgb(79, 174, 197) solid 2px;
+    height: 5vh;
+    border-radius: 10px;
+    text-indent: 10px;
 }
 
 
 #play-btn {
-
     display: none;
     line-height: normal;
     text-align: center;
@@ -58,6 +52,7 @@ input {
     justify-items: center;
     margin: 0;
     text-indent: 0;
+    font-family: 'Poppins';
 }
 
 #play-btn:hover {
@@ -65,13 +60,25 @@ input {
 
 }
 
+.regioes-divs>h2 {
+    margin: 2px;
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: rgb(11, 107, 124);
+    margin-bottom: 5px;
+
+}
+
+
 #regioes-container {
     visibility: hidden;
     font-family: 'Poppins';
     justify-content: start;
-    background-color: #dffffd;
+    background-color: #fcfcfc;
     padding: 5vh;
     border-radius: 20px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.068) inset;
+
 }
 
 #timer {
@@ -85,19 +92,37 @@ input {
     padding-right: 10px;
 }
 
-.gabarito {
-    color: rgb(226, 12, 12);
-    margin: 5px;
-    padding: 15px;
-    font-weight: 500;
-    background-color: rgb(255, 231, 231);
-    list-style: square inside;
-    border-radius: 10px;
+
+.regioes-divs ul {
+    padding-left: 0;
+    margin: 0;
 }
 
-li.adivinhado {
-    color: #4CAF50;
-    background-color: #caffcc;
+.gabarito {
+    color: rgb(226, 12, 12);
+    margin-bottom: 10px;
+    font-weight: 600;
+    background-color: rgb(255, 237, 237);
+    list-style: none;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.068);
+
+}
+
+
+.advinhado {
+    color: green;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-weight: 600;
+    background-color: rgb(213, 250, 223);
+    list-style: square inside;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.068);
+    list-style: none;
+
+
 }
 
 .msg-erro {
@@ -111,9 +136,9 @@ li.adivinhado {
 
 input:read-only {
     background-color: rgb(236, 236, 236);
-    border: rgb(79, 197, 191) solid 2px;
+    border: rgb(79, 174, 197) solid 2px;
     height: 5vh;
-    border-radius: 20px;
+    border-radius: 10px;
     text-indent: 10px;
 }
 
@@ -186,7 +211,7 @@ main {
 
 #atividade_container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     width: fit-content;
     margin: 0;
     gap: 10vh;
@@ -227,7 +252,7 @@ li .inputEstado {
     flex-wrap: nowrap;
     display: flex;
     align-items: flex-end;
-    gap: 7px
+    gap: 7px;
 }
 
 /*
@@ -240,8 +265,10 @@ li .inputEstado {
 #descr_regioes {
     background-color: rgb(255, 238, 238);
     padding: 5vh;
-    border-radius: 0px 0px 30px 30px;
+    border-radius: 30px;
     width: 100%;
+    box-shadow: #51515131 1px 1px 5px;
+
 }
 
 h1 {
