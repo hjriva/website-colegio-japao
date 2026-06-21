@@ -3,17 +3,19 @@
     --cor-texto: #515151;
 
     --fonte-titulo: 'Sekuya';
-    
+
 
 
 }
 
 
-
 #mapa-container {
-        visibility: hidden;
+    visibility: hidden;
     max-width: fit-content;
     margin: 0 2vw;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
 
 }
 
@@ -33,7 +35,7 @@ input {
 
 
 #play-btn {
-    
+
     display: none;
     line-height: normal;
     text-align: center;
@@ -46,7 +48,7 @@ input {
     border: none;
     color: white;
     cursor: pointer;
-     min-height: unset;
+    min-height: unset;
     height: auto;
     padding: 10px 20px;
     font-size: 1.2em;
@@ -84,7 +86,18 @@ input {
 }
 
 .gabarito {
-    color: rgb(107, 107, 107);
+    color: rgb(226, 12, 12);
+    margin: 5px;
+    padding: 15px;
+    font-weight: 500;
+    background-color: rgb(255, 231, 231);
+    list-style: square inside;
+    border-radius: 10px;
+}
+
+li.adivinhado {
+    color: #4CAF50;
+    background-color: #caffcc;
 }
 
 .msg-erro {
@@ -118,12 +131,14 @@ main {
     box-sizing: border-box;
 }
 
-#descr_regioes, #atividade_container {
+#descr_regioes,
+#atividade_container {
     width: fit-content;
 }
 
 #descr_regioes {
-    width: 100%; /* estica para acompanhar o irmão */
+    width: 100%;
+    /* estica para acompanhar o irmão */
 }
 
 
@@ -176,14 +191,14 @@ main {
     margin: 0;
     gap: 10vh;
     margin-top: 5vh;
-     gap: 2vw;
-         margin: 5vh auto 2vh auto;
+    gap: 2vw;
+    margin: 5vh auto 2vh auto;
 }
 
 .btn-confirmar {
     width: 5vh;
     height: 5vh;
-   font-size: 2.5vh;
+    font-size: 2.5vh;
     cursor: pointer;
     border: none;
     border-radius: 100%;
@@ -192,14 +207,14 @@ main {
     color: white;
     margin-bottom: 2px;
     align-items: center;
-        display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    
+
 
 }
 
-.inputEstado {
+li .inputEstado {
     border-radius: 6px 0 0 6px;
     height: 5vh;
     border-radius: 20px;
@@ -226,7 +241,7 @@ main {
     background-color: rgb(255, 238, 238);
     padding: 5vh;
     border-radius: 0px 0px 30px 30px;
-        width: 100%;
+    width: 100%;
 }
 
 h1 {
