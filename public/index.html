@@ -42,28 +42,28 @@
       </nav>
     </header>
 
-        <main>
-    <section class="principal">
-      <div id="informacoes_iniciais">
-        <h1>Colégio<br />Estadual<span class="titulo">Japão</span></h1>
-        <p>
-          O conhecer nos faz valer. A educação é o acender de uma chama, não o
-          preenchimento de um recipiente vazio.
-        </p>
-        <button><i class="fa-brands fa-whatsapp 2-xl"></i><a href="https://wa.me/5191282233" target="_blank"> Entre em
-            contato!</a></button>
-      </div>
-      <div id="imagem_transparencia">
-        <img src="./imgs_site/fachada.jpg"
-          alt="Fachada Escola Japão, com flores e plantas ao redor, em um dia ensolarado. Mostrando as salas de aula."
-          id="imagem_inicio" />
-      </div>
+    <main>
+      <section class="principal">
+        <div id="informacoes_iniciais">
+          <h1>Colégio<br />Estadual<span class="titulo">Japão</span></h1>
+          <p>
+            O conhecer nos faz valer. A educação é o acender de uma chama, não o
+            preenchimento de um recipiente vazio.
+          </p>
+          <button><i class="fa-brands fa-whatsapp 2-xl"></i><a href="https://wa.me/5191282233" target="_blank"> Entre em
+              contato!</a></button>
+        </div>
+        <div id="imagem_transparencia">
+          <img src="./imgs_site/fachada.jpg"
+            alt="Fachada Escola Japão, com flores e plantas ao redor, em um dia ensolarado. Mostrando as salas de aula."
+            id="imagem_inicio" />
+        </div>
 
-      <div id="previa-agenda">
-        <h4>Últimas notícias: </h4>
-        <p><span id="previa-span"></span>. <a href="agenda_pag.html" id="link-agenda">Confira a agenda.</a> </p>
-      </div>
-    </section>
+        <div id="previa-agenda">
+          <h4>Últimas notícias: </h4>
+          <p><span id="previa-span"></span>. <a href="agenda_pag.html" id="link-agenda">Confira a agenda.</a> </p>
+        </div>
+      </section>
 
       <!-- HISTORIA -->
 
@@ -75,7 +75,7 @@
           alt="Fotografia antiga em preto e branco mostrando um grupo de adultos e crianças reunidos para a inauguração da escola." />
         <article class="historia_text" id="ht1">
           <img src="./imgs_site/jp5 5.png" alt="Logo da escola com um fundo de transparência." class="logo_fundo" />
-          <p>
+          <p class="texto1">
             O Colégio Estadual Japão foi inaugurado no dia
             <strong>16 de julho de 1964.</strong> A instituição era composta
             de dois pavilhões e foi denominada então Grupo Escolar Japão, por
@@ -87,7 +87,7 @@
         <article class="historia_text" id="ht2">
           <img src="./imgs_site/jp.png" alt="Escritas japonesas e em letras vermelhas, que traduzindo é 'Japão'"
             class="texto_jp" />
-          <p id="texto0">
+          <p id="texto2">
             A nossa amizade com o Japão não parou por aí. As relações do
             Colégio com o Consulado Japonês desde então sempre foram cordiais
             e intensas. No ano de 2004, o então Cônsul Kohei Nagashima nos
@@ -166,8 +166,8 @@
         <form action="https://api.staticforms.dev/submit" method="POST" id="form">
 
 
-          <input type="text" placeholder="Nome" />
-          <input type="email" placeholder="E-mail" />
+          <input type="text" placeholder="Nome" name="Nome" />
+          <input type="email" placeholder="E-mail" name="Email" />
           <textarea placeholder="Insira sua sugestão!"></textarea>
           <button type="submit">Enviar</button>
           <div id="feedback-form"></div>
@@ -192,7 +192,7 @@
         </address>
       </div>
     </div>
-    </div>
+
   </section>
   </main>
   <!-- FOOTER -->
