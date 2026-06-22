@@ -16,11 +16,17 @@
 
 body {
     overflow-x: hidden;
+    width: 100%;
 }
 
 main {
     padding-top: 1px;
-    /* evita o margin collapse */
+    width: 100%;
+
+}
+
+.container {
+    width: 100%;
 }
 
 #logo_header,
@@ -375,7 +381,7 @@ h2>i {
     margin-top: 5vh;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     align-items: center;
     margin-bottom: 10vh;
 }
@@ -385,27 +391,22 @@ h2>i {
     background-color: var(--vermelho);
     display: flex;
     flex-direction: row-reverse;
-    width: 30vh;
+    width: 100%;
+    height: 100%;
 }
 
-#endereco {
+address {
+    display: flex;
     font-size: 3vh;
-    border-radius: 30px 30px 30px 30px;
-    width: 30vw;
-    height: 31vw;
     display: flex;
     justify-content: center;
     align-items: start;
-    flex-direction: column;
     flex-wrap: wrap;
-    align-content: flex-start;
     color: #ffffff;
     font-weight: 600;
-
-}
-
-#endereco>p {
     margin-left: 2vw;
+
+
 }
 
 #mapframe {
@@ -867,5 +868,41 @@ h2>i {
 
     #mapa-container {
         margin: 0px 2vw;
+    }
+
+    .local {
+        display: grid;
+        grid-template-columns: 60% 40%;
+
+    }
+
+    .box {
+        background-color: var(--vermelho);
+        display: flex;
+        width: 100vh;
+        height: 100%;
+        border-radius: 30px 0px 0px 30px;
+        margin-left: 10px;
+    }
+
+    #mapframe {
+        width: 100%;
+        margin-right: 30px;
+    }
+
+    address {
+        display: flex;
+        font-size: 3vh;
+        justify-content: center;
+        align-items: end;
+        flex-wrap: wrap;
+        color: #ffffff;
+        font-weight: 600;
+        padding: 10vh;
+        margin-right: 30vh;
+        margin-left: 5px;
+        font-style: normal;
+
+
     }
 }
