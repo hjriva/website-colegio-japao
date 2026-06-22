@@ -13,6 +13,7 @@
     margin: 0px;
 
 }
+
 body {
     overflow-x: hidden;
 }
@@ -369,10 +370,17 @@ h2>i {
     margin-bottom: 20vh;
 }
 
-#endereco {
+
+.box {
     background-color: var(--vermelho);
+    display: flex;
+    flex-direction: row-reverse;
+    width: 30vh;
+}
+
+#endereco {
     font-size: 3vh;
-    border-radius: 30px 0px 0px 30px;
+    border-radius: 30px 30px 30px 30px;
     width: 30vw;
     height: 31vw;
     display: flex;
@@ -391,7 +399,7 @@ h2>i {
 }
 
 #mapframe {
-    width: 900px;
+    width: 100vh;
     height: 428px;
     border-radius: 0px 30px 30px 0px;
     border: none;
@@ -803,9 +811,9 @@ h2>i {
 
 }
 
-#form > button {
-  font-size: 1em;
-  font-weight: 300;
-  width: 100%;
-  grid-column: 1 / -1;
+#form>button {
+    font-size: 1em;
+    font-weight: 300;
+    width: 100%;
+    grid-column: 1 / -1;
 }
