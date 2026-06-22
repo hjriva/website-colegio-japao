@@ -40,7 +40,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="stylegpt.css" />
   </head>
   <body>
     <header>
@@ -60,15 +60,27 @@
     <h1>Boas Vindas, Helena!</h1>
     <p id="subtitulo">Painel de Controle</p>
     
+    <div id="abas">
     <button id="mostrar-painel-agenda">Agenda</button>
     <button id="mostrar-painel-atv">Atividades</button>
     <button id="mostrar-painel-usuarios">Usuários</button>
-  
+  </div>
     <div id="painel-admin">
-      <div id="painel-agenda-conteudo">
+      <div id="painel-agenda-conteudo">  
+        <div id="cabecalho-painel-agenda"> 
         <button id="adicionar-post">Adicionar postagens</button>
 
-        <div id="novo-evento-form">
+      
+        <div id="cabecalho-inputs">
+        <input
+          type="text"
+          id="input-busca"
+          placeholder="Buscar por título ou descrição..."
+        />
+        <input type="date" id="filtro-data" />
+        </div>
+</div>  
+         <div id="novo-evento-form">
           <h2>Adicionar novo post:</h2>
           <form action="/updateBD" method="POST" id="FormularioNovo">
             <input
@@ -103,12 +115,8 @@
           <input type="button" value="Criar nova postagem" id="salvar-post" />
         </div>
 
-        <input
-          type="text"
-          id="input-busca"
-          placeholder="Buscar por título ou descrição..."
-        />
-        <input type="date" id="filtro-data" />
+
+        
 
         <div id="controle-agenda">
           <!--Aqui é onde vão aparecer os eventos-->

@@ -224,7 +224,7 @@ h1 {
   background: #ece8e500;
   color: var(--vermelho);
   border: none;
-  border-radius: 12px 12px 0 0;
+  border-top-right-radius: 12px ;
   padding: 12px 24px;
   font-weight: 600;
   font-size: 0.95rem;
@@ -266,6 +266,7 @@ h1 {
   flex-wrap: wrap;
   align-content: flex-start;
 }
+
 
 
 #adicionar-post,
@@ -313,6 +314,7 @@ h1 {
 #adicionar-usuario-botao:hover {
   background: var(--verde-escuro);
 }
+
 
 
 #input-busca,
@@ -960,7 +962,8 @@ img {
       rgba(0, 0, 0, .75),
       rgba(0, 0, 0, .25),
       transparent);
-        pointer-events: none
+        pointer-events: none;
+
 }
 
 /* Nome da disciplina */
@@ -987,6 +990,7 @@ img {
   position: relative;
   z-index: 3; /* acima do ::after que é z-index implícito */
 }
+
 
 /* =====================
    IMAGENS DAS MATÉRIAS

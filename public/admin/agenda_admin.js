@@ -259,15 +259,27 @@ function InserirNovo() {
 //Aqui cria a função para que cada item tenha os botões de editar e excluir
 function acoesAdmin(ev, entrada) {
   const btnEditar = document.createElement("button");
-  btnEditar.textContent = "Alterar";
+  const icon = document.createElement('i');
+  icon.classList.add("fa-solid");
+  icon.classList.add("fa-pen");
+  btnEditar.appendChild(icon);
+  btnEditar.classList.add('botoes-editar')
   btnEditar.addEventListener("click", () => editarEntrada(entrada.identrada));
 
   const btnExcluir = document.createElement("button");
-  btnExcluir.textContent = "Excluir";
+
+  const icontrash = document.createElement('i');
+  icontrash.classList.add("fa-solid");
+  icontrash.classList.add('fa-trash-can')
+  btnExcluir.appendChild(icontrash);
+  btnExcluir.classList.add('botoes-excluir')
   btnExcluir.addEventListener("click", () => excluirEntrada(entrada.identrada));
 
-  ev.appendChild(btnEditar);
-  ev.appendChild(btnExcluir);
+  const wrapperBotoes = document.createElement('div')
+  wrapperBotoes.id = 'wrapper-botoes'
+  wrapperBotoes.appendChild(btnEditar);
+  wrapperBotoes.appendChild(btnExcluir);
+  ev.appendChild(wrapperBotoes)
 }
 
 function buscar(pagina = 1) {
