@@ -11,7 +11,7 @@
 
 
   --rosa-card: #f6dcd5;
-  --fundo-pagina: #f4f2f0;
+  --fundo-pagina: #ffffff;
   --branco: #ffffff;
   --borda: #e2ddd9;
   --texto-escuro: #232323;
@@ -221,7 +221,7 @@ h1 {
 #mostrar-painel-atv,
 #mostrar-painel-usuarios {
   order: 3;
-  background: #ece8e5;
+  background: #ece8e500;
   color: var(--vermelho);
   border: none;
   border-radius: 12px 12px 0 0;
@@ -230,6 +230,9 @@ h1 {
   font-size: 0.95rem;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
+      width: 150px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
+
 
 }
 
@@ -840,7 +843,7 @@ img {
 @media (max-width: 768px) {
   body {
     padding: 16px;
-    gap: 14px;
+    gap: 0px;
   }
 
   #mostrar-painel-agenda,
@@ -957,6 +960,7 @@ img {
       rgba(0, 0, 0, .75),
       rgba(0, 0, 0, .25),
       transparent);
+        pointer-events: none
 }
 
 /* Nome da disciplina */
@@ -979,7 +983,9 @@ img {
 
 /* Esconde os botões de editar/excluir */
 #controle-atividades li button {
-  display: none;
+  display: inline-block;
+  position: relative;
+  z-index: 3; /* acima do ::after que é z-index implícito */
 }
 
 /* =====================

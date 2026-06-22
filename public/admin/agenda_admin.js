@@ -798,6 +798,11 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     painelAdmin.textContent = "Permissões não definidas.";
   }
+
+let dataInputs = document.querySelectorAll('#FormularioNovo input[type=date]')
+dataInputs.forEach(input => {
+    input.value = new Date().toISOString().split('T')[0]; 
+})
 });
 
 // ===== Listeners =====
