@@ -10,11 +10,11 @@
 
 // Cores por região (estado inicial = cinza, acerto = cor da região)
 const CORES_REGIOES = {
-  N:  { acerto: "#378ADD", nome: "Norte" },
-  NE: { acerto: "#D85A30", nome: "Nordeste" },
-  CO: { acerto: "#639922", nome: "Centro-Oeste" },
-  SE: { acerto: "#7F77DD", nome: "Sudeste" },
-  S:  { acerto: "#BA7517", nome: "Sul" },
+  N:  { acerto: "#7fb3e7", nome: "Norte" },
+  NE: { acerto: "#eea58d", nome: "Nordeste" },
+  CO: { acerto: "#bcdf92", nome: "Centro-Oeste" },
+  SE: { acerto: "#aba4f3", nome: "Sudeste" },
+  S:  { acerto: "#f5d19f", nome: "Sul" },
 };
 
 const COR_PADRAO   = "#ffffff00"; // regiões ainda não acertadas

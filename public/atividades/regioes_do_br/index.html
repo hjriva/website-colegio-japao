@@ -45,53 +45,52 @@
       </nav>
     </header>
 
-    
-
     <main>
-       <div id="page-wrapper">
-      <div id="descr_regioes">
-        <h1>
-          <i
-            class="fa-solid fa-earth-africa fa-xs"
-            style="color: rgb(238, 0, 0) medium"
-          ></i
-          >&nbsp;Regiões do Brasil e suas UFs
-        </h1>
-        <p>
-          Nesta atividade, o <strong>objetivo é identificar corretamente as Unidades
-          Federativas (UFs)</strong> de cada <strong>região do Brasil.</strong> As regiões estão
-          organizadas separadamente em caixas de texto, e o aluno deve
-          <strong>relacionar cada estado à sua respectiva região.</strong> Essa prática ajuda a
-          fortalecer o aprendizado de Geografia e a localização das UFs
-          brasileiras.
-        </p>
+      <div id="page-wrapper">
+        <div id="descr_regioes">
+          <h1>
+            <i
+              class="fa-solid fa-earth-africa fa-xs"
+              style="color: rgb(238, 0, 0) medium"
+            ></i
+            >&nbsp;Regiões do Brasil e suas UFs
+          </h1>
+          <p>
+            Nesta atividade, o
+            <strong
+              >objetivo é identificar corretamente as Unidades Federativas
+              (UFs)</strong
+            >
+            de cada <strong>região do Brasil.</strong> As regiões estão
+            organizadas separadamente em caixas de texto, e o aluno deve
+            <strong>relacionar cada estado à sua respectiva região.</strong>
+            Essa prática ajuda a fortalecer o aprendizado de Geografia e a
+            localização das UFs brasileiras.
+          </p>
 
-          
-        <div id="cabecalho-atv">
-          <div id="controls">
-            <div id="buttons">
-              <input type="button" value="Começar" id="play-btn" />
-              <input type="button" value="Desistir" id="quit-btn" />
+          <div id="cabecalho-atv">
+            <div id="controls">
+              <div id="buttons">
+                <input type="button" value="Começar" id="play-btn" />
+                <input type="button" value="Desistir" id="quit-btn" />
+              </div>
+              <div id="timer">
+                <span id="hour">00</span>:<span id="minute">00</span>:<span
+                  id="second"
+                  >00</span
+                >:<span id="millisecond">000</span>
+              </div>
             </div>
-            <div id="timer">
-              <span id="hour">00</span>:<span id="minute">00</span>:<span
-                id="second"
-                >00</span
-              >:<span id="millisecond">000</span>
-            </div>
+            <div id="resultado"></div>
           </div>
-          <div id="resultado"></div>
         </div>
-      </div>
 
-       <div id="loading">Carregando...</div>
-      <div id="atividade_container">
-       
-        <div id="regioes-container"></div>
+        <div id="loading">Carregando...</div>
+        <div id="atividade_container">
+          <div id="regioes-container"></div>
 
-        <div id="mapa-container"></div>
-      </div>
-
+          <div id="mapa-container"></div>
+        </div>
       </div>
     </main>
 
@@ -99,7 +98,11 @@
       <div id="container_footer_grid">
         <div class="footer-col" id="id_visual">
           <div class="logo-footer-wrapper">
-            <img src="../../imgs_site/logojpwhite.png" id="logo_footer" alt="Logo" />
+            <img
+              src="../../imgs_site/logojpwhite.png"
+              id="logo_footer"
+              alt="Logo"
+            />
             <div class="logo-text">
               Colégio<br /><span class="titulo-branco">JAPÃO</span>
             </div>
@@ -121,26 +124,58 @@
           </ul>
         </div>
 
-      <div class="footer-col" id="contatos">
-        <h3>Contate-nos</h3>
-        <ul>
-          <li>
-            <a href="https://www.instagram.com/colegioestadualjapao_01.cre/" target="_blank"><i class="fa-brands fa-instagram"></i>@colegioestadualjapao_01.cre</a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/colegiojapao01cre" target="_blank"><i class="fa-brands fa-facebook-f"></i>/colegiojapao01cre</a>
-          </li>
-          <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/5191282233" target="_blank">(51) 9128-2233</a></li>
-        </ul>
-        <button class="btn-login">
-          <i class="fa-solid fa-user"></i>Login
-        </button>
-      </div>
+        <div class="footer-col" id="contatos">
+          <h3>Contate-nos</h3>
+          <ul>
+            <li>
+              <a
+                href="https://www.instagram.com/colegioestadualjapao_01.cre/"
+                target="_blank"
+                ><i class="fa-brands fa-instagram"></i
+                >@colegioestadualjapao_01.cre</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/colegiojapao01cre"
+                target="_blank"
+                ><i class="fa-brands fa-facebook-f"></i>/colegiojapao01cre</a
+              >
+            </li>
+            <li>
+              <i class="fa-brands fa-whatsapp"></i>
+              <a href="https://wa.me/5191282233" target="_blank"
+                >(51) 9128-2233</a
+              >
+            </li>
+          </ul>
+          <button class="btn-login">
+            <i class="fa-solid fa-user"></i>Login
+          </button>
+        </div>
       </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
     <script src="mapa.js"></script>
     <script src="script.js"></script>
+
+        <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
+    </script>
+
+    <script src="carrossel.js"></script>
+
+    <script
+      src="https://cdn.userway.org/widget.js"
+      data-account="PhHQuLEkH6" id="userway-root"
+    ></script>
   </body>
 </html>
