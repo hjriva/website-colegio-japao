@@ -301,7 +301,9 @@ app.get("/regioes", async (req, res) => {
 
     const resposta = regioes.map(regiao => ({
       ...regiao,
-      estados: estados.filter(e => e.sigla_regiao === regiao.id_sigla)
+      estados: estados.filter(
+    e => e.sigla_regiao?.trim() === regiao.id_sigla?.trim()
+)
     }));
 
     res.json(resposta);
@@ -650,6 +652,19 @@ app.post('/excluirDisciplina', async (req, res) => {
     }
 });
 
+app.get("/atividadesdisplay", async (req, res) => {
+    try {
+        const { rows } = await db.query(`
+            SELECT a.*, q.id as quiz_id
+            FROM atividades a
+            LEFT JOIN quizzes q ON q.atividade_id = a.id
+            ORDER BY a.criado_em DESC NULLS LAST
+        `);
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ erro: "Erro ao buscar atividades" });
+    }
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })

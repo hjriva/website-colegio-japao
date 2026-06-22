@@ -25,10 +25,9 @@ export function criaCardEvento(entrada, container, acoes = null) {
     evHeader.appendChild(evTitulo);
 
     criaElemento('img', null, 'src', `${entrada.img}`, evHeader, 'img-evento');
-    criaElemento('h2', `${entrada.titulo}:`, null, null, evTitulo, 'titulo-vento');
-    criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano}`, null, null, evTitulo, 'data-evento');
-    criaElemento('p', `${entrada.horario.slice(0, 5).replace(':', 'h')}`, null, null, evTitulo, 'horario-evento')
-    criaElemento('p', entrada.descricao, null, null, ev, 'descr-evento');
+    criaElemento('h3', `${entrada.titulo}`, null, null, evTitulo, 'titulo-vento');
+    criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano} ${entrada.horario.slice(0, 5).replace(':', 'h')}`, null, null, evTitulo, 'horario-data-evento');
+    criaElemento('p', entrada.descricao, null, null, evTitulo, 'descr-evento');
 
     // se acoes for passado, renderiza os botões - para usar somente no painel interno
     if (acoes) acoes(ev, entrada);
@@ -45,7 +44,7 @@ export function ReqDisciplinas(div, acoes = null) {
             data.forEach(disc => {
                 const li = document.createElement('li');
                 li.id = `disciplina${disc.id}`;
-
+                li.classList.add('li_disciplinas')
                 const link = document.createElement('a');
                 link.href = `/atividades/disciplinas.html?id=${disc.id}`;
                 link.textContent = disc.nome_disc;
@@ -56,6 +55,20 @@ export function ReqDisciplinas(div, acoes = null) {
 
                 // se acoes for passado, renderiza os botões - só pro painel admin
                 if (acoes) acoes(li, disc);
+            });
+        })
+        .catch(err => console.error(err));
+}
+
+export function ReqDisciplinasSelect(select) {
+    fetch('/disciplinas')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(disc => {
+                const option = document.createElement('option');
+                option.value = disc.id;
+                option.textContent = disc.nome_disc;
+                select.appendChild(option);
             });
         })
         .catch(err => console.error(err));

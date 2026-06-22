@@ -7,19 +7,33 @@
   <title>Agenda</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="style_agenda.css" />
-  <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon">
+  
+<!-- Fontes Google -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
+    <!-- BootStrap/Flaticon -->
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet" />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon" />
+    
 </head>
 
 <body>
@@ -32,90 +46,100 @@
     <!-- NAV -->
     <nav>
       <ul>
-        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html">Página Inicial</a></li>
         <li><a href="atividades/index.html">Atividades</a></li>
         <li><a class="btn_agenda" href="agenda_pag.html">Agenda</a></li>
       </ul>
     </nav>
   </header>
 
-  <h1>Agenda de Eventos</h1>
+  <main>
+  <div id="img-wrapper">
+    <img src="../imgs_site/gincana.png" alt="" />
+  </div>
+  <h1><i class="fa-solid fa-calendar-days" style="color: red;"></i>&nbsp;Agenda de Eventos</h1>
   <p>Evento principal do mês: <span id="evento-destaque"></span></p>
   <p>Confira as datas!</p>
 
   <div id="agenda-layout">
+
+  <!--
     <div id="agenda-tabs">
       <button id="btn-tab-calendario" class="tab-ativa">Calendário</button>
 
       <button id="btn-tab-lista">Lista</button>
-    </div>
+    </div> -->
+
     <section id="calendario-coluna">
       <div id="calendario_agenda">
         <div class="cal-header">
-          <button class="cal-nav" id="btn-prev">← anterior</button>
+          <button class="cal-nav" id="btn-prev"> <i class="fa-solid fa-angle-left"></i></button>
           <h2 id="cal-titulo"></h2>
-          <button class="cal-nav" id="btn-next">próximo →</button>
+          <button class="cal-nav" id="btn-next"><i class="fa-solid fa-angle-right"></i></button>
         </div>
 
         <div class="cal-grid" id="cal-grid"></div>
 
-        <div class="eventos-section" id="eventos-section">
-          <div class="eventos-titulo" id="eventos-titulo">
-            Eventos de hoje
-          </div>
-          <div id="eventos-conteudo">
-            <span class="loading">Carregando...</span>
-          </div>
-        </div>
+
       </div>
     </section>
 
     <!-- Eventos de hoje -->
     <section id="lista-coluna">
-      <div id="eventos-hoje"></div>
+    <!-- <div id="eventos-hoje"></div> -->
+
+            <div class="eventos-section" id="eventos-section">
+          <div class="eventos-titulo" id="eventos-titulo">
+            <h2 id="eventos-hoje">Eventos de hoje</h2>
+            <input type="date" id="input-data" />
+             
+          </div>
+          <div id="eventos-conteudo">
+            <span class="loading">Carregando...</span>
+          </div>
+        </div>
 
       <!-- Seletor de dia -->
-      <input type="date" id="input-data" />
+      
       <div id="eventos-dia"></div>
 
       <!-- Próximos eventos -->
       <h2 id="h2-prox">Próximos eventos</h2>
       <div id="proximos-eventos"></div>
 
-      <div>
-        <button id="btn-anterior" class="paginacao-botao">← Anterior</button>
-        <span id="info-pagina"></span>
-        <button id="btn-proximo" class="paginaca-botao">Próximo →</button>
-      </div>
+
     </section>
 
+</main>
     <!--Precisa ter uma div com esse id, pois é aqui que os elementos de agenda serão
         adicionados dinâmicamente pelo javascript-->
   </div>
-  <footer>
-    <div id="container_footer_grid">
-      <div class="footer-col" id="id_visual">
-        <div class="logo-footer-wrapper">
-          <img src="./imgs_site/logojpwhite.png" id="logo_footer"
-            alt="Logo da escola na cor branca, com o símbolo abstrato." />
-          <div class="logo-text">
-            Colégio<br /><span class="titulo-branco">JAPÃO</span>
+    <footer>
+      <div id="container_footer_grid">
+        <div class="footer-col" id="id_visual">
+          <div class="logo-footer-wrapper">
+            <img
+              src="imgs_site/logojpwhite.png"
+              id="logo_footer"
+              alt="Logo da escola na cor branca, com o símbolo abstrato."
+            />
+            <div class="logo-text">
+              Colégio<br /><span class="titulo-branco">JAPÃO</span>
+            </div>
+          </div>
+          <p class="slogan-footer">O conhecimento <br />nos faz valer.</p>
+          <div class="horario-atendimento">
+            <p><strong id="horario_bold">Horário de atendimento:</strong></p>
+            <p>Das 08:00 até as 20:00</p>
           </div>
         </div>
-        <p class="slogan-footer">O conhecimento <br />nos faz valer.</p>
-        <div class="horario-atendimento">
-          <p><strong id="horario_bold">Horário de atendimento:</strong></p>
-          <p>Das 08:00 até as 20:00</p>
-        </div>
-      </div>
 
       <div class="footer-col" id="links">
         <h3>Mapa</h3>
         <ul>
           <li><a href="index.html">Página inicial</a></li>
-          <li><a href="index.html">Início</a></li>
           <li><a href="atividades/index.html">Atividades</a></li>
-          <li><a href="#">Contato</a></li>
+          <li><a href="/index.html#contato">Contato</a></li>
           <li><a href="agenda_pag.html">Agenda</a></li>
         </ul>
       </div>
@@ -124,21 +148,39 @@
         <h3>Contate-nos</h3>
         <ul>
           <li>
-            <a href="#"><i class="fa-brands fa-instagram"></i>@xxxjapao</a>
+            <a href="https://www.instagram.com/colegioestadualjapao_01.cre/" target="_blank"><i class="fa-brands fa-instagram"></i>@colegioestadualjapao_01.cre</a>
           </li>
           <li>
-            <a href="#"><i class="fa-solid fa-link"></i> / o link</a>
+            <a href="https://www.facebook.com/colegiojapao01cre" target="_blank"><i class="fa-brands fa-facebook-f"></i>/colegiojapao01cre</a>
           </li>
-          <li><i class="fa-brands fa-whatsapp"></i> (51) 99541-9523</li>
+          <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/5191282233" target="_blank">(51) 9128-2233</a></li>
         </ul>
         <button class="btn-login">
-          <i class="fa-solid fa-user"></i> Login
+          <i class="fa-solid fa-user"></i>Login
         </button>
       </div>
     </div>
   </footer>
 
   <script type="module" src="agenda_pag.js"></script>
+
+      <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
+    </script>
+
+    <script src="carrossel.js"></script>
+
+    <script
+      src="https://cdn.userway.org/widget.js"
+      data-account="PhHQuLEkH6" id="userway-root"
+    ></script>
 </body>
 
 </html>

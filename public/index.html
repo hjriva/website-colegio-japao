@@ -1,215 +1,260 @@
 <!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colégio Estadual Japão</title>
+    <link rel="stylesheet" href="style.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Colégio Estadual Japão</title>
-  <link rel="stylesheet" href="style.css" />
+    <!-- Fontes Google -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Fontes Google -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet" />
+    <!-- BootStrap/Flaticon -->
 
-  <!-- BootStrap/Flaticon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon" />
+  </head>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon" />
-</head>
-
-<body>
-  <div class="container">
-    <header>
-      <div class="identidade">
-        <img src="imgs_site/logo.png" id="logo_header"
-          alt="Logotipo circular vermelho com símbolo abstrato preto da instituição" />
-        <div class="logo">Colégio<span class="titulo">Japão</span></div>
-      </div>
-      <!-- NAV -->
-      <nav>
-        <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="atividades/index.html">Atividades</a></li>
-          <li><a class="btn_agenda" href="agenda_pag.html">Agenda</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <section class="principal">
-      <div id="informacoes_iniciais">
-        <h1>Colégio<br />Estadual<span class="titulo">Japão</span></h1>
-        <p>
-          O conhecer nos faz valer. A educação é o acender de uma chama, não o
-          preenchimento de um recipiente vazio.
-        </p>
-        <button><a href="#">Entre em contato!</a></button>
-      </div>
-      <div id="imagem_transparencia">
-        <img src="./imgs_site/fachada.jpg"
-          alt="Fachada Escola Japão, com flores e plantas ao redor, em um dia ensolarado. Mostrando as salas de aula."
-          id="imagem_inicio" />
-      </div>
-    </section>
-
-    <main>
-      <!-- HISTORIA -->
-
-      <h2 id="subtitulo">
-        Nossa <span class="subtitulo_pt2">História</span>
-      </h2>
-      <div class="historia">
-        <img src="imgs_site/inauguracao_escola.png" id="ih1"
-          alt="Fotografia antiga em preto e branco mostrando um grupo de adultos e crianças reunidos para a inauguração da escola." />
-        <article class="historia_text" id="ht1">
-          <img src="./imgs_site/jp5 5.png" alt="Logo da escola com um fundo de transparência." class="logo_fundo" />
-          <p>
-            O Colégio Estadual Japão foi inaugurado no dia
-            <strong>16 de julho de 1964.</strong> A instituição era composta
-            de dois pavilhões e foi denominada então Grupo Escolar Japão, por
-            localizar-se num pequeno reduto de japoneses, que doaram o terreno
-            para a construção da escola. Foi em homenagem à essa gentileza que
-            a escola recebeu o nome de <strong> Colégio Japão</strong>.
-          </p>
-        </article>
-        <article class="historia_text" id="ht2">
-          <img src="./imgs_site/jp.png" alt="Escritas japonesas e em letras vermelhas, que traduzindo é 'Japão'"
-            class="texto_jp" />
-          <p id="texto0">
-            A nossa amizade com o Japão não parou por aí. As relações do
-            Colégio com o Consulado Japonês desde então sempre foram cordiais
-            e intensas. No ano de 2004, o então Cônsul Kohei Nagashima nos
-            proporcionou a criação do ginásio coberto. Em setembro de 2009, o
-            Cônsul Haruyoshi Miura possibilitou a reforma de um antigo
-            pavilhão de madeira, nos entregando o atual "Prédio Verde".
-          </p>
-        </article>
-
-        <img src="imgs_site/japao_historia02.jpg"
-          alt="fotografia em preto e branco mostrando a comunidade escolar reunida." id="ih2" />
-      </div>
-
-      <div id="ht3">
-        <blockquote id="texto">
-          "Ao longo desses anos, muitos alunos passaram por estas salas de
-          aula e tornaram-se cidadãos que colaboram com o seu trabalho para a
-          grandeza da nossa cidade, exercendo as mais variadas profissões."
-        </blockquote>
-      </div>
-
-      <!-- GALERIA -->
-      <section class="galeria">
-        <h2 id="espacos">Espaços</h2>
-
-        <div class="carrossel-container">
-          <div class="carrossel-slides">
-            <div class="slide active">
-              <img src="imgs_site/descanso.png" alt="Espaço 1" />
-            </div>
-            <div class="slide">
-              <img src="imgs_site/salaaula.png" alt="Espaço 2" />
-            </div>
-            <div class="slide">
-              <img src="imgs_site/patioescola.png" alt="Espaço 3" />
-            </div>
-            <div class="slide">
-              <img src="imgs_site/refeitorio.png" alt="Espaço 4" />
-            </div>
-          </div>
-
-          <button class="prev-btn carrossel-btn">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <button class="next-btn carrossel-btn">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
+  <body>
+    <div class="container">
+      <header>
+        <div class="identidade">
+          <img
+            src="imgs_site/logo.png"
+            id="logo_header"
+            alt="Logotipo circular vermelho com símbolo abstrato preto da instituição"
+          />
+          <div class="logo">Colégio<span class="titulo">Japão</span></div>
         </div>
+        <!-- NAV -->
+        <nav>
+          <ul>
+            <li><a href="index.html">Página Inicial</a></li>
+            <li><a href="atividades/index.html">Atividades</a></li>
+            <li><a class="btn_agenda" href="agenda_pag.html">Agenda</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section class="principal">
+        <div id="informacoes_iniciais">
+          <h1>Colégio<br />Estadual<span class="titulo">Japão</span></h1>
+          <p>
+            O conhecer nos faz valer. A educação é o acender de uma chama, não o
+            preenchimento de um recipiente vazio.
+          </p>
+          <button><i class="fa-brands fa-whatsapp 2-xl"></i><a href="https://wa.me/5191282233" target="_blank"> Entre em contato!</a></button>
+        </div>
+        <div id="imagem_transparencia">
+          <img
+            src="./imgs_site/fachada.jpg"
+            alt="Fachada Escola Japão, com flores e plantas ao redor, em um dia ensolarado. Mostrando as salas de aula."
+            id="imagem_inicio"
+          />
+      </div>
+
+          <div id="previa-agenda">
+          <h4>Últimas notícias: </h4>
+          <p><span id="previa-span"></span>. <a href="agenda_pag.html" id="link-agenda">Confira a agenda.</a> </p>
+          </div>
       </section>
 
-      <section id="contato">
-        <div id="redessociais">
-          <h2>Contate-nos</h2>
-          <p>
-            Vamos conversar? Entre em contato para tirar dúvidas, solicitar
-            informações ou compartilhar sua ideia.
-          </p>
+      <main>
+        <!-- HISTORIA -->
+
+        <h2 id="subtitulo">
+          Nossa <span class="subtitulo_pt2">História</span>
+        </h2>
+        <div class="historia">
+          <img
+            src="imgs_site/inauguracao_escola.png"
+            id="ih1"
+            alt="Fotografia antiga em preto e branco mostrando um grupo de adultos e crianças reunidos para a inauguração da escola."
+          />
+          <article class="historia_text" id="ht1">
+            <img
+              src="./imgs_site/jp5 5.png"
+              alt="Logo da escola com um fundo de transparência."
+              class="logo_fundo"
+            />
+            <p>
+              O Colégio Estadual Japão foi inaugurado no dia
+              <strong>16 de julho de 1964.</strong> A instituição era composta
+              de dois pavilhões e foi denominada então Grupo Escolar Japão, por
+              localizar-se num pequeno reduto de japoneses, que doaram o terreno
+              para a construção da escola. Foi em homenagem à essa gentileza que
+              a escola recebeu o nome de <strong> Colégio Japão</strong>.
+            </p>
+          </article>
+          <article class="historia_text" id="ht2">
+            <img
+              src="./imgs_site/jp.png"
+              alt="Escritas japonesas e em letras vermelhas, que traduzindo é 'Japão'"
+              class="texto_jp"
+            />
+            <p id="texto0">
+              A nossa amizade com o Japão não parou por aí. As relações do
+              Colégio com o Consulado Japonês desde então sempre foram cordiais
+              e intensas. No ano de 2004, o então Cônsul Kohei Nagashima nos
+              proporcionou a criação do ginásio coberto. Em setembro de 2009, o
+              Cônsul Haruyoshi Miura possibilitou a reforma de um antigo
+              pavilhão de madeira, nos entregando o atual "Prédio Verde".
+            </p>
+          </article>
+
+          <img
+            src="imgs_site/japao_historia02.jpg"
+            alt="fotografia em preto e branco mostrando a comunidade escolar reunida."
+            id="ih2"
+          />
+        </div>
+
+        <div id="ht3">
+          <blockquote id="texto">
+            "Ao longo desses anos, muitos alunos passaram por estas salas de
+            aula e tornaram-se cidadãos que colaboram com o seu trabalho para a
+            grandeza da nossa cidade, exercendo as mais variadas profissões."
+          </blockquote>
+        </div>
+
+        <!-- GALERIA -->
+        <section class="galeria">
+          <h2 id="espacos">Espaços</h2>
+
+          <div class="carrossel-container">
+            <div class="carrossel-slides">
+              <div class="slide active">
+                <img src="imgs_site/descanso.png" alt="Espaço 1" />
+              </div>
+              <div class="slide">
+                <img src="imgs_site/salaaula.png" alt="Espaço 2" />
+              </div>
+              <div class="slide">
+                <img src="imgs_site/patioescola.png" alt="Espaço 3" />
+              </div>
+              <div class="slide">
+                <img src="imgs_site/refeitorio.png" alt="Espaço 4" />
+              </div>
+            </div>
+
+            <button class="prev-btn carrossel-btn">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="next-btn carrossel-btn">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </section>
+
+        <section id="contato">
+          <div id="redessociais">
+            <h2>Contate-nos</h2>
+            <p>
+              Vamos conversar? Entre em contato para tirar dúvidas, solicitar
+              informações ou compartilhar sua ideia.
+            </p>
 
           <ul>
             <li>
-              <a href="#"><i class="fa-brands fa-instagram icon"></i> @colegiojapao</a>
+              <a href="https://www.instagram.com/colegioestadualjapao_01.cre/" target="_blank"><i class="fa-brands fa-instagram icon"></i> @colegioestadualjapao_01.cre</a>
             </li>
             <li>
-              <a href="#"><i class="fa-solid fa-link icon"></i>
-                facebook/colegiojapao</a>
+              <a href="https://www.facebook.com/colegiojapao01cre " target="_blank"><i class="fa-brands fa-facebook-f"></i>
+                /colegiojapao01cre</a>
             </li>
             <li>
-              <a href="#"><i class="fa-brands fa-whatsapp icon"></i> (51) 99541-9523</a>
+              <a href="https://wa.me/5191282233" target="_blank"><i class="fa-brands fa-whatsapp icon"></i> (51) 9128-2233</a>
             </li>
           </ul>
         </div>
-        <div id="form">
+        
+        <form action="https://api.staticforms.dev/submit" method="POST" id="form">
+          
+
           <input type="text" placeholder="Nome" />
           <input type="email" placeholder="E-mail" />
           <textarea placeholder="Insira sua sugestão!"></textarea>
           <button type="submit">Enviar</button>
-        </div>
+          <div id="feedback-form"></div>
+        </form>
+        
+        
       </section>
     </main>
   </div>
 
-  <!-- LOCALIZAÇÃO -->
-  <section id="loc_end">
-    <h2>
-      <i class="fa-solid fa-map-location-dot" style="color: rgb(255, 54, 54)"></i>Localização
-    </h2>
-    <div class="local">
-      <iframe id="mapframe"
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d665.8823857949334!2d-51.14231218236115!3d-30.031966974701227!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951977b5e996f15f%3A0xd85d79c8d38fdd5c!2sCol%C3%A9gio%20Estadual%20Jap%C3%A3o!5e0!3m2!1spt-BR!2sus!4v1779391961783!5m2!1spt-BR!2sus"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <div class="box">
-        <div id="endereco">
-          <address>
-            R. Enrico Caruso, 444
-            Jardim Sabará
-            Porto Alegre, RS
-            CEP 91215-300
-          </address>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div id="container_footer_grid">
-      <div class="footer-col" id="id_visual">
-        <div class="logo-footer-wrapper">
-          <img src="imgs_site/logojpwhite.png" id="logo_footer"
-            alt="Logo da escola na cor branca, com o símbolo abstrato." />
-          <div class="logo-text">
-            Colégio<br /><span class="titulo-branco">JAPÃO</span>
+    <!-- LOCALIZAÇÃO -->
+    <section id="loc_end">
+      <h2>
+        <i
+          class="fa-solid fa-map-location-dot"
+          style="color: rgb(255, 54, 54)"
+        ></i
+        >Localização
+      </h2>
+      <div class="local">
+        <iframe
+          id="mapframe"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d665.8823857949334!2d-51.14231218236115!3d-30.031966974701227!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951977b5e996f15f%3A0xd85d79c8d38fdd5c!2sCol%C3%A9gio%20Estadual%20Jap%C3%A3o!5e0!3m2!1spt-BR!2sus!4v1779391961783!5m2!1spt-BR!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <div class="box">
+          <div id="endereco">
+            <address>
+              R. Enrico Caruso, 444 Jardim Sabará Porto Alegre, RS CEP 91215-300
+            </address>
           </div>
         </div>
-        <p class="slogan-footer">O conhecimento <br />nos faz valer.</p>
-        <div class="horario-atendimento">
-          <p><strong id="horario_bold">Horário de atendimento:</strong></p>
-          <p>Das 08:00 até as 20:00</p>
-        </div>
       </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div id="container_footer_grid">
+        <div class="footer-col" id="id_visual">
+          <div class="logo-footer-wrapper">
+            <img
+              src="imgs_site/logojpwhite.png"
+              id="logo_footer"
+              alt="Logo da escola na cor branca, com o símbolo abstrato."
+            />
+            <div class="logo-text">
+              Colégio<br /><span class="titulo-branco">JAPÃO</span>
+            </div>
+          </div>
+          <p class="slogan-footer">O conhecimento <br />nos faz valer.</p>
+          <div class="horario-atendimento">
+            <p><strong id="horario_bold">Horário de atendimento:</strong></p>
+            <p>Das 08:00 até as 20:00</p>
+          </div>
+        </div>
 
       <div class="footer-col" id="links">
         <h3>Mapa</h3>
         <ul>
           <li><a href="index.html">Página inicial</a></li>
-          <li><a href="index.html">Início</a></li>
           <li><a href="atividades/index.html">Atividades</a></li>
-          <li><a href="#">Contato</a></li>
+          <li><a href="#contato">Contato</a></li>
           <li><a href="agenda_pag.html">Agenda</a></li>
         </ul>
       </div>
@@ -218,35 +263,38 @@
         <h3>Contate-nos</h3>
         <ul>
           <li>
-            <a href="#"><i class="fa-brands fa-instagram"></i>@xxxjapao</a>
+            <a href="https://www.instagram.com/colegioestadualjapao_01.cre/" target="_blank"><i class="fa-brands fa-instagram"></i>@colegioestadualjapao_01.cre</a>
           </li>
           <li>
-            <a href="#"><i class="fa-solid fa-link"></i> / o link</a>
+            <a href="https://www.facebook.com/colegiojapao01cre" target="_blank"><i class="fa-brands fa-facebook-f"></i>/colegiojapao01cre</a>
           </li>
-          <li><i class="fa-brands fa-whatsapp"></i> (51) 99541-9523</li>
+          <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/5191282233" target="_blank">(51) 9128-2233</a></li>
         </ul>
         <button class="btn-login">
-          <i class="fa-solid fa-user"></i> Login
+          <i class="fa-solid fa-user"></i>Login
         </button>
       </div>
     </div>
   </footer>
 
 
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
     </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
+    </script>
 
-  <script src="carrossel.js"></script>
+    <script src="carrossel.js"></script>
 
-  <script src="https://cdn.userway.org/widget.js" data-account="PhHQuLEkH6"></script>
-</body>
-
+    <script
+      src="https://cdn.userway.org/widget.js"
+      data-account="PhHQuLEkH6" id="userway-root"
+    ></script>
+    
+  </body>
 </html>

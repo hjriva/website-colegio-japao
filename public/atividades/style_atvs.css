@@ -1,5 +1,89 @@
-container-atividades > li {
+:root {
+    --cor-principal: rgb(255, 0, 0);
+    --cor-secundaria: rgb(255, 238, 238);
+}
+
+
+#container-atividades>ul {
     list-style-type: none
+}
+
+#container-atividades {
+    min-width: 160px;
+}
+
+#filtro-disciplinas-titulo {
+    white-space: nowrap;
+    font-size: 1rem;
+    margin: 2px 5px;
+}
+
+#img-wrapper {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    height: 400px;
+}
+
+#img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+}
+
+#img-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            transparent 50%,
+            white 100%);
+    pointer-events: none;
+}
+
+
+main {
+    margin: 0 auto;
+    max-width: 90vw;
+}
+
+#h1-atividades {
+    color: var(--cor-principal);
+    margin-top: -60px;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+}
+
+p {
+    margin-bottom: 5vh;
+}
+
+.grid-atividades {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+
+#primeira-coluna {
+    border-radius: 20px;
+    box-shadow: rgba(46, 46, 46, 0.205) 1px 1px 10px;
+}
+
+#filtro-disciplinas-titulo>li {
+    margin: 0px 2px;
+    text-align: center;
+
+}
+
+#filtro-disciplinas-titulo {
+    text-align: center;
 }
 
 /*  footer, separando pra me achar */
@@ -13,6 +97,77 @@ container-atividades > li {
     border-radius: 30px 30px 0 0;
     margin-top: 5vh;
 
+}
+
+#listadisciplinas {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+}
+
+.li_disciplinas {
+    background-color: var(--cor-principal);
+    border: solid 1px #ddd;
+    color: white;
+    border-radius: 8px;
+    width: 18vh;
+    margin: 0 auto;
+    padding: 4px 16px;
+
+}
+
+.li_disciplinas a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    margin-left: 0;
+}
+
+
+#atividades_display {
+    display: block;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    margin: 2px auto;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    max-height: 70vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    border-radius: 20px;
+}
+
+#atividades_display::-webkit-scrollbar {
+    width: 12px;
+}
+
+#atividades_display::-webkit-scrollbar-track {
+    background: var(--cor-secundaria);
+}
+
+#atividades_display::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    border: 3px solid rgb(255, 0, 0);
+}
+
+
+.atividade {
+    height: 200px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    flex-direction: column;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    padding: 2px;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 20px;
 }
 
 
@@ -96,6 +251,41 @@ container-atividades > li {
     margin: 4px 0;
 }
 
+#filtrar-titulo {
+    text-align: center;
+    display: block;
+    text-align: center;
+    font-size: 2.5vh;
+    white-space: nowrap;
+    margin: 2px 5px;
+    font-weight: 700;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+}
+
+.atividade>a {
+    color: gray;
+}
+
+.atividade>a:hover {
+    color: var(--vermelho);
+}
+
+#titulo-disciplinas {
+    display: block;
+    text-align: center;
+}
+
+select {
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 300;
+    border: solid 1px black;
+    background-color: #ffffff;
+    padding: 5px;
+    margin: 2px auto;
+}
+
 #horario_bold {
     color: #ffffff;
 }
@@ -112,6 +302,10 @@ container-atividades > li {
 .footer-col h3 {
     font-size: 1.2rem;
     margin: 0 0 16px 0;
+}
+
+#botao_voltar_disciplinas {
+    display: block;
 }
 
 .footer-col ul {
@@ -163,4 +357,24 @@ container-atividades > li {
 
 .btn-login:hover {
     background-color: #f1f1f1;
+}
+
+@media (min-width: 1024px) {
+    main {
+        max-width: 90vw;
+        margin-top: 0;
+    }
+
+    #container_disciplinas_atvs {
+        display: grid;
+        max-width: 100vw;
+        grid-auto-flow: column;
+        gap: 5vw;
+        grid-template-columns: 220px 1fr;
+
+    }
+
+    #atividades_display {
+        width: 100%
+    }
 }

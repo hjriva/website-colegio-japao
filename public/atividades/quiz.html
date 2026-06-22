@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_quiz.css">
     <link rel="icon" type="image/png" href="../imgs_site/logo.png">
 
 
@@ -40,15 +41,21 @@
             </ul>
         </nav>
     </header>
-    <h1 id="titulo">Teste</h1>
+    <main>
+    <h1 id="titulo">Carregando quiz...</h1>
 
-    <div id="navegacao"></div>
+
 
     <div id="resultado"></div>
-    <div id="questoes"></div>
-
-    <button id="submeter-resultado">Submeter resultado </button>
-
+    <div id="questoes">
+        <p id="loading-quiz">Carregando...</p>
+    </div>
+        <div id="navegacao"></div>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <button id="submeter-resultado">Submeter resultado</button>
+    <p id="aviso-submeter" style="color: red; margin: 0;"></p>
+</div>
+        </main>
     <footer>
         <div id="container_footer_grid">
             <div class="footer-col" id="id_visual">
@@ -95,199 +102,26 @@
 
 
 
-                <script>
-                    const params = new URLSearchParams(window.location.search);
-                    const id = params.get('id');
-                    const pagina = params.get('pagina') || 1;
-                    let res = window.document.getElementById('resultado')
+              <script src="quiz_script.js"></script>
+              
+                    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+      </div>
+      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+      <script>
+        new window.VLibras.Widget("https://vlibras.gov.br/app");
+      </script>
 
-                    // ✅ chave usada no sessionStorage para este quiz
-                    const STORAGE_KEY = `quiz_${id}`;
+      <script src="carrossel.js"></script>
 
-                    // ✅ carrega o que já foi salvo: respostas marcadas e feedback de cada questão
-                    // formato: respostas = { "1": "a", "2": "c" }, feedback = { "1": { correta: true, texto: "...", explicacao: "..." } }
-                    let dadosSalvos = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');
-                    if (!dadosSalvos.respostas) dadosSalvos.respostas = {};
-                    if (!dadosSalvos.feedback) dadosSalvos.feedback = {};
-
-                    function salvarDados() {
-                        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(dadosSalvos));
-                    }
-
-                    // ✅ chamada pelo listener de cada radio
-                    function SalvarRadio(radio) {
-                        const questaoId = radio.closest('.questao').id;
-
-                        // salva/atualiza a resposta marcada para essa questão
-                        dadosSalvos.respostas[questaoId] = radio.value;
-
-                        // se essa questão já tinha feedback (de uma correção anterior), ele fica
-                        // inválido porque a resposta mudou — então removemos
-                        if (dadosSalvos.feedback[questaoId]) {
-                            delete dadosSalvos.feedback[questaoId];
-                            // remove a div de feedback/explicação já exibida, se existir
-                            const divQuestao = document.getElementById(questaoId);
-                            const divFeedback = divQuestao.querySelector('.feedback');
-                            const divExplicacao = divQuestao.querySelector('.explicacao');
-                            if (divFeedback) divFeedback.remove();
-                            if (divExplicacao) divExplicacao.remove();
-                        }
-
-                        salvarDados();
-                    }
-
-                    let botaoResultado = window.document.getElementById('submeter-resultado')
-                    fetch(`/quiz/${id}?pagina=${pagina}`)
-                        .then(res => res.json())
-                        .then(data => {
-
-                            document.getElementById('titulo').innerText = data.quiz.titulo; // ✅ atualizado
-                            console.log(data)
-
-                            // ✅ guarda o total de questões do quiz (vindo do backend), salvo uma vez
-                            if (!dadosSalvos.totalQuestoesQuiz) {
-                                dadosSalvos.totalQuestoesQuiz = data.totalQuestoes ?? (data.totalPaginas * data.questoes.length);
-                                salvarDados();
-                            }
-
-                            data.questoes.forEach(questao => {
-
-                                const div = document.createElement('div');
-                                div.id = questao.id
-                                div.classList.add('questao')
-
-                                // ✅ recupera resposta marcada anteriormente (se houver)
-                                const respostaSalva = dadosSalvos.respostas[questao.id];
-
-                                div.innerHTML = `
-                    <p>${questao.pergunta}</p>
-                    <input type="radio" name="q${questao.id}" value="a" ${respostaSalva === 'a' ? 'checked' : ''}> a) ${questao.alternativa_a}<br>
-                    <input type="radio" name="q${questao.id}" value="b" ${respostaSalva === 'b' ? 'checked' : ''}> b) ${questao.alternativa_b}<br>
-                    <input type="radio" name="q${questao.id}" value="c" ${respostaSalva === 'c' ? 'checked' : ''}> c) ${questao.alternativa_c}<br>
-                    <input type="radio" name="q${questao.id}" value="d" ${respostaSalva === 'd' ? 'checked' : ''}> d) ${questao.alternativa_d}<br>
-                `;
-                                document.getElementById('questoes').appendChild(div);
-
-                                // ✅ liga o SalvarRadio em cada radio desta questão
-                                div.querySelectorAll('input[type=radio]').forEach(radio => {
-                                    radio.addEventListener('change', () => SalvarRadio(radio));
-                                });
-
-                                // ✅ se essa questão já tinha feedback salvo (de correção anterior), exibe de novo
-                                let feedbackSalvo = dadosSalvos.feedback[questao.id];
-
-                                // ✅ se o quiz já foi submetido e essa questão (desta página) ainda não tinha
-                                // sido corrigida, calcula o feedback agora, já que temos resposta_correta aqui
-                                if (!feedbackSalvo && dadosSalvos.submetido && respostaSalva) {
-                                    const altCorreta = questao.resposta_correta
-                                    const correta = (respostaSalva == altCorreta)
-                                    feedbackSalvo = {
-                                        texto: correta ? `Você acertou a questão!` : `A resposta correta é ${altCorreta}!`,
-                                        classe: correta ? 'resposta-correta' : 'resposta-inccorreta',
-                                        explicacao: questao.explicacao
-                                    }
-                                    dadosSalvos.feedback[questao.id] = feedbackSalvo
-                                    salvarDados();
-                                }
-
-                                if (feedbackSalvo) {
-                                    const divFeedback = document.createElement('div')
-                                    divFeedback.classList.add('feedback', feedbackSalvo.classe)
-                                    divFeedback.textContent = feedbackSalvo.texto
-                                    div.appendChild(divFeedback)
-
-                                    if (feedbackSalvo.explicacao) {
-                                        const divExplicacao = document.createElement('div')
-                                        divExplicacao.classList.add('explicacao')
-                                        divExplicacao.textContent = feedbackSalvo.explicacao
-                                        div.appendChild(divExplicacao)
-                                    }
-                                }
-                            });
-
-                            const nav = document.getElementById('navegacao');
-
-                            if (data.paginaAtual > 1) {
-                                nav.innerHTML += `<a href="/atividades/quiz.html?id=${id}&pagina=${data.paginaAtual - 1}">← Anterior</a>`; // ✅ subpasta
-                            }
-                            if (data.paginaAtual < data.totalPaginas) {
-                                nav.innerHTML += `<a href="/atividades/quiz.html?id=${id}&pagina=${Number(data.paginaAtual) + 1}">Próxima →</a>`; // ✅ subpasta
-                            }
-
-                            // ✅ se o quiz já foi submetido alguma vez, mostra o resultado total acumulado
-                            if (dadosSalvos.submetido) {
-                                mostrarResultadoTotal();
-                            }
-
-                            botaoResultado.addEventListener('click', () => {
-                                let perguntas = document.querySelectorAll('.questao')
-
-                                perguntas.forEach((pergunta, index) => {
-                                    const questaoId = pergunta.id;
-
-                                    // se essa questão já tem feedback salvo (não mudou desde a última correção), pula
-                                    if (dadosSalvos.feedback[questaoId]) return;
-
-                                    const questao = data.questoes.find(q => q.id == questaoId) ?? null;
-                                    const altCorreta = questao.resposta_correta
-
-                                    const radioMarcado = pergunta.querySelector('input[type=radio]:checked')
-                                    if (!radioMarcado) return; // questão não respondida, não dá pra corrigir ainda
-
-                                    let altMarcada = radioMarcado.value
-
-                                    const divFeedback = document.createElement('div')
-                                    divFeedback.classList.add('feedback')
-
-                                    let classe, texto
-                                    if (altMarcada == altCorreta) {
-                                        texto = `Você acertou a questão ${index + 1}!`
-                                        classe = 'resposta-correta'
-                                    } else {
-                                        texto = `A resposta correta é ${altCorreta}!`
-                                        classe = 'resposta-inccorreta'
-                                    }
-                                    divFeedback.textContent = texto
-                                    divFeedback.classList.add(classe)
-                                    pergunta.appendChild(divFeedback)
-
-                                    const explicacaoPergunta = questao.explicacao
-                                    if (explicacaoPergunta !== null) {
-                                        const divExplicacao = document.createElement('div')
-                                        divExplicacao.classList.add('explicacao')
-                                        divExplicacao.textContent = explicacaoPergunta
-                                        pergunta.appendChild(divExplicacao)
-                                    }
-
-                                    // ✅ salva o feedback desta questão (resultado + explicação) no sessionStorage
-                                    dadosSalvos.feedback[questaoId] = {
-                                        texto,
-                                        classe,
-                                        explicacao: explicacaoPergunta
-                                    }
-                                })
-
-                                dadosSalvos.submetido = true
-                                salvarDados()
-                                mostrarResultadoTotal()
-                            })
-
-                            // ✅ calcula e exibe "Você acertou X de Y!" usando TODO o feedback já salvo
-                            // (de todas as páginas já corrigidas), comparado ao total real de questões do quiz
-                            function mostrarResultadoTotal() {
-                                const totalCorretas = Object.values(dadosSalvos.feedback).filter(f => f.classe === 'resposta-correta').length
-                                const totalQuestoes = dadosSalvos.totalQuestoesQuiz
-
-                                let texto = `Você acertou ${totalCorretas} de ${totalQuestoes}!`
-                                if (totalCorretas >= Math.ceil(totalQuestoes / 2)) {
-                                    texto += ` Parabéns!!`
-                                }
-                                res.innerHTML = texto
-                            }
-
-                        });
-
-                </script>
+      <script
+        src="https://cdn.userway.org/widget.js"
+        data-account="PhHQuLEkH6"
+        id="userway-root"
+      ></script>
 
 </body>
 

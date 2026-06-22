@@ -18,6 +18,11 @@ body {
     overflow-x: hidden;
 }
 
+main {
+    padding-top: 1px;
+    /* evita o margin collapse */
+}
+
 #logo_header,
 #logo_footer,
 .logo {
@@ -39,6 +44,8 @@ body {
     font-family: 'Sekuya';
     color: var(--vermelho);
 }
+
+
 
 header {
     box-shadow: rgba(0, 0, 0, 0.26) 1pt 0pt 30px;
@@ -89,10 +96,10 @@ li>a {
     padding-right: 2em;
     color: #ffffff;
     border-radius: 10px;
-    font-weight: 300;
+    font-weight: 400;
     box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 1pt;
-
 }
+
 
 .btn_agenda:hover {
     background-color: hwb(0 39% 0%);
@@ -136,11 +143,13 @@ button {
     background-color: var(--vermelho);
     border: none;
     border-radius: 10px;
-    padding: 2vh;
-    font-size: 2vh;
+    padding: 2.3vh;
+    font-size: 1em;
     color: #ffffff;
     margin-top: 1em;
     box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
+    font-weight: 500;
+
 
 }
 
@@ -215,7 +224,7 @@ button:hover {
 
 .historia {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 30% 30%;
     justify-items: start;
 
 
@@ -246,7 +255,8 @@ strong {
 
 #ih1 {
     border-radius: 0px 20px 20px 0px;
-    grid-column: 1;
+    grid-column: 1 /1;
+    z-index: 2;
 
 }
 
@@ -367,7 +377,7 @@ h2>i {
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    margin-bottom: 20vh;
+    margin-bottom: 10vh;
 }
 
 
@@ -816,4 +826,46 @@ h2>i {
     font-weight: 300;
     width: 100%;
     grid-column: 1 / -1;
+}
+
+
+#feedback_div {
+    display: none;
+}
+
+#previa-agenda {
+    display: none;
+}
+
+@media screen and (min-width: 1024px) {
+
+    .principal {
+        position: relative;
+    }
+
+    #previa-agenda {
+        position: absolute;
+
+        left: calc(100% - 480px);
+        top: 430px;
+
+        width: 420px;
+
+        background: var(--vermelho);
+        color: #fff;
+
+        padding: 18px 22px;
+
+        border-radius: 18px 0 0 18px;
+
+        z-index: 5;
+    }
+
+    #link-agenda {
+        color: white;
+    }
+
+    #mapa-container {
+        margin: 0px 2vw;
+    }
 }
