@@ -40,10 +40,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="stylegpt.css" />
+    <link rel="stylesheet" href="style_admin.css" />
   </head>
   <body>
-    <header>
+    <header style="display: none;">
       <div class="identidade">
         <img
           src="../imgs_site/logo.png"
@@ -57,20 +57,22 @@
 
     <!--Precisa desse id devido ao JavaScript-->
 
+    <div id="welcome-title">
     <h1>Boas Vindas, Helena!</h1>
     <p id="subtitulo">Painel de Controle</p>
-    
+    </div>
+              <main id="formulario_perguntas">
     <div id="abas">
-    <button id="mostrar-painel-agenda">Agenda</button>
-    <button id="mostrar-painel-atv">Atividades</button>
-    <button id="mostrar-painel-usuarios">Usuários</button>
+    <button id="mostrar-painel-agenda" class="aba ativa">Agenda</button>
+    <button id="mostrar-painel-atv" class="aba">Atividades</button>
+    <button id="mostrar-painel-usuarios" class="aba">Usuários</button>
   </div>
     <div id="painel-admin">
       <div id="painel-agenda-conteudo">  
         <div id="cabecalho-painel-agenda"> 
         <button id="adicionar-post">Adicionar postagens</button>
 
-      
+          
         <div id="cabecalho-inputs">
         <input
           type="text"
@@ -153,7 +155,7 @@
             <label for="randomizar">Embaralhar</label>
           </form>
 
-          <main id="formulario_perguntas">
+
             <!--Aqui são gerados os formulários para criar as perguntas-->
             <div id="form-pergunta-1" class="perguntas_teste">
               <!--Div modelo para outros formulários gerados dinamicamente com JS-->
@@ -210,7 +212,7 @@
                 </div>
               </form>
             </div>
-          </main>
+         
           <button id="add-pergunta">+</button>
           <button id="salvar_quiz">Salvar</button>
         </div>
@@ -229,7 +231,7 @@
         />
       </div>
     </div>
-
+ </main>
     <script type="module" src="agenda_admin.js"></script>
     <script type="module" src="script-fb.js"></script>
   </body>
