@@ -337,7 +337,7 @@
     const lista = document.createElement("ul");
     controle.appendChild(lista);
 
-    ReqDisciplinas(lista, acoesAdminDisciplina);
+   ReqDisciplinas(lista, acoesAdminDisciplina, { comFundo: true });
   }
 
   function mostrarAtividadesDisciplina(idDisciplina, nomeDisciplina) {
@@ -359,19 +359,30 @@
     fetch(`/disciplina/${idDisciplina}`)
       .then((res) => res.json())
       .then(({ atividades }) => {
-        atividades.forEach((atv) => {
-          const li = document.createElement("li");
-          const link = document.createElement("a");
-          link.href = "#";
-          link.textContent = atv.titulo;
-          link.addEventListener("click", (e) => {
+    atividades.forEach((atv) => {
+        const li = document.createElement("li");
+
+        // ✅ background da disciplina no li da atividade
+        if (atv.imagem_disciplina) {
+               li.style.backgroundImage = `
+        linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+        url('/${atv.imagem_disciplina}')
+    `;
+            li.style.backgroundSize = 'cover';
+            li.style.backgroundPosition = 'center';
+        }
+
+        const link = document.createElement("a");
+        link.href = "#";
+        link.textContent = atv.titulo;
+        link.addEventListener("click", (e) => {
             e.preventDefault();
             mostrarAtividade(atv, idDisciplina, nomeDisciplina);
-          });
-          li.appendChild(link);
-          lista.appendChild(li);
         });
-      })
+        li.appendChild(link);
+        lista.appendChild(li);
+    });
+})
       .catch((err) => console.error(err));
   }
 
@@ -438,7 +449,7 @@
     li.appendChild(botaoWrapper);
   }
 
-  function editarDisciplina(li, disc) {
+ function editarDisciplina(li, disc) {
     const elLink = li.querySelector(".nome-disciplina");
     const valorAtual = elLink.textContent;
 
@@ -447,69 +458,104 @@
     input.value = valorAtual;
     elLink.replaceWith(input);
 
+    // ✅ input de imagem
+    const inputImagem = document.createElement("input");
+    inputImagem.type = "file";
+    inputImagem.accept = "image/*";
+    inputImagem.style.cssText = "display:block; margin-top:6px; font-size:0.8rem;";
+
+    const labelImagem = document.createElement("label");
+    labelImagem.textContent = "Nova foto:";
+    labelImagem.style.cssText = "font-size:0.8rem; display:block; margin-top:6px;";
+
+    li.insertBefore(labelImagem, li.querySelector('.button-wrapper-disciplinas'));
+    li.insertBefore(inputImagem, li.querySelector('.button-wrapper-disciplinas'));
+
     const btnEditar = li.querySelector(`#editar${disc.id}`);
     const btnExcluir = li.querySelector(`#excluir${disc.id}`);
     btnEditar.style.display = "none";
     btnExcluir.style.display = "none";
-      btnExcluir.classList.add('botoes-excluir')
 
     const btnSalvar = document.createElement("button");
     const iconsalvar = document.createElement('i');
-    iconsalvar.classList.add("fa-solid");
-    iconsalvar.classList.add('fa-check');
-    btnSalvar.classList.add('salvar-agenda-admin')
+    iconsalvar.classList.add("fa-solid", 'fa-check');
+    btnSalvar.classList.add('salvar-agenda-admin');
     btnSalvar.appendChild(iconsalvar);
 
-
-  
     const btnCancelar = document.createElement("button");
     const iconcancelar = document.createElement('i');
-    iconcancelar.classList.add("fa-solid");
-    iconcancelar.classList.add('fa-ban')
-    btnCancelar.classList.add('cancelar-agenda-admin')
+    iconcancelar.classList.add("fa-solid", 'fa-ban');
+    btnCancelar.classList.add('cancelar-agenda-admin');
     btnCancelar.appendChild(iconcancelar);
 
-    function restaurar(nomeFinal) {
-      const novoLink = document.createElement("a");
-      novoLink.href = `/atividades/disciplinas.html?id=${disc.id}`;
-      novoLink.textContent = nomeFinal;
-      novoLink.classList.add("nome-disciplina");
-      novoLink.addEventListener("click", (e) => {
-        e.preventDefault();
-        mostrarAtividadesDisciplina(disc.id, disc.nome_disc);
-      });
+    function restaurar(nomeFinal, novaImagem) {
+        const novoLink = document.createElement("a");
+        novoLink.href = `/atividades/disciplinas.html?id=${disc.id}`;
+        novoLink.textContent = nomeFinal;
+        novoLink.classList.add("nome-disciplina");
+        novoLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            mostrarAtividadesDisciplina(disc.id, disc.nome_disc);
+        });
 
-      input.replaceWith(novoLink);
+        input.replaceWith(novoLink);
+        labelImagem.remove();
+        inputImagem.remove();
 
-      btnEditar.style.display = "";
-      btnExcluir.style.display = "";
-      btnSalvar.remove();
-      btnCancelar.remove();
+        // ✅ atualiza background do li se veio nova imagem
+        if (novaImagem) {
+            li.style.backgroundImage = `
+        linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+        url('/${atv.imagem_disciplina}')
+    `;
+            li.style.backgroundSize = 'cover';
+            li.style.backgroundPosition = 'center';
+        }
+
+        btnEditar.style.display = "";
+        btnExcluir.style.display = "";
+        btnSalvar.remove();
+        btnCancelar.remove();
     }
 
-    btnSalvar.addEventListener("click", () => {
-      const novoNome = input.value.trim();
-      if (!novoNome) return;
+    btnSalvar.addEventListener("click", async () => {
+        const novoNome = input.value.trim();
+        if (!novoNome) return;
 
-      fetch("/atualizarDisciplina", {
-        method: "POST",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-        body: JSON.stringify({ id: disc.id, nome_disc: novoNome }),
-      })
-        .then((res) => res.json())
-        .then(() => {
-          disc.nome_disc = novoNome;
-          restaurar(novoNome);
-        })
-        .catch((err) => console.error(err));
+        // Salva o nome
+        await fetch("/atualizarDisciplina", {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify({ id: disc.id, nome_disc: novoNome }),
+        });
+        disc.nome_disc = novoNome;
+
+        // ✅ Salva a imagem se tiver uma nova
+        let novaImagem = null;
+        if (inputImagem.files[0]) {
+            const formData = new FormData();
+            formData.append("id", disc.id);
+            formData.append("imagem", inputImagem.files[0]);
+
+            const res = await fetch("/atualizarImagemDisciplina", {
+                method: "POST",
+                body: formData,
+            });
+            const data = await res.json();
+            if (data.imagem) novaImagem = data.imagem;
+        }
+
+        restaurar(novoNome, novaImagem);
     });
 
     btnCancelar.addEventListener("click", () => {
-      restaurar(valorAtual);
+        labelImagem.remove();
+        inputImagem.remove();
+        restaurar(valorAtual, null);
     });
 
     li.append(btnSalvar, btnCancelar);
-  }
+}
 
   function excluirDisciplina(li, disc) {
     if (li.querySelector(".form-excluir-disciplina")) return;

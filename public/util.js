@@ -37,14 +37,26 @@ export function criaCardEvento(entrada, container, acoes = null) {
 //adaptado do Claude
 
 
-export function ReqDisciplinas(div, acoes = null) {
+export function ReqDisciplinas(div, acoes = null, opcoes = {}) {
     fetch('/disciplinas')
         .then(res => res.json())
         .then(data => {
             data.forEach(disc => {
                 const li = document.createElement('li');
                 li.id = `disciplina${disc.id}`;
-                li.classList.add('li_disciplinas')
+                li.classList.add('li_disciplinas');
+
+                // ✅ só aplica background se opcoes.comFundo for true
+                if (opcoes.comFundo && disc.imagem) {
+                    li.style.backgroundImage = `
+                        linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+                        url('/${disc.imagem}')
+                    `;
+                      
+                    li.style.backgroundSize = 'cover';
+                    li.style.backgroundPosition = 'center';
+                }
+
                 const link = document.createElement('a');
                 link.href = `/atividades/disciplinas.html?id=${disc.id}`;
                 link.textContent = disc.nome_disc;
@@ -53,7 +65,6 @@ export function ReqDisciplinas(div, acoes = null) {
 
                 div.appendChild(li);
 
-                // se acoes for passado, renderiza os botões - só pro painel admin
                 if (acoes) acoes(li, disc);
             });
         })

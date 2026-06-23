@@ -290,3 +290,29 @@ p {
     color: var(--vermelho);
     font-family: 'Poppins';
 }
+
+@media (max-width: 670px) {
+
+     h1 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    
+    #atividade_container {
+        flex-direction: column-reverse;
+        width: 100%;
+        
+    }
+    #regioes-container {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #mapa-container {
+        margin: 1px 4px;
+        position: static;
+          align-self: center;
+    }
+}

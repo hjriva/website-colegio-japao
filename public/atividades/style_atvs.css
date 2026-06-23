@@ -111,9 +111,9 @@ p {
     border: solid 1px #ddd;
     color: white;
     border-radius: 8px;
-    width: 18vh;
     margin: 0 auto;
     padding: 4px 16px;
+    width: 139px;
 
 }
 
@@ -358,6 +358,9 @@ select {
 .btn-login:hover {
     background-color: #f1f1f1;
 }
+
+
+
 
 @media (min-width: 1024px) {
     main {

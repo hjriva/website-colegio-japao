@@ -366,16 +366,12 @@ app.post("/novoquiz", async (req, res) => {
     await client.query('BEGIN');
 
     // Insere disciplina se não existir
-    await client.query(`
-      INSERT INTO disciplinas (nome_disc)
-      VALUES ($1)
-      ON CONFLICT (nome_disc) DO NOTHING
-    `, [disciplina]);
-
-    const { rows: discRows } = await client.query(
-      `SELECT id FROM disciplinas WHERE nome_disc = $1`,
-      [disciplina]
-    );
+    const { rows: discRows } = await client.query(`
+    INSERT INTO disciplinas (nome_disc)
+    VALUES ($1)
+    ON CONFLICT (nome_disc) DO UPDATE SET nome_disc = EXCLUDED.nome_disc
+    RETURNING id
+`, [disciplina]);
     const idDisciplina = discRows[0].id;
 
     // Cria a atividade
@@ -446,13 +442,15 @@ app.get("/disciplina/:id", async (req, res) => {
             `SELECT * FROM disciplinas WHERE id = $1`, [id]
         );
         const { rows: atividades } = await db.query(`
-            SELECT 
-                a.id, a.titulo, a.tipo, a.caminho,
-                q.id AS quiz_id
-            FROM atividades a
-            LEFT JOIN quizzes q ON q.atividade_id = a.id
-            WHERE a.disciplina_id = $1
-        `, [id]);
+    SELECT 
+        atividades.*,
+        quizzes.id AS quiz_id,
+        disciplinas.imagem AS imagem_disciplina
+    FROM atividades
+    LEFT JOIN quizzes ON quizzes.atividade_id = atividades.id
+    LEFT JOIN disciplinas ON atividades.disciplina_id = disciplinas.id
+    WHERE atividades.disciplina_id = $1
+`, [id]);
 
         res.json({ disciplina: disciplina[0], atividades });
     } catch (err) {
@@ -582,7 +580,7 @@ app.get('/disciplinas/exceto/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const { rows } = await db.query(
-            `SELECT id, nome_disc FROM disciplinas WHERE id != $1 ORDER BY nome_disc`,
+            `SELECT id, nome_disc, imagem FROM disciplinas WHERE id != $1 ORDER BY nome_disc`,
             [id]
         );
         res.json(rows);
@@ -720,16 +718,44 @@ app.post('/excluirDisciplina', async (req, res) => {
 app.get("/atividadesdisplay", async (req, res) => {
     try {
         const { rows } = await db.query(`
-            SELECT a.*, q.id as quiz_id
-            FROM atividades a
-            LEFT JOIN quizzes q ON q.atividade_id = a.id
-            ORDER BY a.criado_em DESC NULLS LAST
+SELECT 
+        atividades.*,
+        quizzes.id AS quiz_id,
+        disciplinas.imagem AS imagem_disciplina
+    FROM atividades
+    LEFT JOIN quizzes ON quizzes.atividade_id = atividades.id
+    LEFT JOIN disciplinas ON atividades.disciplina_id = disciplinas.id
         `);
         res.json(rows);
     } catch (err) {
         res.status(500).json({ erro: "Erro ao buscar atividades" });
     }
 });
+
+const uploadDisciplina = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => cb(null, path.join(__dirname, '..', 'public', 'imgs')),
+        filename: (req, file, cb) => {
+            const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
+            cb(null, 'disc-' + unique + path.extname(file.originalname));
+        }
+    })
+});
+
+app.post('/atualizarImagemDisciplina', uploadDisciplina.single('imagem'), async (req, res) => {
+    const { id } = req.body;
+    if (!id || !req.file) return res.status(400).json({ erro: 'Dados incompletos' });
+
+    const caminho = `imgs/${req.file.filename}`;
+    try {
+        await db.query(`UPDATE disciplinas SET imagem = $1 WHERE id = $2`, [caminho, id]);
+        res.json({ sucesso: true, imagem: caminho });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: 'Erro ao atualizar imagem' });
+    }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })

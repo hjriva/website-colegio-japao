@@ -76,8 +76,8 @@ function tentarAdicionar(sigla) {
   //procura as regiões retornadas do BD e pega aquela cuja sigla é a mesma do input selecionado
 
   const match = regiao.estados.find(
-    (e) => normalizarResposta(e.nome_estado) === normalizarResposta(valor) /*||
-    normalizarResposta(e.id_sigla) === normalizarResposta(valor)*/,
+    (e) => normalizarResposta(e.nome_estado) === normalizarResposta(valor) ||
+    normalizarResposta(e.id_sigla) === normalizarResposta(valor),
   ); //Aqui eu optei por validar somente se for digitado o nome completo do estado, mas é possível validar pela sigla também
 
   /*A const match compara o valor adicionado no input com cada estado daquela região, retornando o primeiro

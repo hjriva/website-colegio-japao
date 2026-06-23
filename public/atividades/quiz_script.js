@@ -37,7 +37,7 @@ let botaoResultado = window.document.getElementById('submeter-resultado')
 fetch(`/quiz/${id}?pagina=${pagina}`)
     .then(res => res.json())
     .then(data => {
-
+        console.log(data)
         document.getElementById('loading-quiz').remove();
 
         document.getElementById('titulo').innerText = data.quiz.titulo;

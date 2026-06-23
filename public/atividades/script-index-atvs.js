@@ -55,16 +55,26 @@ function criarGridComScroll(atividades) {
     function carregarMais() {
         const slice = atividades.slice(index, index + porVez);
         slice.forEach(atv => {
-            const div = document.createElement('div');
-            div.classList.add('atividade');
+    const div = document.createElement('div');
+    div.classList.add('atividade');
 
-            const href = atv.tipo === 'quiz'
-                ? `/atividades/quiz.html?id=${atv.quiz_id}`
-                : atv.caminho;
+    // ✅ background com a imagem da disciplina
+    if (atv.imagem_disciplina) {
+       div.style.backgroundImage = `
+        linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+        url('/${atv.imagem_disciplina}')
+    `;
+        div.style.backgroundSize = 'cover';
+        div.style.backgroundPosition = 'center';
+    }
 
-            div.innerHTML = `<a href="${href}" target="_blank"><h3>${atv.titulo}</h3></a>`;
-            grid.appendChild(div);
-        });
+    const href = atv.tipo === 'quiz'
+        ? `/atividades/quiz.html?id=${atv.quiz_id}`
+        : atv.caminho;
+
+    div.innerHTML = `<a href="${href}" target="_blank"><h3>${atv.titulo}</h3></a>`;
+    grid.appendChild(div);
+});
         index += porVez;
 
         // ✅ se ainda tem mais, adiciona sentinela para o observer observar
@@ -107,7 +117,12 @@ function mostrarAtividadesDisciplina(idDisciplina, nomeDisciplina) {
         titulo.textContent = 'Atividades interativas';
         fetch('/atividadesdisplay')
             .then(res => res.json())
-            .then(data => exibirAtividades(data));
+            .then(data => {
+                console.log('atividadesdisplay retornou:', data);
+                exibirAtividades(data)}
+             )
+             .catch(err => console.error('erro no fetch inicial:', err));
+            
     });
     container_atvs.appendChild(btnVoltar);
     container_atvs._btnVoltar = btnVoltar;
