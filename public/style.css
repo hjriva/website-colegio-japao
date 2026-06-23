@@ -16,6 +16,9 @@
     padding: 0;
     box-sizing: border-box;
 
+    /* outline: 1px solid red; */
+    /* verificar o que esta vazando */
+
 }
 
 body {
@@ -26,6 +29,7 @@ body {
 main {
     padding-top: 1px;
     width: 100%;
+    position: relative;
 
 }
 
@@ -72,6 +76,7 @@ nav>ul {
 .identidade {
     display: flex;
     flex-direction: row;
+    margin-right: 0;
 }
 
 header {
@@ -140,6 +145,7 @@ li>a {
 h1 {
     font-weight: 400;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     font-size: clamp(1.8rem, 4vw, 3rem);
     color: var(--cor-texto);
@@ -245,8 +251,7 @@ button:hover {
     flex-direction: column;
     justify-items: center;
     width: auto;
-
-
+    overflow: hidden;
 }
 
 
@@ -329,12 +334,14 @@ strong {
 #texto1 {
     margin-top: 10vh;
     position: relative;
+    overflow: hidden;
 }
 
 #texto2 {
     margin-top: 10vh;
     position: relative;
     grid-column: 3/4;
+    overflow: hidden;
 }
 
 .texto_jp {
@@ -353,12 +360,12 @@ strong {
 #texto {
     line-height: 2rem;
     text-align: justify;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: var(--vermelho);
-    font-weight: 400;
+    font-weight: 500;
     z-index: 2;
     position: relative;
-    padding: clamp(1rem, 4vw, 4rem);
+    padding: 6em;
     border-radius: 20px;
     background-color: #ffffff;
     margin: 2rem auto;
@@ -366,17 +373,14 @@ strong {
     margin-bottom: 0;
     box-shadow: inset 0 0 10px rgba(37, 37, 37, 0.3);
 
-
-
 }
 
 #texto::before {
     content: "\201C";
-    /* aspas abrindo " */
     position: absolute;
-    top: -30px;
-    left: -20px;
-    font-size: 8rem;
+    top: -10px;
+    left: 10px;
+    font-size: 5rem;
     color: var(--vermelho);
     font-family: Georgia, serif;
     line-height: 1;
@@ -384,11 +388,10 @@ strong {
 
 #texto::after {
     content: "\201D";
-    /* aspas fechando " */
     position: absolute;
-    bottom: -60px;
-    right: -20px;
-    font-size: 8rem;
+    bottom: -40px;
+    right: 10px;
+    font-size: 5rem;
     color: var(--vermelho);
     font-family: Georgia, serif;
     line-height: 1;
@@ -514,6 +517,7 @@ address {
 .titulo-branco {
     font-family: 'Sekuya';
     font-weight: bold;
+    display: inline;
 }
 
 .slogan-footer {
@@ -761,9 +765,9 @@ address {
 
 #contato {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    /* mobile: empilhado */
     gap: 2rem;
-
     width: min(95%, 1200px);
     margin: 0 auto;
     align-items: start;
@@ -773,12 +777,9 @@ address {
 #redessociais {
     background-color: var(--vermelho);
     height: auto;
-    margin-bottom: 2vh;
     color: #f1f1f1;
     overflow: hidden;
     border-radius: 30px;
-    width: min(95%, 1200px);
-    margin: 2rem auto;
     padding: 2rem;
 
 
@@ -873,12 +874,11 @@ address {
 }
 
 #previa-agenda {
-    display: none;
+    display: none !important;
 }
 
 .hamburger {
     display: none;
-    /* escondido no desktop */
     background: none;
     box-shadow: none;
     color: var(--cor-texto);
@@ -889,7 +889,6 @@ address {
     cursor: pointer;
 }
 
-/* Overlay escuro atrás do menu */
 .nav-overlay {
     display: none;
     position: fixed;
@@ -902,13 +901,11 @@ address {
     display: block;
 }
 
-/* Painel lateral */
 nav.mobile-open>ul {
     transform: translateX(0);
 }
 
 nav>ul {
-    /* Mobile: vira painel lateral direito */
     position: fixed;
     top: 0;
     right: 0;
@@ -923,7 +920,6 @@ nav>ul {
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
     z-index: 100;
     transform: translateX(100%);
-    /* escondido fora da tela */
     transition: transform 0.3s ease;
 }
 
@@ -938,7 +934,6 @@ nav>ul {
         display: none !important;
     }
 
-    /* Restaura o comportamento original da nav no desktop */
     nav>ul {
         position: static;
         height: auto;
@@ -968,21 +963,20 @@ nav>ul {
     }
 
     #previa-agenda {
+        background-color: rgb(255, 0, 0);
+        color: white;
+        padding: 2vw;
+        width: auto;
+        left: calc(100% - 480px);
+        right: 0;
+        border-radius: 20px 0px 0px 20px;
+        display: block !important;
         position: absolute;
-
         left: calc(100% - 480px);
         top: 430px;
+        overflow: hidden;
+        box-shadow: rgba(0, 0, 0, 0.233) 1px 1px 5px;
 
-        width: 420px;
-
-        background: var(--vermelho);
-        color: #fff;
-
-        padding: 18px 22px;
-
-        border-radius: 18px 0 0 18px;
-
-        z-index: 5;
     }
 
 
@@ -1042,34 +1036,22 @@ nav>ul {
 
     }
 
-    #ih1 {
-        border-radius: 0px 20px 20px 0px;
-        grid-column: 1;
-        grid-row: 1;
-        z-index: 2;
-        margin: 30px;
+    #texto2 {
+        grid-column: auto;
+        /* remova o 3/4 */
     }
 
-    #ih2 {
-        border-radius: 12px 0px 0px 12px;
-        grid-column: 2;
-        grid-row: 2;
-        margin-top: 5vh;
-        z-index: 1;
-        width: 100%;
-
-    }
-
-
+    #ht1,
     #ht2 {
-        grid-column: 1;
-        grid-row: 2;
+        overflow: hidden;
+        min-width: 0;
+        padding: 5vw
     }
 
-    #ht1 {
-        grid-column: 2;
-        grid-row: 1;
-
+    #ih1,
+    #ih2 {
+        min-width: 0;
+        max-width: 100%;
     }
 
 
@@ -1123,75 +1105,134 @@ nav>ul {
         font-family: 'Poppins';
         text-decoration: none;
     }
+
+    .identidade {
+        margin-right: 25vw;
+    }
+
+    #contato {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @media (max-width: 768px) {
-
-    .historia_text {
-        margin: 1rem;
+    .logo-text {
+        font-size: 1rem;
+        white-space: nowrap;
     }
 
-    #informacoes_iniciais {
-        padding: 1rem;
+    @media (max-width: 768px) {
+        #id_visual {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .logo-footer-wrapper {
+            flex: 0 0 auto;
+        }
+
+        .slogan-footer {
+            flex: 1 1 100px;
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        .horario-atendimento {
+            flex: 1 1 120px;
+            font-size: 0.85rem;
+
+        }
+
+
+
+        .footer-col ul li,
+        .footer-col ul li a {
+            white-space: normal;
+            word-break: break-all;
+            font-size: 0.75rem;
+        }
+
+        .historia_text {
+            margin: 1rem;
+        }
+
+        #informacoes_iniciais {
+            padding: 1rem;
+        }
+
+        #informacoes_iniciais>p {
+            max-width: 100%;
+        }
+
+        #texto {
+            padding: 1rem;
+            width: 95%;
+        }
+
+        .logo_fundo,
+        .texto_jp {
+            display: none;
+
+
+        }
+
+        #ih2 {
+            padding: 0;
+        }
+
+        #mapframe {
+            width: 100%;
+            height: 300px;
+        }
+
+        #container_footer_grid {
+            grid-template-columns: 1fr;
+        }
+
+        #form {
+            grid-template-columns: 1fr;
+        }
+
+        #form input {
+            grid-column: 1;
+        }
+
+        .slide {
+            width: 80vw;
+        }
+
+        header {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+
+        .historia {
+            padding: 0 1rem;
+        }
+
+        .historia>img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        #loc_end {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .local {
+            width: 100%;
+            overflow: hidden;
+        }
+
+
     }
-
-    #informacoes_iniciais>p {
-        max-width: 100%;
-    }
-
-    #texto {
-        padding: 1rem;
-        width: 95%;
-    }
-
-    .logo_fundo,
-    .texto_jp {
-        display: none;
-    }
-
-    #ih2 {
-        padding: 0;
-    }
-
-    #mapframe {
-        width: 100%;
-        height: 300px;
-    }
-
-    #container_footer_grid {
-        grid-template-columns: 1fr;
-    }
-
-    #form {
-        grid-template-columns: 1fr;
-    }
-
-    #form input {
-        grid-column: 1;
-    }
-
-    .slide {
-        width: 80vw;
-    }
-
-    header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-    }
-
-    .historia {
-        padding: 0 1rem;
-    }
-
-    .historia>img {
-        width: 100%;
-        height: auto;
-        border-radius: 12px;
-    }
-
-
-
 }
 
 @media screen and (max-width: 1023px) {
@@ -1199,9 +1240,7 @@ nav>ul {
         display: flex;
     }
 
-    /* Esconde a nav por padrão no mobile */
     nav>ul {
         display: flex;
-        /* mantém flex, mas fora da tela via transform */
     }
 }
