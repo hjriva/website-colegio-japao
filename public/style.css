@@ -63,7 +63,8 @@ nav>ul {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    gap: 10px;
 
 }
 
@@ -71,7 +72,6 @@ nav>ul {
 .identidade {
     display: flex;
     flex-direction: row;
-    margin-right: 25vw;
 }
 
 header {
@@ -81,6 +81,7 @@ header {
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.26) 1pt 0pt 30px;
     height: 15vh;
+    overflow-x: hidden;
 }
 
 
@@ -89,7 +90,6 @@ li>a {
     color: var(--cor-texto);
     font-family: var(--fonte-texto);
     font-weight: 600;
-    margin-left: 3em;
     font-size: 2.5vh;
 
 }
@@ -129,7 +129,7 @@ li>a {
 
 #informacoes_iniciais>p {
     font-size: 1.8vh;
-    max-width: 14vw;
+    max-width: 100%;
     color: #4141418f;
     margin-bottom: 1em;
     font-weight: 600;
@@ -141,7 +141,7 @@ h1 {
     font-weight: 400;
     display: flex;
     flex-direction: row;
-    font-size: 3vw;
+    font-size: clamp(1.8rem, 4vw, 3rem);
     color: var(--cor-texto);
     margin-top: 2em;
     margin-bottom: 1vw;
@@ -223,7 +223,7 @@ button:hover {
 
 #subtitulo {
     text-align: center;
-    font-size: 2.2vw;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 450;
     color: var(--cor-texto);
     margin-top: 3em;
@@ -251,19 +251,18 @@ button:hover {
 
 
 .historia_text {
-    margin-left: 8em;
-    margin-right: 8em;
+
     font-size: 1em;
     line-height: 2rem;
     text-align: justify;
-    margin-top: 1.5em;
+    padding: 1rem;
+    margin: 0;
 }
 
 
 .historia>img {
-    width: 80vh;
-    height: 40vh;
-    display: inline-block;
+    width: 100%;
+    height: auto;
 }
 
 #ih1 {
@@ -284,7 +283,7 @@ button:hover {
     z-index: 1;
     width: 100%;
     order: 3;
-    padding: 20vh;
+    padding: 0;
     width: 100%;
 
 }
@@ -359,8 +358,8 @@ strong {
     font-weight: 400;
     z-index: 2;
     position: relative;
-    padding: 10vh;
-    border-radius: 20px;
+padding: clamp(1rem, 4vw, 4rem);
+        border-radius: 20px;
     background-color: #ffffff;
     margin: 2rem auto;
     width: min(90%, 1000px);
@@ -431,7 +430,7 @@ h2>i {
 
 address {
     display: flex;
-    font-size: 3vh;
+    font-size: 1rem;
     display: flex;
     justify-content: center;
     align-items: start;
@@ -444,7 +443,8 @@ address {
 }
 
 #mapframe {
-    width: 100vh;
+    width: 100%;
+    max-width: 100%;
     height: 428px;
     border-radius: 0px 30px 30px 0px;
     border: none;
@@ -760,11 +760,13 @@ address {
 }
 
 #contato {
-    display: flex;
-    flex-direction: column-reverse;
-    flex-wrap: wrap;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    width: min(95%, 1200px);
     margin: 0 auto;
+    align-items: start;
 }
 
 
@@ -806,6 +808,8 @@ address {
     margin: 4vh;
     padding: 2vh;
     color: #ffffff;
+    margin-left: 0;
+
 }
 
 .icon {
@@ -818,7 +822,7 @@ address {
     gap: 16px;
     align-self: center;
     width: 100%;
-    max-width: 480px;
+    max-width: none;
 }
 
 #form input {
@@ -906,7 +910,10 @@ address {
         border-radius: 18px 0 0 18px;
 
         z-index: 5;
+        display: none;
     }
+
+
 
     #link-agenda {
         color: white;
@@ -930,16 +937,6 @@ address {
         border-radius: 30px 0px 0px 30px;
         margin-left: 10px;
     }
-
-    #contato {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        justify-items: center;
-        align-items: center;
-        margin: 0;
-
-    }
-
 
 
     #mapframe {
@@ -978,8 +975,7 @@ address {
         grid-column: 1;
         grid-row: 1;
         z-index: 2;
-        width: 100%;
-
+        margin: 30px;
     }
 
     #ih2 {
@@ -1055,4 +1051,73 @@ address {
         font-family: 'Poppins';
         text-decoration: none;
     }
+}
+
+@media (max-width: 768px) {
+
+    .historia_text {
+        margin: 1rem;
+    }
+
+    #informacoes_iniciais {
+        padding: 1rem;
+    }
+
+    #informacoes_iniciais>p {
+        max-width: 100%;
+    }
+
+    #texto {
+        padding: 1rem;
+        width: 95%;
+    }
+
+    .logo_fundo,
+    .texto_jp {
+        display: none;
+    }
+
+    #ih2 {
+        padding: 0;
+    }
+
+    #mapframe {
+        width: 100%;
+        height: 300px;
+    }
+
+    #container_footer_grid {
+        grid-template-columns: 1fr;
+    }
+
+    #form {
+        grid-template-columns: 1fr;
+    }
+
+    #form input {
+        grid-column: 1;
+    }
+
+    .slide {
+        width: 80vw;
+    }
+
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .historia {
+        padding: 0 1rem;
+    }
+
+    .historia>img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    
+
 }
