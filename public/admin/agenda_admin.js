@@ -470,14 +470,23 @@
       const inputImagem = document.createElement("input");
       inputImagem.type = "file";
       inputImagem.accept = "image/*";
+      inputImagem.id = `img_${disc.id}`
       inputImagem.style.cssText = "display:block; margin-top:6px; font-size:0.8rem;";
+      inputImagem.style.display = 'none'
 
       const labelImagem = document.createElement("label");
-      labelImagem.textContent = "Nova foto:";
-      labelImagem.style.cssText = "font-size:0.8rem; display:block; margin-top:6px;";
+      labelImagem.setAttribute('for', `img_${disc.id}`)
+      labelImagem.textContent = "Nova foto";
+      labelImagem.classList.add('label-file')
 
+labelImagem.style.cssText = "font-size:0.8rem; display:inline-block; margin-top:6px; padding:4px 10px; background:#e2e2e2; border-radius:8px; cursor:pointer;"
       li.insertBefore(labelImagem, li.querySelector('.button-wrapper-disciplinas'));
       li.insertBefore(inputImagem, li.querySelector('.button-wrapper-disciplinas'));
+
+      inputImagem.addEventListener('change', () => {
+    const nome = inputImagem.files[0]?.name || "Escolher arquivo";
+    labelImagem.textContent = nome;
+});
 
       const btnEditar = li.querySelector(`#editar${disc.id}`);
       const btnExcluir = li.querySelector(`#excluir${disc.id}`);
@@ -514,7 +523,8 @@
           if (novaImagem) {
               li.style.backgroundImage = `
           linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
-          url('/${atv.imagem_disciplina}')
+          url('/${novaImagem}')
+
       `;
               li.style.backgroundSize = 'cover';
               li.style.backgroundPosition = 'center';
@@ -562,7 +572,10 @@
           restaurar(valorAtual, null);
       });
 
-      li.append(btnSalvar, btnCancelar);
+      const botoesEditDisciplina = document.createElement('div')
+      botoesEditDisciplina.classList.add(`botoesEditDisciplina`)
+      botoesEditDisciplina.append(btnSalvar, btnCancelar)
+      li.append(botoesEditDisciplina);
   }
 
     function excluirDisciplina(li, disc) {
@@ -683,7 +696,9 @@
             // ===== BOTÃO EXCLUIR QUIZ =====
 const btnExcluirQuiz = document.createElement("button");
 btnExcluirQuiz.textContent = "Excluir quiz";
+
 btnExcluirQuiz.classList.add("btn-excluir-quiz");
+btnExcluirQuiz.id = 'btnExcluirQuiz'
 btnExcluirQuiz.addEventListener("click", async () => {
     if (!confirm(`Tem certeza que deseja excluir o quiz "${quiz.titulo}"? Essa ação é permanente.`)) return;
 
@@ -698,7 +713,6 @@ btnExcluirQuiz.addEventListener("click", async () => {
     }
 });
 
-tituloDiv.appendChild(btnExcluirQuiz);
 
           const inputTitulo = document.createElement("input");
           inputTitulo.value = quiz.titulo;
@@ -717,7 +731,7 @@ tituloDiv.appendChild(btnExcluirQuiz);
           // ===== BOTÕES GLOBAIS =====
           const botoesDiv = document.createElement("div");
           botoesDiv.classList.add("acoes-quiz-admin");
-
+          
           const btnAdicionar = document.createElement("button");
           btnAdicionar.textContent = "+";
           btnAdicionar.id = "add-pergunta";
@@ -739,7 +753,7 @@ tituloDiv.appendChild(btnExcluirQuiz);
           });
 
           const btnSalvarTitulo = document.createElement("button");
-          btnSalvarTitulo.textContent = "Salvar título";
+          btnSalvarTitulo.textContent = "Salvar quiz";
           btnSalvarTitulo.id = "salvar_quiz_editado";
           btnSalvarTitulo.addEventListener("click", async () => {
             await fetch("/atualizarTituloQuiz", {
@@ -750,9 +764,10 @@ tituloDiv.appendChild(btnExcluirQuiz);
                 titulo: inputTitulo.value,
               }),
             });
+              
           });
 
-          botoesDiv.append(btnAdicionar, btnSalvarTitulo);
+          botoesDiv.append(btnAdicionar, btnSalvarTitulo, btnExcluirQuiz);
           container.appendChild(botoesDiv);
         });
     }

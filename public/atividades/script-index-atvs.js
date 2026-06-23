@@ -10,7 +10,7 @@ function renderizarDisciplinas() {
     container.innerHTML = '';
 
     const isMobile = window.innerWidth < 1020;
-
+console.log('largura:', window.innerWidth, 'isMobile:', isMobile);
     if (isMobile) {
         const select = document.createElement('select');
         container.appendChild(select);
