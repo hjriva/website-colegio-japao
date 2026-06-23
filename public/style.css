@@ -358,8 +358,8 @@ strong {
     font-weight: 400;
     z-index: 2;
     position: relative;
-padding: clamp(1rem, 4vw, 4rem);
-        border-radius: 20px;
+    padding: clamp(1rem, 4vw, 4rem);
+    border-radius: 20px;
     background-color: #ffffff;
     margin: 2rem auto;
     width: min(90%, 1000px);
@@ -876,7 +876,80 @@ address {
     display: none;
 }
 
+.hamburger {
+    display: none;
+    /* escondido no desktop */
+    background: none;
+    box-shadow: none;
+    color: var(--cor-texto);
+    font-size: 1.8rem;
+    padding: 0.5em;
+    margin: 0;
+    width: auto;
+    cursor: pointer;
+}
+
+/* Overlay escuro atrás do menu */
+.nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 99;
+}
+
+.nav-overlay.active {
+    display: block;
+}
+
+/* Painel lateral */
+nav.mobile-open>ul {
+    transform: translateX(0);
+}
+
+nav>ul {
+    /* Mobile: vira painel lateral direito */
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background: #fff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    gap: 2rem;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    transform: translateX(100%);
+    /* escondido fora da tela */
+    transition: transform 0.3s ease;
+}
+
 @media screen and (min-width: 1024px) {
+
+
+    .hamburger {
+        display: none !important;
+    }
+
+    .nav-overlay {
+        display: none !important;
+    }
+
+    /* Restaura o comportamento original da nav no desktop */
+    nav>ul {
+        position: static;
+        height: auto;
+        width: auto;
+        background: none;
+        flex-direction: row;
+        padding: 0;
+        box-shadow: none;
+        transform: none;
+        transition: none;
+    }
 
     .principal {
         display: grid;
@@ -910,7 +983,6 @@ address {
         border-radius: 18px 0 0 18px;
 
         z-index: 5;
-        display: none;
     }
 
 
@@ -1118,6 +1190,18 @@ address {
         border-radius: 12px;
     }
 
-    
 
+
+}
+
+@media screen and (max-width: 1023px) {
+    .hamburger {
+        display: flex;
+    }
+
+    /* Esconde a nav por padrão no mobile */
+    nav>ul {
+        display: flex;
+        /* mantém flex, mas fora da tela via transform */
+    }
 }
