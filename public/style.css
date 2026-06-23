@@ -24,6 +24,8 @@
 body {
     overflow-x: hidden;
     width: 100%;
+
+
 }
 
 main {
@@ -119,7 +121,6 @@ li>a {
 
 
 .principal {
-
     display: flex;
     flex-direction: column-reverse;
     width: 100%;
@@ -129,11 +130,12 @@ li>a {
 }
 
 #informacoes_iniciais {
-    padding-left: 5.5vw;
+    padding-left: 10vw;
+    padding-right: 5.5vw;
 }
 
 #informacoes_iniciais>p {
-    font-size: 1.8vh;
+    font-size: 1em;
     max-width: 100%;
     color: #4141418f;
     margin-bottom: 1em;
@@ -166,7 +168,7 @@ h1 {
 
 }
 
-button {
+#faleconosco {
     background-color: var(--vermelho);
     border: none;
     border-radius: 10px;
@@ -180,13 +182,13 @@ button {
 
 }
 
-button>a {
+#faleconosco>a {
     color: #ffffff;
     font-family: 'Poppins';
     text-decoration: none;
 }
 
-button:hover {
+#faleconosco:hover {
     background-color: hwb(0 39% 0%);
 
 }
@@ -252,6 +254,9 @@ button:hover {
     justify-items: center;
     width: auto;
     overflow: hidden;
+    margin-top: 0;
+    padding: 0 5rem;
+
 }
 
 
@@ -271,12 +276,13 @@ button:hover {
 }
 
 #ih1 {
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 50px;
     grid-column: 1;
     grid-row: 1;
     z-index: 2;
     width: 100%;
     order: 2;
+
 
 }
 
@@ -284,12 +290,12 @@ button:hover {
     border-radius: 12px 0px 0px 12px;
     grid-column: 2;
     grid-row: 2;
-    margin-top: 5vh;
     z-index: 1;
     width: 100%;
     order: 3;
     padding: 0;
     width: 100%;
+    display: none;
 
 }
 
@@ -331,18 +337,7 @@ strong {
 }
 
 
-#texto1 {
-    margin-top: 10vh;
-    position: relative;
-    overflow: hidden;
-}
 
-#texto2 {
-    margin-top: 10vh;
-    position: relative;
-    grid-column: 3/4;
-    overflow: hidden;
-}
 
 .texto_jp {
     position: absolute;
@@ -365,7 +360,7 @@ strong {
     font-weight: 500;
     z-index: 2;
     position: relative;
-    padding: 6em;
+    padding: 3em;
     border-radius: 20px;
     background-color: #ffffff;
     margin: 2rem auto;
@@ -397,16 +392,28 @@ strong {
     line-height: 1;
 }
 
+.texto1 {
+    position: relative;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+#texto2 {
+    position: relative;
+    grid-column: 3/4;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
 h2 {
     margin-top: 9vh;
-    margin-left: 10vh;
     font-weight: 800;
+    text-align: center;
 
 }
 
 
 h2>i {
-    margin-right: 2vh;
     font-size: 5vh;
 
 }
@@ -663,6 +670,7 @@ address {
     position: relative;
     width: 100%;
     height: 450px;
+    margin-bottom: 5vh;
 
 }
 
@@ -780,7 +788,7 @@ address {
     color: #f1f1f1;
     overflow: hidden;
     border-radius: 30px;
-    padding: 2rem;
+    padding: 3.3rem;
 
 
 
@@ -788,13 +796,14 @@ address {
 
 
 #redessociais>p {
-    padding: 2vh;
-    margin: 4vh;
+    text-align: justify;
+    margin-bottom: 5vh;
+    margin-top: 2vh;
 }
 
 #redessociais>h2 {
     margin-top: 2vh;
-    margin-left: 6vh;
+    margin-bottom: 5vh;
 
 }
 
@@ -802,14 +811,16 @@ address {
     list-style: none;
     margin: 0;
     padding: 0;
+
 }
 
 #redessociais>ul>li>a {
     list-style: none;
-    margin: 4vh;
-    padding: 2vh;
+    margin: 5vh;
+    row-gap: 10px;
     color: #ffffff;
     margin-left: 0;
+    word-break: break-all;
 
 }
 
@@ -824,6 +835,7 @@ address {
     align-self: center;
     width: 100%;
     max-width: none;
+
 }
 
 #form input {
@@ -1038,7 +1050,6 @@ nav>ul {
 
     #texto2 {
         grid-column: auto;
-        /* remova o 3/4 */
     }
 
     #ht1,
@@ -1053,6 +1064,20 @@ nav>ul {
         min-width: 0;
         max-width: 100%;
     }
+
+    #ih2 {
+        border-radius: 12px 0px 0px 12px;
+        grid-column: 2;
+        grid-row: 2;
+        z-index: 1;
+        width: 100%;
+        order: 3;
+        padding: 0;
+        width: 100%;
+        display: flex;
+
+    }
+
 
 
     #informacoes_iniciais {
@@ -1116,124 +1141,152 @@ nav>ul {
 }
 
 @media (max-width: 768px) {
+
+    #texto {
+        width: 80%;
+        margin: 2rem auto;
+        overflow: hidden;
+    }
+
+    #texto::before {
+        font-size: 3rem;
+        top: 5px;
+        left: 5px;
+    }
+
+    #texto::after {
+        font-size: 3rem;
+        bottom: -25px;
+        right: 5px;
+    }
+
     .logo-text {
         font-size: 1rem;
         white-space: nowrap;
     }
 
-    @media (max-width: 768px) {
-        #id_visual {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: flex-start;
-        }
+    #id_visual {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: flex-start;
+    }
 
-        .logo-footer-wrapper {
-            flex: 0 0 auto;
-        }
+    .logo-footer-wrapper {
+        flex: 0 0 auto;
+    }
 
-        .slogan-footer {
-            flex: 1 1 100px;
-            margin: 0;
-            font-size: 0.85rem;
-        }
+    .slogan-footer {
+        flex: 1 1 100px;
+        margin: 0;
+        font-size: 0.85rem;
+    }
 
-        .horario-atendimento {
-            flex: 1 1 120px;
-            font-size: 0.85rem;
+    .horario-atendimento {
+        flex: 1 1 120px;
+        font-size: 0.85rem;
 
-        }
-
+    }
 
 
-        .footer-col ul li,
-        .footer-col ul li a {
-            white-space: normal;
-            word-break: break-all;
-            font-size: 0.75rem;
-        }
 
-        .historia_text {
-            margin: 1rem;
-        }
+    .footer-col ul li,
+    .footer-col ul li a {
+        white-space: normal;
+        word-break: break-all;
+        font-size: 0.75rem;
+    }
 
-        #informacoes_iniciais {
-            padding: 1rem;
-        }
+    .historia_text {
+        margin: 1rem;
+    }
 
-        #informacoes_iniciais>p {
-            max-width: 100%;
-        }
+    #informacoes_iniciais {
+        padding: 1rem;
+    }
 
-        #texto {
-            padding: 1rem;
-            width: 95%;
-        }
-
-        .logo_fundo,
-        .texto_jp {
-            display: none;
+    #informacoes_iniciais>h1 {
+        padding-right: 5vw;
+        padding-left: 5vw;
+    }
 
 
-        }
+    #informacoes_iniciais>p {
+        font-size: 1.8vh;
+        max-width: 100%;
+        color: #4141418f;
+        margin-bottom: 1em;
+        font-weight: 600;
+        text-align: start;
+        padding-right: 5vw;
+        padding-left: 5vw;
 
-        #ih2 {
-            padding: 0;
-        }
+    }
 
-        #mapframe {
-            width: 100%;
-            height: 300px;
-        }
+    #faleconosco {
+        margin-left: 5vw;
+    }
 
-        #container_footer_grid {
-            grid-template-columns: 1fr;
-        }
-
-        #form {
-            grid-template-columns: 1fr;
-        }
-
-        #form input {
-            grid-column: 1;
-        }
-
-        .slide {
-            width: 80vw;
-        }
-
-        header {
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 0 1rem;
-        }
-
-
-        .historia {
-            padding: 0 1rem;
-        }
-
-        .historia>img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-        }
-
-        #loc_end {
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .local {
-            width: 100%;
-            overflow: hidden;
-        }
+    .logo_fundo,
+    .texto_jp {
+        display: none;
 
 
     }
+
+    #ih2 {
+        padding: 0;
+    }
+
+    #mapframe {
+        width: 100%;
+        height: 300px;
+    }
+
+    #container_footer_grid {
+        grid-template-columns: 1fr;
+    }
+
+    #form {
+        grid-template-columns: 1fr;
+    }
+
+    #form input {
+        grid-column: 1;
+    }
+
+    .slide {
+        width: 80vw;
+    }
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 1rem;
+    }
+
+
+
+    .historia>img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    #loc_end {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .local {
+        width: 100%;
+        overflow: hidden;
+    }
+
+
 }
+
 
 @media screen and (max-width: 1023px) {
     .hamburger {
