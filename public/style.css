@@ -1085,6 +1085,16 @@ nav>ul {
         flex-direction: column;
     }
 
+        #informacoes_iniciais>p {
+        font-size: 2vh;
+        max-width: 100%;
+        color: #4141418f;
+        margin-bottom: 1em;
+        font-weight: 600;
+        text-align: start;
+    }
+
+
     #imagem_inicio {
         width: 100%;
         height: 500px;
