@@ -591,6 +591,71 @@ app.get('/disciplinas/exceto/:id', async (req, res) => {
         res.status(500).json({ erro: 'Erro ao buscar disciplinas' });
     }
 });
+app.post("/novaPerguntaQuiz", async (req, res) => {
+
+  const {
+    quiz_id,
+    pergunta,
+    alt_a,
+    alt_b,
+    alt_c,
+    alt_d,
+    correto,
+    explicacao
+  } = req.body;
+
+  if (!quiz_id || !pergunta) {
+    return res.status(400).json({
+      erro: "Dados incompletos"
+    });
+  }
+
+  try {
+
+    const { rows } = await db.query(
+      `
+      INSERT INTO questoes
+      (
+        quiz_id,
+        pergunta,
+        alternativa_a,
+        alternativa_b,
+        alternativa_c,
+        alternativa_d,
+        resposta_correta,
+        explicacao
+      )
+      VALUES
+      ($1,$2,$3,$4,$5,$6,$7,$8)
+      RETURNING id
+      `,
+      [
+        quiz_id,
+        pergunta,
+        alt_a,
+        alt_b,
+        alt_c,
+        alt_d,
+        correto,
+        explicacao
+      ]
+    );
+
+    res.json({
+      sucesso: true,
+      id: rows[0].id
+    });
+
+  } catch (err) {
+
+    console.error(err);
+
+    res.status(500).json({
+      erro: "Erro ao criar pergunta"
+    });
+
+  }
+});
 
 // Exclui a disciplina, com opção de migrar ou excluir as atividades vinculadas
 app.post('/excluirDisciplina', async (req, res) => {
