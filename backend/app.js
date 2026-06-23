@@ -756,6 +756,29 @@ app.post('/atualizarImagemDisciplina', uploadDisciplina.single('imagem'), async 
     }
 });
 
+app.post("/excluirQuiz", async (req, res) => {
+    const { idQuiz, idAtividade } = req.body;
+    if (!idQuiz || !idAtividade) return res.status(400).json({ erro: "Dados incompletos" });
+
+    const client = await db.connect();
+    try {
+        await client.query('BEGIN');
+        await client.query(`DELETE FROM questoes WHERE quiz_id = $1`, [idQuiz]);
+        await client.query(`DELETE FROM quizzes WHERE id = $1`, [idQuiz]);
+        await client.query(`DELETE FROM atividades WHERE id = $1`, [idAtividade]);
+        await client.query('COMMIT');
+        res.json({ sucesso: true });
+    } catch (err) {
+        await client.query('ROLLBACK');
+        console.error(err);
+        res.status(500).json({ erro: "Erro ao excluir quiz" });
+    } finally {
+        client.release();
+    }
+});
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
