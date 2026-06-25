@@ -15,7 +15,7 @@
         padding: 0;
         box-sizing: border-box;
 
-        outline: 1px solid red;
+        /* outline: 1px solid red; */
         /* verificar o que esta vazando */
 
     }
@@ -341,7 +341,7 @@
     .texto_jp {
         display: none;
     }
-    
+
     #ht1 p {
         position: relative;
         z-index: 1;
