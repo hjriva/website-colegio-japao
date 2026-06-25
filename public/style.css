@@ -281,24 +281,26 @@
         grid-column: 1;
         grid-row: 1;
         z-index: 2;
-        width: 100%;
-        order: 2;
+        /*width: 100%;*/
+        order: 3;
 
 
     }
 
     #ih2 {
-        border-radius: 50px 0px 0px 50px;
+        /*border-radius: 50px 0px 0px 50px;*/
         grid-column: 2;
         grid-row: 2;
         z-index: 1;
-        width: 100%;
+        /*width: 100%;*/
         order: 3;
         padding: 0;
-        width: 100%;
-        display: none;
+        /*width: 100%;
+        display: none;*/
+        order: 4;
 
     }
+   
 
 
     #ht2 {
@@ -311,10 +313,11 @@
         position: relative;
         grid-column: 2;
         grid-row: 1;
-        order: 2;
+        order: 3;
 
     }
 
+  
     strong {
         color: var(--vermelho);
     }
@@ -337,8 +340,17 @@
         z-index: 1;
     }
 
+   #texto1, #texto2, .historia > img
+    {
+    width: 75vw;
+    margin: auto;
+    box-sizing: content-box;
+}
 
-
+    .historia > img, #ih2 > img {
+border-radius: 50px;
+    }
+    
 
     .texto_jp {
         position: absolute;
@@ -350,7 +362,7 @@
     }
 
 
-
+ 
 
 
     #texto {
@@ -942,6 +954,27 @@
         transition: transform 0.3s ease;
     }
 
+#loc_end {
+    max-width: 99%;
+  }
+
+ [class*="userway_buttons_wrapper"] {
+    top: auto !important;
+    bottom: 20px !important;
+}
+
+* [class*="userway"] [class*="buttons_wrapper"] {
+    top: auto !important;
+    bottom: 20px !important;
+}
+
+.uwy.userway_p1 .userway_buttons_wrapper {
+   
+    left: calc(100vw - 11px) !important;
+
+}
+
+
     @media screen and (min-width: 1024px) {
 
         #subtitulo {
@@ -1059,6 +1092,9 @@
             width: 100%;
             row-gap: 30px;
             margin-bottom: 10vh;
+            grid-template-areas:
+            "ih1 ht2"
+            "ht1 ih2"
 
         }
 
@@ -1097,7 +1133,7 @@
             grid-column: 1;
             grid-row: 1;
             z-index: 2;
-            order: 2;
+            grid-area: ih1;
 
         }
 
@@ -1105,9 +1141,13 @@
             width: 95%;
             margin-left: auto;
             display: flex;
+            grid-area: ih2;
         }
 
-
+        #ht2 {
+            grid-area: ht2;
+        }
+        #ht1 { grid-area: ht1; }*/
 
 
         #informacoes_iniciais {
@@ -1214,6 +1254,9 @@
             width: 80%;
             margin: 2rem auto;
             overflow: hidden;
+            /*text-align: right; 
+             font-weight: 300; */
+            font-size: 0.8em;
         }
 
         #texto::before {
@@ -1362,5 +1405,38 @@
 
         nav>ul {
             display: flex;
+        }
+
+        #form > button {
+            width: fit-content;
+            padding: 10px;
+            margin: auto;
+            /*width: 100%;*/
+        }
+
+        #loc_end {
+            max-width: 100%;
+        }
+
+       
+    }
+
+
+    @media screen and (min-width: 1023px) {
+        #texto1, #texto2 {
+            width: auto;
+            max-width: 100%;
+            
+        }
+    
+        #ht1, #ht2 {
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            padding: 0px;
+        }
+
+        #ih2 {
+            border-radius: 50px 0px 0px 50px;
         }
     }
