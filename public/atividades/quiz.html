@@ -1,74 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style_quiz.css">
-    <link rel="icon" type="image/png" href="../imgs_site/logo.png">
-
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="style_quiz.css" />
+    <link rel="icon" type="image/png" href="../imgs_site/logo.png" />
 
     <!-- Fontes Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-            <!-- BootStrap/Flaticon -->
+    <!-- BootStrap/Flaticon -->
 
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <header>
-        <div class="identidade">
-            <img src="../imgs_site/logo.png" id="logo_header"
-                alt="Logo da escola na cor vermelha, com o símbolo abstrato." />
-            <div class="logo">Colégio<span class="titulo">Japão</span></div>
-        </div>
-        <!-- NAV -->
-        <nav>
-            <ul>
-                <li><a href="../index.html">Início</a></li>
-                <li><a href="index.html">Atividades</a></li>
-                <li><a class="btn_agenda" href="../agenda_pag.html">Agenda</a></li>
-            </ul>
-        </nav>
+      <div class="identidade">
+        <img
+          src="../imgs_site/logo.png"
+          id="logo_header"
+          alt="Logo da escola na cor vermelha, com o símbolo abstrato."
+        />
+        <div class="logo">Colégio<span class="titulo">Japão</span></div>
+      </div>
+      <!-- NAV -->
+      <nav>
+        <ul>
+          <li><a href="../index.html">Início</a></li>
+          <li><a href="index.html">Atividades</a></li>
+          <li><a class="btn_agenda" href="../agenda_pag.html">Agenda</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-    <h1 id="titulo">Carregando quiz...</h1>
+      <h1 id="titulo">Carregando quiz...</h1>
 
-
-
-    <div id="resultado"></div>
-    <div id="questoes">
+      <div id="resultado"></div>
+      <div id="questoes">
         <p id="loading-quiz">Carregando...</p>
-    </div>
-        <div id="navegacao"></div>
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <button id="submeter-resultado">Submeter resultado</button>
-    <p id="aviso-submeter" style="color: red; margin: 0;"></p>
-</div>
-        </main>
+      </div>
+      <div id="navegacao"></div>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <button id="submeter-resultado">Submeter resultado</button>
+        <p id="aviso-submeter" style="color: red; margin: 0"></p>
+      </div>
+    </main>
 
     <footer>
       <div id="container_footer_grid">
         <div class="footer-col" id="id_visual">
           <div class="logo-footer-wrapper">
             <img
-              src="../imgs_site/logojpwhite.png"
+              src="imgs_site/logojpwhite.png"
               id="logo_footer"
               alt="Logo da escola na cor branca, com o símbolo abstrato."
             />
@@ -83,13 +88,20 @@
           </div>
         </div>
 
+        <div class="footer-col">
+          <h3>Anos</h3>
+          <p>1º ano até 9º ano do Ensino Fundamental</p>
+          <p>1º ano até o 3º ano do Ensino Médio</p>
+          <p>Educação de Jovens e Adultos (EJA)</p>
+        </div>
+
         <div class="footer-col" id="links">
           <h3>Mapa</h3>
           <ul>
-            <li><a href="../index.html">Página inicial</a></li>
-            <li><a href="index.html">Atividades</a></li>
-            <li><a href="../index.html#contato">Contato</a></li>
-            <li><a href="../agenda_pag.html">Agenda</a></li>
+            <li><a href="index.html">Página inicial</a></li>
+            <li><a href="atividades/index.html">Atividades</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="agenda_pag.html">Agenda</a></li>
           </ul>
         </div>
 
@@ -125,30 +137,25 @@
       </div>
     </footer>
 
+    <script src="quiz_script.js"></script>
 
-
-
-              <script src="quiz_script.js"></script>
-              
-                    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-          <div class="vw-plugin-top-wrapper"></div>
-        </div>
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
       </div>
-      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-      <script>
-        new window.VLibras.Widget("https://vlibras.gov.br/app");
-      </script>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
+    </script>
 
-      <script src="carrossel.js"></script>
+    <script src="carrossel.js"></script>
 
-      <script
-        src="https://cdn.userway.org/widget.js"
-        data-account="PhHQuLEkH6"
-        id="userway-root"
-      ></script>
-
-</body>
-
+    <script
+      src="https://cdn.userway.org/widget.js"
+      data-account="PhHQuLEkH6"
+      id="userway-root"
+    ></script>
+  </body>
 </html>

@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style_admin.css" />
+
     <title>Painel de Controle</title>
+
     <style>
       img {
         height: 100px;
@@ -39,13 +42,17 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <link rel="shortcut icon" href="../../imgs_site/logo.png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="../../imgs_site/logo.png"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="style_admin.css" />
 
     <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon" />
   </head>
   <body>
-    <header style="display: none;">
+    <header>
       <div class="identidade">
         <img
           src="../imgs_site/logo.png"
@@ -60,104 +67,96 @@
     <!--Precisa desse id devido ao JavaScript-->
 
     <div id="welcome-title">
-    <h1>Boas Vindas, Helena!</h1>
-    <p id="subtitulo">Painel de Controle</p>
+      <h1>Boas Vindas, Helena!</h1>
+      <p id="subtitulo">Painel de Controle</p>
     </div>
-              <main id="formulario_perguntas">
-    <div id="abas">
-    <button id="mostrar-painel-agenda" class="aba ativa">Agenda</button>
-    <button id="mostrar-painel-atv" class="aba">Atividades</button>
-  </div>
-    <div id="painel-admin">
-      <div id="painel-agenda-conteudo">  
-        <div id="cabecalho-painel-agenda"> 
-        <button id="adicionar-post">Adicionar postagens</button>
-
-          
-        <div id="cabecalho-inputs">
-        <input
-          type="text"
-          id="input-busca"
-          placeholder="Buscar por título ou descrição..."
-        />
-        <input type="date" id="filtro-data" />
-        </div>
-</div>  
-         <div id="novo-evento-form">
-          <h2>Adicionar novo post:</h2>
-          <form action="/updateBD" method="POST" id="FormularioNovo">
-            <input
-              type="text"
-              name="nome-evento"
-              id="nome-novo-evento"
-              placeholder="Nome"
-            />
-            <br />
-            <br />
-            <input type="date" name="" id="data-novo-evento" /> <br />
-            <br />
-            <input type="time" name="" id="hora-novo-evento" /> <br />
-            <br />
-
-            <input type="checkbox" id="destaque" />
-
-            <input
-              type="file"
-              name=""
-              id="imagem-novo-evento"
-              accept="image/*"
-            />
-            <br /><br />
-            <textarea
-              name=""
-              id="desc-novo-evento"
-              placeholder="Descricao"
-            ></textarea>
-            <br /><br /><br /><br />
-          </form>
-          <input type="button" value="Criar nova postagem" id="salvar-post" />
-        </div>
-
-
-        
-
-        <div id="controle-agenda">
-          <!--Aqui é onde vão aparecer os eventos-->
-        </div>
-
-        <button id="btn-anterior-interno">← Anterior</button>
-        <span id="info-pagina-interna"></span>
-        <button id="btn-proximo-interno">Próximo →</button>
+    <main id="formulario_perguntas">
+      <div id="abas">
+        <button id="mostrar-painel-agenda" class="aba ativa">Agenda</button>
+        <button id="mostrar-painel-atv" class="aba">Atividades</button>
       </div>
+      <div id="painel-admin">
+        <div id="painel-agenda-conteudo">
+          <div id="cabecalho-painel-agenda">
+            <button id="adicionar-post">Adicionar postagens</button>
 
-      <div id="painel-atividades-conteudo" style="display: none">
-      
+            <div id="cabecalho-inputs">
+              <input
+                type="text"
+                id="input-busca"
+                placeholder="Buscar por título ou descrição..."
+              />
+              <input type="date" id="filtro-data" />
+            </div>
+          </div>
+          <div id="novo-evento-form">
+            <h2>Adicionar novo post:</h2>
+            <form action="/updateBD" method="POST" id="FormularioNovo">
+              <input
+                type="text"
+                name="nome-evento"
+                id="nome-novo-evento"
+                placeholder="Nome"
+              />
+              <br />
+              <br />
+              <input type="date" name="" id="data-novo-evento" /> <br />
+              <br />
+              <input type="time" name="" id="hora-novo-evento" /> <br />
+              <br />
 
-        <div id="novo-quiz">
-        <button
-        
-          value="Adicionar novo quiz"
-          id="novo-quiz-toggle"> Criar novo quiz
-        </button> </div>
-        <div id="nova-atividade">
-          <!--Informações principais sobre o quiz, antes das perguntas: nome e disciplina -->
-          <form action="" id="cabecalho-quiz">
-            <label for="nome-atividade">Nome da atividade: </label>
-            <input type="text" name="nome-atividade" id="nome-atividade" />
-            <label for="input-disciplina">Disciplina:</label>
-            <input
-              list="disciplinas-dl"
-              name="input-disciplina"
-              id="input-disciplina"
-            />
-            <datalist id="disciplinas-dl">
-              <!--Opções adicionadas dinamicamente com js-->
-            </datalist>
+              <input type="checkbox" id="destaque" />
 
-            <input type="checkbox" id="randomizar" name="random" />
-            <label for="randomizar">Embaralhar</label>
-          </form>
+              <input
+                type="file"
+                name=""
+                id="imagem-novo-evento"
+                accept="image/*"
+              />
+              <br /><br />
+              <textarea
+                name=""
+                id="desc-novo-evento"
+                placeholder="Descricao"
+              ></textarea>
+              <br /><br /><br /><br />
+            </form>
+            <input type="button" value="Criar nova postagem" id="salvar-post" />
+          </div>
 
+          <div id="controle-agenda">
+            <!--Aqui é onde vão aparecer os eventos-->
+          </div>
+
+          <button id="btn-anterior-interno">← Anterior</button>
+          <span id="info-pagina-interna"></span>
+          <button id="btn-proximo-interno">Próximo →</button>
+        </div>
+
+        <div id="painel-atividades-conteudo" style="display: none">
+          <div id="novo-quiz">
+            <button value="Adicionar novo quiz" id="novo-quiz-toggle">
+              Criar novo quiz
+            </button>
+          </div>
+          <div id="nova-atividade">
+            <!--Informações principais sobre o quiz, antes das perguntas: nome e disciplina -->
+            <form action="" id="cabecalho-quiz">
+              <label for="nome-atividade">Nome da atividade: </label>
+              <input type="text" name="nome-atividade" id="nome-atividade" />
+              <label for="input-disciplina">Disciplina:</label>
+              <input
+                list="disciplinas-dl"
+                name="input-disciplina"
+                id="input-disciplina"
+              />
+              <datalist id="disciplinas-dl">
+                <!--Opções adicionadas dinamicamente com js-->
+              </datalist>
+
+              <input type="checkbox" id="randomizar" name="random" />
+              <label for="randomizar">Embaralhar</label>
+            </form>
 
             <!--Aqui são gerados os formulários para criar as perguntas-->
             <div id="form-pergunta-1" class="perguntas_teste">
@@ -215,17 +214,85 @@
                 </div>
               </form>
             </div>
-         
-          <button id="add-pergunta">+</button>
-          <button id="salvar_quiz">Salvar</button>
+
+            <button id="add-pergunta">+</button>
+            <button id="salvar_quiz">Salvar</button>
+          </div>
+
+          <div id="controle-atividades"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div id="container_footer_grid">
+        <div class="footer-col" id="id_visual">
+          <div class="logo-footer-wrapper">
+            <img
+              src="../imgs_site/logojpwhite.png"
+              id="logo_footer"
+              alt="Logo da escola na cor branca, com o símbolo abstrato."
+            />
+            <div class="logo-text">
+              Colégio<br /><span class="titulo-branco">JAPÃO</span>
+            </div>
+          </div>
+          <p class="slogan-footer">O conhecimento <br />nos faz valer.</p>
+          <div class="horario-atendimento">
+            <p><strong id="horario_bold">Horário de atendimento:</strong></p>
+            <p>Das 08:00 até as 20:00</p>
+          </div>
         </div>
 
-        <div id="controle-atividades"></div>
-      </div>
+        <div class="footer-col">
+          <h3>Anos</h3>
+          <p>1º ano até 9º ano do Ensino Fundamental</p>
+          <p>1º ano até o 3º ano do Ensino Médio</p>
+          <p>Educação de Jovens e Adultos (EJA)</p>
+        </div>
 
-     
-    </div>
- </main>
+        <div class="footer-col" id="links">
+          <h3>Mapa</h3>
+          <ul>
+            <li><a href="index.html">Página inicial</a></li>
+            <li><a href="atividades/index.html">Atividades</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="agenda_pag.html">Agenda</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" id="contatos">
+          <h3>Contate-nos</h3>
+          <ul>
+            <li>
+              <a
+                href="https://www.instagram.com/colegioestadualjapao_01.cre/"
+                target="_blank"
+                ><i class="fa-brands fa-instagram"></i
+                >@colegioestadualjapao_01.cre</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/colegiojapao01cre"
+                target="_blank"
+                ><i class="fa-brands fa-facebook-f"></i>/colegiojapao01cre</a
+              >
+            </li>
+            <li>
+              <i class="fa-brands fa-whatsapp"></i>
+              <a href="https://wa.me/5191282233" target="_blank"
+                >(51) 9128-2233</a
+              >
+            </li>
+          </ul>
+          <button class="btn-login">
+            <i class="fa-solid fa-user"></i>Login
+          </button>
+        </div>
+      </div>
+    </footer>
+
     <script type="module" src="agenda_admin.js"></script>
     <script type="module" src="script-fb.js"></script>
   </body>

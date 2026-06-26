@@ -7,6 +7,10 @@
   <title>Colégio Estadual Japão</title>
   <link rel="stylesheet" href="style.css" />
 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" />
+
+
   <!-- Fontes Google -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,10 +48,11 @@
               <button class="hamburger" id="hamburger" aria-label="Abrir menu">
   <i class="fa-solid fa-bars"></i>
 </button>
+
     </header>
 
     <main>
-      <section class="principal">
+      <section class="principal" >
         <div id="informacoes_iniciais">
           <h1>Colégio Estadual&nbsp;<span class="titulo">Japão</span></h1>
           <p id="subtituloprincipal">
@@ -76,7 +81,7 @@
       <h2 id="subtitulo">
         Nossa <span class="subtitulo_pt2">História</span>
       </h2>
-      <div class="historia">
+      <div class="historia reveal">
         <img src="imgs_site/inauguracao_escola.png" id="ih1"
           alt="Fotografia antiga em preto e branco mostrando um grupo de adultos e crianças reunidos para a inauguração da escola." />
         <article class="historia_text" id="ht1">
@@ -260,7 +265,10 @@
   <script src="carrossel.js"></script>
 
   <script src="https://cdn.userway.org/widget.js" data-account="PhHQuLEkH6" id="userway-root"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
 </body>
 
 </html>
