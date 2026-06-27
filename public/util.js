@@ -45,6 +45,7 @@ export function criaCardEvento(entrada, container, acoes = null) {
     "horario-data-evento",
   );
   const divDescricao = document.createElement("div");
+  divDescricao.classList.add('div-descricao')
   ev.appendChild(divDescricao);
   ev.appendChild(divDescricao);
   criaElemento(
