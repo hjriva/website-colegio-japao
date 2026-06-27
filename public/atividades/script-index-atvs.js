@@ -13,6 +13,11 @@ function renderizarDisciplinas() {
 console.log('largura:', window.innerWidth, 'isMobile:', isMobile);
     if (isMobile) {
         const select = document.createElement('select');
+        select.addEventListener('change', () => {
+    const id = select.value;
+    const nome = select.options[select.selectedIndex].text;
+    if (id) mostrarAtividadesDisciplina(id, nome);
+});
         container.appendChild(select);
         container.style.display = 'flex';
         ReqDisciplinasSelect(select);
