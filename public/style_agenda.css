@@ -269,9 +269,7 @@ h2 {
 }
 
 .eventos-section {
-    margin-top: 1.5rem;
     border-top: 0.5px solid var(--color-border-tertiary);
-    padding-top: 1rem;
 }
 
 .eventos-titulo {
@@ -288,19 +286,27 @@ h2 {
     color: white;
 }
 
+
+#eventos-titulo {
+    font-size: 15px;
+
+}
+
 .btn-voltar {
     margin-bottom: 1rem;
     transition: .2s;
-    color: var(--color-text-secondary);
+    color: var(--cor-principal);
     background: none;
-    border: 0.5px solid var(--color-border-secondary);
-    border-radius: var(--border-radius-md);
-    padding: 4px 10px;
+    border: none;
     cursor: pointer;
     margin-bottom: 0.75rem;
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    width: 6vw;
+    box-shadow: none;
+    font-weight: 600;
+
 }
 
 .btn-voltar:hover {
@@ -319,10 +325,12 @@ h2 {
 }
 
 
-.btn-prev, .btn-next {
+.btn-prev,
+.btn-next {
     border: none;
 
 }
+
 .loading {
     font-size: 14px;
     color: var(--color-text-secondary);
@@ -393,6 +401,17 @@ h2 {
 
 
 @media (min-width: 1024px) {
+    .evento-titulo-div {
+        color: rgb(0, 0, 0);
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 10px;
+    }
+
 
 
 
@@ -418,6 +437,23 @@ h2 {
         font-size: 24px;
     }
 
+    .descr-evento {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1em;
+    }
+
+    .div-descricao {
+        box-shadow: rgba(0, 0, 0, 0.178) 1px 1px 5px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        width: 100%;
+
+    }
+
     main {
         width: auto;
         margin: 3vw;
@@ -434,7 +470,7 @@ h2 {
 
 
     .eventos-agenda {
-        width: 85%;
+        width: 100%;
         border-radius: 20px;
         /* ← só cantos esquerdos */
         border-right: none;
@@ -505,6 +541,7 @@ h2 {
     padding: 10px;
     text-align: justify;
     margin: 0 auto;
+
 }
 
 .div-descricao {
@@ -513,5 +550,6 @@ h2 {
     display: flex;
     align-items: center;
     margin-top: 20px;
+    width: 100%;
 
 }

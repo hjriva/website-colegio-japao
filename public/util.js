@@ -15,7 +15,6 @@ export function criaElemento(
   if (atributo !== null && atributo.trim() == "") {
     elem.style.display = "none";
   }
-
   return elem; // retornar permite encadear se precisar
 }
 
@@ -46,7 +45,7 @@ export function criaCardEvento(entrada, container, acoes = null) {
     "horario-data-evento",
   );
   const divDescricao = document.createElement("div");
-  divDescricao.classList.add("div-descricao");
+  ev.appendChild(divDescricao);
   ev.appendChild(divDescricao);
   criaElemento(
     "p",
