@@ -346,6 +346,7 @@
     margin: 0;
     display: flex;
     align-items: stretch;
+
   }
 
   /* ===== EVENTO EM MODO DE EDIÇÃO ===== */
@@ -800,6 +801,8 @@
   #cabecalho-quiz {
     margin: 10px auto;
     width: fit-content;
+        display: flex;
+    flex-wrap: wrap;
   }
   #cabecalho-quiz > input {
     margin: 2px;
@@ -883,4 +886,5 @@ button {
   align-items: center;
   gap: 6px;
   white-space: nowrap;
+  margin: 5px;
 }

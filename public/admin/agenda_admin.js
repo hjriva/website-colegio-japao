@@ -64,7 +64,7 @@
       
       const tituloEl = ev.querySelector(".titulo-vento");
       const dataEl = ev.querySelector(".horario-data-evento");
-      const descEl = ev.querySelector(".descr-evento");
+      const descEl = ev.querySelector(".div-descricao");
       const imgEl = ev.querySelector("img");
 
       const titulo = tituloEl.textContent.trim();
@@ -81,11 +81,12 @@
 
       const dataFormatada = `${ano}-${mes.padStart(2, "0")}-${dia.padStart(2, "0")}`;
 
-      // 🔥 pega o container correto
+      
       const container = ev.querySelector(".evento-titulo-div");
 
       // salva HTML original para cancelar
-      const originalHTML = container.innerHTML;
+      const originalHTML = ev.innerHTML;
+      descEl.style.display = "none";
 
       // cria modo edição mantendo estrutura
       container.innerHTML = `
@@ -160,7 +161,7 @@
         container.classList.remove('editando')
         wrapperBotoes.style.flexDirection = 'column';
         wrapperBotoes.style.justifyContent = 'center';
-        container.innerHTML = originalHTML;
+        ev.innerHTML = originalHTML;
 
         preview.remove();
         inputImg.replaceWith(imgEl);
@@ -197,6 +198,10 @@
         const result = await res.json();
 
         restaurar();
+          const novoBtnEditar = ev.querySelector("button");
+          if (novoBtnEditar) {
+          novoBtnEditar.onclick = () => editarEntrada(idElem);
+          }
       };
     }
 
@@ -987,7 +992,7 @@ btnExcluirQuiz.addEventListener("click", async () => {
       novoForm.querySelector(".explicacao-text").value = "";
       novoForm.querySelector(".explicacao-text").id = `explicacao-${numPerguntas}`;
 
-      document.getElementById("formulario_perguntas").appendChild(novoForm);
+      document.getElementById("lista-de-perguntas").appendChild(novoForm);
     }
 
     function mostrarPainelAtvs() {
@@ -1160,3 +1165,7 @@ btnExcluirQuiz.addEventListener("click", async () => {
         })
         .catch((error) => console.error(error));
     });
+
+    window.document.getElementById('add-pergunta').addEventListener('click', () => {
+      NovaQuestao()
+    })
