@@ -725,6 +725,36 @@ btnExcluirQuiz.addEventListener("click", async () => {
           tituloDiv.appendChild(inputTitulo);
           container.appendChild(tituloDiv);
 
+          const botoesDiv = document.createElement("div");
+          botoesDiv.classList.add("acoes-quiz-admin");
+          
+ 
+          const btnSalvarTitulo = document.createElement("button");
+          btnSalvarTitulo.textContent = "Salvar quiz";
+          btnSalvarTitulo.id = "salvar_quiz_editado";
+          btnSalvarTitulo.addEventListener("click", async () => {
+            await fetch("/atualizarTituloQuiz", {
+              method: "POST",
+              headers: { "Content-type": "application/json" },
+              body: JSON.stringify({
+                idAtividade: quiz.atividade_id,
+                titulo: inputTitulo.value,
+              }),
+            });
+
+                btnSalvarTitulo.textContent = "✓ Salvo!";
+    btnSalvarTitulo.style.color = "green";
+    setTimeout(() => {
+        btnSalvarTitulo.textContent = "Salvar quiz";
+        btnSalvarTitulo.style.color = "";
+    }, 2000);
+              
+          });
+
+
+          botoesDiv.append(btnSalvarTitulo, btnExcluirQuiz);
+          container.appendChild(botoesDiv);
+
           // ===== PERGUNTAS =====
           const perguntasContainer = document.createElement("div");
           container.appendChild(perguntasContainer);
@@ -734,10 +764,8 @@ btnExcluirQuiz.addEventListener("click", async () => {
           });
 
           // ===== BOTÕES GLOBAIS =====
-          const botoesDiv = document.createElement("div");
-          botoesDiv.classList.add("acoes-quiz-admin");
           
-          const btnAdicionar = document.createElement("button");
+                   const btnAdicionar = document.createElement("button");
           btnAdicionar.textContent = "+";
           btnAdicionar.id = "add-pergunta";
           btnAdicionar.addEventListener("click", () => {
@@ -757,23 +785,8 @@ btnExcluirQuiz.addEventListener("click", async () => {
             perguntasEditadas.push(ref);
           });
 
-          const btnSalvarTitulo = document.createElement("button");
-          btnSalvarTitulo.textContent = "Salvar quiz";
-          btnSalvarTitulo.id = "salvar_quiz_editado";
-          btnSalvarTitulo.addEventListener("click", async () => {
-            await fetch("/atualizarTituloQuiz", {
-              method: "POST",
-              headers: { "Content-type": "application/json" },
-              body: JSON.stringify({
-                idAtividade: quiz.atividade_id,
-                titulo: inputTitulo.value,
-              }),
-            });
-              
-          });
+          container.appendChild(btnAdicionar);
 
-          botoesDiv.append(btnAdicionar, btnSalvarTitulo, btnExcluirQuiz);
-          container.appendChild(botoesDiv);
         });
     }
 
@@ -823,7 +836,7 @@ btnExcluirQuiz.addEventListener("click", async () => {
         radio.type = "radio";
         radio.name = nomeGrupo;
         radio.value = letra;
-        if (questao.resposta_correta === letra) radio.checked = true;
+        if (questao.resposta_correta?.toUpperCase() === letra) radio.checked = true;
 
         const input = document.createElement("input");
         input.type = "text";
@@ -846,6 +859,14 @@ btnExcluirQuiz.addEventListener("click", async () => {
       inputExplicacao.value = questao.explicacao || "";
       inputExplicacao.placeholder = "Explicação da resposta";
 
+      function ajustarAltura(textarea) {
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight + "px";
+}
+
+ajustarAltura(inputPergunta);
+ajustarAltura(inputExplicacao);
+
       // ===== BOTÃO EDITAR (visível em modo leitura) =====
       const btnEditar = document.createElement("button");
       btnEditar.classList.add("btn-editar-card");
@@ -854,6 +875,8 @@ btnExcluirQuiz.addEventListener("click", async () => {
       btnEditar.appendChild(iconEdit);
       btnEditar.addEventListener("click", () => {
         card.classList.add("editando");
+        ajustarAltura(inputPergunta);
+  ajustarAltura(inputExplicacao);
       });
 
       // ===== AÇÕES DO CARD: salvar e cancelar (visíveis só em .editando) =====
@@ -913,6 +936,7 @@ btnExcluirQuiz.addEventListener("click", async () => {
         };
 
         const endpoint = questao.id ? "/atualizarPergunta" : "/novaPerguntaQuiz";
+            console.log("correta:", correta);
         const res = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-type": "application/json" },
@@ -950,6 +974,8 @@ btnExcluirQuiz.addEventListener("click", async () => {
       );
 
       container.appendChild(card);
+      ajustarAltura(inputPergunta);
+ajustarAltura(inputExplicacao);
 
       return { id: questao.id, card, inputPergunta, altA, altB, altC, altD, inputExplicacao };
     }

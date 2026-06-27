@@ -533,8 +533,9 @@ app.post("/atualizarTituloQuiz", async (req, res) => {
 
 // Atualiza uma pergunta
 app.post("/atualizarPergunta", async (req, res) => {
-    const { id, pergunta, alt_a, alt_b, alt_c, alt_d, correto, explicacao } = req.body;
-
+    console.log("body recebido:", req.body);
+    const { id, pergunta, alt_a, alt_b, alt_c, alt_d, explicacao } = req.body;
+    const correto = req.body.correto?.toLowerCase()
     if (!id || !pergunta) {
         return res.status(400).json({ erro: "Dados incompletos" });
     }
@@ -554,9 +555,9 @@ app.post("/atualizarPergunta", async (req, res) => {
 
         res.json({ sucesso: true });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ erro: "Erro ao atualizar pergunta" });
-    }
+    console.error("Erro detalhado:", err.message, err.stack);
+    res.status(500).json({ erro: err.message });
+}
 });
 
 app.post("/deletarPergunta", async (req, res) => {
@@ -590,7 +591,7 @@ app.get('/disciplinas/exceto/:id', async (req, res) => {
     }
 });
 app.post("/novaPerguntaQuiz", async (req, res) => {
-
+  console.log("body novaPerguntaQuiz:", req.body);
   const {
     quiz_id,
     pergunta,
@@ -598,9 +599,10 @@ app.post("/novaPerguntaQuiz", async (req, res) => {
     alt_b,
     alt_c,
     alt_d,
-    correto,
     explicacao
   } = req.body;
+
+  const correto = req.body.correto?.toLowerCase()
 
   if (!quiz_id || !pergunta) {
     return res.status(400).json({

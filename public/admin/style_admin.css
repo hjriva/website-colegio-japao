@@ -888,3 +888,19 @@ button {
   white-space: nowrap;
   margin: 5px;
 }
+
+.pergunta-admin textarea {
+  resize: none;
+  overflow: hidden;
+  min-height: 60px;
+  height: auto;
+}
+
+.pergunta-admin:not(.editando) textarea {
+  border-color: transparent;
+  background: transparent;
+  resize: none;
+  pointer-events: none;
+  padding: 4px 6px;
+  overflow: hidden; /* ← adiciona isso */
+}
