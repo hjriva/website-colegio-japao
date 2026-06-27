@@ -83,7 +83,7 @@ body {
 
 .img-evento {
     min-width: 100%;
-    min-height: 50%;
+    max-height: 300px;
     border-radius: 15px;
     object-fit: cover;
     display: flex;
@@ -100,26 +100,31 @@ h2 {
 #eventos-hoje {
     font-weight: 500;
     margin: 0px;
+    color: white;
 }
 
 #input-data {
     border-radius: 10px;
     font-size: 1em;
     font-weight: 300;
-    border: solid 1px black;
-    background-color: #ffffff;
+    border: solid 1px rgb(255, 0, 0);
+    background-color: #ffe3e3;
     padding: 5px;
+    text-align: center;
+
 }
 
 .titulo-vento {
     margin-top: 2px;
     font-size: 24px;
     margin-left: 0px;
-    font-weight: 500;
+    font-weight: 600;
     color: red;
+    text-align: center;
 }
 
-.titulo-vento, .horario-data-evento {
+.titulo-vento,
+.horario-data-evento {
     margin: 0 auto;
 }
 
@@ -129,7 +134,7 @@ h2 {
     flex-direction: column;
     flex: 1;
     align-content: center;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -141,17 +146,22 @@ h2 {
     gap: 15px;
     flex-wrap: wrap;
     justify-content: center;
-    align-content: flex-start;
-    align-items: flex-start;
+    align-content: center;
+    align-items: center;
     padding: 20px;
 }
 
 
 
 #h2-prox {
-    margin-top: 3px;
+    margin-top: 30px;
     margin-left: 3px;
-    margin-bottom: 3px
+    margin-bottom: 10px;
+    font-weight: 600;
+    padding: 1rem;
+    background-color: red;
+    color: white;
+    border-radius: 15px;
 }
 
 #cal-titulo {
@@ -180,6 +190,7 @@ h2 {
     font-size: 14px;
     color: var(--color-text-primary);
     box-shadow: none;
+    margin-top: 30px;
 }
 
 .cal-nav:hover {
@@ -266,13 +277,14 @@ h2 {
     font-size: 15px;
     font-weight: 500;
     margin-bottom: 0.75rem;
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 10px;
     flex-direction: row;
+    background-color: red;
+    padding: 1rem;
+    border-radius: 15px;
+    color: white;
 }
 
 .btn-voltar {
@@ -297,9 +309,19 @@ h2 {
 .sem-eventos {
     font-size: 14px;
     color: var(--color-text-secondary);
-    padding: 0.5rem 0;
+    padding: 1rem;
+    text-indent: 20px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    text-align: center;
+
 }
 
+
+.btn-prev, .btn-next {
+    border: none;
+
+}
 .loading {
     font-size: 14px;
     color: var(--color-text-secondary);
@@ -478,9 +500,17 @@ h2 {
 }
 
 .descr-evento {
-    font-weight: 400;
-    text-align: justify;
+    font-weight: 500;
     padding: 10px;
+    text-align: justify;
+    margin: 0 auto;
+}
+
+.div-descricao {
     box-shadow: rgba(0, 0, 0, 0.178) 1px 1px 5px;
-    border-radius: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+
 }
