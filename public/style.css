@@ -493,7 +493,7 @@
         box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
     }
 
-    .eventos-agenda {
+/*  .eventos-agenda {
         border: solid rgb(255, 255, 255);
         width: 25em;
         height: 12em;
@@ -518,7 +518,7 @@
         flex-wrap: wrap;
         gap: 30px;
         align-content: center;
-    }
+    }*/
 
     #espacos {
         text-align: center;
@@ -880,7 +880,7 @@
     }
 
     #redessociais>ul>li>a {
-        list-style: none;
+        list-style: none;   
         color: #ffffff;
         margin-left: 0;
         font-size: clamp(0.90rem, 2vw, 1rem);

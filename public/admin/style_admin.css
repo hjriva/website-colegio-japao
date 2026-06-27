@@ -107,7 +107,7 @@
     font-weight: 600;
   }
 
-  #subtitulo {
+  #subtitulo_admin {
     color: red;
   }
 
@@ -121,7 +121,7 @@
   }
 
   #input-busca {
-    width: 214px;
+   width: 263px;
   }
 
   input,
@@ -143,9 +143,15 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    align-items: center;
+    gap: 8px;
+    margin-top: 0px;
+    box-shadow: none;
+    width: auto;
+    padding: 0px;
   }
 
-  #novo-quiz-toggle::before  {
+  /*#novo-quiz-toggle::before  {
     content: '+';
     width: 20px;
     height: 20px;
@@ -166,7 +172,7 @@
     color: var(--branco);
     display: grid;
     place-items: center;
-  }
+  }*/
 
   #add-pergunta {
     width: 44px;
@@ -179,6 +185,7 @@
     font-weight: 700;
     cursor: pointer;
     align-self: flex-start;
+    padding: 0px;
   }
 
   #salvar-post,
@@ -302,6 +309,10 @@
     height: 36px;
     border: none;
     color: white;
+        padding: 0px;
+    font-size: 13.3px;
+    font-weight: initial;
+    margin-top: 0px;
   }
 
   .button-wrapper-disciplinas > button, .botoesEditDisciplina > button {
@@ -527,8 +538,27 @@
     padding: 2px;
     text-align: center;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
+  #controle-atividades > ul > li {
+  position: relative;
+  overflow: hidden; /* ← isso impede o vazamento */
+}
+
+#controle-atividades > ul > li > a {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  box-sizing: border-box; /* ← garante que padding não some à largura */
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
   .li_disciplinas a, a {
     display: block;
     text-decoration: none;
@@ -536,6 +566,10 @@
     margin-left: 0;
   }
 
+  .div-descricao {
+    width: 90%;
+  }
+    
   /* ===== QUIZ ADMIN ===== */
 
   .titulo-quiz-admin > input,
@@ -585,6 +619,20 @@
     grid-auto-flow: column;
     gap: 15px;
     justify-items: start;
+  }
+
+  #destaque_div {
+    display: flex;
+    align-items: center;
+  }
+
+  #destaque {
+        margin-right: 10px;
+  }
+
+  #add-post-title {
+    margin-top: 0px;
+    margin-bottom: 12px;
   }
 
   /* ===== CARD PERGUNTA ===== */
@@ -749,7 +797,13 @@
 
   }
 
-
+  #cabecalho-quiz {
+    margin: 10px auto;
+    width: fit-content;
+  }
+  #cabecalho-quiz > input {
+    margin: 2px;
+  }
   .botoeseditando {
     display: flex;
     flex-direction: column;
@@ -795,3 +849,30 @@ button {
     white-space: nowrap;
 }
 
+
+.perguntas_teste {
+      margin: 15px 50px;
+}
+
+.campo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin: 5px 0px;
+}
+
+.campo input[type="text"] {
+  flex: 1;
+  min-width: 0; /* impede o input de "estourar" o flex container */
+}
+
+.campo input[type="radio"] {
+  flex-shrink: 0; /* garante que o radio nunca encolhe ou quebra */
+  width: 16px;
+  height: 16px;
+}
+
+.explicacao-text {
+  width: 100%;
+}
