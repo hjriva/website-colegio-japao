@@ -10,8 +10,11 @@
 main>p {
     position: relative;
     z-index: 1;
+    font-weight: 600;
 }
-
+ #pmargin {
+    margin-bottom: 5vh;
+ }
 h1 {
     color: var(--cor-principal);
     margin-top: -60px;
@@ -27,8 +30,9 @@ h1 {
     height: auto;
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
-    margin: 0;
     padding: 5px;
+    margin-bottom: 2vh;
+
 
 }
 
@@ -137,6 +141,7 @@ h2 {
     align-content: center;
     align-items: center;
     margin-bottom: 20px;
+
 }
 
 
@@ -150,12 +155,14 @@ h2 {
     align-content: center;
     align-items: center;
     padding: 20px;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 
 
 #h2-prox {
-    margin-top: 30px;
+    margin-top: 15px;
     margin-left: 3px;
     margin-bottom: 10px;
     font-weight: 600;
@@ -398,6 +405,30 @@ h2 {
     display: block;
 }
 
+.horario-data-evento {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.descr-evento {
+    font-weight: 500;
+    text-align: justify;
+
+}
+
+.div-descricao {
+    box-shadow: rgba(0, 0, 0, 0.178) 1px 1px 5px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    width: 92%;
+    margin: 0 auto;
+    padding: 5vw;
+    margin-top: 0;
+    margin-bottom: 2vh;
+
+}
 
 
 @media (min-width: 1024px) {
@@ -409,10 +440,23 @@ h2 {
         align-content: center;
         align-items: center;
         margin-bottom: 20px;
-        width: 10px;
+        padding: 2vh;
     }
 
+    .descr-evento {
+        padding: 0;
+    }
 
+    .div-descricao {
+        box-shadow: rgba(0, 0, 0, 0.178) 1px 1px 5px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        width: 50vw;
+        padding: 20px;
+    }
 
 
     .evento-header-div {
@@ -526,30 +570,5 @@ h2 {
         overflow-y: overlay;
     }
 
-
-}
-
-
-
-.horario-data-evento {
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.descr-evento {
-    font-weight: 500;
-    padding: 10px;
-    text-align: justify;
-    margin: 0 auto;
-
-}
-
-.div-descricao {
-    box-shadow: rgba(0, 0, 0, 0.178) 1px 1px 5px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    width: 100%;
 
 }
