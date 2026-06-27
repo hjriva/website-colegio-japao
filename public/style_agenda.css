@@ -82,8 +82,8 @@ body {
 
 
 .img-evento {
-    max-width: 150px;
-    max-height: 100px;
+    min-width: 100%;
+    min-height: 50%;
     border-radius: 15px;
     object-fit: cover;
     display: flex;
@@ -115,7 +115,12 @@ h2 {
     margin-top: 2px;
     font-size: 24px;
     margin-left: 0px;
-    font-weight: 400;
+    font-weight: 500;
+    color: red;
+}
+
+.titulo-vento, .horario-data-evento {
+    margin: 0 auto;
 }
 
 .evento-titulo-div {
@@ -138,6 +143,7 @@ h2 {
     justify-content: center;
     align-content: flex-start;
     align-items: flex-start;
+    padding: 20px;
 }
 
 
@@ -466,8 +472,15 @@ h2 {
 
 
 
-.horario-data-evento,
-.descr-evento {
+.horario-data-evento {
     font-size: 18px;
+    font-weight: 600;
+}
+
+.descr-evento {
     font-weight: 400;
+    text-align: justify;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.178) 1px 1px 5px;
+    border-radius: 20px;
 }
