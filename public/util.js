@@ -5,6 +5,9 @@ export function criaElemento(tag, texto, atributo, valorAtributo, pai, className
     if (atributo !== null) elem.setAttribute(atributo, valorAtributo);
     elem.classList.add(className);
     pai.appendChild(elem);
+    if (atributo !== null && atributo.trim() == '') {
+        elem.style.display = 'none'
+    }
     return elem; // retornar permite encadear se precisar
 }
 
@@ -20,14 +23,23 @@ export function criaCardEvento(entrada, container, acoes = null) {
     evHeader.classList.add('evento-header-div');
     ev.appendChild(evHeader);
 
+
+ 
     const evTitulo = document.createElement('div');
     evTitulo.setAttribute('class', 'evento-titulo-div');
     evHeader.appendChild(evTitulo);
 
+
+
+
+
     criaElemento('img', null, 'src', `${entrada.img}`, evHeader, 'img-evento');
     criaElemento('h3', `${entrada.titulo}`, null, null, evTitulo, 'titulo-vento');
     criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano} ${entrada.horario.slice(0, 5).replace(':', 'h')}`, null, null, evTitulo, 'horario-data-evento');
-    criaElemento('p', entrada.descricao, null, null, evTitulo, 'descr-evento');
+           const divDescricao = document.createElement('div')
+        divDescricao.classList.add('div-descricao')
+        evTitulo.appendChild(divDescricao)
+    criaElemento('p', entrada.descricao, null, null, divDescricao, 'descr-evento');
 
     // se acoes for passado, renderiza os botões - para usar somente no painel interno
     if (acoes) acoes(ev, entrada);
