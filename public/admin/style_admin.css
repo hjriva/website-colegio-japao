@@ -876,3 +876,11 @@ button {
 .explicacao-text {
   width: 100%;
 }
+
+
+.campo-quiz {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}

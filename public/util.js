@@ -15,9 +15,7 @@ export function criaElemento(
   if (atributo !== null && atributo.trim() == "") {
     elem.style.display = "none";
   }
-    if (atributo !== null && atributo.trim() == '') {
-        elem.style.display = 'none'
-    }
+
   return elem; // retornar permite encadear se precisar
 }
 
@@ -29,18 +27,35 @@ export function criaCardEvento(entrada, container, acoes = null) {
   ev.setAttribute("id", `${entrada.identrada}`);
   container.appendChild(ev);
 
-    const evHeader = document.createElement('div');
-    evHeader.classList.add('evento-header-div');
-    ev.appendChild(evHeader);
+  const evHeader = document.createElement("div");
+  evHeader.classList.add("evento-header-div");
+  ev.appendChild(evHeader);
 
-    const evTitulo = document.createElement('div');
-    evTitulo.setAttribute('class', 'evento-titulo-div');
-    evHeader.appendChild(evTitulo);
+  const evTitulo = document.createElement("div");
+  evTitulo.setAttribute("class", "evento-titulo-div");
+  evHeader.appendChild(evTitulo);
 
-    criaElemento('img', null, 'src', `${entrada.img}`, evHeader, 'img-evento');
-    criaElemento('h3', `${entrada.titulo}`, null, null, evTitulo, 'titulo-vento');
-    criaElemento('p', `${entrada.dia} / ${entrada.mes} / ${entrada.ano} ${entrada.horario.slice(0, 5).replace(':', 'h')}`, null, null, evTitulo, 'horario-data-evento');
-    criaElemento('p', entrada.descricao, null, null, evTitulo, 'descr-evento');
+  criaElemento("img", null, "src", `${entrada.img}`, evHeader, "img-evento");
+  criaElemento("h3", `${entrada.titulo}`, null, null, evTitulo, "titulo-vento");
+  criaElemento(
+    "p",
+    `${entrada.dia} / ${entrada.mes} / ${entrada.ano} ${entrada.horario.slice(0, 5).replace(":", "h")}`,
+    null,
+    null,
+    evTitulo,
+    "horario-data-evento",
+  );
+  const divDescricao = document.createElement("div");
+  divDescricao.classList.add("div-descricao");
+  ev.appendChild(divDescricao);
+  criaElemento(
+    "p",
+    entrada.descricao,
+    null,
+    null,
+    divDescricao,
+    "descr-evento",
+  );
 
   // se acoes for passado, renderiza os botões - para usar somente no painel interno
   if (acoes) acoes(ev, entrada);

@@ -148,8 +148,12 @@
           <div id="nova-atividade">
             <!--Informações principais sobre o quiz, antes das perguntas: nome e disciplina -->
             <form action="" id="cabecalho-quiz">
+                <div class="campo-quiz">
               <label for="nome-atividade">Nome da atividade: </label>
+
               <input type="text" name="nome-atividade" id="nome-atividade" />
+              </div>
+              <div class="campo-quiz">
               <label for="input-disciplina">Disciplina:</label>
               <input
                 list="disciplinas-dl"
@@ -159,9 +163,11 @@
               <datalist id="disciplinas-dl">
                 <!--Opções adicionadas dinamicamente com js-->
               </datalist>
-
+              </div>
+              <div class="campo-quiz">
               <input type="checkbox" id="randomizar" name="random" />
               <label for="randomizar">Embaralhar</label>
+              </div>
             </form>
 
             <!--Aqui são gerados os formulários para criar as perguntas-->
