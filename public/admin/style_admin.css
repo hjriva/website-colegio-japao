@@ -971,6 +971,23 @@
     overflow: hidden;
   }
 
+  #hora-novo-evento {
+    width: 20%;
+  }
+
+  #destaque-div {
+        grid-column: 2 / 3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #destaque {
+    margin-left: 5vw;
+
+  }
+
+
   @media (max-width: 1024px) {
     .eventos-agenda {
       grid-template-columns: 1fr;
@@ -1031,4 +1048,6 @@
       flex-direction: column;
       gap: 12px;
     }
+
+
   }

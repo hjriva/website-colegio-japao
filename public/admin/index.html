@@ -50,7 +50,7 @@
       type="image/x-icon"
     />
     <link rel="stylesheet" href="style_admin.css" />
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css" />
 
     <link rel="shortcut icon" href="./imgs_site/logo.png" type="image/x-icon" />
   </head>
@@ -81,7 +81,9 @@
       <div id="painel-admin">
         <div id="painel-agenda-conteudo">
           <div id="cabecalho-painel-agenda">
-            <button id="adicionar-post"> <i class="fa-solid fa-circle-plus"></i> Adicionar postagens</button>
+            <button id="adicionar-post">
+              <i class="fa-solid fa-circle-plus"></i> Adicionar postagens
+            </button>
 
             <div id="cabecalho-inputs">
               <input
@@ -105,13 +107,12 @@
               <br />
               <input type="date" name="" id="data-novo-evento" /> <br />
               <br />
-              <input type="time" name="" id="hora-novo-evento" /> <br />
-              <br />
               <div id="destaque_div">
-              
-              <input type="checkbox" id="destaque" />
-              <label for="destaque">Marcar como destaque? </label>
-                </div>
+                <input type="time" name="" id="hora-novo-evento" />
+
+                <input type="checkbox" id="destaque" />
+                <label for="destaque">Marcar como destaque? </label>
+              </div>
               <input
                 type="file"
                 name=""
@@ -148,86 +149,105 @@
           <div id="nova-atividade">
             <!--Informações principais sobre o quiz, antes das perguntas: nome e disciplina -->
             <form action="" id="cabecalho-quiz">
-                <div class="campo-quiz">
-              <label for="nome-atividade">Nome da atividade: </label>
+              <div class="campo-quiz">
+                <label for="nome-atividade">Nome da atividade: </label>
 
-              <input type="text" name="nome-atividade" id="nome-atividade" />
+                <input type="text" name="nome-atividade" id="nome-atividade" />
               </div>
               <div class="campo-quiz">
-              <label for="input-disciplina">Disciplina:</label>
-              <input
-                list="disciplinas-dl"
-                name="input-disciplina"
-                id="input-disciplina"
-              />
-              <datalist id="disciplinas-dl">
-                <!--Opções adicionadas dinamicamente com js-->
-              </datalist>
+                <label for="input-disciplina">Disciplina:</label>
+                <input
+                  list="disciplinas-dl"
+                  name="input-disciplina"
+                  id="input-disciplina"
+                />
+                <datalist id="disciplinas-dl">
+                  <!--Opções adicionadas dinamicamente com js-->
+                </datalist>
               </div>
               <div class="campo-quiz">
-              <input type="checkbox" id="randomizar" name="random" />
-              <label for="randomizar">Embaralhar</label>
+                <input type="checkbox" id="randomizar" name="random" />
+                <label for="randomizar">Embaralhar</label>
               </div>
             </form>
-          <div id="lista-de-perguntas">
-            <!--Aqui são gerados os formulários para criar as perguntas-->
-            <div id="form-pergunta-1" class="perguntas_teste">
-              <!--Div modelo para outros formulários gerados dinamicamente com JS-->
-              
-              <form action="" class="form_pergunta" id="form_1">
-                <!--Talvez não precise de action, ver posteriormente-->
+            <div id="lista-de-perguntas">
+              <!--Aqui são gerados os formulários para criar as perguntas-->
+              <div id="form-pergunta-1" class="perguntas_teste">
+                <!--Div modelo para outros formulários gerados dinamicamente com JS-->
 
-                <span class="numero-pergunta">1&#41;</span>
-                <label for="question1">Pergunta:</label>
-                <input
-                  type="text"
-                  name="enunciado-1"
-                  id="enunciado-1"
-                  class="input_enunciado"
-                />
+                <form action="" class="form_pergunta" id="form_1">
+                  <!--Talvez não precise de action, ver posteriormente-->
 
-                <div class="campo">
-                  <!--Essa div existe para conseguirmos deixar uma pergunta embaixo da outra 
+                  <span class="numero-pergunta">1&#41;</span>
+                  <label for="question1">Pergunta:</label>
+                  <input
+                    type="text"
+                    name="enunciado-1"
+                    id="enunciado-1"
+                    class="input_enunciado"
+                  />
+
+                  <div class="campo">
+                    <!--Essa div existe para conseguirmos deixar uma pergunta embaixo da outra 
             sem encher de br,
             provavelmente vai ser adicionado em outros elementos -->
-                  <label for="alt-a-1"> a&#41; </label>
-                  <input type="text" name="alt-a" class="alt-a" id="alt-a-1" />
-                  <!--O id desses inputs precisa ter um número, pois serão gerados mais deles dinamicamente
+                    <label for="alt-a-1"> a&#41; </label>
+                    <input
+                      type="text"
+                      name="alt-a"
+                      class="alt-a"
+                      id="alt-a-1"
+                    />
+                    <!--O id desses inputs precisa ter um número, pois serão gerados mais deles dinamicamente
         para serem unicos -->
-                  <input type="radio" name="radio-alternativa" value="a" />
-                  <!--O value do radio precisa ser a letra da alternativa, para conseguirmos armazenar a opção correta de cada pergunta.-->
-                </div>
+                    <input type="radio" name="radio-alternativa" value="a" />
+                    <!--O value do radio precisa ser a letra da alternativa, para conseguirmos armazenar a opção correta de cada pergunta.-->
+                  </div>
 
-                <div class="campo">
-                  <label for="alt-b-1"> b&#41; </label>
-                  <input type="text" name="alt-b" class="alt-b" id="alt-b-1" />
-                  <input type="radio" name="radio-alternativa" value="b" />
-                </div>
+                  <div class="campo">
+                    <label for="alt-b-1"> b&#41; </label>
+                    <input
+                      type="text"
+                      name="alt-b"
+                      class="alt-b"
+                      id="alt-b-1"
+                    />
+                    <input type="radio" name="radio-alternativa" value="b" />
+                  </div>
 
-                <div class="campo">
-                  <label for="alt-c"> c&#41; </label>
-                  <input type="text" name="alt-c" class="alt-c" id="alt-c-1" />
-                  <input type="radio" name="radio-alternativa" value="c" />
-                </div>
+                  <div class="campo">
+                    <label for="alt-c"> c&#41; </label>
+                    <input
+                      type="text"
+                      name="alt-c"
+                      class="alt-c"
+                      id="alt-c-1"
+                    />
+                    <input type="radio" name="radio-alternativa" value="c" />
+                  </div>
 
-                <div class="campo">
-                  <label for="alt-d"> d&#41; </label>
-                  <input type="text" name="alt-d" class="alt-d" id="alt-d-1" />
-                  <input type="radio" name="radio-alternativa" value="d" />
-                </div>
+                  <div class="campo">
+                    <label for="alt-d"> d&#41; </label>
+                    <input
+                      type="text"
+                      name="alt-d"
+                      class="alt-d"
+                      id="alt-d-1"
+                    />
+                    <input type="radio" name="radio-alternativa" value="d" />
+                  </div>
 
-                <div class="campo">
-                  <textarea
-                    name="explicacao-1"
-                    id="explicacao-1"
-                    class="explicacao-text"
-                    placeholder="Explicacao opcional"
-                  ></textarea>
-                </div>
-              </form>
-              
+                  <div class="campo">
+                    <textarea
+                      name="explicacao-1"
+                      id="explicacao-1"
+                      class="explicacao-text"
+                      placeholder="Explicacao opcional"
+                    ></textarea>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
             <button id="add-pergunta">+</button>
             <button id="salvar_quiz">Salvar</button>
           </div>
