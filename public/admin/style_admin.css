@@ -44,14 +44,13 @@
     display: flex;
     align-items: flex-end;
     padding-left: 10px;
-    border-bottom: 1px solid #c0c0c0;
     background: #ffffff00;
   }
 
   #abas button {
-    background: #f2f2f2;
+    background: white;
     border: none;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 -5px 8px rgba(0, 0, 0, 0.15);
     border-bottom: none;
     border-radius: 12px 12px 0 0;
     padding: 10px 24px;
@@ -66,19 +65,20 @@
   }
 
   #abas button:hover {
-    background: #fafafa;
+    background: #f2f2f2;
   }
 
   #abas button.ativa {
-    background: white;
+    background: #f2f2f2;
     z-index: 10;
+
   }
 
   #mostrar-painel-agenda.aba-ativa,
   #mostrar-painel-atv.aba-ativa,
   #mostrar-painel-usuarios.aba-ativa {
     background: var(--branco);
-    box-shadow: var(--sombra);
+
   }
 
 
@@ -90,11 +90,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e2e2e2;
+    background-color: #f2f2f2;
+    ;
     padding: 10px 39px;
     box-sizing: border-box;
     flex-wrap: wrap;
     margin: 0px;
+
   }
 
   /* ===== WELCOME ===== */
@@ -103,7 +105,7 @@
     margin: 5px 30px;
   }
 
-  #welcome-title > h1 {
+  #welcome-title>h1 {
     font-weight: 600;
   }
 
@@ -121,7 +123,7 @@
   }
 
   #input-busca {
-   width: 263px;
+    width: 263px;
   }
 
   input,
@@ -134,7 +136,8 @@
 
   /* ===== BOTÕES ===== */
 
-  #adicionar-post, #novo-quiz-toggle {
+  #adicionar-post,
+  #novo-quiz-toggle {
     background: none;
     border: none;
     color: var(--verde);
@@ -251,7 +254,7 @@
 
   .btn-editar-cancelar {
     background: #dc3545;
-    color: white;  
+    color: white;
   }
 
   .btn-editar-salvar {
@@ -301,26 +304,28 @@
     align-items: flex-end;
   }
 
-  .eventos-agenda > #wrapper-botoes > button,
-  .button-wrapper-disciplinas > button,
-  .botoesEditDisciplina > button {
+  .eventos-agenda>#wrapper-botoes>button,
+  .button-wrapper-disciplinas>button,
+  .botoesEditDisciplina>button {
     border-radius: 50%;
     width: 36px;
     height: 36px;
     border: none;
     color: white;
-        padding: 0px;
+    padding: 0px;
     font-size: 13.3px;
     font-weight: initial;
     margin-top: 0px;
   }
 
-  .button-wrapper-disciplinas > button, .botoesEditDisciplina > button {
+  .button-wrapper-disciplinas>button,
+  .botoesEditDisciplina>button {
     background-color: rgba(71, 71, 71, 0.418);
     color: black;
   }
 
-  .button-wrapper-disciplinas, .botoesEditDisciplina {
+  .button-wrapper-disciplinas,
+  .botoesEditDisciplina {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -338,16 +343,20 @@
   }
 
   .eventos-agenda {
-    background: var(--rosa-card);
+    background: var(--branco);
     border-radius: 20px;
     padding: 18px 20px;
-    height: auto;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
     margin: 0;
-    display: flex;
-    align-items: stretch;
 
+    display: grid;
+    grid-template-columns: 100px 220px 1fr auto;
+    align-items: stretch;
+    /* era center */
+    gap: 20px;
   }
+
+
 
   /* ===== EVENTO EM MODO DE EDIÇÃO ===== */
 
@@ -369,9 +378,9 @@
   .eventos-agenda.editando .evento-header-div {
     flex-direction: column-reverse;
     justify-content: flex-start;
-      align-items: stretch;
+    align-items: stretch;
 
-    
+
     flex-wrap: nowrap;
     gap: 16px;
   }
@@ -421,8 +430,8 @@
   .eventos-agenda.editando input[type="file"] {
     border: none;
     padding: 0;
-}
-  
+  }
+
 
 
   .eventos-agenda.editando .btn-editar-salvar,
@@ -433,35 +442,42 @@
   /* ===== EVENTO HEADER DIV ===== */
 
   .evento-header-div {
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
-    align-items: flex-start;
-    width: 100%;
+    display: contents;
   }
 
+
   .evento-titulo-div {
-    color: rgb(0, 0, 0);
+    height: 100%;
     display: flex;
     flex-direction: column;
-    flex: 1;
-    align-content: center;
-    align-items: flex-start;
-    margin-bottom: 20px;
+    justify-content: center;
+    box-sizing: border-box;
   }
+
+.div-descricao {
+  width: 100%;          
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
 
   .titulo-vento {
     margin-top: 2px;
-    font-size: 24px;
+    font-size: 1.3em;
     margin-left: 0px;
-    font-weight: 400;
+    font-weight: 600;
+    color: var(--vermelho);
+
   }
 
   .descr-evento {
-    width: 70%;
+    width: 100%;
+    border-radius: 20px;
   }
 
   .evento-formulario {
@@ -513,7 +529,7 @@
 
   /* ===== ATIVIDADES ===== */
 
-  #controle-atividades > ul {
+  #controle-atividades>ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 16px;
@@ -528,7 +544,7 @@
     border-radius: 20px;
   }
 
-  #controle-atividades > ul > li {
+  #controle-atividades>ul>li {
     height: 300px;
     border-radius: 20px;
     display: flex;
@@ -542,25 +558,29 @@
     overflow: hidden;
   }
 
-  #controle-atividades > ul > li {
-  position: relative;
-  overflow: hidden; /* ← isso impede o vazamento */
-}
+  #controle-atividades>ul>li {
+    position: relative;
+    overflow: hidden;
+    /* ← isso impede o vazamento */
+  }
 
-#controle-atividades > ul > li > a {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 12px;
-  box-sizing: border-box; /* ← garante que padding não some à largura */
-  text-align: center;
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-  .li_disciplinas a, a {
+  #controle-atividades>ul>li>a {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    /* ← garante que padding não some à largura */
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .li_disciplinas a,
+  a {
     display: block;
     text-decoration: none;
     color: inherit;
@@ -570,39 +590,39 @@
   .div-descricao {
     width: 90%;
   }
-    
+
   /* ===== QUIZ ADMIN ===== */
 
-  .titulo-quiz-admin > input,
-  .titulo-quiz-admin > textarea,
-  .titulo-quiz-admin > div > input,
-  .titulo-quiz-admin > div > textarea {
+  .titulo-quiz-admin>input,
+  .titulo-quiz-admin>textarea,
+  .titulo-quiz-admin>div>input,
+  .titulo-quiz-admin>div>textarea {
     width: 90%;
   }
 
-  .titulo-quiz-admin > div {
+  .titulo-quiz-admin>div {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
 
-  .pergunta-admin > textarea,
-  .pergunta-admin > div > input[type='text'],
-  .pergunta-admin > div > textarea {
+  .pergunta-admin>textarea,
+  .pergunta-admin>div>input[type='text'],
+  .pergunta-admin>div>textarea {
     width: 70%;
   }
 
-  .pergunta-admin > div {
+  .pergunta-admin>div {
     display: flex;
     align-items: center;
   }
 
-  .pergunta-admin > div input[type="radio"] {
+  .pergunta-admin>div input[type="radio"] {
     width: 16px;
     height: 16px;
   }
 
-  .pergunta-admin > div input[type="text"] {
+  .pergunta-admin>div input[type="text"] {
     width: calc(100% - 24px);
     margin: 0px 14px;
   }
@@ -628,7 +648,7 @@
   }
 
   #destaque {
-        margin-right: 10px;
+    margin-right: 10px;
   }
 
   #add-post-title {
@@ -719,6 +739,33 @@
 
   /* ===== IMAGEM EDIT ===== */
 
+
+  .img-evento {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .img-evento {
+    order: 1;
+  }
+
+  .evento-titulo-div {
+    order: 2;
+  }
+
+  .div-descricao {
+    order: 3;
+  }
+
+  #wrapper-botoes {
+    order: 4;
+  }
+
+
+
+
   .img-edit-wrapper {
     display: flex;
     flex-direction: row;
@@ -727,7 +774,7 @@
   }
 
   .img-edit-wrapper img {
-     max-width: 400px;
+    max-width: 400px;
     height: auto;
     border-radius: 8px;
     object-fit: cover;
@@ -752,6 +799,7 @@
     height: 90px;
     object-fit: cover;
     border-radius: 8px;
+
   }
 
   .linha-imagem input[type="file"] {
@@ -776,44 +824,48 @@
   }
 
 
-  #controle-atividades, #controle-agenda {
+  #controle-atividades,
+  #controle-agenda {
     margin: 15px 30px;
   }
 
-  #painel-atividades-conteudo > h2 {
+  #painel-atividades-conteudo>h2 {
     margin: 15px 30px;
   }
 
   #novo-quiz {
     width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #e2e2e2;
-      padding: 10px 39px;
-      box-sizing: border-box;
-      flex-wrap: wrap;
-      margin: 0px;
-          height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px 39px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    margin: 0px;
+    height: 64px;
 
   }
 
   #cabecalho-quiz {
     margin: 10px auto;
     width: fit-content;
-        display: flex;
+    display: flex;
     flex-wrap: wrap;
+
   }
-  #cabecalho-quiz > input {
+
+  #cabecalho-quiz>input {
     margin: 2px;
   }
+
   .botoeseditando {
     display: flex;
     flex-direction: column;
   }
 
   #nova-atividade {
-        margin: 15px 30px;
+    margin: 15px 30px;
   }
 
 
@@ -821,25 +873,29 @@
     width: 70%;
   }
 
-#btnExcluirQuiz, #salvar_quiz_editado, .salvar-agenda-admin, .cancelar-agenda-admin, .form-excluir-disciplina > button {
-  border-radius: 10px;
-  color: rgb(0, 0, 0);
-  border: none;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
-  background-color: #ffffff00;
-}
+  #btnExcluirQuiz,
+  #salvar_quiz_editado,
+  .salvar-agenda-admin,
+  .cancelar-agenda-admin,
+  .form-excluir-disciplina>button {
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    border: none;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff00;
+  }
 
-.li_disciplinas {
-  height: 720px;
-}
+  .li_disciplinas {
+    height: 720px;
+  }
 
-button {
-  border: none;
-  background-color: rgba(0, 0, 0, 0);
-  color: rgb(0, 0, 0);
-}
+  button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(0, 0, 0);
+  }
 
-.label-file {
+  .label-file {
     display: inline-block;
     padding: 6px 12px;
     background: #e2e2e2;
@@ -850,57 +906,91 @@ button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
+  }
 
 
-.perguntas_teste {
-      margin: 15px 50px;
-}
+  .perguntas_teste {
+    margin: 15px 50px;
+  }
 
-.campo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  margin: 5px 0px;
-}
+  .campo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin: 5px 0px;
+  }
 
-.campo input[type="text"] {
-  flex: 1;
-  min-width: 0; /* impede o input de "estourar" o flex container */
-}
+  .campo input[type="text"] {
+    flex: 1;
+    min-width: 0;
+  }
 
-.campo input[type="radio"] {
-  flex-shrink: 0; /* garante que o radio nunca encolhe ou quebra */
-  width: 16px;
-  height: 16px;
-}
+  .campo input[type="radio"] {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
 
-.explicacao-text {
-  width: 100%;
-}
+  .explicacao-text {
+    width: 100%;
+  }
 
 
-.campo-quiz {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  margin: 5px;
-}
+  .campo-quiz {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    margin: 5px;
+  }
 
-.pergunta-admin textarea {
-  resize: none;
-  overflow: hidden;
-  min-height: 60px;
-  height: auto;
-}
+  .pergunta-admin textarea {
+    resize: none;
+    overflow: hidden;
+    min-height: 60px;
+    height: auto;
+  }
 
-.pergunta-admin:not(.editando) textarea {
-  border-color: transparent;
-  background: transparent;
-  resize: none;
-  pointer-events: none;
-  padding: 4px 6px;
-  overflow: hidden; /* ← adiciona isso */
+  .pergunta-admin:not(.editando) textarea {
+    border-color: transparent;
+    background: transparent;
+    resize: none;
+    pointer-events: none;
+    padding: 4px 6px;
+    overflow: hidden;
+  }
+
+  @media (max-width: 1024px) {
+  .eventos-agenda {
+    grid-template-columns: 1fr;  
+    gap: 12px;
+  }
+
+  .img-evento {
+    width: 100%;
+    height: 180px;    
+    object-fit: cover;
+  }
+
+  .evento-titulo-div,
+  .div-descricao {
+    height: auto;
+    text-align: center;
+  }
+
+  #wrapper-botoes {
+    flex-direction: row-reverse;   
+    justify-content: center;
+    height: auto;
+  }
+
+  .div-descricao {
+    margin: 0 auto;
+    text-align: justify;
+    width: 100%;
+    padding: 5vw;
+  }
+
+
 }
