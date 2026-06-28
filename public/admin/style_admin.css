@@ -293,6 +293,16 @@
     font-size: 18px;
   }
 
+
+  #btn-proximo-interno,
+  #btn-anterior-interno {
+    width: 150px;
+  }
+
+  #btn-anterior-interno {
+    margin-left: 2vw;
+  }
+
   /* ===== WRAPPER BOTÕES ===== */
 
   #wrapper-botoes {
@@ -454,16 +464,16 @@
     box-sizing: border-box;
   }
 
-.div-descricao {
-  width: 100%;          
-  height: 100%;
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--borda);
-  border-radius: 10px;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
+  .div-descricao {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
 
 
   .titulo-vento {
@@ -962,35 +972,63 @@
   }
 
   @media (max-width: 1024px) {
-  .eventos-agenda {
-    grid-template-columns: 1fr;  
-    gap: 12px;
+    .eventos-agenda {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .img-evento {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .evento-titulo-div,
+    .div-descricao {
+      height: auto;
+      text-align: center;
+    }
+
+    #wrapper-botoes {
+      flex-direction: row-reverse;
+      justify-content: center;
+      height: auto;
+    }
+
+    .div-descricao {
+      margin: 0 auto;
+      text-align: justify;
+      width: 100%;
+      padding: 5vw;
+    }
+
+
   }
 
-  .img-evento {
-    width: 100%;
-    height: 180px;    
-    object-fit: cover;
+  @media (min-width: 1025px) {
+    .eventos-agenda.editando {
+      display: flex;
+      /* a base agora é grid; aqui forço flex de volta */
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .eventos-agenda.editando .evento-header-div {
+      display: flex;
+      /* a base é 'contents'; aqui forço flex de volta */
+      flex-direction: row;
+      flex: 1;
+      align-items: flex-start;
+    }
+
+    .eventos-agenda.editando .img-edit-wrapper {
+      flex: 0 0 160px;
+    }
+
+    .eventos-agenda.editando .evento-titulo-div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
   }
-
-  .evento-titulo-div,
-  .div-descricao {
-    height: auto;
-    text-align: center;
-  }
-
-  #wrapper-botoes {
-    flex-direction: row-reverse;   
-    justify-content: center;
-    height: auto;
-  }
-
-  .div-descricao {
-    margin: 0 auto;
-    text-align: justify;
-    width: 100%;
-    padding: 5vw;
-  }
-
-
-}
