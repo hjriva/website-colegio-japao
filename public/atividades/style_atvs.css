@@ -24,6 +24,8 @@
     margin-left: calc(-50vw + 50%);
     overflow: hidden;
     height: 400px;
+    max-height: 30vh;
+
 }
 
 #img-wrapper img {
@@ -32,6 +34,7 @@
     object-fit: cover;
     object-position: center 30%;
     display: block;
+    max-height: 30vh;
 }
 
 #img-wrapper::after {
@@ -50,15 +53,25 @@ main {
     max-width: 90vw;
 }
 
+
 #h1-atividades {
     color: var(--cor-principal);
-    margin-top: -60px;
+    margin-top: -20px;
+    margin-bottom: 20px;
     position: relative;
     z-index: 1;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: clamp(1.2rem, 5vw, 3rem);
 }
 
-
+#h1-atividades i {
+    white-space: nowrap;
+    margin-right: 6px;
+}
 
 .grid-atividades {
     display: grid;
@@ -99,15 +112,16 @@ main {
     border-radius: 8px;
     margin: 0 auto;
     padding: 4px 16px;
-    width: 139px;
+    width: 80%;
 
 }
 
 .li_disciplinas a {
-    display: block;
     text-decoration: none;
     color: inherit;
     margin-left: 0;
+    font-size: 1em;
+
 }
 
 
@@ -163,12 +177,11 @@ main {
     text-align: center;
     display: block;
     text-align: center;
-    font-size: 2.5vh;
+    font-size: 2vh;
     white-space: nowrap;
     margin: 2px 5px;
-    font-weight: 700;
-    margin-bottom: 2vh;
-    margin-top: 2vh;
+    font-weight: 500;
+
 }
 
 .atividade>a {
@@ -192,8 +205,8 @@ select {
     background-color: #ffffff;
     padding: 5px;
     margin: 2px auto;
+    margin-bottom: 2vh;
 }
-
 
 
 
@@ -201,6 +214,10 @@ select {
     display: block;
 }
 
+#descricao_atv {
+    font-weight: 500;
+    margin-bottom: 3vh;
+}
 
 
 @media (min-width: 1024px) {
@@ -221,4 +238,62 @@ select {
     #atividades_display {
         width: 100%
     }
+
+    #descricao_atv {
+        font-weight: 500;
+        margin-bottom: 3vh;
+    }
+
+    #h1-atividades {
+        margin-top: -60px;
+    }
+
+
+    #filtrar-titulo {
+        text-align: center;
+        display: block;
+        font-size: 3vh;
+        white-space: nowrap;
+        margin: 2px 5px;
+        font-weight: 500;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+    }
+
+    #img-wrapper {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        overflow: hidden;
+        height: 400px;
+        margin-top: 0;
+        max-height: 50vh;
+
+    }
+
+    #img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+        display: block;
+        max-height: 50vh;
+    }
+
+    #img-wrapper::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom,
+                transparent 50%,
+                white 100%);
+        pointer-events: none;
+    }
+
+
+    #h1-atividades {
+        margin-top: -60px;
+        /* volta de -20px para -60px */
+    }
+
 }
