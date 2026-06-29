@@ -140,16 +140,16 @@ main>h1 {
 
 #submeter-resultado {
     font-family: 'Poppins';
-    
-        border: none;
-        border-radius: 10px;
-        padding: 1em;
-        font-size: 1em;
-        color: #ffffff;
-        margin-top: 1em;
-        box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
-        font-weight: 500;
-        background-color: var(--vermelho);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+
+
+}
+
+#submeter-resultado:hover {
+    background-color: hwb(0 39% 0%);
+    transform: scale(1.03);
 
 }
 
@@ -173,5 +173,16 @@ main>h1 {
     main>h1 {
         font-size: 1.3rem;
         justify-content: center;
+    }
+
+    #submeter-resultado {
+        font-family: 'Poppins';
+        border: none;
+        padding: 3vw;
+        background-color: red;
+        color: white;
+        border-radius: 10px;
+        margin-top: 2vh;
+
     }
 }

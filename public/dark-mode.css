@@ -3,31 +3,37 @@
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-
-    width: fit-content !important;
+    width: 100% !important;
     min-width: 45px !important;
-    height: 38px !important;   /* mesma altura da Agenda */
-    padding: 0 14px !important;
-
+    height: 40px !important;
+    padding: 0 !important;
     border: none !important;
     border-radius: 10px !important;
     background: var(--vermelho) !important;
     color: #fff !important;
-    margin-top: -6px !important;
-    box-shadow: rgba(54,54,54,.315) 2px 2px 1pt !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
 }
 
 #btn-dark-mode:hover,
 #btn-dark-mode:focus {
-    background: hwb(0 39% 0%) !important; /* igual Agenda */
-    box-shadow: rgba(54,54,54,.315) 2px 2px 1pt !important;
+    background: hwb(0 39% 0%) !important;
     transform: none !important;
 }
 
 #btn-dark-mode i {
     pointer-events: none;
     font-size: 1.1rem;
-    color: #ffffff;
+    color: #ffffff !important;
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin-top: 0 !important;
+}
+
+#btn-dark-mode:hover {
+    background-color: hwb(0 39% 0%) !important;
+    transform: scale(1.05) !important;
 }
 
 /* no mobile, centraliza o botão no menu */
@@ -38,9 +44,8 @@
         border: none !important;
         color: #fff !important;
 
-        width: 45px !important;
+        width: 145px !important;
         height: 45px !important;
-        min-width: 45px !important;
         padding: 0 !important;
 
         border-radius: 10px !important;
@@ -54,11 +59,11 @@
 
         top: 22px;
         left: 30px;
-
+        flex-shrink: 0 !important;
         z-index: 9999;
     }
 
-        .hamburger {
+    .hamburger {
         position: fixed !important;
         top: 22px !important;
         right: 20px !important;
@@ -92,7 +97,7 @@ html.dark-mode main {
 /* header */
 html.dark-mode header {
     background-color: #252525;
-    box-shadow: rgba(0,0,0,0.5) 1pt 0pt 30px;
+    box-shadow: rgba(0, 0, 0, 0.5) 1pt 0pt 30px;
 }
 
 html.dark-mode .logo,
@@ -127,7 +132,7 @@ html.dark-mode .atividade:hover {
     filter: brightness(0.85);
 }
 
-html.dark-mode #informacoes_iniciais > p {
+html.dark-mode #informacoes_iniciais>p {
     color: #8a8a8a;
 }
 
@@ -153,9 +158,11 @@ html.dark-mode #texto2 {
 
 /* blockquote */
 html.dark-mode #texto {
-    background-color: #e4313190;  /* era #2a2a2a, agora um pouco mais claro e avermelhado */
+    background-color: #e4313190;
+    /* era #2a2a2a, agora um pouco mais claro e avermelhado */
     color: #f4f4f4;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);  /* sombra mais suave */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    /* sombra mais suave */
 }
 
 html.dark-mode #texto::before,
@@ -186,7 +193,7 @@ html.dark-mode #form input,
 html.dark-mode #form textarea {
     background-color: #2e2e2e;
     color: #d0d0d0;
-    box-shadow: rgba(0,0,0,0.3) 1pt 0pt 5px;
+    box-shadow: rgba(0, 0, 0, 0.3) 1pt 0pt 5px;
 }
 
 html.dark-mode #form input::placeholder,
@@ -209,20 +216,20 @@ html.dark-mode #container_footer_grid {
 }
 
 html.dark-mode .footer-col {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* nav mobile */
-html.dark-mode nav > ul {
+html.dark-mode nav>ul {
     background-color: #252525;
 }
 
-html.dark-mode nav > ul > li > a:not(.btn_agenda) {
+html.dark-mode nav>ul>li>a:not(.btn_agenda) {
     color: #d0d0d0;
     border-bottom-color: #3a3a3a;
 }
 
-html.dark-mode nav > ul > li > a:not(.btn_agenda):hover {
+html.dark-mode nav>ul>li>a:not(.btn_agenda):hover {
     background-color: #3a2020;
     color: #f92525;
 }

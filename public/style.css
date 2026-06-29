@@ -56,8 +56,9 @@
 
 
     .identidade:hover {
-        transition: transform 0.1s ease;
-        transform: scale(1.1);
+        transition: transform 0.3s ease;
+        transform: scale(1.09);
+
     }
 
     .titulo {
@@ -76,6 +77,11 @@
         gap: 20px;
         flex-wrap: wrap;
         gap: 10px;
+
+    }
+
+    nav>ul>li>a:hover {
+        color: red;
 
     }
 
@@ -108,11 +114,13 @@
 
 
 
-   
+
 
 
     .btn_agenda:hover {
         background-color: hwb(0 39% 0%);
+        color: white;
+
     }
 
 
@@ -165,27 +173,34 @@
     }
 
     #faleconosco {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         background-color: var(--vermelho);
-        border: none;
+        color: #ffffff;
+        text-decoration: none;
         border-radius: 10px;
         padding: 0.90em;
         font-size: 1em;
-        color: #ffffff;
-        margin-top: 1em;
-        box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
         font-weight: 500;
+        margin-top: 1em;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        width: fit-content;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
 
 
-    }
 
-    #faleconosco>a {
-        color: #ffffff;
-        font-family: 'Poppins';
-        text-decoration: none;
     }
 
     #faleconosco:hover {
         background-color: hwb(0 39% 0%);
+        transform: scale(1.05);
+    }
+
+
+    #faleconosco:hover {
+        background-color: hwb(0 39% 0%);
+
 
     }
 
@@ -484,7 +499,7 @@
         box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
     }
 
-/*  .eventos-agenda {
+    /*  .eventos-agenda {
         border: solid rgb(255, 255, 255);
         width: 25em;
         height: 12em;
@@ -709,6 +724,7 @@
 
     .btn-login:hover {
         background-color: #f1f1f1;
+
     }
 
     /* carrossel */
@@ -1039,16 +1055,53 @@
 
 
     @media screen and (min-width: 1024px) {
-         .btn_agenda {
-        background-color: var(--vermelho);
-        padding: 0.5em;
-        padding-left: 2em;
-        padding-right: 2em;
-        color: #ffffff;
-        border-radius: 10px;
-        font-weight: 400;
-        box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 1pt;
-    }   
+
+
+        .btn_agenda {
+            background-color: var(--vermelho);
+            padding: 0.5em;
+            padding-left: 2em;
+            padding-right: 2em;
+            color: #ffffff;
+            border-radius: 10px;
+            font-weight: 400;
+            display: inline-block;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+
+        }
+
+        .btn_agenda:hover {
+            background-color: hwb(0 39% 0%);
+            transform: scale(1.09);
+        }
+
+
+        #btn-dark-mode {
+            width: auto !important;
+            min-width: 0 !important;
+            padding: 0.5em 0.8em;
+            margin-top: 0;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        #btn-dark-mode:hover {
+            background-color: hwb(0 39% 0%);
+            transform: scale(1.09);
+        }
+
+        nav>ul>li:has(.btn_agenda) {
+            overflow: visible;
+        }
+
+        nav>ul {
+            align-items: center;
+        }
+
+        nav>ul>li {
+            display: flex;
+            align-items: center;
+        }
 
         #subtitulo {
             font-size: 1.5em;
@@ -1278,12 +1331,15 @@
             font-size: 1em;
             color: #ffffff;
             margin-top: 1em;
-            box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
             font-weight: 500;
             background-color: var(--vermelho);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+
 
 
         }
+
 
         button>a {
             background-color: var(--vermelho);
@@ -1292,6 +1348,9 @@
             text-decoration: none;
         }
 
+        button:hover {
+            transform: scale(1.01);
+        }
 
         #contato {
             grid-template-columns: 1fr 1fr;
@@ -1528,7 +1587,7 @@
         .next-btn {
             right: 8px;
         }
-        
+
         .carrossel-container {
             height: 220px;
         }
@@ -1563,43 +1622,41 @@
 
     @media screen and (max-width: 1023px) {
 
-        #btn-dark-mode {
-    width: auto !important;
-    white-space: nowrap;
-}
 
-        nav.mobile-open > ul > li > a.btn_agenda {
-    background-color: #ffffff00;
-         color: var(--cor-texto);
-        font-size: 17.6px;
-        font-weight: 600;
-        box-shadow: none;
-        text-align: left;
-                padding: 1.1rem 2rem;
-                        margin: 0px;
-}
 
-nav.mobile-open > ul > li > a.btn_agenda:hover, 
-nav.mobile-open > ul > li > a.btn_agenda:after,
-nav.mobile-open > ul > li > a.btn_agenda:active,
-nav.mobile-open > ul > li > a.btn_agenda:focus {
-     background-color: #fdeaea;
+        nav.mobile-open>ul>li>a.btn_agenda {
+            background-color: #ffffff00;
+            color: var(--cor-texto);
+            font-size: 17.6px;
+            font-weight: 600;
+            box-shadow: none;
+            text-align: left;
+            padding: 1.1rem 2rem;
+            margin: 0px;
+        }
+
+        nav.mobile-open>ul>li>a.btn_agenda:hover,
+        nav.mobile-open>ul>li>a.btn_agenda:after,
+        nav.mobile-open>ul>li>a.btn_agenda:active,
+        nav.mobile-open>ul>li>a.btn_agenda:focus {
+            background-color: #fdeaea;
             color: var(--vermelho);
             border-radius: none;
             background-color: #ffffff00;
-             font-size: 17.6px;
-        font-weight: 600;
-        box-shadow: none;
-        text-align: left;
-                padding: 1.1rem 2rem;
-                        margin: 0px;
-}
-       nav.mobile-open > ul > li {
-        border-radius: none;
-       }
+            font-size: 17.6px;
+            font-weight: 600;
+            box-shadow: none;
+            text-align: left;
+            padding: 1.1rem 2rem;
+            margin: 0px;
+        }
+
+        nav.mobile-open>ul>li {
+            border-radius: none;
+        }
 
 
-       
+
 
         .hamburger {
             display: flex;
@@ -1646,13 +1703,14 @@ nav.mobile-open > ul > li > a.btn_agenda:focus {
         nav>ul>li>a:hover {
             background-color: #fdeaea;
             color: var(--vermelho);
+
         }
 
         /* botão Agenda dentro do menu mobile */
         nav>ul>li>a.btn_agenda {
             display: block;
             margin: 0;
-            
+
             border-bottom: none;
         }
 
@@ -1665,7 +1723,7 @@ nav.mobile-open > ul > li > a.btn_agenda:focus {
             z-index: 5 !important;
         }
 
-        
+
     }
 
 
@@ -1690,4 +1748,3 @@ nav.mobile-open > ul > li > a.btn_agenda:focus {
             border-radius: 50px 0px 0px 50px;
         }
     }
-
