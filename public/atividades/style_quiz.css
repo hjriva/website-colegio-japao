@@ -42,11 +42,18 @@ main>h1 {
 }
 
 
-.explicacao {
+.explicacao-correta {
     background-color: #64ad64;
     border-radius: 20px;
     padding: inherit;
     color: white;
+}
+
+.explicacao-errada {
+    background-color: #d30000;
+    color: white;
+    border-radius: 20px;
+    padding: inherit;
 }
 
 #resultado {

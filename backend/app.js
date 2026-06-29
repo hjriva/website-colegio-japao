@@ -338,16 +338,46 @@ app.post("/novasperguntas", async (req, res) => {
   }
 
   try {
+    const { rows: maxOrdem } = await db.query(
+    `SELECT COALESCE(MAX(ordem), 0) + 1 AS prox FROM questoes WHERE quiz_id = $1`,
+    [idQuiz]
+);
+const ordemNova = maxOrdem[0].prox;
+
     await db.query(`
-      INSERT INTO questoes (quiz_id, pergunta, alternativa_a, alternativa_b, alternativa_c, alternativa_d, resposta_correta, explicacao)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-    `, [idQuiz, enunciado, alt_a, alt_b, alt_c, alt_d, correto, explicacao]);
+    INSERT INTO questoes (quiz_id, pergunta, alternativa_a, alternativa_b, alternativa_c, alternativa_d, resposta_correta, explicacao, ordem)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+`, [idQuiz, enunciado, alt_a, alt_b, alt_c, alt_d, correto, explicacao, ordemNova]);
 
     res.json({ sucesso: true });
   } catch (err) {
     console.error(err);
     res.status(500).json({ erro: "Erro ao salvar pergunta" });
   }
+});
+
+app.post("/reordenarQuestoes", async (req, res) => {
+    const { questoes } = req.body;
+    if (!questoes?.length) return res.status(400).json({ erro: "Dados incompletos" });
+
+    const client = await db.connect();
+    try {
+        await client.query('BEGIN');
+        for (const q of questoes) {
+            await client.query(
+                `UPDATE questoes SET ordem = $1 WHERE id = $2`,
+                [q.ordem, q.id]
+            );
+        }
+        await client.query('COMMIT');
+        res.json({ sucesso: true });
+    } catch (err) {
+        await client.query('ROLLBACK');
+        console.error(err);
+        res.status(500).json({ erro: "Erro ao reordenar questões" });
+    } finally {
+        client.release();
+    }
 });
 
 // Novo quiz
@@ -474,7 +504,8 @@ app.get("/quiz/:id", async (req, res) => {
         `, [id]);
         const quiz = quizRows[0];
 
-        const ordem = quiz.randomizar ? 'ORDER BY RANDOM()' : 'ORDER BY id';
+        const deveRandomizar = quiz.randomizar === true || quiz.randomizar === 'true';
+        const ordem = deveRandomizar ? 'ORDER BY RANDOM()' : 'ORDER BY ordem ASC NULLS LAST';
         const { rows: questoes } = await db.query(`
             SELECT * FROM questoes WHERE quiz_id = $1 ${ordem} LIMIT $2 OFFSET $3
         `, [id, porPagina, offset]);
@@ -484,6 +515,7 @@ app.get("/quiz/:id", async (req, res) => {
         );
         const totalPaginas = Math.ceil(parseInt(totalRows[0].total) / porPagina);
         res.json({ quiz, questoes, totalPaginas, totalQuestoes: parseInt(totalRows[0].total), paginaAtual: pagina });
+             console.log(quiz.randomizar, typeof quiz.randomizar) 
     } catch (err) {
         res.status(500).json({ erro: "Erro ao buscar quiz" });
     }
@@ -562,20 +594,38 @@ app.post("/atualizarPergunta", async (req, res) => {
 
 app.post("/deletarPergunta", async (req, res) => {
     const { id } = req.body;
+    if (!id) return res.status(400).json({ erro: "Dados incompletos" });
 
-    if (!id) {
-        return res.status(400).json({ erro: "Dados incompletos" });
-    }
-
+    const client = await db.connect();
     try {
-        await db.query(`DELETE FROM questoes WHERE id = $1`, [id]);
+        await client.query('BEGIN');
+
+        // Busca o quiz_id e a ordem da pergunta antes de deletar
+        const { rows } = await client.query(
+            `SELECT quiz_id, ordem FROM questoes WHERE id = $1`, [id]
+        );
+        if (!rows.length) return res.status(404).json({ erro: "Pergunta não encontrada" });
+
+        const { quiz_id, ordem } = rows[0];
+
+        await client.query(`DELETE FROM questoes WHERE id = $1`, [id]);
+
+        // Recompacta a ordem das questões seguintes
+        await client.query(
+            `UPDATE questoes SET ordem = ordem - 1 WHERE quiz_id = $1 AND ordem > $2`,
+            [quiz_id, ordem]
+        );
+
+        await client.query('COMMIT');
         res.json({ sucesso: true });
     } catch (err) {
+        await client.query('ROLLBACK');
         console.error(err);
         res.status(500).json({ erro: "Erro ao excluir pergunta" });
+    } finally {
+        client.release();
     }
 });
-
 // Lista disciplinas para o select (excluindo a que será deletada)
 app.get('/disciplinas/exceto/:id', async (req, res) => {
     const { id } = req.params;
@@ -612,34 +662,19 @@ app.post("/novaPerguntaQuiz", async (req, res) => {
 
   try {
 
+    const { rows: maxOrdem } = await db.query(
+    `SELECT COALESCE(MAX(ordem), 0) + 1 AS prox FROM questoes WHERE quiz_id = $1`,
+    [quiz_id]
+);
+        const ordemNova = maxOrdem[0].prox;
+
     const { rows } = await db.query(
-      `
-      INSERT INTO questoes
-      (
-        quiz_id,
-        pergunta,
-        alternativa_a,
-        alternativa_b,
-        alternativa_c,
-        alternativa_d,
-        resposta_correta,
-        explicacao
-      )
-      VALUES
-      ($1,$2,$3,$4,$5,$6,$7,$8)
-      RETURNING id
-      `,
-      [
-        quiz_id,
-        pergunta,
-        alt_a,
-        alt_b,
-        alt_c,
-        alt_d,
-        correto,
-        explicacao
-      ]
-    );
+    `INSERT INTO questoes
+    (quiz_id, pergunta, alternativa_a, alternativa_b, alternativa_c, alternativa_d, resposta_correta, explicacao, ordem)
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+    RETURNING id`,
+    [quiz_id, pergunta, alt_a, alt_b, alt_c, alt_d, correto, explicacao, ordemNova]
+);
 
     res.json({
       sucesso: true,

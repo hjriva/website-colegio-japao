@@ -112,9 +112,7 @@ fetch(`/quiz/${id}?pagina=${pagina}`)
         divFeedback.textContent = feedbackSalvo.texto;
         div.appendChild(divFeedback);
 
-        pergunta
-          .querySelectorAll("input[type=radio]")
-          .forEach((r) => (r.disabled = true));
+          div.querySelectorAll("input[type=radio]").forEach((r) => (r.disabled = true));
 
         // Aplica classe de background
         div.classList.add(
@@ -128,7 +126,8 @@ fetch(`/quiz/${id}?pagina=${pagina}`)
           feedbackSalvo.explicacao.trim() !== ""
         ) {
           const divExplicacao = document.createElement("div");
-          divExplicacao.classList.add("explicacao");
+            divExplicacao.classList.add(feedbackSalvo.classe === "resposta-correta" ? "explicacao-correta" : "explicacao-errada");
+
           divExplicacao.textContent = feedbackSalvo.explicacao;
           div.appendChild(divExplicacao);
         }
@@ -142,9 +141,12 @@ fetch(`/quiz/${id}?pagina=${pagina}`)
       linkAnterior.href = `/atividades/quiz.html?id=${id}&pagina=${data.paginaAtual - 1}`;
       linkAnterior.className = "paginacao";
       linkAnterior.textContent = "← Anterior";
-      linkAnterior.addEventListener("click", () =>
-        sessionStorage.setItem("navegando_quiz", id),
-      );
+  linkAnterior.addEventListener("click", (e) => {
+  e.preventDefault();
+  submeterPaginaAtual(data);
+  sessionStorage.setItem("navegando_quiz", id);
+  window.location.href = linkAnterior.href;
+});
       nav.appendChild(linkAnterior);
     }
     if (data.paginaAtual < data.totalPaginas) {
@@ -153,15 +155,45 @@ fetch(`/quiz/${id}?pagina=${pagina}`)
       linkProximo.className = "paginacao";
       linkProximo.id = "prox-link";
       linkProximo.textContent = "Próxima →";
-      linkProximo.addEventListener("click", () =>
-        sessionStorage.setItem("navegando_quiz", id),
-      );
+      linkProximo.addEventListener("click", (e) => {
+  e.preventDefault();
+  submeterPaginaAtual(data);
+  sessionStorage.setItem("navegando_quiz", id);
+  window.location.href = linkProximo.href;
+});
       nav.appendChild(linkProximo);
     }
 
     if (dadosSalvos.submetido) {
       mostrarResultadoTotal();
     }
+
+    function submeterPaginaAtual(data) {
+  document.querySelectorAll(".questao").forEach((pergunta) => {
+    const questaoId = pergunta.id;
+    if (dadosSalvos.feedback[questaoId]) return; // já corrigida
+
+    const radioMarcado = pergunta.querySelector("input[type=radio]:checked");
+    if (!radioMarcado) return; // não respondida, ignora
+
+    const questao = data.questoes.find((q) => q.id == questaoId);
+    if (!questao) return;
+
+    const altMarcada = radioMarcado.value;
+    const altCorreta = questao.resposta_correta;
+    const correta = altMarcada == altCorreta;
+
+    dadosSalvos.feedback[questaoId] = {
+      texto: correta
+        ? `Você acertou a questão!`
+        : `A resposta correta é ${altCorreta}!`,
+      classe: correta ? "resposta-correta" : "resposta-inccorreta",
+      explicacao: questao.explicacao,
+    };
+  });
+
+  salvarDados();
+}
 
     botaoResultado.addEventListener("click", () => {
       let perguntas = document.querySelectorAll(".questao");
@@ -220,7 +252,8 @@ fetch(`/quiz/${id}?pagina=${pagina}`)
         const explicacaoPergunta = questao.explicacao;
         if (explicacaoPergunta !== null && explicacaoPergunta.trim() !== "") {
           const divExplicacao = document.createElement("div");
-          divExplicacao.classList.add("explicacao");
+          divExplicacao.classList.add( altMarcada == altCorreta ? "explicacao-correta" : "explicacao-errada");
+          
           divExplicacao.textContent = explicacaoPergunta;
           pergunta.appendChild(divExplicacao);
         }
