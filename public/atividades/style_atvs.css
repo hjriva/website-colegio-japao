@@ -81,6 +81,17 @@ main {
     margin-top: 8px;
 }
 
+.li_disciplinas {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+
+}
+
+.li_disciplinas:hover {
+    background-color: hwb(0 39% 0%);
+    transform: scale(1.09);
+}
 
 #primeira-coluna {
     border-radius: 20px;
