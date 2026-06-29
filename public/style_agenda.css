@@ -213,6 +213,9 @@ h2 {
     color: var(--color-text-primary);
     box-shadow: none;
     margin-top: 30px;
+    border: none;
+    background: none;
+    box-shadow: none;
 }
 
 .cal-nav:hover {
@@ -528,6 +531,7 @@ h2 {
         min-height: 100px;
     }
 
+    
 
     .eventos-agenda {
         width: 98%;
