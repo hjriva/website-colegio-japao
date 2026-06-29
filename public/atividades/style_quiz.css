@@ -42,11 +42,18 @@ main>h1 {
 }
 
 
-.explicacao {
+.explicacao-correta {
     background-color: #64ad64;
     border-radius: 20px;
     padding: inherit;
     color: white;
+}
+
+.explicacao-errada {
+    background-color: #d30000;
+    color: white;
+    border-radius: 20px;
+    padding: inherit;
 }
 
 #resultado {
@@ -133,6 +140,16 @@ main>h1 {
 
 #submeter-resultado {
     font-family: 'Poppins';
+    
+        border: none;
+        border-radius: 10px;
+        padding: 1em;
+        font-size: 1em;
+        color: #ffffff;
+        margin-top: 1em;
+        box-shadow: rgba(54, 54, 54, 0.315) 2px 2px 2pt;
+        font-weight: 500;
+        background-color: var(--vermelho);
 
 }
 
