@@ -119,6 +119,7 @@ const nav = document.querySelector('nav');
 const overlay = document.createElement('div');
 overlay.classList.add('nav-overlay');
 document.body.appendChild(overlay);
+const darkModeBtn = window.document.getElementById('btn-dark-mode')
 
 function toggleMenu() {
     nav.classList.toggle('mobile-open');
