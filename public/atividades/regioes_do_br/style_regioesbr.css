@@ -36,6 +36,7 @@ input {
 }
 
 
+
 #play-btn,
 #quit-btn {
     background-color: var(--vermelho);
@@ -53,11 +54,14 @@ input {
     margin: 0;
     text-indent: 0;
     font-family: 'Poppins';
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+
 }
 
 #play-btn:hover {
-    box-shadow: 1px 1px 10px var(--vermelho);
-
+    background-color: hwb(0 39% 0%);
+    transform: scale(1.05);
 }
 
 .regioes-divs>h2 {
@@ -156,14 +160,16 @@ main {
     box-sizing: border-box;
 }
 
-#descr_regioes,
-#atividade_container {
-    width: fit-content;
-}
+
 
 #descr_regioes {
-    width: 100%;
-    /* estica para acompanhar o irmão */
+    width: fit-content;
+
+}
+
+#atividade_container {
+    width: fit-content;
+
 }
 
 
@@ -260,7 +266,7 @@ li .inputEstado {
     #atividade_container {
         width: 45vw;
     }
-}*/ 
+}*/
 
 #descr_regioes {
     background-color: rgb(255, 238, 238);
@@ -293,26 +299,137 @@ p {
 
 @media (max-width: 670px) {
 
-     h1 {
+    h1 {
         display: flex;
         align-items: center;
         gap: 8px;
         flex-wrap: wrap;
     }
-    
+
     #atividade_container {
         flex-direction: column-reverse;
         width: 100%;
-        
+
     }
+
     #regioes-container {
         width: 100%;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     #mapa-container {
         margin: 1px 4px;
         position: static;
-          align-self: center;
+        align-self: center;
+    }
+
+    #play-btn,
+    #quit-btn {
+        width: 100%;
+        font-size: 1em;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    #controls {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    #cabecalho-atv {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #resultado {
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        display: flex;
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+        line-height: 1.3;
+        flex-wrap: nowrap;
+        margin-bottom: 3vh;
+        align-items: center;
+    }
+
+    h1 i {
+        display: inline !important;
+        vertical-align: middle;
+        margin-right: 6px;
+    }
+
+    .botaoinput {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    li .inputEstado {
+        width: 100%;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .btn-confirmar {
+        flex-shrink: 0;
+    }
+
+    #regioes-container {
+        padding: 3vw;
+        box-sizing: border-box;
+    }
+
+    .regioes-divs {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+
+    }
+
+    li {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .botaoinput {
+        width: 100%;
+    }
+
+    li .inputEstado {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #atividade_container {
+        flex-direction: column-reverse;
+        width: 100% !important;
+        overflow: hidden;
+    }
+
+    .regioes-divs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .botaoinput {
+        justify-content: center;
+    }
+    .regioes-divs ul {
+        width: 100%;
+    }
+
+    .gabarito,
+    .advinhado {
+        width: 100% !important;
+        box-sizing: border-box;
     }
 }
