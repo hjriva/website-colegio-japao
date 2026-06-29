@@ -2,10 +2,18 @@
 <html lang="pt-BR">
 
 <head>
+    <script>
+    if (localStorage.getItem('colegio-japao-dark-mode') === '1' ||
+       (localStorage.getItem('colegio-japao-dark-mode') === null &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark-mode');
+    }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agenda</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="dark-mode.css" />
 
     <link rel="stylesheet" href="style_agenda.css" />
 
@@ -51,6 +59,10 @@
         <li><a href="index.html">Página Inicial</a></li>
         <li><a href="atividades/index.html">Atividades</a></li>
         <li><a class="btn_agenda" href="agenda_pag.html">Agenda</a></li>
+        <li><button id="btn-dark-mode" aria-label="Alternar modo noturno" title="Ativar modo noturno">
+          <i class="fa-regular fa-moon"></i>
+        </button>
+        </li>
       </ul>
     </nav>
 
@@ -205,7 +217,7 @@
       src="https://cdn.userway.org/widget.js"
       data-account="PhHQuLEkH6" id="userway-root"
     ></script>
-
+    <script src="dark-mode.js"></script>
 </body>
 
 </html>

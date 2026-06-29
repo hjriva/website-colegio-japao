@@ -264,38 +264,28 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(err => console.error(err));
 
         console.log('cheguei aqui');
-        const btnTabCalendario =
-    document.getElementById('btn-tab-calendario');
 
-const btnTabLista =
-    document.getElementById('btn-tab-lista');
+    const btnTabCalendario = document.getElementById('btn-tab-calendario');
+    const btnTabLista = document.getElementById('btn-tab-lista');
 
-const calendario =
-    document.getElementById('calendario-coluna');
+    if (btnTabCalendario && btnTabLista) {
+        calendario.classList.remove('oculto');
+        lista.classList.add('oculto');
 
-const lista =
-    document.getElementById('lista-coluna');
+        btnTabCalendario.addEventListener('click', () => {
+            calendario.classList.remove('oculto');
+            lista.classList.add('oculto');
+            btnTabCalendario.classList.add('tab-ativa');
+            btnTabLista.classList.remove('tab-ativa');
+        });
 
-calendario.classList.remove('oculto');
-lista.classList.add('oculto');
-
-btnTabCalendario.addEventListener('click', () => {
-
-    calendario.classList.remove('oculto');
-    lista.classList.add('oculto');
-
-    btnTabCalendario.classList.add('tab-ativa');
-    btnTabLista.classList.remove('tab-ativa');
-});
-
-btnTabLista.addEventListener('click', () => {
-
-    lista.classList.remove('oculto');
-    calendario.classList.add('oculto');
-
-    btnTabLista.classList.add('tab-ativa');
-    btnTabCalendario.classList.remove('tab-ativa');
-});
+        btnTabLista.addEventListener('click', () => {
+            lista.classList.remove('oculto');
+            calendario.classList.add('oculto');
+            btnTabLista.classList.add('tab-ativa');
+            btnTabCalendario.classList.remove('tab-ativa');
+        });
+    }
 
 });
 
