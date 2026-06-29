@@ -61,10 +61,12 @@ button {
     height: 3em;
     border-radius: 2vh;
     border: none;
-    width: 40vh;
+    width: 100%;
     max-width: 360px;
-
+    box-sizing: border-box;
 }
+
+
 
 input {
     background-color: #E2DDDD;
@@ -72,8 +74,14 @@ input {
 }
 
 #erro {
-    font-size: 5vh;
+    font-size: 2vh;
+    text-align: center;
+    min-height: 1.5em;
+    color: var(--cor-primaria);
 }
+
+
+
 
 
 button {

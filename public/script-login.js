@@ -18,6 +18,8 @@ document.getElementById('btn-login').addEventListener('click', async (e) => {
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
 
+    document.getElementById('erro').style.display = 'none'; 
+
     try {
         await signInWithEmailAndPassword(auth, email, senha);
         const token = await auth.currentUser.getIdToken();
