@@ -58,6 +58,7 @@
     color: red;
     position: relative;
     margin-left: -8px;
+    font-weight: 600;
   }
 
   #abas button:first-child {
@@ -82,8 +83,10 @@
   }
 
 
-
-  /* ===== CABEÇALHO AGENDA ===== */
+#subtitulo_admin {
+  font-weight: 700;
+  margin
+}
 
   #cabecalho-painel-agenda {
     width: 100%;
@@ -107,10 +110,13 @@
 
   #welcome-title>h1 {
     font-weight: 600;
+    margin-bottom: 0;
   }
 
   #subtitulo_admin {
     color: red;
+    margin-bottom: 5vh;
+    margin-left: 2px;
   }
 
   /* ===== INPUTS ===== */
