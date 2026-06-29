@@ -39,13 +39,29 @@
 
         <input type="email" id="email" placeholder="E-mail" />
         <input type="password" id="senha" placeholder="Senha" />
-        <p id="redefinicao">Esqueci a Senha / Redefina sua Senha</p>
+        <button type="button" id="btn-esqueci">Esqueci minha senha / Redefina sua Senha</button>
+
         <!-- Tag de redefinição vai mudar provavelmente pra link ou botao mas por enquanto vai ficar assim -->
         <button type="button" id="btn-login">Entrar</button>
         <p id="erro" style="color: red; display: none">
           E-mail ou senha inválidos
         </p>
       </div>
+
+      <div id="modal-esqueci" style="display:none;">
+  <div id="modal-conteudo">
+    <h2>Redefinir senha</h2>
+    <p>Se você tiver uma conta, receberá um e-mail com o link de redefinição.</p>
+    <input type="email" id="email-redefinir" placeholder="Seu e-mail" />
+    <p id="msg-sucesso" style="display:none; color:green;">E-mail enviado! Verifique sua caixa de entrada.</p>
+    <p id="msg-erro-modal" style="display:none; color:red;">E-mail inválido.</p>
+    <button type="button" id="btn-enviar-reset">Enviar</button>
+    <button type="button" id="btn-fechar-modal">
+  <i class="fa-solid fa-xmark"></i>
+</button>
+  </div>
+    </div>
+
 
       <!-- JS -->
       <script type="module" src="/script-login.js"></script>
@@ -61,7 +77,7 @@
         new window.VLibras.Widget("https://vlibras.gov.br/app");
       </script>
 
-      <script src="carrossel.js"></script>
+      <!--<script src="carrossel.js"></script>-->
 
       <script
         src="https://cdn.userway.org/widget.js"
