@@ -80,6 +80,11 @@
 
     }
 
+    nav>ul>li>a:hover {
+        color: red;
+
+    }
+
 
     .identidade {
         display: flex;
@@ -114,6 +119,7 @@
 
     .btn_agenda:hover {
         background-color: hwb(0 39% 0%);
+        color: white;
 
     }
 
@@ -1049,8 +1055,8 @@
 
 
     @media screen and (min-width: 1024px) {
- 
- 
+
+
         .btn_agenda {
             background-color: var(--vermelho);
             padding: 0.5em;
@@ -1069,18 +1075,21 @@
             background-color: hwb(0 39% 0%);
             transform: scale(1.09);
         }
-    #btn-dark-mode {
-        width: auto !important;
-        min-width: 0 !important;
-        padding: 0.5em 0.8em;
-        margin-top: 0;
-        transition: transform 0.3s ease, background-color 0.3s ease;
-    }
 
-    #btn-dark-mode:hover {
-        background-color: hwb(0 39% 0%);
-        transform: scale(1.09);
-    }
+
+        #btn-dark-mode {
+            width: auto !important;
+            min-width: 0 !important;
+            padding: 0.5em 0.8em;
+            margin-top: 0;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        #btn-dark-mode:hover {
+            background-color: hwb(0 39% 0%);
+            transform: scale(1.09);
+        }
+
         nav>ul>li:has(.btn_agenda) {
             overflow: visible;
         }
@@ -1613,7 +1622,7 @@
 
     @media screen and (max-width: 1023px) {
 
-  
+
 
         nav.mobile-open>ul>li>a.btn_agenda {
             background-color: #ffffff00;
