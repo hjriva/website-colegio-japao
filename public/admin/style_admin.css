@@ -83,10 +83,10 @@
   }
 
 
-#subtitulo_admin {
-  font-weight: 700;
-  margin
-}
+  #subtitulo_admin {
+    font-weight: 700;
+
+  }
 
   #cabecalho-painel-agenda {
     width: 100%;
@@ -94,15 +94,29 @@
     justify-content: space-between;
     align-items: center;
     background-color: #f2f2f2;
-    ;
     padding: 10px 39px;
     box-sizing: border-box;
     flex-wrap: wrap;
-    margin: 0px;
+    margin: 0;
 
   }
 
-  /* ===== WELCOME ===== */
+
+  #SairBotao {
+    background-color: red;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+
+
+  }
+
+  #SairBotao:hover {
+    transition: transform 0.3s ease;
+    transform: scale(1.09);
+  }
+
+
 
   #welcome-title {
     margin: 5px 30px;
@@ -158,6 +172,13 @@
     box-shadow: none;
     width: auto;
     padding: 0px;
+  }
+
+
+  #adicionar-post:hover {
+    transition: transform 0.2s ease;
+    transform: scale(1.03);
+    color: #2e7d32;
   }
 
   /*#novo-quiz-toggle::before  {
@@ -224,12 +245,36 @@
   }
 
   .botoes-editar {
-    background-color: blue;
+    background-color: #638FFF;
   }
 
   .botoes-excluir {
-    background-color: red;
+    background-color: #FF3D3D;
+
   }
+
+  .botoes-excluir:hover {
+    transition: transform 0.2s ease;
+    transform: scale(1.09);
+  }
+
+
+  .botoes-editar:hover {
+    transition: transform 0.2s ease;
+    transform: scale(1.09);
+  }
+
+  .btn-editar-salvar:hover {
+    transition: transform 0.2s ease;
+    transform: scale(1.09);
+  }
+
+  .btn-editar-cancelar:hover {
+    transition: transform 0.2s ease;
+    transform: scale(1.09);
+  }
+
+
 
   .btn-editar-salvar,
   .btn-editar-cancelar {
