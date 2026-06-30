@@ -17,8 +17,8 @@ const CORES_REGIOES = {
   S:  { acerto: "#f5d19f", nome: "Sul" },
 };
 
-const COR_PADRAO   = "#ffffff00"; // regiões ainda não acertadas
-const COR_BORDA    = "#000000";
+const COR_PADRAO   = "var(--mapa-fundo, #e8e8e8)"; // regiões ainda não acertadas
+const COR_BORDA    = "var(--mapa-borda, #333333)";
 const COR_GABARITO = "#acacac"; // revelada ao desistir
 
 let svgMapa = null;
@@ -143,6 +143,7 @@ console.log("S tem:", regioes["S"]?.map(f => f.properties.name));
         .datum(f)
         .attr("d", pathGen)
         .attr("fill", COR_PADRAO)
+        .style("fill", COR_PADRAO)
         .attr("stroke", COR_BORDA)
         .attr("stroke-width", "0.8")
         .attr("data-regiao", sigla)

@@ -16,6 +16,7 @@
     position: sticky;
     top: 20px;
     align-self: flex-start;
+    min-height: 280px;
 
 }
 
@@ -324,6 +325,7 @@ p {
         margin: 1px 4px;
         position: static;
         align-self: center;
+
     }
 
     #play-btn,
@@ -432,4 +434,24 @@ p {
         width: 100% !important;
         box-sizing: border-box;
     }
+}
+
+#mapa-container {
+  background-color: transparent; /* ou uma cor neutra */
+}
+
+#mapa-container svg {
+  display: block;
+}
+
+
+
+    html.dark-mode{
+    --mapa-borda: #cccccc;
+    --mapa-fundo: #555555;
+  }
+ 
+
+:root {
+  --mapa-borda: #333333;
 }
