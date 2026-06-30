@@ -227,6 +227,13 @@
     border-radius: var(--radius-pill);
     padding: 12px 30px;
     cursor: pointer;
+    margin: 20px 0px 0px 20px;
+  }
+
+  #salvar-post {
+    margin-left: 0;
+    font-size: 1em;
+    font-weight: 500;
   }
 
   #salvar_quiz_editado,
@@ -557,10 +564,13 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
+
   }
 
   #novo-evento-form h2 {
     color: var(--texto-escuro);
+
   }
 
   #FormularioNovo {
@@ -603,6 +613,10 @@
     overflow-y: auto;
     scroll-behavior: smooth;
     border-radius: 20px;
+  }
+
+  #lista-de-perguntas {
+    width: 100%;
   }
 
   #controle-atividades>ul>li {
@@ -890,8 +904,20 @@
     margin: 15px 30px;
   }
 
+
   #painel-atividades-conteudo>h2 {
     margin: 15px 30px;
+  }
+
+  #painel-atividades-conteudo {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #painel-admin {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    max-width: auto;
   }
 
   #novo-quiz {
@@ -909,10 +935,11 @@
   }
 
   #cabecalho-quiz {
-    margin: 10px auto;
     width: fit-content;
     display: flex;
     flex-wrap: wrap;
+    padding: 16px;
+    margin: 0 auto;
 
   }
 
@@ -925,13 +952,11 @@
     flex-direction: column;
   }
 
-  #nova-atividade {
-    margin: 15px 30px;
-  }
 
 
   .input_enunciado {
-    width: 70%;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   #btnExcluirQuiz,
@@ -971,7 +996,8 @@
 
 
   .perguntas_teste {
-    margin: 15px 50px;
+    margin: 0 !important;
+    padding: 16px;
   }
 
   .campo {
@@ -1036,6 +1062,111 @@
   #destaque {
     margin-left: 5vw;
 
+
+  }
+
+  #novo-evento-form {
+    background: #f2f2f2;
+    border: none;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+
+  .eventos-agenda {
+    background: #f2f2f2;
+    border-radius: 12px;
+    box-shadow: none;
+    border: none;
+  }
+
+  #nova-atividade {
+    background: #f2f2f2;
+    border-radius: 12px;
+    padding: 0 !important;
+    margin: 0;
+    border-radius: 0;
+    width: 100%;
+    box-sizing: border-box;
+
+  }
+
+  #cabecalho-quiz {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+
+
+  .form_pergunta {
+    display: block;
+    background: #f2f2f2;
+    border-radius: 12px;
+    padding: 16px;
+    width: 100%;
+    background: #f2f2f2;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: -25px;
+  }
+
+  .numero-pergunta {
+    display: inline;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  .form_pergunta>label {
+    display: inline;
+  }
+
+  .form_pergunta>input.input_enunciado {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .form_pergunta>.campo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .campo input[type="text"] {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    padding: 8px 14px;
+    width: 100%;
+  }
+
+  #add-pergunta {
+    background: #43a047;
+    color: white;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+    border: none;
+    cursor: pointer;
+    margin-left: 2vw;
+    margin-bottom: 10vh;
+  }
+
+  #salvar_quiz {
+    background: #43a047;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+    float: right;
+    margin-right: 3vw;
   }
 
 
@@ -1100,5 +1231,64 @@
       gap: 12px;
     }
 
+    #cabecalho-painel-agenda {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f2f2f2;
+      padding: 10px 39px;
+      box-sizing: border-box;
+      flex-wrap: wrap;
+      margin: 0 auto;
+
+    }
+  }
+
+  @media (max-width: 768px) {
+    #cabecalho-quiz {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .campo-quiz {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .campo-quiz input,
+    .campo-quiz label {
+      width: 100%;
+    }
+
+    .campo-quiz:has(input[type="checkbox"]) {
+      flex-direction: row;
+      align-items: center;
+      margin: 0 auto;
+    }
+
+
+    #cabecalho-painel-agenda {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    #input-busca {
+      width: 100%;
+
+    }
+
+    #filtro-data {
+      width: 100%;
+      margin-bottom: 2vh;
+    }
+
+    #adicionar-post {
+      margin: 1vh;
+    }
 
   }
