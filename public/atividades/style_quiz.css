@@ -26,6 +26,7 @@ main>h1 {
 
     padding: 17px;
     margin: 15px 5px;
+    background-color: #ff727244;
     border-radius: 25px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
     width: 100%;

@@ -224,3 +224,20 @@ function resetarMapa() {
   const srEl = document.getElementById("mapa-sr-status");
   if (srEl) srEl.textContent = "";
 }
+  function atualizarCoresMapa() {
+    if (!svgMapa) return;
+    const dark = document.documentElement.classList.contains('dark-mode');
+    const corPadrao = dark ? "#666666" : "#ffffff00";
+    const corBorda  = dark ? "#444444" : "#000000";
+
+    svgMapa.selectAll("path[data-regiao]")
+      .filter(function() {
+        const fill = d3.select(this).attr("fill");
+        // só reaplica nos estados ainda não acertados/gabarito
+        const cores = Object.values(CORES_REGIOES).map(r => r.acerto);
+        return !cores.includes(fill) && fill !== "#888888";
+      })
+      .transition().duration(300)
+      .attr("fill", corPadrao)
+      .attr("stroke", corBorda);
+  }

@@ -1,11 +1,19 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
+    <script>
+      if (localStorage.getItem('colegio-japao-dark-mode') === '1' ||
+        (localStorage.getItem('colegio-japao-dark-mode') === null &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark-mode');
+      }
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz</title>
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="style_quiz.css" />
+    <link rel="stylesheet" href="../dark-mode.css" />
     <link rel="icon" type="image/png" href="../imgs_site/logo.png" />
 
     <!-- Fontes Google -->
@@ -53,8 +61,18 @@
            <li><a href="../index.html#nossa-historia">Sobre</a></li>
           <li><a href="index.html">Atividades</a></li>
           <li><a class="btn_agenda" href="../agenda_pag.html">Agenda</a></li>
+          <li>
+            <button id="btn-dark-mode" aria-label="Alternar modo noturno" title="Ativar modo noturno">
+              <i class="fa-regular fa-moon"></i>
+            </button>
+          </li>
         </ul>
       </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
     </header>
     <main>
       <h1 id="titulo">Carregando quiz...</h1>
@@ -153,7 +171,8 @@
       new window.VLibras.Widget("https://vlibras.gov.br/app");
     </script>
 
-    <script src="carrossel.js"></script>
+    <script src="../carrossel.js"></script>
+    <script src="../dark-mode.js"></script>
 
     <script
       src="https://cdn.userway.org/widget.js"

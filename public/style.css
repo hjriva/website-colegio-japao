@@ -23,6 +23,7 @@
     html {
         -webkit-text-size-adjust: 100%;
         text-size-adjust: 100%;
+        scroll-behavior: smooth; /* adicione esta linha */
     }
 
     body {
@@ -1748,4 +1749,9 @@
         #ih2 {
             border-radius: 50px 0px 0px 50px;
         }
+    }
+
+    #contato,
+    #nossa-historia {
+        scroll-margin-top: 15vh;
     }

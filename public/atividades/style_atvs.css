@@ -198,7 +198,7 @@ main {
 }
 
 .atividade>a {
-    color: gray;
+    color: rgb(85, 84, 84);
 }
 
 .atividade>a:hover {

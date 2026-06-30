@@ -240,13 +240,10 @@ html.dark-mode .subtitulo_pt2 {
 }
 
 html.dark-mode strong {
-    color: #f92525;
+    color: #d0d0d0;
 }
 
 /*Agenda*/
-/* =============================================
-   AGENDA — dark mode
-   ============================================= */
 
 /* fade da imagem hero da agenda */
 html.dark-mode #img-wrapper::after {
@@ -368,4 +365,105 @@ html.dark-mode #atividades_display::-webkit-scrollbar-thumb {
     background-color: #4e2d2d;
     border-radius: 20px;
     border: 3px solid #f92525;
+}
+
+/*QUIZ — dark mode*/
+
+html.dark-mode .questao {
+    background-color: #2a2a2a;
+}
+
+html.dark-mode .questao > p {
+    color: #d0d0d0;
+    background-color: #323232;
+}
+
+html.dark-mode .alternativa-quiz {
+    background-color: #323232;
+    color: #d0d0d0;
+}
+
+html.dark-mode .alternativa-quiz:has(input:checked) {
+    border-color: #f92525;
+}
+
+/* quando a questão já foi corrigida, a alternativa marcada fica verde ou vermelha */
+html.dark-mode .questao-correta .alternativa-quiz:has(input:checked) {
+    border-color: #64ad64;
+}
+
+html.dark-mode .questao-errada .alternativa-quiz:has(input:checked) {
+    border-color: #f92525;
+}
+
+html.dark-mode .questao-correta {
+    background-color: #2a2a2a;
+}
+
+html.dark-mode .questao-errada {
+    background-color: #2a2a2a;
+}
+
+/* REGIÕES DO BRASIL — dark mode */
+
+html.dark-mode #descr_regioes {
+    background-color: #2a2a2a;
+    color: #d0d0d0;
+}
+
+html.dark-mode #descr_regioes p {
+    color: #d0d0d0;
+}
+
+html.dark-mode #regioes-container {
+    background-color: #2a2a2a;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3) inset;
+}
+
+html.dark-mode .regioes-divs > h2 {
+    color: #4ab8cc;
+}
+
+html.dark-mode #timer {
+    background-color: #2a2a2a;
+    color: #f92525;
+}
+
+html.dark-mode #resultado {
+    background-color: #2d6e2d;
+}
+
+html.dark-mode #loading {
+    color: #f92525;
+}
+
+html.dark-mode li .inputEstado {
+    background-color: #464545;
+    color: #d0d0d0;
+    border-color: #4ab8cc;
+}
+
+html.dark-mode input:read-only {
+    background-color: #3a3a3a;
+    color: #888;
+    border-color: #555;
+}
+
+html.dark-mode .gabarito {
+    background-color: #3a1a1a;
+    color: #f97070;
+}
+
+html.dark-mode .advinhado {
+    background-color: #1a3a1a;
+    color: #7dd87d;
+}
+
+html.dark-mode .msg-erro {
+    color: #f97070;
+}
+
+html.dark-mode #links,
+html.dark-mode #contatos {
+    background-color: rgba(0, 0, 0, 0.2);
 }
