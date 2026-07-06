@@ -1,3 +1,11 @@
+html.dark-mode {
+    --acerto-s: #1a8f7f;
+    --acerto-se: #20177e;
+    --acerto-co: #4e8012;
+    --acerto-ne: #7c331b;
+    --acerto-n: #8f1f6d;
+}
+
 /* botão fixo de alternância */
 #btn-dark-mode {
     display: inline-flex !important;
@@ -13,6 +21,7 @@
     color: #fff !important;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
 }
+
 
 #btn-dark-mode:hover,
 #btn-dark-mode:focus {

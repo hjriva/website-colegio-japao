@@ -10,11 +10,11 @@
 
 // Cores por região (estado inicial = cinza, acerto = cor da região)
 const CORES_REGIOES = {
-  N:  { acerto: "#7fb3e7", nome: "Norte" },
-  NE: { acerto: "#eea58d", nome: "Nordeste" },
-  CO: { acerto: "#bcdf92", nome: "Centro-Oeste" },
-  SE: { acerto: "#aba4f3", nome: "Sudeste" },
-  S:  { acerto: "#f5d19f", nome: "Sul" },
+  N:  { acerto: "var(--acerto-n)", nome: "Norte" },
+  NE: { acerto: "var(--acerto-ne)", nome: "Nordeste" },
+  CO: { acerto: "var(--acerto-co)", nome: "Centro-Oeste" },
+  SE: { acerto: "var(--acerto-se)", nome: "Sudeste" },
+  S:  { acerto: "var(--acerto-s)", nome: "Sul" },
 };
 
 const COR_PADRAO   = "var(--mapa-fundo, #e8e8e8)"; // regiões ainda não acertadas
@@ -143,7 +143,7 @@ console.log("S tem:", regioes["S"]?.map(f => f.properties.name));
         .datum(f)
         .attr("d", pathGen)
         .attr("fill", COR_PADRAO)
-        .style("fill", COR_PADRAO)
+        //.style("fill", COR_PADRAO)
         .attr("stroke", COR_BORDA)
         .attr("stroke-width", "0.8")
         .attr("data-regiao", sigla)
