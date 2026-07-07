@@ -22,6 +22,18 @@ function normalizarResposta(str) {
   ); //retira espaços em branco ao redor da string
 }
 
+function colorirEstado(siglaEstado, siglaRegiao) {
+  if (!svgMapa) return;
+  const cor = CORES_REGIOES[siglaRegiao]?.acerto ?? "#27ae60";
+  const path = svgMapa.select(`path[data-estado="${siglaEstado}"]`);
+  if (path.empty()) return;
+
+  path.transition().duration(600).attr("fill", cor);
+
+  const srEl = document.getElementById("mapa-sr-status");
+  if (srEl) srEl.textContent = `${siglaEstado} correto!`;
+}
+
 function verificarConclusao() {
   const totalEstados = dadosRegioes.reduce(
     (soma, r) => soma + r.estados.length,
@@ -103,6 +115,7 @@ function tentarAdicionar(sigla) {
 
   //caso em que submete de forma válida:
   listarEstados(match, lista, "advinhado");
+  colorirEstado(match.id_sigla, sigla);
   //retira as mensagens de erro, se houverem
   document.querySelectorAll(".msg-erro").forEach((msg) => {
     msg.remove();
@@ -185,7 +198,7 @@ function DesistirSessao() {
       div.style.display = "none";
     });
   });
-  dadosRegioes.forEach((reg) => revelarGabaritoRegiao(reg.id_sigla));
+ // dadosRegioes.forEach((reg) => revelarGabaritoRegiao(reg.id_sigla));
 }
 
 function pausarCron() {
@@ -260,14 +273,13 @@ const fetchRegioes = fetch("/regioes")
       DesistirSessao();
       regioes.forEach((reg) => {
         const lista = document.getElementById("lista-" + reg.id_sigla);
-        reg.estados.forEach((estados) => {
-          const jaExiste = lista.querySelector(
-            `[data-sigla="${estados.id_sigla}"]`,
-          );
-          if (!jaExiste) {
-            listarEstados(estados, lista, "gabarito"); // reutiliza a função
-          }
-        });
+       reg.estados.forEach((estados) => {
+  const jaExiste = lista.querySelector(`[data-sigla="${estados.id_sigla}"]`);
+  if (!jaExiste) {
+    listarEstados(estados, lista, "gabarito");     // restaura a listagem
+    revelarGabaritoEstado(estados.id_sigla);        // usa o parâmetro certo
+  }
+});
       });
       let faltas = window.document.querySelectorAll("li.gabarito").length;
       resultado.innerHTML += ` Faltaram ${faltas}!`;

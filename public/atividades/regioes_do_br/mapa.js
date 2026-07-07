@@ -8,7 +8,11 @@
  * Para resetar, chame resetarMapa().
  */
 
-// Cores por região (estado inicial = cinza, acerto = cor da região)
+/**
+  Objeto no qual cada chave é uma reigão,
+  definindo cores por região (estado inicial = cinza, acerto = cor da região)
+*/
+
 const CORES_REGIOES = {
   N:  { acerto: "var(--acerto-n)", nome: "Norte" },
   NE: { acerto: "var(--acerto-ne)", nome: "Nordeste" },
@@ -19,7 +23,7 @@ const CORES_REGIOES = {
 
 const COR_PADRAO   = "var(--mapa-fundo, #e8e8e8)"; // regiões ainda não acertadas
 const COR_BORDA    = "var(--mapa-borda, #333333)";
-const COR_GABARITO = "#acacac"; // revelada ao desistir
+const COR_GABARITO = "var(--mapa-gabarito)"; // revelada ao desistir
 
 let svgMapa = null;
 
@@ -37,7 +41,7 @@ let svgMapa = null;
 const GEOJSON_URL =
   "https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson";
 
-// Mapeamento estado → sigla de região
+// Mapeamento estado/sigla de região
 const ESTADO_PARA_REGIAO = {
   "Acre": "N", "Amapá": "N", "Amazonas": "N", "Pará": "N",
   "Rondônia": "N", "Roraima": "N", "Tocantins": "N",
@@ -51,6 +55,22 @@ const ESTADO_PARA_REGIAO = {
   "Paraná": "S", "Rio Grande do Sul": "S", "Santa Catarina": "S",
 };
 
+//Mapeamento estado/sigla de estado
+
+const ESTADO_PARA_SIGLA = {
+  "Acre": "AC", "Amapá": "AP", "Amazonas": "AM", "Pará": "PA",
+  "Rondônia": "RO", "Roraima": "RR", "Tocantins": "TO",
+  "Alagoas": "AL", "Bahia": "BA", "Ceará": "CE", "Maranhão": "MA",
+  "Paraíba": "PB", "Pernambuco": "PE", "Piauí": "PI",
+  "Rio Grande do Norte": "RN", "Sergipe": "SE",
+  "Distrito Federal": "DF", "Goiás": "GO",
+  "Mato Grosso": "MT", "Mato Grosso do Sul": "MS",
+  "Espírito Santo": "ES", "Minas Gerais": "MG",
+  "Rio de Janeiro": "RJ", "São Paulo": "SP",
+  "Paraná": "PR", "Rio Grande do Sul": "RS", "Santa Catarina": "SC",
+};
+
+
 function initMapa() {
   const container = document.getElementById("mapa-container");
   if (!container) {
@@ -59,8 +79,10 @@ function initMapa() {
   }
 
   // --- SVG acessível ---
-  svgMapa = d3.select(container)
-    .append("svg")
+  svgMapa = d3.select(container) 
+  /**d3 é a variável global, importada do script 
+   * (https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js), por isso este precisa vir antes no html*/
+    .append("svg") 
     .attr("width", "100%")
     .attr("viewBox", "0 0 500 520")
     .attr("preserveAspectRatio", "xMidYMid meet")
@@ -102,6 +124,12 @@ function renderizarMapa(geojson, g) {
   const projection = d3.geoMercator().fitSize([500, 520], geojson);
   const pathGen    = d3.geoPath().projection(projection);
 
+  const mapeamentoSiglaEstado = {};
+Object.entries(ESTADO_PARA_SIGLA).forEach(([nome, sigla]) => {
+  const nomeNorm = nome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  mapeamentoSiglaEstado[nomeNorm] = sigla;
+});
+
   // Cria versão normalizada do mapeamento uma vez só
   const mapeamentoNormalizado = {};
   Object.entries(ESTADO_PARA_REGIAO).forEach(([nome, sigla]) => {
@@ -116,11 +144,13 @@ function renderizarMapa(geojson, g) {
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
 
+    const siglaEstado = mapeamentoSiglaEstado[nomeEstado]; 
     const siglaReg = mapeamentoNormalizado[nomeEstado];
     if (!siglaReg) {
       console.warn("Estado não mapeado:", nomeEstado);
       return;
     }
+    f.__siglaEstado = siglaEstado; 
     if (!regioes[siglaReg]) regioes[siglaReg] = [];
     regioes[siglaReg].push(f);
   });
@@ -147,10 +177,14 @@ console.log("S tem:", regioes["S"]?.map(f => f.properties.name));
         .attr("stroke", COR_BORDA)
         .attr("stroke-width", "0.8")
         .attr("data-regiao", sigla)
+        .attr("data-estado", f.__siglaEstado)
         .style("transition", "fill 0.6s ease");
     });
   });
 }
+
+
+
 
 /**
  * Colore todos os paths de uma região ao ser concluída.
@@ -209,6 +243,19 @@ function revelarGabaritoRegiao(sigla) {
  * Reseta o mapa para o estado inicial (cinza).
  * Chame isso no início de cada nova partida (comecarCron).
  */
+
+
+function revelarGabaritoEstado(siglaEstado) {
+  if (!svgMapa) return;
+  const path = svgMapa.select(`path[data-estado="${siglaEstado}"]`);
+  if (path.empty()) return;
+
+  const jaAcertado = path.attr("fill") !== COR_PADRAO;
+  if (!jaAcertado) {
+    path.transition().duration(400).attr("fill", COR_GABARITO);
+  }
+}
+
 function resetarMapa() {
   if (!svgMapa) return;
   svgMapa.selectAll("path[data-regiao]")
