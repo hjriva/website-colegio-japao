@@ -838,6 +838,8 @@
     .carrossel-btn:hover {
         color: var(--vermelho);
         background-color: transparent;
+        transform: translateY(-50%) scale(1.05);
+
     }
 
     .prev-btn {
@@ -1371,6 +1373,7 @@
 
         #contato {
             grid-template-columns: 1fr 1fr;
+             
         }
 
         .carrossel-btn {
@@ -1400,9 +1403,9 @@
             text-align: start;
         }
 
-        #faleconosco {
+       /* #faleconosco {
             width: 12vw;
-        }
+        } tirei pq estava alargando em telas mto largas */ 
 
         #form {
             width: 100%;
@@ -1808,4 +1811,8 @@
         width: 28%;
     }
 
+    }
+
+    @media (min-width: 1220px) {
+       
     }
