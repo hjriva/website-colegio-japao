@@ -63,6 +63,8 @@ export function criaCardEvento(entrada, container, acoes = null) {
 //adaptado do Claude
 
 export function ReqDisciplinas(div, acoes = null, opcoes = {}) {
+
+  
   fetch("/disciplinas")
     .then((res) => res.json())
     .then((data) => {
@@ -97,6 +99,13 @@ export function ReqDisciplinas(div, acoes = null, opcoes = {}) {
 }
 
 export function ReqDisciplinasSelect(select) {
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Selecione uma disciplina...';
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    select.appendChild(placeholder);
+
   fetch("/disciplinas")
     .then((res) => res.json())
     .then((data) => {
