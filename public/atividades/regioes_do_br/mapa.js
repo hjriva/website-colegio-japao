@@ -11,6 +11,10 @@
 /**
   Objeto no qual cada chave é uma reigão,
   definindo cores por região (estado inicial = cinza, acerto = cor da região)
+
+  Dados cartográficos: Limites estaduais brasileiros obtidos a partir do projeto Click That 'Hood, 
+  mantido pela Code for America. O arquivo brazil-states.geojson é distribuído sob licença MIT e
+   foi utilizado como base para a visualização interativa do mapa.
 */
 
 const CORES_REGIOES = {
@@ -31,7 +35,7 @@ let svgMapa = null;
  * Inicializa o mapa dentro do elemento #mapa-container.
  * Cria o elemento <svg> acessível e faz fetch do GeoJSON do IBGE.
  *
- * GeoJSON público das regiões brasileiras (IBGE via GitHub):
+ * GeoJSON público das regiões brasileiras:
  * https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson
  * — agrupamos os estados por região via propriedade "name" ou "sigla".
  *

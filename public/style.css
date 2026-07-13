@@ -743,6 +743,25 @@
     }
 
     /* carrossel */
+   .slide-legenda {
+    display: none;
+}
+
+.slide.active .slide-legenda {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10px 12px;
+    background-color: var(--vermelho);
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    z-index: 2;
+    font-weight: 600;
+}
     .galeria {
         text-align: center;
         margin-bottom: 0;
@@ -885,9 +904,11 @@
 
 
     #redessociais>p {
-        text-align: justify;
+        text-align: center;
         margin-bottom: 5vh;
         margin-top: 2vh;
+       
+        font-weight: 600;
     }
 
     #redessociais>h2 {
@@ -947,6 +968,11 @@
         background-color: #ff16161a;
         box-shadow: rgba(0, 0, 0, 0.158) 1pt 0pt 5px;
 
+    }
+
+    #form > label {
+        color: var(--vermelho);
+        font-weight: 500;
     }
 
     #form input:focus,
@@ -1372,9 +1398,11 @@
         }
 
         #contato {
-            grid-template-columns: 1fr 1fr;
-             
-        }
+        grid-template-columns: 1fr 1fr;
+        margin-top: 25px;
+            }
+
+       
 
         .carrossel-btn {
             background-color: #f92525;
@@ -1396,9 +1424,14 @@
             padding: 3.3rem;
             margin-left: calc((min(95vw, 1200px) - 100vw) / 2);
             border-radius: 0px 30px 30px 0px;
+            width: calc(100% + ((100vw - min(95vw, 1200px)) / 2));
+           
 
         }
 
+            #redessociais>p {
+                 max-width: 90%;
+            }
         #rds {
             text-align: start;
         }
@@ -1408,7 +1441,10 @@
         } tirei pq estava alargando em telas mto largas */ 
 
         #form {
-            width: 100%;
+             justify-self: start; /* trava a borda esquerda no lugar */
+            margin-right: calc((min(95vw, 1200px) - 100vw) / 2 + 20px);
+            width: calc(100% + ((100vw - min(95vw, 1200px)) / 2) - 20px);
+            
 
         }
 

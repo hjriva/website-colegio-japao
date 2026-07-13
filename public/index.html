@@ -81,7 +81,7 @@
     <i class="fa-brands fa-whatsapp"></i> Fale conosco!
 </a>        </div>
         <div id="imagem_transparencia">
-          <img src="./imgs_site/fachada.jpg"
+          <img src="./imgs_site/frente.jpeg"
             alt="Fachada Escola Japão, com flores e plantas ao redor, em um dia ensolarado. Mostrando as salas de aula."
             id="imagem_inicio" />
         </div>
@@ -135,16 +135,20 @@
         <div class="carrossel-container">
           <div class="carrossel-slides">
             <div class="slide active">
-              <img src="imgs_site/descanso.png" alt="Espaço 1" />
+              <img src="imgs_site/carrossel4.jpeg" alt="Espaço 1" />
+              <p class="slide-legenda" >Corredor principal</p>
             </div>
             <div class="slide">
-              <img src="imgs_site/salaaula.png" alt="Espaço 2" />
+              <img src="imgs_site/carrossel1.jpeg" alt="Espaço 2" />
+              <p class="slide-legenda">Pátio externo</p>
             </div>
             <div class="slide">
-              <img src="imgs_site/patioescola.png" alt="Espaço 3" />
+              <img src="imgs_site/carrossel2.jpeg" alt="Espaço 3" />
+              <p class="slide-legenda">Espaço de lazer</p>
             </div>
             <div class="slide">
-              <img src="imgs_site/refeitorio.png" alt="Espaço 4" />
+              <img src="imgs_site/carrossel3.jpeg" alt="Espaço 4" />
+               <p class="slide-legenda">Refeitório</p>
             </div>
           </div>
 
@@ -183,10 +187,13 @@
 
         <form action="https://api.staticforms.dev/submit" method="POST" id="form">
 
-
-          <input type="text" placeholder="Nome" name="Nome" />
-          <input type="email" placeholder="E-mail" name="Email" />
-          <textarea placeholder="Insira sua sugestão!"></textarea>
+          <label for="input-nome">Nome</label>
+          <label for="input-email">E-mail</label>
+          <input type="text"  name="Nome" id="input-nome"/>
+          
+          <input type="email" name="Email" id="input-email"/>
+          <label for="sugesta-input">Insira sua sugestão!</label>
+          <textarea  id="sugesta-input"></textarea>
           <button type="submit">Enviar</button>
           <div id="feedback-form"></div>
         </form>
