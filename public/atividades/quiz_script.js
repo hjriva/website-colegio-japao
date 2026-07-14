@@ -196,6 +196,11 @@ fetch(`/quiz/${id}?pagina=${pagina}`)
 }
 
     botaoResultado.addEventListener("click", () => {
+      let exp = window.document.querySelectorAll('.explicacao')
+      exp.forEach((exp) => {
+        exp.remove()
+      })
+
       let perguntas = document.querySelectorAll(".questao");
       const avisoEl = document.getElementById("aviso-submeter");
 
@@ -252,6 +257,7 @@ fetch(`/quiz/${id}?pagina=${pagina}`)
         const explicacaoPergunta = questao.explicacao;
         if (explicacaoPergunta !== null && explicacaoPergunta.trim() !== "") {
           const divExplicacao = document.createElement("div");
+          divExplicacao.classList.add('explicacao')
           divExplicacao.classList.add( altMarcada == altCorreta ? "explicacao-correta" : "explicacao-errada");
           
           divExplicacao.textContent = explicacaoPergunta;

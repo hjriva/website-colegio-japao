@@ -65,10 +65,16 @@ function criarGridComScroll(atividades) {
 
     // ✅ background com a imagem da disciplina
     if (atv.imagem_disciplina) {
-       div.style.backgroundImage = `
-        linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
-        url('/${atv.imagem_disciplina}')
-    `;
+      div.style.backgroundImage = `
+    linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.1) 0%,
+        rgba(0,0,0,0.3) 70%,
+        rgba(0,0,0,0.85) 100%
+        
+    ),
+    url('/${atv.imagem_disciplina}')
+`;
         div.style.backgroundSize = 'cover';
         div.style.backgroundPosition = 'center';
     }

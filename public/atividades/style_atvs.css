@@ -118,7 +118,7 @@ main {
 
 .li_disciplinas {
     background-color: var(--cor-principal);
-    border: solid 1px #ddd;
+    border: solid 1px #dddddd00;
     color: white;
     border-radius: 8px;
     margin: 0 auto;
@@ -172,7 +172,7 @@ main {
     height: 200px;
     border-radius: 5px;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     align-content: stretch;
     flex-direction: column;
@@ -198,7 +198,8 @@ main {
 }
 
 .atividade>a {
-    color: rgb(85, 84, 84);
+    color: rgb(250, 250, 250);
+    text-decoration: none;
 }
 
 .atividade>a:hover {

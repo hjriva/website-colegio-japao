@@ -304,7 +304,12 @@ p {
 }
 
 @media (max-width: 670px) {
-
+    svg {
+    width: 80vw;
+}
+    #timer {
+        text-align: center;
+    }
     h1 {
         display: flex;
         align-items: center;
@@ -447,6 +452,7 @@ p {
 
 #mapa-container svg {
   display: block;
+  
 }
 
 
